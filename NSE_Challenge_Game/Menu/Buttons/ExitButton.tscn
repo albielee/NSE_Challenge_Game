@@ -1,0 +1,15 @@
+[gd_scene format=2]
+
+[node name="Exit" type="Button"]
+margin_top = 48.0
+margin_right = 1040.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 1, 128 )
+mouse_filter = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+button_mask = 0
+text = "EXIT"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

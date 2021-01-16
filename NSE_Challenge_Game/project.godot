@@ -16,8 +16,23 @@ _global_script_class_icons={
 [application]
 
 config/name="NSE_Challenge_Game"
+run/main_scene="res://World/Father.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/size/fullscreen=true
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="DynamicObject"
+2d_physics/layer_4="OOB"
 
 [rendering]
 
+environment/default_clear_color=Color( 1, 1, 1, 1 )
 environment/default_environment="res://default_env.tres"

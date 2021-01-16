@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Play" type="Button"]
+margin_right = 1040.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 128 )
+mouse_filter = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+button_mask = 0
+text = "PLAY"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
