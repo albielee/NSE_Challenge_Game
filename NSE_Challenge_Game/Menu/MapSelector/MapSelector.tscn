@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Menu/MapSelector/MapSelector.gd" type="Script" id=1]
+
+[node name="MapSelector" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonLeft" type="Button" parent="."]
+margin_left = -32.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = 28.0
+
+[node name="ButtonRight" type="Button" parent="."]
+margin_left = 56.0
+margin_top = 8.0
+margin_right = 72.0
+margin_bottom = 28.0
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+[connection signal="pressed" from="ButtonLeft" to="." method="_on_ButtonLeft_pressed"]
+[connection signal="pressed" from="ButtonRight" to="." method="_on_ButtonRight_pressed"]
