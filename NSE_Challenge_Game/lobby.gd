@@ -35,10 +35,6 @@ func _on_host_pressed():
 	gamestate.host_game(player_name)
 	refresh_lobby()
 	
-	var round_settings = []
-	round_settings.append($Menu/Host/MapSelector/Label.text)
-	
-	gamestate.begin_game(round_settings)
 
 
 
@@ -53,7 +49,10 @@ func _on_join_pressed():
 		return
 
 	$Connect/ErrorLabel.text = ""
-	disable_buttons()
+	$Connect.hide()
+	$Players.show()
+	$Connect/Join.disabled = true
+	$Menu/Host/Hosting/StartServerButton.disabled = true
 
 	var player_name = $Connect/Name.text
 	gamestate.join_game(ip, player_name)
@@ -95,11 +94,12 @@ func refresh_lobby():
 	for p in players:
 		$Players/List.add_item(p)
 
-	$Players/Start.disabled = not get_tree().is_network_server()
+	#Disable host only features of the lobby
+	var notHost = not get_tree().is_network_server()
+	$Players/Start.disabled = notHost
+	$Players/MapSelector/ButtonLeft.disabled = notHost
+	$Players/MapSelector/ButtonRight.disabled = notHost
 
-
-#func _on_start_pressed():
-#	gamestate.begin_game()
 
 func _on_HostButton_pressed():
 	$Menu/Main.hide()
@@ -125,3 +125,11 @@ func _on_BackButton_pressed():
 	$Connect.hide()
 	$Menu/Host.hide()
 	$Menu/Main.show()
+
+
+func _on_Start_pressed():
+	#Setup round settings for starting the game
+	var roundSettings = []
+	roundSettings.append($Players/MapSelector/Label.text)
+	
+	gamestate.begin_game(roundSettings)

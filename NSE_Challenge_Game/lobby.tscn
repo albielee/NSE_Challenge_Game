@@ -28,10 +28,10 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="ColourSelection" parent="Players" instance=ExtResource( 2 )]
-margin_left = -258.0
-margin_top = -90.5
-margin_right = -218.0
-margin_bottom = -50.5
+margin_left = 182.0
+margin_top = 21.5
+margin_right = 222.0
+margin_bottom = 61.5
 
 [node name="Label" type="Label" parent="Players"]
 margin_left = 26.0
@@ -60,6 +60,12 @@ margin_right = 229.0
 margin_bottom = 296.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+
+[node name="MapSelector" parent="Players" instance=ExtResource( 3 )]
+margin_left = 294.0
+margin_top = 21.5
+margin_right = 334.0
+margin_bottom = 61.5
 
 [node name="Connect" type="Panel" parent="."]
 visible = false
@@ -278,6 +284,7 @@ text = "Your IP Address:"
 margin_left = 8.0
 margin_top = -24.0
 margin_right = 112.0
+text = "127.0.0.1"
 
 [node name="StartServerButton" type="Button" parent="Menu/Host/Hosting" groups=[
 "button",
@@ -336,12 +343,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapSelector" parent="Menu/Host" instance=ExtResource( 3 )]
-margin_left = 48.0
-margin_top = 72.0
-margin_right = 88.0
-margin_bottom = 112.0
-
 [node name="Options" type="Panel" parent="Menu"]
 visible = false
 margin_left = 384.0
@@ -356,7 +357,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 24.0
 margin_bottom = 28.0
-[connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Players/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Connect/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Menu/Main/JoinButton" to="." method="_on_JoinButton_pressed"]

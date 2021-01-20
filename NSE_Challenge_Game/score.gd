@@ -3,7 +3,7 @@ extends HBoxContainer
 var player_labels = {}
 
 func _process(_delta):
-	var rocks_left = $"../Rocks".get_child_count()
+	var rocks_left = 1#$"../Rocks".get_child_count()
 	if rocks_left == 0:
 		var winner_name = ""
 		var winner_score = 0
@@ -38,7 +38,7 @@ func add_player(id, new_player_name):
 
 
 func _ready():
-	$"../Winner".hide()
+	#$"../Winner".hide()
 	set_process(true)
 
 

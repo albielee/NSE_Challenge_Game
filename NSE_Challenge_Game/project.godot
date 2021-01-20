@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 [autoload]
 
 gamestate="*res://gamestate.gd"
+Settings="*res://Settings.gd"
 
 [debug]
 
@@ -85,3 +86,10 @@ set_bomb={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="StaticWorld"
+2d_physics/layer_3="DynamicWorld"
+2d_physics/layer_5="IgnoreAll"

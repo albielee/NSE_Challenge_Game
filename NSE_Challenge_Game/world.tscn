@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://rock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rockold.tscn" type="PackedScene" id=2]
 [ext_resource path="res://score.gd" type="Script" id=3]
 [ext_resource path="res://montserrat.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Rock.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -316,4 +317,13 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
 current = true
+
+[node name="roundController" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rock" parent="." instance=ExtResource( 5 )]
 [connection signal="pressed" from="Winner/ExitGame" to="Score" method="_on_exit_game_pressed"]

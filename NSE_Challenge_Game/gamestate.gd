@@ -68,9 +68,9 @@ func unregister_player(id):
 	emit_signal("player_list_changed")
 
 
-remote func pre_start_game(spawn_points, round_settings):
+remote func pre_start_game(spawn_points, roundSettings):
 	# Change scene.
-	var map = round_settings[0]
+	var map = roundSettings[0]
 	var world = load(map).instance()
 	get_tree().get_root().add_child(world)
 
@@ -81,7 +81,7 @@ remote func pre_start_game(spawn_points, round_settings):
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
-
+			
 		player.set_name(str(p_id)) # Use unique ID as node name.
 		player.position=spawn_pos
 		player.set_network_master(p_id) #set unique id as master.
@@ -142,7 +142,7 @@ func get_player_list():
 func get_player_name():
 	return player_name
 
-func begin_game(round_settings):
+func begin_game(roundSettings):
 	assert(get_tree().is_network_server())
 
 	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
@@ -153,13 +153,15 @@ func begin_game(round_settings):
 		spawn_points[p] = spawn_point_idx
 		spawn_point_idx += 1
 	# Call to pre-start game with the spawn points.
-	for p in players:
-		rpc_id(p, "pre_start_game", spawn_points)
 
-	pre_start_game(spawn_points, round_settings)
+	for p in players:
+		rpc_id(p, "pre_start_game", spawn_points, roundSettings)
+
+	pre_start_game(spawn_points, roundSettings)
 
 
 func end_game():
+	return
 	if has_node("/root/World"): # Game is in progress.
 		# End it
 		get_node("/root/World").queue_free()

@@ -1,7 +1,17 @@
-extends Area2D
+extends RigidBody2D
 
 var in_area = []
 var from_player
+
+
+puppet var puppet_pos = Vector2()
+
+func _physics_process(delta):
+	if not is_network_master():
+		position = puppet_pos
+	else:
+		rset("puppet_pos", position)
+
 
 # Called from the animation.
 func explode():
