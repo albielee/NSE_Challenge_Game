@@ -11,15 +11,18 @@ export var FRICTION = 400
 
 enum {
 	MOVE,
-	ROLL,
-	ATTACK
+	DASH,
+	SUMMON,
+	PUSH,
+	PULL,
+	FALL,
+	DEATH
 }
 
 #Variables
 var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
-
 
 var current_anim = ""
 
@@ -30,37 +33,26 @@ func _ready():
 		set_collision_mask_bit(1, true);
 		set_collision_mask_bit(2, true);
 		set_collision_mask_bit(3, true);
-		
-
-#Summoning a rock and syncing it to players in server
-# Use sync because it will be called everywhere
-sync func summon_rock(rock_name, pos, by_who):
-	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
-	rock.set_name(rock_name) # Ensure unique name for the bomb
-	rock.position = pos
-	#rock.from_who #we can set this when we need to know who killed who for stats
-	
-	# No need to set network master to bomb, will be owned by server by default
-	get_node("../..").add_child(rock)
 
 func _physics_process(delta):
-
 	if is_network_master():
 		match state:
 			MOVE:
 				move_state(delta)
-			ROLL:
-				roll_state(delta)
-				
-			ATTACK:
-				attack_state(delta)
-
-		var summoning = Input.is_action_just_pressed("summon_rock")
-		if summoning:
-			var rock_name = get_name()
-			var rock_pos = position
-			rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
-
+			DASH:
+				dash_state(delta)
+			SUMMON:
+				summon_state(delta)
+			PUSH:
+				push_state(delta)
+			PULL:
+				pull_state(delta)
+			FALL:
+				fall_state(delta)
+			DEATH:
+				death_state(delta)
+		
+		#send off your position to other peeps
 		rset("puppet_pos", position)
 		rset("puppet_velocity", velocity)
 	else:
@@ -81,9 +73,11 @@ func _physics_process(delta):
 		current_anim = new_anim
 		get_node("anim").play(current_anim)
 
+	#syncing position for other clients but not self
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter
 		puppet_velocity = velocity
+
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -101,18 +95,35 @@ func move_state(delta):
 	
 	move();
 	
-	if(Input.is_action_just_pressed("Roll")):
-		state = ROLL;
+	#if actions causing other states:
+	if(Input.is_action_just_pressed("dash")):
+		state = DASH;
 	
-	if(Input.is_action_just_pressed("attack")):
-		state = ATTACK
+	#Summoning a rock
+	if(Input.is_action_just_pressed("summon_rock")):
+		state = SUMMON;
 
-func roll_state(delta):
+func dash_state(delta):
 	velocity = roll_vector * ROLL_SPEED;
 	move();
 
-func attack_state(delta):
+func summon_state(delta):
 	velocity = Vector2.ZERO
+	var rock_name = get_name()
+	var rock_pos = position
+	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
+	
+func push_state(delta):
+	pass
+
+func pull_state(delta):
+	pass
+	
+func fall_state(delta):
+	pass
+	
+func death_state(delta):
+	pass
 
 func move():
 	velocity = move_and_slide(velocity)
@@ -120,3 +131,14 @@ func move():
 func set_player_name(new_name):
 	get_node("label").set_text(new_name)
 
+#sync functions
+#Summoning a rock and syncing it to players in server
+# Use sync because it will be called everywhere
+sync func summon_rock(rock_name, pos, by_who):
+	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
+	rock.set_name(rock_name) # Ensure unique name for the bomb
+	rock.position = pos
+	#rock.from_who #we can set this when we need to know who killed who for stats
+	
+	# No need to set network master to bomb, will be owned by server by default
+	get_node("../..").add_child(rock)
