@@ -1,7 +1,7 @@
 extends Control
 
 
-var maps = ["res://world.tscn","res://world2.tscn","res://world3.tscn"]
+var maps = ["res://Worlds/world.tscn"]
 var mapIndex = 0
 
 func _ready():
