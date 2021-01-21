@@ -8,7 +8,6 @@ func _process(delta):
 		if(one_player_left):
 			restart_round()
 
-
 func detect_players_left():
 	var players_left = 0
 	var players = get_tree().get_nodes_in_group("player")
