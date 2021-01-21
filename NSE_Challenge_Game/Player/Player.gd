@@ -58,9 +58,7 @@ func _physics_process(delta):
 		rotation += mouse_position.angle()	# multiply by value if we want slow rot (e.g. 0.1)	
 		
 		#send off your position to other peeps
-		rset("puppet_rotation", rotation)
-		rset("puppet_pos", position)
-		rset("puppet_velocity", velocity)
+		send_status()
 	else:
 		rotation = puppet_rotation;
 		position = puppet_pos;
@@ -86,6 +84,11 @@ func _physics_process(delta):
 		puppet_velocity = velocity
 		puppet_rotation = rotation
 
+func send_status():
+	#send off your position to other peeps
+	rset("puppet_rotation", rotation)
+	rset("puppet_pos", position)
+	rset("puppet_velocity", velocity)
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -139,11 +142,16 @@ master func fall_state():
 	state = DEATH;
 	death_state()
 	
-	
+
 func death_state():
 	#move the players away - this is easier than destroying the client and respawning them
 	#if we do multiple rounds
 	position = Vector2.ZERO
+	send_status()
+	rpc("dead")
+	dead()
+
+puppet func dead():
 	dead = true
 
 func move():

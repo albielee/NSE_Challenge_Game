@@ -1,7 +1,15 @@
 extends Control
 
-
-
+func _process(delta):
+	#Check if one player is left
+	var players_left = 0
+	for p in get_tree().get_nodes_in_group("player"):
+		if(p.dead == false):
+			players_left += 1
+	if(players_left == 1):
+		pass
+		#oneleft
+			
 """
 OLD CODE BUT MAY BE USEFUL LATER
 
