@@ -28,9 +28,11 @@ var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 
 var mouse_position
+var spawn_position
 var current_anim = ""
 
 func _ready():
+	spawn_position = position
 	#Add player collisions if server host as they will be handling all physics calc
 	if(get_tree().is_network_server()):
 		set_collision_layer_bit(1, true);
@@ -39,6 +41,7 @@ func _ready():
 		set_collision_mask_bit(3, true);
 
 func _physics_process(delta):
+
 	if(is_network_master() and !dead):
 		match state:
 			MOVE:
@@ -126,7 +129,6 @@ func summon_state(delta):
 	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
 	state = MOVE
 	
-	
 func push_state(delta):
 	pass
 
@@ -147,6 +149,8 @@ func death_state():
 	#move the players away - this is easier than destroying the client and respawning them
 	#if we do multiple rounds
 	position = Vector2.ZERO
+	
+	#keep everyone updated on your predicament
 	send_status()
 	rpc("dead")
 	dead()
@@ -154,11 +158,24 @@ func death_state():
 puppet func dead():
 	dead = true
 
+puppet func alive():
+	dead = false
+
 func move():
 	velocity = move_and_slide(velocity)
 
 func set_player_name(new_name):
 	get_node("label").set_text(new_name)
+
+master func reset():
+	#bring player back to life
+	rpc("alive")
+	alive()
+	send_status()
+	print("RESET")
+	#bring player back to spawn position
+	position = spawn_position
+	state = MOVE
 
 #sync functions
 #Summoning a rock and syncing it to players in server

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Rock" type="KinematicBody2D" groups=[
-"syncObject",
+"resettable",
 ]]
 collision_layer = 4
 collision_mask = 7

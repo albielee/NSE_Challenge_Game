@@ -1,15 +1,37 @@
 extends Control
 
 func _process(delta):
-	#Check if one player is left
+	#If the host:
+	if(is_network_master()):
+		#Check if one player is left
+		var one_player_left = detect_players_left()
+		if(one_player_left):
+			restart_round()
+
+
+func detect_players_left():
 	var players_left = 0
-	for p in get_tree().get_nodes_in_group("player"):
-		if(p.dead == false):
-			players_left += 1
-	if(players_left == 1):
-		pass
-		#oneleft
-			
+	var players = get_tree().get_nodes_in_group("player")
+	#if more than one player
+	if(len(players) > 1):
+		for p in players:
+			if(p.dead == false):
+				players_left += 1
+		if(players_left == 1):
+			return true
+		return false
+	else:
+		return players[0].dead
+
+func restart_round():
+	#Because we dont want to restart the scene, we need to call all reset functions
+	#in objects that may have changed.
+	
+	#All objects that can be reset will be put in the resettable group
+	#all objects in resettable should have a reset function
+	for o in get_tree().get_nodes_in_group("resettable"):
+		o.rpc("reset")
+		
 """
 OLD CODE BUT MAY BE USEFUL LATER
 
