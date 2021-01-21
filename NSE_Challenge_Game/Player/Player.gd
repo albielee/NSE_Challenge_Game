@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_velocity = Vector2()
+puppet var puppet_rotation = rotation
 
 export var ACCELERATION = 400
 export var MAX_SPEED = 70
@@ -24,6 +25,7 @@ var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 
+var mouse_position
 var current_anim = ""
 
 func _ready():
@@ -52,10 +54,17 @@ func _physics_process(delta):
 			DEATH:
 				death_state(delta)
 		
+		#get mouse position
+		mouse_position = get_local_mouse_position()
+		#Rotate the player to face the mouse
+		rotation += mouse_position.angle()	# multiply by value if we want slow rot (e.g. 0.1)	
+		
 		#send off your position to other peeps
+		rset("puppet_rotation", rotation)
 		rset("puppet_pos", position)
 		rset("puppet_velocity", velocity)
 	else:
+		rotation = puppet_rotation;
 		position = puppet_pos;
 		velocity = puppet_velocity;
 
@@ -77,6 +86,7 @@ func _physics_process(delta):
 	if not is_network_master():
 		puppet_pos = position # To avoid jitter
 		puppet_velocity = velocity
+		puppet_rotation = rotation
 
 
 func move_state(delta):
@@ -110,8 +120,11 @@ func dash_state(delta):
 func summon_state(delta):
 	velocity = Vector2.ZERO
 	var rock_name = get_name()
-	var rock_pos = position
+	var offset = 40
+	var rock_pos = Vector2(position.x + offset*sin(rotation+deg2rad(90)), position.y - offset*cos(rotation+deg2rad(90)))
 	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
+	state = MOVE
+	
 	
 func push_state(delta):
 	pass
