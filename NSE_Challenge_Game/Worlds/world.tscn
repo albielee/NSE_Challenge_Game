@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Tilesets/tileset.tres" type="TileSet" id=1]
-
+[ext_resource path="res://Objects/Scene/DeathVoid.tscn" type="PackedScene" id=2]
 
 [node name="World" type="Node2D"]
 
@@ -33,3 +33,6 @@ position = Vector2( 360, 552 )
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
 current = true
+
+[node name="DeathVoid" parent="." instance=ExtResource( 2 )]
+position = Vector2( 112, 208 )

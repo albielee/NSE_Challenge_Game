@@ -22,6 +22,8 @@ enum {
 
 #Variables
 var state = MOVE
+var dead = false
+
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 
@@ -37,7 +39,7 @@ func _ready():
 		set_collision_mask_bit(3, true);
 
 func _physics_process(delta):
-	if is_network_master():
+	if(is_network_master() and !dead):
 		match state:
 			MOVE:
 				move_state(delta)
@@ -49,10 +51,6 @@ func _physics_process(delta):
 				push_state(delta)
 			PULL:
 				pull_state(delta)
-			FALL:
-				fall_state(delta)
-			DEATH:
-				death_state(delta)
 		
 		#get mouse position
 		mouse_position = get_local_mouse_position()
@@ -131,12 +129,22 @@ func push_state(delta):
 
 func pull_state(delta):
 	pass
+
+#Called when the player enters the void area
+master func fall_state():
+	state = FALL;
+	#anim, falling motion, destroy player
 	
-func fall_state(delta):
-	pass
+	#on animation finished, destroy player
+	state = DEATH;
+	death_state()
 	
-func death_state(delta):
-	pass
+	
+func death_state():
+	#move the players away - this is easier than destroying the client and respawning them
+	#if we do multiple rounds
+	position = Vector2.ZERO
+	dead = true
 
 func move():
 	velocity = move_and_slide(velocity)

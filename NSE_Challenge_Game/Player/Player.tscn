@@ -135,7 +135,9 @@ tracks/0/keys = {
 size = 14
 font_data = ExtResource( 2 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 collision_layer = 2147483649
 collision_mask = 0
 script = ExtResource( 1 )
