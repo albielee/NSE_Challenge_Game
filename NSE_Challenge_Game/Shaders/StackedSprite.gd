@@ -88,13 +88,16 @@ func set_center(new_value):
 	center = new_value;
 	on_value_change();
 
+func set_sprite(load_path, r):
+	set_rows(r)
+	set_slice_sheet(load(load_path))
+
 func load_animation(anim_name, load_path, frame_number, r):
 	var frames = []
 	load_path = load_path.split(".");
 	var path = load_path[0]
 	var png = load_path[1]
-	print(path)
-	print(png)
+
 	frames.append(r)
 	for i in range(frame_number):
 		frames.append(load(path + str(i+1) + "." + png))
@@ -105,7 +108,7 @@ func play_animation(anim_name, speed):
 	playing_animation = anim_name
 	timer_waittime = 1.0/speed
 	
-	rows = anim_dict[anim_name][0]
+	set_rows(anim_dict[anim_name][0])
 	set_slice_sheet(anim_dict[anim_name][anim_index])
 	anim_index += 1
 	$Timer.set_wait_time(timer_waittime)
