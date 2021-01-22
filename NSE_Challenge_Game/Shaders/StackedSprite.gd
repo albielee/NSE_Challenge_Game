@@ -103,7 +103,7 @@ func load_animation(anim_name, load_path, frame_number, r):
 func play_animation(anim_name, speed):
 	anim_index = 1
 	playing_animation = anim_name
-	timer_waittime = 1/speed
+	timer_waittime = 1.0/speed
 	
 	rows = anim_dict[anim_name][0]
 	set_slice_sheet(anim_dict[anim_name][anim_index])
