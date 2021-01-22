@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/StackedSprite.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/StackedSprite.shader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/columns = null
+shader_param/rows = null
+shader_param/layer_count = null
+shader_param/stretch = null
+shader_param/center = null
+
+[node name="StackedSprite" type="Node2D"]
+material = SubResource( 1 )
+script = ExtResource( 1 )

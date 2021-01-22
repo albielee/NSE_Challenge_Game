@@ -32,6 +32,8 @@ var spawn_position
 var current_anim = ""
 
 func _ready():
+	$StackedSprite.load_animation("chr_knight","res://Player/chr_knight.png",6,40)
+	
 	spawn_position = position
 	#Add player collisions if server host as they will be handling all physics calc
 	if(get_tree().is_network_server()):
@@ -39,6 +41,8 @@ func _ready():
 		set_collision_mask_bit(1, true);
 		set_collision_mask_bit(2, true);
 		set_collision_mask_bit(3, true);
+
+
 
 func _physics_process(delta):
 
@@ -69,7 +73,8 @@ func _physics_process(delta):
 
 	var new_anim = "standing"
 	if velocity.y < 0:
-		new_anim = "walk_up"
+		if($StackedSprite.playing_animation == ""):
+			$StackedSprite.play_animation("chr_knight",30)
 	elif velocity.y > 0:
 		new_anim = "walk_down"
 	elif velocity.x < 0:
@@ -79,7 +84,7 @@ func _physics_process(delta):
 
 	if new_anim != current_anim:
 		current_anim = new_anim
-		get_node("anim").play(current_anim)
+		#get_node("anim").play(current_anim)
 
 	#syncing position for other clients but not self
 	if not is_network_master():
@@ -122,6 +127,7 @@ func dash_state(delta):
 	move();
 
 func summon_state(delta):
+	
 	velocity = Vector2.ZERO
 	var rock_name = get_name()
 	var offset = 40
@@ -165,7 +171,8 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func set_player_name(new_name):
-	get_node("label").set_text(new_name)
+	pass
+	#get_node("label").set_text(new_name)
 
 master func reset():
 	#bring player back to life
