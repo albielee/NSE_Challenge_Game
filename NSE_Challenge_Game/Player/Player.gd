@@ -32,7 +32,12 @@ var spawn_position
 var current_anim = ""
 
 func _ready():
-	$StackedSprite.load_animation("chr_knight","res://Player/chr_knight.png",6,40)
+	$StackedSprite.load_animation("still","res://Assets/Player/stationary.png",2,40)
+	$StackedSprite.load_animation("up","res://Assets/Player/walk_up.png",6,40)
+	$StackedSprite.load_animation("down","res://Assets/Player/walk_down.png",6,40)
+	$StackedSprite.load_animation("left","res://Assets/Player/walk_left.png",6,40)
+	$StackedSprite.load_animation("right","res://Assets/Player/walk_right.png",6,40)
+	
 	
 	spawn_position = position
 	#Add player collisions if server host as they will be handling all physics calc
@@ -62,7 +67,7 @@ func _physics_process(delta):
 		#get mouse position
 		mouse_position = get_local_mouse_position()
 		#Rotate the player to face the mouse
-		rotation += mouse_position.angle()	# multiply by value if we want slow rot (e.g. 0.1)	
+		rotation += mouse_position.angle()+deg2rad(90)	# multiply by value if we want slow rot (e.g. 0.1)	
 		
 		#send off your position to other peeps
 		send_status()
@@ -71,20 +76,8 @@ func _physics_process(delta):
 		position = puppet_pos;
 		velocity = puppet_velocity;
 
-	var new_anim = "standing"
-	if velocity.y < 0:
-		if($StackedSprite.playing_animation == ""):
-			$StackedSprite.play_animation("chr_knight",30)
-	elif velocity.y > 0:
-		new_anim = "walk_down"
-	elif velocity.x < 0:
-		new_anim = "walk_left"
-	elif velocity.x > 0:
-		new_anim = "walk_right"
+	update_animations()
 
-	if new_anim != current_anim:
-		current_anim = new_anim
-		#get_node("anim").play(current_anim)
 
 	#syncing position for other clients but not self
 	if not is_network_master():
@@ -92,6 +85,26 @@ func _physics_process(delta):
 		puppet_velocity = velocity
 		puppet_rotation = rotation
 
+func update_animations():
+	var new_anim = "standing"
+	if velocity.y < 0:
+		if($StackedSprite.playing_animation == ""):
+			$StackedSprite.play_animation("up",30)
+	elif velocity.y > 0:
+		if($StackedSprite.playing_animation == ""):
+			$StackedSprite.play_animation("down",30)
+	elif velocity.x < 0:
+		if($StackedSprite.playing_animation == ""):
+			$StackedSprite.play_animation("left",30)
+	elif velocity.x > 0:
+		if($StackedSprite.playing_animation == ""):
+			$StackedSprite.play_animation("right",30)
+	else:
+		$StackedSprite.play_animation("still",30)
+
+	if new_anim != current_anim:
+		current_anim = new_anim
+	
 func send_status():
 	#send off your position to other peeps
 	rset("puppet_rotation", rotation)
@@ -131,7 +144,7 @@ func summon_state(delta):
 	velocity = Vector2.ZERO
 	var rock_name = get_name()
 	var offset = 40
-	var rock_pos = Vector2(position.x + offset*sin(rotation+deg2rad(90)), position.y - offset*cos(rotation+deg2rad(90)))
+	var rock_pos = Vector2(position.x + offset*sin(rotation), position.y - offset*cos(rotation))
 	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
 	state = MOVE
 	

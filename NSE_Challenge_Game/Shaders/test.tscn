@@ -5,11 +5,11 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/columns = null
-shader_param/rows = null
-shader_param/layer_count = null
-shader_param/stretch = null
-shader_param/center = null
+shader_param/columns = 1
+shader_param/rows = 1
+shader_param/layer_count = 1
+shader_param/stretch = 1
+shader_param/center = 0
 
 [node name="StackedSprite" type="Node2D"]
 material = SubResource( 1 )

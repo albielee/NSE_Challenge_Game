@@ -1,21 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Tilesets/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Objects/Scene/DeathVoid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Controllers/RoundController.gd" type="Script" id=3]
 [ext_resource path="res://Controllers/RoundController.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Shaders/StackedSprite.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Shaders/StackedSprite.shader" type="Shader" id=6]
-[ext_resource path="res://Shaders/pink_tree.png" type="Texture" id=7]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 6 )
-shader_param/columns = 1
-shader_param/rows = 43
-shader_param/layer_count = 43
-shader_param/stretch = 1
-shader_param/center = 0
-shader_param/slice_sheet = ExtResource( 7 )
 
 [node name="World" type="Node2D"]
 
@@ -68,10 +56,3 @@ current = true
 
 [node name="RoundController" parent="." instance=ExtResource( 4 )]
 script = ExtResource( 3 )
-
-[node name="StackedSprite" parent="." instance=ExtResource( 5 )]
-material = SubResource( 1 )
-position = Vector2( 448, 320 )
-z_index = 320
-slice_sheet = ExtResource( 7 )
-rows = 43
