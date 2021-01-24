@@ -25,7 +25,6 @@ var velocity = Vector2.ZERO
 var rock_summoned = false
 var dead = false
 
-var spawn_position = Vector2.ZERO
 var old_position = Vector2.ZERO
 
 export var MASS = 200
@@ -36,10 +35,9 @@ export var TURN_SPEED = 400
 
 func _ready():
 	set_linear_damp(FRICTION/5)
-	spawn_position = position
 	
 	#Load animations
-	$StackedSprite.load_animation("still","res://Assets/Player/stationary.png",1,40)
+	$StackedSprite.load_animation("still","res://Assets/Player/stationary.png",2,40)
 	$StackedSprite.load_animation("up","res://Assets/Player/walk_up.png",6,40)
 	$StackedSprite.load_animation("down","res://Assets/Player/walk_down.png",6,40)
 	$StackedSprite.load_animation("left","res://Assets/Player/walk_left.png",6,40)
@@ -196,39 +194,3 @@ sync func summon_rock(rock_name, pos, by_who):
 	# No need to set network master to bomb, will be owned by server by default
 	get_node("../..").add_child(rock)
 	
-
-#Called when the player enters the void area
-master func fall_state():
-	state = FALL;
-	#anim, falling motion, destroy player
-	
-	#on animation finished, destroy player
-	state = DEATH;
-	death_state()
-	
-
-func death_state():
-	#move the players away - this is easier than destroying the client and respawning them
-	#if we do multiple rounds
-	position = Vector2.ZERO
-	
-	#keep everyone updated on your predicament
-	#send_status()
-	rpc("dead")
-	dead()
-
-puppet func dead():
-	dead = true
-
-puppet func alive():
-	dead = false
-
-master func reset():
-	#bring player back to life
-	rpc("alive")
-	alive()
-	#send_status()
-	print("RESET")
-	#bring player back to spawn position
-	position = spawn_position
-	state = MOVE

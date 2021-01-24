@@ -20,7 +20,7 @@ func detect_players_left():
 			return true
 		return false
 	else:
-		return players[0].dead
+		pass#return players[0].dead
 
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions
