@@ -1,6 +1,5 @@
 extends RigidBody2D
 
-
 #Input
 puppet var puppet_control_movement = Vector2.ZERO
 puppet var puppet_control_pushpull = 0.0

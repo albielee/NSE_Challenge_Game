@@ -29,13 +29,13 @@ var spawn_position = Vector2.ZERO
 var old_position = Vector2.ZERO
 
 export var MASS = 200
-export var FRICTION = 100
-export var MAX_SPEED = 100
-export var SPEED = 100
+export var FRICTION = 10
+export var MAX_SPEED = 30
+export var SPEED = 200
 export var TURN_SPEED = 400
 
 func _ready():
-	set_linear_damp(FRICTION/5)
+	set_linear_damp(FRICTION)
 	spawn_position = position
 	
 	#Load animations
@@ -134,11 +134,12 @@ func move_state(delta):
 	var input_vector = puppet_control_movement
 	
 	if(input_vector != Vector2.ZERO):
-		velocity += input_vector*SPEED*delta
-		velocity = velocity.clamped(MAX_SPEED)
+		print(velocity)
+		velocity = velocity.move_toward(input_vector*MAX_SPEED, SPEED*delta)
 	else:
 		#Apply friction
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		print(velocity)
+		velocity = Vector2.ZERO
 	
 	move()
 
@@ -193,7 +194,7 @@ sync func summon_rock(rock_name, pos, by_who):
 	set_mode(RigidBody2D.MODE_RIGID)
 	#rock.from_who #we can set this when we need to know who killed who for stats
 	
-	# No need to set network master to bomb, will be owned by server by default
+	# No need to set network master, will be owned by server by default
 	get_node("../..").add_child(rock)
 	
 
