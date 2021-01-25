@@ -50,8 +50,8 @@ func _physics_process(delta):
 	if(is_network_master()):
 		#Let host input their controls
 		var input_vector = Vector2.ZERO
-		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 		input_vector = input_vector.normalized()
 
 		#push/pull is either 1 or -1 respectively, or 0
@@ -134,11 +134,9 @@ func move_state(delta):
 	var input_vector = puppet_control_movement
 	
 	if(input_vector != Vector2.ZERO):
-		print(velocity)
 		velocity = velocity.move_toward(input_vector*MAX_SPEED, SPEED*delta)
 	else:
-		#Apply friction
-		print(velocity)
+		#No need to apply friction here because it is set through linear dampening
 		velocity = Vector2.ZERO
 	
 	move()

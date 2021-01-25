@@ -4,6 +4,8 @@ extends RigidBody2D
 remote var remote_position = Vector2.ZERO
 remote var remote_rotation = 0.0
 
+var i = 1
+
 func _ready():
 	$StackedSprite.load_animation("rock","res://Assets/Rock/rock.png",1,20)
 
@@ -19,6 +21,8 @@ func _physics_process(delta):
 		
 	#Play rock anim
 	if($StackedSprite.playing_animation == ""):
+		print('animupdate ' + var2str(i))
+		i+=1
 		$StackedSprite.play_animation("rock",1)
 
 func _on_SendData_timeout():
