@@ -124,6 +124,10 @@ pull={
 [layer_names]
 
 2d_physics/layer_1="Player"
+3d_physics/layer_1="Player"
 2d_physics/layer_2="StaticWorld"
+3d_physics/layer_2="StaticWorld"
 2d_physics/layer_3="DynamicWorld"
+3d_physics/layer_3="DynamicWorld"
+3d_physics/layer_4="MouseRaycast"
 2d_physics/layer_5="IgnoreAll"

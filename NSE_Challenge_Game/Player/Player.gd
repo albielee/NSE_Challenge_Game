@@ -1,5 +1,4 @@
-extends RigidBody2D
-
+extends RigidBody
 
 #Input
 puppet var puppet_control_movement = Vector2.ZERO
@@ -8,7 +7,7 @@ puppet var puppet_control_summon = 0.0
 puppet var puppet_mouse_angle = 0.0
 
 #Positional data
-remote var remote_position = Vector2.ZERO
+remote var remote_position = Vector3.ZERO
 remote var remote_rotation = 0.0
 
 enum {
@@ -21,29 +20,23 @@ enum {
 	DEATH
 }
 var state = MOVE
-var velocity = Vector2.ZERO
+var velocity = Vector3.ZERO
 var rock_summoned = false
 var dead = false
 
-var spawn_position = Vector2.ZERO
-var old_position = Vector2.ZERO
+var spawn_position = Vector3.ZERO
+var old_position = Vector3.ZERO
 
-export var MASS = 200
+export var MASS = 10
 export var FRICTION = 10
-export var MAX_SPEED = 30
-export var SPEED = 200
+export var MAX_SPEED = 500
+export var SPEED = 2000
 export var TURN_SPEED = 400
 
 func _ready():
 	set_linear_damp(FRICTION)
-	spawn_position = position
-	
-	#Load animations
-	$StackedSprite.load_animation("still","res://Assets/Player/stationary.png",1,40)
-	$StackedSprite.load_animation("up","res://Assets/Player/walk_up.png",6,40)
-	$StackedSprite.load_animation("down","res://Assets/Player/walk_down.png",6,40)
-	$StackedSprite.load_animation("left","res://Assets/Player/walk_left.png",6,40)
-	$StackedSprite.load_animation("right","res://Assets/Player/walk_right.png",6,40)
+	set_mass(MASS)
+	spawn_position = get_transform().origin
 	
 
 func _physics_process(delta):
@@ -61,20 +54,30 @@ func _physics_process(delta):
 		
 		
 		var offset = deg2rad(90)
-		puppet_mouse_angle = get_local_mouse_position().angle() + offset	
+		var cam = get_tree().get_nodes_in_group("Camera")[0]
+		if(cam != null):
+			var up_dir = Vector3.UP;
+			var target_position = cam.raycast_position
+			var current_angle_y = get_transform().basis.get_euler().y;
+			var target_angle_y = get_transform().looking_at(target_position, up_dir).basis.get_euler().y;
+			var rotation_angle = wrapf(target_angle_y - current_angle_y, -PI, PI);
+			
+			puppet_mouse_angle = up_dir * (rotation_angle);
+	
 		
 	#Take control input and run player code
 	#send off positional values
 	
 	#If it is the host then do physics calculations
 	if(get_tree().is_network_server()):
-		set_mode(RigidBody2D.MODE_RIGID)
+		if(mode != MODE_RIGID):
+			set_mode(RigidBody.MODE_RIGID)
 		#I want to handle the players movement here
 		#I want to send the positional data from here
 		var push_pull = puppet_control_pushpull
 		var summon = puppet_control_summon
 		var mouse_angle = puppet_mouse_angle
-		
+
 		match state:
 			MOVE:
 				move_state(delta)
@@ -88,7 +91,9 @@ func _physics_process(delta):
 				pull_state(delta)
 
 		#Rotate the player to face the mouse
-		#set_applied_torque(mouse_angle*TURN_SPEED)
+
+		#add_torque(mouse_angle*TURN_SPEED*delta)
+		#print(Vector3(0,mouse_angle*TURN_SPEED,0))
 		set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 		#rotation += mouse_angle	# multiply by value if we want slow rot (e.g. 0.1)	
 		
@@ -101,59 +106,49 @@ func _physics_process(delta):
 		
 	else:
 		#This will allow the setting of positional arguments
-		set_mode(RigidBody2D.MODE_KINEMATIC)
-		
-		old_position = position
+		if(mode != MODE_KINEMATIC):
+			set_mode(RigidBody.MODE_KINEMATIC)
+
+		old_position = get_transform().origin
 		#Disable the collision box
 		#$collider.disabled = true
 		#set the mode to kinematic, remove collisions and
 		#update recieved position
-		position = lerp(remote_position, old_position, 0.01)
+		transform.origin = lerp(remote_position, old_position, 0.01)
 		rotation = remote_rotation
 		
 	update_animations()
 
 
 func update_animations():
-	if velocity.y < 0:
-		if($StackedSprite.playing_animation == ""):
-			$StackedSprite.play_animation("up",30)
-	elif velocity.y > 0:
-		if($StackedSprite.playing_animation == ""):
-			$StackedSprite.play_animation("down",30)
-	elif velocity.x < 0:
-		if($StackedSprite.playing_animation == ""):
-			$StackedSprite.play_animation("left",30)
-	elif velocity.x > 0:
-		if($StackedSprite.playing_animation == ""):
-			$StackedSprite.play_animation("right",30)
-	else:
-		$StackedSprite.play_animation("still",30)
+	pass
 
 func move_state(delta):
 	var input_vector = puppet_control_movement
-	
+
 	if(input_vector != Vector2.ZERO):
-		velocity = velocity.move_toward(input_vector*MAX_SPEED, SPEED*delta)
+		velocity = velocity.move_toward(Vector3(input_vector.x*MAX_SPEED,0,input_vector.y*MAX_SPEED), SPEED*delta)
 	else:
 		#No need to apply friction here because it is set through linear dampening
-		velocity = Vector2.ZERO
+		velocity = Vector3.ZERO
 	
 	move()
 
 func move():
-	apply_central_impulse(velocity)
+	add_force(velocity, Vector3.ZERO)
+	#apply_central_impulse(velocity)
 
 func dash_state(delta):
 	pass
 	
 func summon_state(delta):
 	#Apply friction
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	velocity = velocity.move_toward(Vector3.ZERO, FRICTION * delta)
 	
 	var rock_name = get_name()
-	var offset = 40
-	var rock_pos = Vector2(position.x + offset*sin(rotation), position.y - offset*cos(rotation))
+	var offset = 1
+	var y_rot = -get_transform().basis.get_euler().y
+	var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
 	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
 	state = MOVE
 	
@@ -170,7 +165,7 @@ func set_player_name(new_name):
 func _on_SendData_timeout():
 	if(get_tree().is_network_server()):
 		rset_unreliable("remote_rotation", rotation)
-		rset_unreliable("remote_position", position)
+		rset_unreliable("remote_position", get_transform().origin)
 	else:
 		if(is_network_master()):
 			#Send off players movement
@@ -187,9 +182,9 @@ func _on_SendData_timeout():
 sync func summon_rock(rock_name, pos, by_who):
 	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
 	rock.set_name(rock_name) # Ensure unique name for the bomb
-	set_mode(RigidBody2D.MODE_KINEMATIC)
-	rock.position = pos
-	set_mode(RigidBody2D.MODE_RIGID)
+	set_mode(RigidBody.MODE_KINEMATIC)
+	rock.translation = pos
+	set_mode(RigidBody.MODE_RIGID)
 	#rock.from_who #we can set this when we need to know who killed who for stats
 	
 	# No need to set network master, will be owned by server by default
@@ -209,7 +204,7 @@ master func fall_state():
 func death_state():
 	#move the players away - this is easier than destroying the client and respawning them
 	#if we do multiple rounds
-	position = Vector2.ZERO
+	translation = Vector3.ZERO
 	
 	#keep everyone updated on your predicament
 	#send_status()
@@ -229,5 +224,5 @@ master func reset():
 	#send_status()
 	print("RESET")
 	#bring player back to spawn position
-	position = spawn_position
+	translation = spawn_position
 	state = MOVE

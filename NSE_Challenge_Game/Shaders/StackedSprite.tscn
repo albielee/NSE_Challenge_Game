@@ -4,6 +4,7 @@
 [ext_resource path="res://Shaders/StackedSprite.shader" type="Shader" id=2]
 
 [sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/columns = 1
 shader_param/rows = 1
