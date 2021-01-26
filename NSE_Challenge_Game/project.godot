@@ -131,3 +131,7 @@ pull={
 3d_physics/layer_3="DynamicWorld"
 3d_physics/layer_4="MouseRaycast"
 2d_physics/layer_5="IgnoreAll"
+
+[rendering]
+
+environment/default_clear_color=Color( 0.352941, 0.411765, 0.533333, 1 )
