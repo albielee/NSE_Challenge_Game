@@ -9,6 +9,8 @@ puppet var puppet_mouse_angle = 0.0
 #Positional data
 remote var remote_position = Vector3.ZERO
 remote var remote_rotation = 0.0
+#dead data
+remote var remote_dead = false
 
 enum {
 	MOVE,
@@ -40,7 +42,10 @@ func _ready():
 	
 
 func _physics_process(delta):
-	if(is_network_master()):
+	if(state != FALL and state != DEATH and remote_dead):
+		state = FALL
+	
+	if(is_network_master() and !remote_dead):
 		#Let host input their controls
 		var input_vector = Vector2.ZERO
 		input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -109,12 +114,16 @@ func _physics_process(delta):
 		if(mode != MODE_KINEMATIC):
 			set_mode(RigidBody.MODE_KINEMATIC)
 
-		old_position = get_transform().origin
+		var p = get_transform().origin
 		#Disable the collision box
 		#$collider.disabled = true
 		#set the mode to kinematic, remove collisions and
 		#update recieved position
-		transform.origin = lerp(remote_position, old_position, 0.01)
+		var interpolate_speed = 0.1
+		var x = move_toward(p.x, remote_position.x, interpolate_speed)
+		var y = move_toward(p.y, remote_position.y, interpolate_speed)
+		var z = move_toward(p.z, remote_position.z, interpolate_speed)
+		transform.origin = Vector3(x,y,z)
 		rotation = remote_rotation
 		
 	update_animations()
@@ -164,8 +173,10 @@ func set_player_name(new_name):
 
 func _on_SendData_timeout():
 	if(get_tree().is_network_server()):
-		rset_unreliable("remote_rotation", rotation)
+		#Send rotational and positional data
+		rset_unreliable("remote_rotation", get_rotation())
 		rset_unreliable("remote_position", get_transform().origin)
+		rset("remote_dead", remote_dead)
 	else:
 		if(is_network_master()):
 			#Send off players movement
@@ -192,7 +203,7 @@ sync func summon_rock(rock_name, pos, by_who):
 	
 
 #Called when the player enters the void area
-master func fall_state():
+func fall_state():
 	state = FALL;
 	#anim, falling motion, destroy player
 	
@@ -204,25 +215,17 @@ master func fall_state():
 func death_state():
 	#move the players away - this is easier than destroying the client and respawning them
 	#if we do multiple rounds
+	set_mode(RigidBody.MODE_KINEMATIC)
 	translation = Vector3.ZERO
-	
-	#keep everyone updated on your predicament
-	#send_status()
-	rpc("dead")
-	dead()
-
-puppet func dead():
-	dead = true
-
-puppet func alive():
-	dead = false
 
 master func reset():
+	set_mode(RigidBody.MODE_KINEMATIC)
+	
 	#bring player back to life
-	rpc("alive")
-	alive()
-	#send_status()
+	remote_dead = false
 	print("RESET")
 	#bring player back to spawn position
 	translation = spawn_position
 	state = MOVE
+	
+	set_mode(RigidBody.MODE_RIGID)

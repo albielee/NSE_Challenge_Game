@@ -2,7 +2,7 @@ extends Control
 
 func _process(delta):
 	#If the host:
-	if(is_network_master()):
+	if(get_tree().is_network_server()):
 		#Check if one player is left
 		var one_player_left = detect_players_left()
 		if(one_player_left):
@@ -14,13 +14,13 @@ func detect_players_left():
 	#if more than one player
 	if(len(players) > 1):
 		for p in players:
-			if(p.dead == false):
+			if(p.remote_dead == false):
 				players_left += 1
 		if(players_left == 1):
 			return true
 		return false
 	else:
-		pass#return players[0].dead
+		return players[0].remote_dead
 
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions
@@ -30,6 +30,7 @@ func restart_round():
 	#all objects in resettable should have a reset function
 	for o in get_tree().get_nodes_in_group("resettable"):
 		o.rpc("reset")
+		o.reset()
 		
 """
 OLD CODE BUT MAY BE USEFUL LATER
