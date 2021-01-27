@@ -1,6 +1,5 @@
-extends Area2D
+extends Area
 
-
-func _on_DeathVoid_body_entered(body):
-	if(body.has_method("fall_state")):
+func _on_Void_body_entered(body):
+	if(body.is_in_group("player")):
 		body.rpc("fall_state")
