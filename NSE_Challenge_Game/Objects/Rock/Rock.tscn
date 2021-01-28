@@ -29,6 +29,8 @@ mesh = SubResource( 2 )
 material/0 = null
 
 [node name="Hitbox" type="Area" parent="."]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
