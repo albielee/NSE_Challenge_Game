@@ -5,12 +5,16 @@ puppet var puppet_control_movement = Vector2.ZERO
 puppet var puppet_control_pushpull = 0.0
 puppet var puppet_control_summon = 0.0
 puppet var puppet_mouse_angle = 0.0
+puppet var puppet_current_angle = Vector3.ZERO
 
 #Positional data
 remote var remote_position = Vector3.ZERO
 remote var remote_rotation = 0.0
 #dead data
 remote var remote_dead = false
+
+onready var pushbox = $PushBox
+onready var animationPlayer = $AnimationPlayer
 
 enum {
 	MOVE,
@@ -34,6 +38,7 @@ export var FRICTION = 10
 export var MAX_SPEED = 500
 export var SPEED = 2000
 export var TURN_SPEED = 400
+export var PUSH_POWER = 500
 
 func _ready():
 	set_linear_damp(FRICTION)
@@ -57,7 +62,6 @@ func _physics_process(delta):
 		puppet_control_movement = input_vector
 		puppet_control_summon = Input.get_action_strength("summon_rock")
 		
-		
 		var offset = deg2rad(90)
 		var cam = get_tree().get_nodes_in_group("Camera")[0]
 		if(cam != null):
@@ -68,6 +72,15 @@ func _physics_process(delta):
 			var rotation_angle = wrapf(target_angle_y - current_angle_y, -PI, PI);
 			
 			puppet_mouse_angle = up_dir * (rotation_angle);
+			
+			var picur = wrapf(current_angle_y,-PI,PI)
+			var angx = -sin(picur)
+			var angz = -cos(picur)
+			
+			
+			puppet_current_angle.x=angx
+			puppet_current_angle.y=0.0
+			puppet_current_angle.z=angz
 	
 		
 	#Take control input and run player code
@@ -82,10 +95,14 @@ func _physics_process(delta):
 		var push_pull = puppet_control_pushpull
 		var summon = puppet_control_summon
 		var mouse_angle = puppet_mouse_angle
+		var current_angel = puppet_current_angle
+		
+		
+		pushbox.knockback_vector=puppet_current_angle*PUSH_POWER
 
 		match state:
 			MOVE:
-				move_state(delta)
+				move_state(delta, mouse_angle)
 			DASH:
 				dash_state(delta)
 			SUMMON:
@@ -94,13 +111,6 @@ func _physics_process(delta):
 				push_state(delta)
 			PULL:
 				pull_state(delta)
-
-		#Rotate the player to face the mouse
-
-		#add_torque(mouse_angle*TURN_SPEED*delta)
-		#print(Vector3(0,mouse_angle*TURN_SPEED,0))
-		set_angular_velocity(mouse_angle*TURN_SPEED*delta)
-		#rotation += mouse_angle	# multiply by value if we want slow rot (e.g. 0.1)	
 		
 		#Summoning a rock
 		if(summon and rock_summoned == false):
@@ -132,7 +142,7 @@ func _physics_process(delta):
 func update_animations():
 	pass
 
-func move_state(delta):
+func move_state(delta, mouse_angle):
 	var input_vector = puppet_control_movement
 
 	if(input_vector != Vector2.ZERO):
@@ -140,6 +150,18 @@ func move_state(delta):
 	else:
 		#No need to apply friction here because it is set through linear dampening
 		velocity = Vector3.ZERO
+	
+	pushbox.knockback_vector = PUSH_POWER*mouse_angle
+	
+	if(Input.is_action_just_pressed("push")):
+		state = PUSH
+		
+	#Rotate the player to face the mouse
+
+	#add_torque(mouse_angle*TURN_SPEED*delta)
+	#print(Vector3(0,mouse_angle*TURN_SPEED,0))
+	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	#rotation += mouse_angle	# multiply by value if we want slow rot (e.g. 0.1)	
 	
 	move()
 
@@ -152,7 +174,7 @@ func dash_state(delta):
 	
 func summon_state(delta):
 	#Apply friction
-	velocity = velocity.move_toward(Vector3.ZERO, FRICTION * delta)
+	velocity = Vector3.ZERO
 	
 	var rock_name = get_name()
 	var offset = 1
@@ -162,7 +184,11 @@ func summon_state(delta):
 	state = MOVE
 	
 func push_state(delta):
-	pass
+	velocity = Vector3.ZERO
+	animationPlayer.play("push_generic")
+	
+func push_complete():
+	state=MOVE
 	
 func pull_state(delta):
 	pass

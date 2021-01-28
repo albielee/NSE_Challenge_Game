@@ -28,3 +28,7 @@ func _on_SendData_timeout():
 sync func reset():
 	queue_free()
 
+func _on_Hitbox_area_entered(area):
+	if (area.name=='PushBox'):
+		print(area.knockback_vector)
+		add_force(area.knockback_vector, Vector3.ZERO)
