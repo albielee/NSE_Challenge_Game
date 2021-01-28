@@ -247,6 +247,7 @@ func death_state():
 master func reset():
 	set_mode(RigidBody.MODE_KINEMATIC)
 	
+	
 	#bring player back to life
 	remote_dead = false
 	print("RESET")
