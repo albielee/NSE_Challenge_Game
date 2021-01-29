@@ -4,8 +4,9 @@ extends RigidBody
 remote var remote_position = Vector3.ZERO
 remote var remote_rotation = 0.0
 
-var i = 1
+onready var hitbox = $Hitbox
 
+var i = 1
 
 func _physics_process(delta):
 	if(get_tree().is_network_server()):
@@ -28,5 +29,5 @@ func _on_SendData_timeout():
 sync func reset():
 	queue_free()
 
-func _on_Hitbox_area_entered(area):
-	add_force(area.knockback_vector, Vector3.ZERO)
+func _on_Hitbox_pushed():
+	add_force(hitbox.knockback, Vector3.ZERO)

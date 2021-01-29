@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=3]
 [ext_resource path="res://Player/PlayerModels/Cubeboy.tres" type="CubeMesh" id=4]
 [ext_resource path="res://Player/PlayerModels/Longboy.tres" type="CubeMesh" id=5]
+[ext_resource path="res://Player/GrabBox.gd" type="Script" id=6]
+[ext_resource path="res://Player/PlayerModels/Cubeflatboy.tres" type="CubeMesh" id=7]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 2, 1 )
@@ -12,12 +14,72 @@ extents = Vector3( 1, 2, 1 )
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.5
 
-[sub_resource type="Animation" id=8]
-resource_name = "idle"
-length = 0.1
-loop = true
+[sub_resource type="CapsuleShape" id=3]
+radius = 0.5
 
 [sub_resource type="Animation" id=4]
+resource_name = "grabbing"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "max_grab"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "grabmax"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -58,27 +120,47 @@ tracks/2/keys = {
 "values": [ ExtResource( 4 ), ExtResource( 5 ) ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "grabbing"
+
 [sub_resource type="AnimationNodeAnimation" id=9]
-animation = "idle"
+animation = "grabmax"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "push_generic"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=11]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=13]
-states/idle/node = SubResource( 9 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachine" id=18]
+states/grabbing/node = SubResource( 8 )
+states/grabbing/position = Vector2( 444, 177 )
+states/grabmax/node = SubResource( 9 )
+states/grabmax/position = Vector2( 240, 124 )
+states/idle/node = SubResource( 10 )
 states/idle/position = Vector2( 444, 80 )
-states/push_generic/node = SubResource( 10 )
+states/push_generic/node = SubResource( 11 )
 states/push_generic/position = Vector2( 657, 80 )
-transitions = [ "idle", "push_generic", SubResource( 11 ), "push_generic", "idle", SubResource( 12 ) ]
+transitions = [ "idle", "push_generic", SubResource( 12 ), "push_generic", "idle", SubResource( 13 ), "idle", "grabbing", SubResource( 14 ), "grabbing", "idle", SubResource( 15 ), "grabbing", "grabmax", SubResource( 16 ), "grabmax", "idle", SubResource( 17 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
 [node name="Player" type="RigidBody"]
 collision_mask = 7
@@ -90,12 +172,19 @@ shape = SubResource( 1 )
 
 [node name="PushBox" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, -1 )
-collision_layer = 0
-collision_mask = 4
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape" parent="PushBox" index="0"]
 shape = SubResource( 2 )
 disabled = true
+
+[node name="GrabBox" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape" parent="GrabBox" index="0"]
+shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -103,14 +192,16 @@ mesh = ExtResource( 5 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle = SubResource( 8 )
-anims/push_generic = SubResource( 4 )
+anims/grabbing = SubResource( 4 )
+anims/grabmax = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/push_generic = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 13 )
+tree_root = SubResource( 18 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 6 )
+parameters/playback = SubResource( 19 )
 
 [node name="NetworkHandler" type="Spatial" parent="." groups=[
 "player",
@@ -121,6 +212,9 @@ script = ExtResource( 1 )
 [node name="SendData" type="Timer" parent="NetworkHandler"]
 wait_time = 0.01
 autostart = true
+[connection signal="area_entered" from="PushBox" to="PushBox" method="_on_PushBox_area_entered"]
 [connection signal="timeout" from="NetworkHandler/SendData" to="." method="_on_SendData_timeout"]
 
 [editable path="PushBox"]
+
+[editable path="GrabBox"]

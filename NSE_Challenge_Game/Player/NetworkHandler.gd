@@ -7,10 +7,10 @@ extends Spatial
 puppet var puppet_control_movement = Vector2.ZERO
 puppet var puppet_control_pushpull = 0.0
 puppet var puppet_control_summon = 0.0
-puppet var puppet_mouse_angle = Vector3.ZERO
-puppet var puppet_current_angle = Vector3.ZERO
+puppet var puppet_control_grab = 0.0
+puppet var puppet_mouse_position = Vector3.ZERO
 puppet var controls = [puppet_control_movement, puppet_control_pushpull, puppet_control_summon,
-	puppet_mouse_angle]
+	puppet_control_grab, puppet_mouse_position]
 
 #Positional data
 remote var remote_position = Vector3.ZERO
@@ -29,7 +29,8 @@ var old_position = Vector3.ZERO
 	
 func update_controls():
 	#set controls to whatever was set last time
-	return [puppet_control_movement, puppet_control_pushpull, puppet_control_summon,puppet_mouse_angle]
+	return [puppet_control_movement, puppet_control_pushpull, puppet_control_summon, 
+	puppet_control_grab, puppet_mouse_position]
 
 func is_current_player():
 	return (is_network_master() and !remote_dead)
@@ -39,7 +40,8 @@ func current_player(controls):
 	puppet_control_movement = controls[0] 
 	puppet_control_pushpull = controls[1] 
 	puppet_control_summon   = controls[2]
-	puppet_mouse_angle      = controls[3]
+	puppet_control_grab     = controls[3]
+	puppet_mouse_position   = controls[4]
 
 func is_host():
 	return (get_tree().is_network_server())
@@ -72,7 +74,8 @@ func timeout(cur_rotation,cur_position,cur_animation):
 			#send pushpull
 			rset("puppet_control_pushpull", puppet_control_pushpull)
 			rset("puppet_control_summon", puppet_control_summon)
-			rset("puppet_mouse_angle", puppet_mouse_angle)
+			rset("puppet_control_grab", puppet_control_grab)
+			rset("puppet_mouse_position", puppet_mouse_position)
 	$SendData.start(1.0/Settings.tickrate)
 
 #Called when the player enters the void area
