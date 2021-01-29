@@ -16,6 +16,7 @@ enum {
 	DASH,
 	SUMMON,
 	PUSH,
+	PUSHING,
 	PULL,
 	GRAB,
 	GRABBED,
@@ -27,6 +28,8 @@ var state = MOVE
 var anim = "idle"
 var prevanim = "idle"
 
+var charged_power = 0.5
+var push_cooldown = 0
 var rock_summoned = false
 
 export var MASS = 10
@@ -127,7 +130,7 @@ func update(delta):
 	mouse_position = controls[4]
 	
 	angle_update()
-	pushbox.knockback_vector=PUSH_POWER*current_angle
+	pushbox.knockback_vector=charged_power*PUSH_POWER*current_angle
 	grabbox.knockback_vector=PUSH_POWER*current_angle
 	grabbox.pullin_vector=-PUSH_POWER*current_angle
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
@@ -141,6 +144,8 @@ func update(delta):
 			summon_state()
 		PUSH:
 			push_state(delta)
+		PUSHING:
+			pushing_state()
 		PULL:
 			pull_state(delta)
 		GRAB:
@@ -164,9 +169,12 @@ func move_state(delta, mouse_angle):
 		if(grab==1):
 			state = GRAB
 		else:
-			if(pushpull==1):
+			if(pushpull==1 and push_cooldown==0):
 				state = PUSH
+			elif(pushpull==0):
+				push_cooldown=0
 	
+	print(push_cooldown)
 	#Handle rotation of the character towards correct direction
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
@@ -217,7 +225,7 @@ func check_cancel_grab():
 		anim="idle"
 		state=MOVE
 		grabbox.drop_rock()
-		grabbox.transform.origin.z=-1
+		grabbox.transform.origin.z=-1.8
 		return true
 	return false
 
@@ -245,11 +253,21 @@ func summon_state():
 
 func push_state(delta):
 	velocity = Vector3.ZERO
+	anim = "push_charge"
+
+func pushing_state():
 	anim = "push_generic"
+
+func push_power_up():
+	charged_power += 0.1
+	if (pushpull != 1) or (charged_power >= 1.5):
+		state=PUSHING
 
 func push_complete():
 	state = MOVE
 	anim = "idle"
+	charged_power=0.5
+	push_cooldown=1
 
 func pull_state(delta):
 	pass

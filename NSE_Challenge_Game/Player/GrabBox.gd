@@ -21,6 +21,7 @@ func cf_update(playerloc, grab_force, dropoff):
 		var distplayer = playerloc-rockloc
 		
 		transform.origin.z = min(-2,-distplayer.length())
+		transform.origin.z = max(-10,-distplayer.length())
 		
 		var grab = grab_force
 		
@@ -42,6 +43,7 @@ func pull(playerloc, dropoff):
 
 func drop_rock():
 	if (!rock==null):
+		rock.out_zone()
 		rock=null
 
 func pull_center(grab_force):
@@ -51,6 +53,7 @@ func pull_center(grab_force):
 func _on_GrabBox_area_entered(area):
 	if (rock==null):
 		rock=area
+		rock.in_zone()
 
 func is_center(rockloc, meloc):
 	if meloc.distance_to(rockloc) < 1:
@@ -59,5 +62,6 @@ func is_center(rockloc, meloc):
 
 func _on_GrabBox_area_exited(area):
 	if (area==rock):
+		rock.out_zone()
 		emit_signal("lost_rock")
 		rock=null
