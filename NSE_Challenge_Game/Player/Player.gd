@@ -19,6 +19,10 @@ enum {
 	DEATH
 }
 var state = MOVE
+
+var anim = "idle"
+var prevanim = "idle"
+
 var rock_summoned = false
 
 export var MASS = 10
@@ -30,7 +34,8 @@ export var PUSH_POWER = 500
 
 onready var pushbox = $PushBox
 onready var network_handler = $NetworkHandler
-onready var animation_player = $AnimationPlayer
+onready var animationtree = $AnimationTree	
+onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = network_handler.spawn_position
 
 func _ready():
@@ -52,6 +57,10 @@ func _physics_process(delta):
 		update(delta)
 	else:
 		puppet_update(delta)
+	
+	if (anim!=prevanim):
+		handle_animations(anim)
+	prevanim = anim
 
 func host_get_controls():
 	controls = network_handler.update_controls()
@@ -98,6 +107,10 @@ func puppet_update(delta):
 	var z = move_toward(p.z, network_handler.remote_position.z, interpolate_speed)
 	transform.origin = Vector3(x,y,z)
 	set_rotation(network_handler.remote_rotation)
+	anim = network_handler.remote_animation
+
+func handle_animations(animation):
+	animationstate.travel(animation)
 
 #Takes given control input and updates actions of the player, hands info back to handler
 func update(delta):
@@ -118,7 +131,7 @@ func update(delta):
 		DASH:
 			dash_state(delta)
 		SUMMON:
-			summon_state(delta)
+			summon_state()
 		PUSH:
 			push_state(delta)
 		PULL:
@@ -153,34 +166,23 @@ func move():
 func dash_state(delta):
 	pass
 
-func summon_state(delta):
-	#Apply friction
+func summon_state():
 	velocity = Vector3.ZERO
 	
 	var rock_name = get_name()
 	var offset = 1
 	var y_rot = -get_transform().basis.get_euler().y
 	var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
+	network_handler.all_summon_rock(rock_name, rock_pos)
 	state = MOVE
-
-sync func summon_rock(rock_name, pos, by_who):
-	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
-	rock.set_name(rock_name)
-	
-	set_mode(RigidBody.MODE_KINEMATIC)
-	rock.translation = pos
-	set_mode(RigidBody.MODE_RIGID)
-
-	get_node("../..").add_child(rock)
-
 
 func push_state(delta):
 	velocity = Vector3.ZERO
-	animation_player.play("push_generic")
+	anim = "push_generic"
 	
 func push_complete():
-	state=MOVE
+	state = MOVE
+	anim = "idle"
 
 func pull_state(delta):
 	pass
@@ -195,4 +197,4 @@ func angle_update():
 	return Vector3(-sin(curang),0,-cos(curang))
 	
 func _on_SendData_timeout():
-	network_handler.timeout(get_rotation(),get_transform().origin)
+	network_handler.timeout(get_rotation(),get_transform().origin,anim)

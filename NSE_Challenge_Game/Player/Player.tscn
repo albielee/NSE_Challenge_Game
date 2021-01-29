@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=3]
+[ext_resource path="res://Player/PlayerModels/Cubeboy.tres" type="CubeMesh" id=4]
+[ext_resource path="res://Player/PlayerModels/Longboy.tres" type="CubeMesh" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 2, 1 )
@@ -10,8 +12,10 @@ extents = Vector3( 1, 2, 1 )
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.5
 
-[sub_resource type="CubeMesh" id=3]
-size = Vector3( 2, 4, 2 )
+[sub_resource type="Animation" id=8]
+resource_name = "idle"
+length = 0.1
+loop = true
 
 [sub_resource type="Animation" id=4]
 length = 0.5
@@ -41,6 +45,40 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("MeshInstance:mesh")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "push_generic"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=13]
+states/idle/node = SubResource( 9 )
+states/idle/position = Vector2( 444, 80 )
+states/push_generic/node = SubResource( 10 )
+states/push_generic/position = Vector2( 657, 80 )
+transitions = [ "idle", "push_generic", SubResource( 11 ), "push_generic", "idle", SubResource( 12 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
 
 [node name="Player" type="RigidBody"]
 collision_mask = 7
@@ -61,11 +99,18 @@ disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-mesh = SubResource( 3 )
+mesh = ExtResource( 5 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 8 )
 anims/push_generic = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 13 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 6 )
 
 [node name="NetworkHandler" type="Spatial" parent="." groups=[
 "player",

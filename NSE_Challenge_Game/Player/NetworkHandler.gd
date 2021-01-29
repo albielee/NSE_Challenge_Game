@@ -15,6 +15,7 @@ puppet var controls = [puppet_control_movement, puppet_control_pushpull, puppet_
 #Positional data
 remote var remote_position = Vector3.ZERO
 remote var remote_rotation = Vector3.ZERO
+remote var remote_animation = "idle"
 
 #dead data
 remote var remote_dead = false
@@ -46,11 +47,23 @@ func is_host():
 func get_cam():
 	return get_tree().get_nodes_in_group("Camera")[0]
 
-func timeout(cur_rotation,cur_position):
+func all_summon_rock(rock_name, rock_pos):
+	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
+
+sync func summon_rock(rock_name, rock_pos, by_who):
+	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
+	rock.set_name(rock_name)
+	
+	rock.translation = rock_pos
+
+	get_node("../..").add_child(rock)
+
+func timeout(cur_rotation,cur_position,cur_animation):
 	if(is_host()):
 		#Send rotational and positional data
 		rset_unreliable("remote_rotation", cur_rotation)
 		rset_unreliable("remote_position", cur_position)
+		rset_unreliable("remote_animation", cur_animation)
 		rset("remote_dead", remote_dead)
 	else:
 		if(is_current_player()):
@@ -61,10 +74,6 @@ func timeout(cur_rotation,cur_position):
 			rset("puppet_control_summon", puppet_control_summon)
 			rset("puppet_mouse_angle", puppet_mouse_angle)
 	$SendData.start(1.0/Settings.tickrate)
-	
-#sync functions
-#Summoning a rock and syncing it to players in server
-# Use sync because it will be called everywhere
 
 #Called when the player enters the void area
 #func fall_state():
