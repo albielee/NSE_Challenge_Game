@@ -22,12 +22,12 @@ func cf_update(playerloc, grab_force, dropoff):
 		
 		transform.origin.z = min(-2,-distplayer.length())
 		transform.origin.z = max(-10,-distplayer.length())
+		scale.z=1
 		
 		var grab = grab_force
 		
 		cf_vector=(meloc-rockloc)*dist
-		if(is_center(rockloc, meloc)):
-			emit_signal("encounter_rock")
+		emit_signal("encounter_rock")
 		pull_center(grab)
 
 func push(playerloc, dropoff):

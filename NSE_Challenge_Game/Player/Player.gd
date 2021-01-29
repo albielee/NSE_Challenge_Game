@@ -15,6 +15,7 @@ enum {
 	MOVE,
 	DASH,
 	SUMMON,
+	SUMMONING,
 	PUSH,
 	PUSHING,
 	PULL,
@@ -30,6 +31,8 @@ var prevanim = "idle"
 
 var charged_power = 0.5
 var push_cooldown = 0
+
+var summon_size = 0.5
 var rock_summoned = false
 
 export var MASS = 10
@@ -142,6 +145,8 @@ func update(delta):
 			dash_state(delta)
 		SUMMON:
 			summon_state()
+		SUMMONING:
+			summoning_state()
 		PUSH:
 			push_state(delta)
 		PUSHING:
@@ -173,8 +178,6 @@ func move_state(delta, mouse_angle):
 				state = PUSH
 			elif(pushpull==0):
 				push_cooldown=0
-	
-	print(push_cooldown)
 	#Handle rotation of the character towards correct direction
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
@@ -192,7 +195,10 @@ func grab_state(delta):
 		return
 	
 	anim="grabbing"
-	grabbox.transform.origin.z-=0.1
+	
+	#update the shape of the grabbing box
+	grabbox.transform.origin.z-=0.09
+	grabbox.scale.z+=0.05
 	
 	if (movement != Vector2.ZERO):
 		velocity = velocity.move_toward(Vector3(movement.x*MAX_SPEED/3,0,movement.y*MAX_SPEED/3), SPEED*delta)
@@ -226,6 +232,7 @@ func check_cancel_grab():
 		state=MOVE
 		grabbox.drop_rock()
 		grabbox.transform.origin.z=-1.8
+		grabbox.scale.z=1
 		return true
 	return false
 
@@ -240,16 +247,34 @@ func _on_GrabBox_encounter_rock():
 func _on_GrabBox_lost_rock():
 	anim="idle"
 	state=MOVE
+	grabbox.drop_rock()
+	grabbox.transform.origin.z=-1.8
+	grabbox.scale.z=1
 
 func summon_state():
 	velocity = Vector3.ZERO
+	anim = "summon_charge"
+
+func summoning_state():
+	anim = "summon_generic"
+
+func summon_complete():
+	velocity = Vector3.ZERO
 	
 	var rock_name = get_name()
-	var offset = 1
+	var offset = summon_size
 	var y_rot = -get_transform().basis.get_euler().y
 	var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-	network_handler.all_summon_rock(rock_name, rock_pos)
+	network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
+	
+	summon_size=0.5
+	anim = "idle"
 	state = MOVE
+
+func summon_power_up():
+	summon_size+=0.5
+	if (summon == 0.0) or (summon_size == 3.0):
+		state=SUMMONING
 
 func push_state(delta):
 	velocity = Vector3.ZERO

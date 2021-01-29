@@ -49,14 +49,15 @@ func is_host():
 func get_cam():
 	return get_tree().get_nodes_in_group("Camera")[0]
 
-func all_summon_rock(rock_name, rock_pos):
-	rpc("summon_rock", rock_name, rock_pos , get_tree().get_network_unique_id())
+func all_summon_rock(rock_name, rock_pos, rock_size):
+	rpc("summon_rock", rock_name, rock_pos, rock_size, get_tree().get_network_unique_id())
 
-sync func summon_rock(rock_name, rock_pos, by_who):
+sync func summon_rock(rock_name, rock_pos, rock_size, by_who):
 	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
 	rock.set_name(rock_name)
 	
 	rock.translation = rock_pos
+	rock.scale = Vector3(rock_size,rock_size,rock_size)
 
 	get_node("../..").add_child(rock)
 
