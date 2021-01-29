@@ -35,6 +35,8 @@ export var MAX_SPEED = 500
 export var SPEED = 2000
 export var TURN_SPEED = 400
 export var PUSH_POWER = 500
+export var GRAB_POWER = 10
+export var GRAB_DROPOFF_VAL = 1.0
 
 onready var pushbox = $PushBox
 onready var grabbox = $GrabBox
@@ -126,6 +128,9 @@ func update(delta):
 	
 	angle_update()
 	pushbox.knockback_vector=PUSH_POWER*current_angle
+	grabbox.knockback_vector=PUSH_POWER*current_angle
+	grabbox.pullin_vector=-PUSH_POWER*current_angle
+	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
 	
 	match state:
 		MOVE:
@@ -181,7 +186,6 @@ func grab_state(delta):
 	anim="grabbing"
 	grabbox.transform.origin.z-=0.1
 	
-	
 	if (movement != Vector2.ZERO):
 		velocity = velocity.move_toward(Vector3(movement.x*MAX_SPEED/3,0,movement.y*MAX_SPEED/3), SPEED*delta)
 	else:
@@ -194,18 +198,25 @@ func grabbed_state(delta):
 	if (check_cancel_grab()):
 		return
 	
+	var distance = transform.origin.distance_squared_to(grabbox.transform.origin)
+	if (pushpull < 0):
+		grabbox.pull(transform.origin, GRAB_DROPOFF_VAL)
+	if (pushpull > 0):
+		grabbox.push(transform.origin, GRAB_DROPOFF_VAL)
+	
 	if (movement != Vector2.ZERO):
 		velocity = velocity.move_toward(Vector3(movement.x*MAX_SPEED/2.5,0,movement.y*MAX_SPEED/2.5), SPEED*delta)
 	else:
 		velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED/4*delta)
-	move()	
+	move()
 	
 func check_cancel_grab():
 	if (grab==0):
 		anim="idle"
 		state=MOVE
+		grabbox.drop_rock()
 		grabbox.transform.origin.z=-1
 		return true
 	return false
@@ -213,6 +224,14 @@ func check_cancel_grab():
 func max_grab():
 	state = GRABBED
 	anim = "grabmax"
+
+func _on_GrabBox_encounter_rock():
+	state = GRABBED
+	anim = "grabmax"
+
+func _on_GrabBox_lost_rock():
+	anim="idle"
+	state=MOVE
 
 func summon_state():
 	velocity = Vector3.ZERO
@@ -254,3 +273,5 @@ func angle_update():
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
 	network_handler.timeout(get_rotation(),get_transform().origin,anim)
+
+

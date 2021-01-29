@@ -15,7 +15,8 @@ extents = Vector3( 1, 2, 1 )
 radius = 0.5
 
 [sub_resource type="CapsuleShape" id=3]
-radius = 0.5
+radius = 2.0
+height = 0.5
 
 [sub_resource type="Animation" id=4]
 resource_name = "grabbing"
@@ -45,6 +46,18 @@ tracks/1/keys = {
 "method": "max_grab"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("GrabBox/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "grabmax"
@@ -62,6 +75,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ ExtResource( 7 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("GrabBox/CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.1
@@ -77,6 +102,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GrabBox/CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PushBox/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -165,6 +214,8 @@ start_node = "idle"
 [node name="Player" type="RigidBody"]
 collision_mask = 7
 script = ExtResource( 3 )
+PUSH_POWER = 3000
+GRAB_DROPOFF_VAL = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -181,10 +232,13 @@ disabled = true
 
 [node name="GrabBox" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape" parent="GrabBox" index="0"]
 shape = SubResource( 3 )
+disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -213,6 +267,10 @@ script = ExtResource( 1 )
 wait_time = 0.01
 autostart = true
 [connection signal="area_entered" from="PushBox" to="PushBox" method="_on_PushBox_area_entered"]
+[connection signal="area_entered" from="GrabBox" to="GrabBox" method="_on_GrabBox_area_entered"]
+[connection signal="area_exited" from="GrabBox" to="GrabBox" method="_on_GrabBox_area_exited"]
+[connection signal="encounter_rock" from="GrabBox" to="." method="_on_GrabBox_encounter_rock"]
+[connection signal="lost_rock" from="GrabBox" to="." method="_on_GrabBox_lost_rock"]
 [connection signal="timeout" from="NetworkHandler/SendData" to="." method="_on_SendData_timeout"]
 
 [editable path="PushBox"]

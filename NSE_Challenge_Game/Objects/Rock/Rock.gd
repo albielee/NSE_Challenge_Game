@@ -8,6 +8,9 @@ onready var hitbox = $Hitbox
 
 var i = 1
 
+func _ready():
+	set_linear_damp(5)
+
 func _physics_process(delta):
 	if(get_tree().is_network_server()):
 		if(mode != MODE_RIGID):
