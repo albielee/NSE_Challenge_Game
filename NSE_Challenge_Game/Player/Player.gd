@@ -46,6 +46,7 @@ export var GRAB_DROPOFF_VAL = 1.0
 
 onready var pushbox = $PushBox
 onready var grabbox = $GrabBox
+onready var grabbox_shape = $GrabBox/CollisionShape
 
 onready var network_handler = $NetworkHandler
 onready var animationtree = $AnimationTree	
@@ -197,8 +198,9 @@ func grab_state(delta):
 	anim="grabbing"
 	
 	#update the shape of the grabbing box
-	grabbox.transform.origin.z-=0.09
-	grabbox.scale.z+=0.05
+	grabbox.transform.origin.z-=0.05
+	var h = grabbox_shape.shape.get_height()+0.1
+	grabbox_shape.shape.set_height(h)
 	
 	if (movement != Vector2.ZERO):
 		velocity = velocity.move_toward(Vector3(movement.x*MAX_SPEED/3,0,movement.y*MAX_SPEED/3), SPEED*delta)
@@ -232,12 +234,12 @@ func check_cancel_grab():
 		state=MOVE
 		grabbox.drop_rock()
 		grabbox.transform.origin.z=-1.8
-		grabbox.scale.z=1
+		grabbox_shape.shape.set_height(0.5)
 		return true
 	return false
 
 func max_grab():
-	state = GRABBED
+	state=GRABBED
 	anim = "grabmax"
 
 func _on_GrabBox_encounter_rock():

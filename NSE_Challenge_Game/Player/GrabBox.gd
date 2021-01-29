@@ -5,6 +5,8 @@ var knockback_vector = Vector3.ZERO
 var pullin_vector = Vector3.ZERO
 var player_position = Vector3.ZERO
 
+onready var shape = $CollisionShape
+
 var rock = null
 
 signal encounter_rock
@@ -15,14 +17,13 @@ func cf_update(playerloc, grab_force, dropoff):
 		cf_vector = Vector3.ZERO
 	else:
 		var rockloc = rock.global_transform.origin
-		var meloc = global_transform.origin
-		var dist = meloc.distance_squared_to(rockloc)
-		
 		var distplayer = playerloc-rockloc
-		
 		transform.origin.z = min(-2,-distplayer.length())
 		transform.origin.z = max(-10,-distplayer.length())
-		scale.z=1
+		shape.shape.set_height(0.5)
+		
+		var meloc = global_transform.origin
+		var dist = meloc.distance_squared_to(rockloc)
 		
 		var grab = grab_force
 		
