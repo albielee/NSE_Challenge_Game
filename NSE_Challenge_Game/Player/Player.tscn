@@ -207,7 +207,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=10]
 resource_name = "summon_generic"
 length = 0.3
 tracks/0/type = "method"
@@ -225,34 +225,26 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "grabbing"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "grabmax"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "push_charge"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "push_generic"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "summon_charge"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "summon_generic"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
 switch_mode = 2
@@ -263,35 +255,43 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=22]
-states/grabbing/node = SubResource( 10 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=28]
+states/grabbing/node = SubResource( 11 )
 states/grabbing/position = Vector2( 444, 177 )
-states/grabmax/node = SubResource( 11 )
+states/grabmax/node = SubResource( 12 )
 states/grabmax/position = Vector2( 240, 80 )
-states/idle/node = SubResource( 12 )
+states/idle/node = SubResource( 13 )
 states/idle/position = Vector2( 444, 80 )
-states/push_charge/node = SubResource( 13 )
+states/push_charge/node = SubResource( 14 )
 states/push_charge/position = Vector2( 536, -25.984 )
-states/push_generic/node = SubResource( 14 )
+states/push_generic/node = SubResource( 15 )
 states/push_generic/position = Vector2( 658, 80 )
-states/summon_charge/node = SubResource( 25 )
+states/summon_charge/node = SubResource( 16 )
 states/summon_charge/position = Vector2( 113, -18.984 )
-states/summon_generic/node = SubResource( 26 )
+states/summon_generic/node = SubResource( 17 )
 states/summon_generic/position = Vector2( 338, -74.984 )
-transitions = [ "push_generic", "idle", SubResource( 15 ), "idle", "grabbing", SubResource( 16 ), "grabbing", "idle", SubResource( 17 ), "grabbing", "grabmax", SubResource( 18 ), "grabmax", "idle", SubResource( 19 ), "idle", "push_charge", SubResource( 20 ), "push_charge", "push_generic", SubResource( 21 ), "idle", "summon_charge", SubResource( 27 ), "summon_charge", "summon_generic", SubResource( 28 ), "summon_generic", "idle", SubResource( 29 ) ]
+transitions = [ "push_generic", "idle", SubResource( 18 ), "idle", "grabbing", SubResource( 19 ), "grabbing", "idle", SubResource( 20 ), "grabbing", "grabmax", SubResource( 21 ), "grabmax", "idle", SubResource( 22 ), "idle", "push_charge", SubResource( 23 ), "push_charge", "push_generic", SubResource( 24 ), "idle", "summon_charge", SubResource( 25 ), "summon_charge", "summon_generic", SubResource( 26 ), "summon_generic", "idle", SubResource( 27 ) ]
 start_node = "idle"
 graph_offset = Vector2( 0, -83.984 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
 [node name="Player" type="RigidBody"]
 collision_mask = 7
@@ -334,13 +334,13 @@ anims/idle = SubResource( 6 )
 anims/push_charge = SubResource( 7 )
 anims/push_generic = SubResource( 8 )
 anims/summon_charge = SubResource( 9 )
-anims/summon_generic = SubResource( 24 )
+anims/summon_generic = SubResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 22 )
+tree_root = SubResource( 28 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 23 )
+parameters/playback = SubResource( 29 )
 
 [node name="NetworkHandler" type="Spatial" parent="." groups=[
 "player",

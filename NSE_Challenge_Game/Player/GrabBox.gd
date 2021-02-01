@@ -35,7 +35,6 @@ func push(playerloc, dropoff):
 	if (!rock==null):
 		var distance = playerloc.distance_to(rock.global_transform.origin)
 		rock.add_force(knockback_vector/(dropoff*distance))
-		
 	
 func pull(playerloc, dropoff):
 	if (!rock==null):
