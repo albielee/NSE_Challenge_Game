@@ -14,13 +14,13 @@ func detect_players_left():
 	#if more than one player
 	if(len(players) > 1):
 		for p in players:
-			if(p.remote_dead == false):
+			if(p.get_node("NetworkHandler").remote_dead == false):
 				players_left += 1
 		if(players_left == 1):
 			return true
 		return false
 	else:
-		return players[0].remote_dead
+		return players[0].get_node("NetworkHandler").remote_dead
 
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions
@@ -29,8 +29,9 @@ func restart_round():
 	#All objects that can be reset will be put in the resettable group
 	#all objects in resettable should have a reset function
 	for o in get_tree().get_nodes_in_group("resettable"):
-		o.rpc("reset")
-		o.reset()
+		pass
+		#o.rpc("reset")
+		#o.reset()
 		
 """
 OLD CODE BUT MAY BE USEFUL LATER
