@@ -18,7 +18,6 @@ enum {
 	SUMMON,
 	SUMMONING,
 	PUSH,
-	PUSHING,
 	PULL,
 	GRAB,
 	GRABBED,
@@ -30,7 +29,6 @@ var state = MOVE
 var anim = "idle"
 var prevanim = "idle"
 
-var charged_power = 0.5
 var push_cooldown = 0
 var push_mouse_position = mouse_position
 
@@ -154,10 +152,12 @@ func update(delta):
 	mouse_position = controls[5]
 	
 	angle_update()
-	pushbox.knockback_vector=charged_power*PUSH_POWER*current_angle
+	pushbox.knockback_vector=PUSH_POWER*current_angle
 	grabbox.knockback_vector=PUSH_POWER*current_angle
 	grabbox.pullin_vector=-PUSH_POWER*current_angle
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
+	pushbox.update_mouse_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y)
+	pushbox.update()
 	
 	match state:
 		MOVE:
@@ -170,8 +170,6 @@ func update(delta):
 			summoning_state()
 		PUSH:
 			push_state(delta)
-		PUSHING:
-			pushing_state()
 		PULL:
 			pull_state(delta)
 		GRAB:
@@ -318,28 +316,22 @@ func summon_power_up():
 func push_state(delta):
 	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
 	velocity = Vector3.ZERO
+	if pushpull == 1 and anim != "push_over":
+		#update pushbox shape
+		if(pushbox.shape.shape.get_height()<25*SCALE):
+			pushbox.shape.shape.set_height(pushbox.shape.shape.get_height()+5)
+			pushbox.transform.origin.z-=2.5*SCALE
 	
-	#update pushbox shape
-	if(pushbox.shape.shape.get_height()<25*SCALE):
-		pushbox.shape.shape.set_height(pushbox.shape.shape.get_height()+5)
-		pushbox.transform.origin.z-=2.5*SCALE
-	anim = "push_charge"
-
-func pushing_state():
-	anim = "push_generic"
-
-func push_power_up():
-	charged_power += 0.1
-	if (pushpull != 1) or (charged_power >= 1.5):
-		state=PUSHING
+		anim = "push_charge"
+	else: anim = "push_over"
 
 func push_complete():
 	pushbox.shape.shape.set_height(1)
-	pushbox.transform.origin.z=(-1.0*SCALE)
+	pushbox.transform.origin.z=-1.0*SCALE
 	state = MOVE
 	anim = "idle"
-	charged_power=0.5
 	push_cooldown=1
+	pushbox.release()
 
 func pull_state(delta):
 	pass

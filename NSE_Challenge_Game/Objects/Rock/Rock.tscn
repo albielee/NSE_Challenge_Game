@@ -40,4 +40,5 @@ shape = SubResource( 3 )
 [connection signal="timeout" from="SendData" to="." method="_on_SendData_timeout"]
 [connection signal="nozone" from="Hitbox" to="." method="_on_Hitbox_nozone"]
 [connection signal="pushed" from="Hitbox" to="." method="_on_Hitbox_pushed"]
+[connection signal="spun" from="Hitbox" to="." method="_on_Hitbox_spun"]
 [connection signal="zone" from="Hitbox" to="." method="_on_Hitbox_zone"]

@@ -9,12 +9,13 @@ onready var hitbox = $Hitbox
 var i = 1
 
 func _ready():
-	set_linear_damp(1)
+	set_linear_damp(5)
 
 func _physics_process(delta):
 	if(get_tree().is_network_server()):
 		if(mode != MODE_RIGID):
 			set_mode(RigidBody.RIGID)
+		hitbox.face=get_transform().basis.get_euler().y
 	else:
 		#This will allow the setting of positional arguments
 		if(mode != MODE_KINEMATIC):
@@ -35,9 +36,11 @@ sync func reset():
 func _on_Hitbox_pushed():
 	add_force(hitbox.knockback, Vector3.ZERO)
 
-
 func _on_Hitbox_nozone():
-	set_linear_damp(1)
+	set_linear_damp(5)
 
 func _on_Hitbox_zone():
-	set_linear_damp(5)
+	set_linear_damp(1)
+
+func _on_Hitbox_spun():
+	set_angular_velocity(hitbox.angular)
