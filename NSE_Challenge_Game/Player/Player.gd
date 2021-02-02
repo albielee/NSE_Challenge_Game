@@ -156,8 +156,7 @@ func update(delta):
 	grabbox.knockback_vector=PUSH_POWER*current_angle
 	grabbox.pullin_vector=-PUSH_POWER*current_angle
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
-	pushbox.update_mouse_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y)
-	pushbox.update()
+	pushbox.update(mouse_position, global_transform.origin)
 	
 	match state:
 		MOVE:
@@ -185,6 +184,7 @@ func move_state(delta, mouse_angle):
 		velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	pushbox.update_mouse_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y)
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull
