@@ -4,8 +4,9 @@ var movement = Vector2.ZERO
 var pushpull = 0.0
 var summon = 0.0
 var grab = 0.0
+var dash = 0.0
 var mouse_position = Vector3.ZERO
-var controls = [movement, pushpull, summon, grab, mouse_position]
+var controls = [movement, pushpull, summon, grab, dash, mouse_position]
 
 var mouse_angle = Vector3.ZERO
 var current_angle = Vector3.ZERO
@@ -31,16 +32,23 @@ var prevanim = "idle"
 
 var charged_power = 0.5
 var push_cooldown = 0
+var push_mouse_position = mouse_position
 
 var summon_size = 0.5
 var rock_summoned = false
 
+var dash_angle = current_angle
+var can_dash = 0.0
+
+export var SCALE = 1.0
 export var MASS = 10
 export var FRICTION = 10
 export var MAX_SPEED = 500
 export var SPEED = 2000
 export var TURN_SPEED = 400
 export var PUSH_POWER = 500
+export var DASH_INC = 2.0
+export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
 
@@ -55,6 +63,15 @@ onready var spawn_position = network_handler.spawn_position
 func _ready():
 	set_linear_damp(FRICTION)
 	set_mass(MASS)
+	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
+	$MeshInstance.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
+	
+	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
+	pushbox.transform.origin.z=(-1.0*SCALE)
+	
+	grabbox.scale=Vector3(SCALE,SCALE,SCALE)
+	grabbox.transform.origin.z=(-1.8*SCALE)
+	grabbox.shape.shape.set_height(0.5*SCALE)
 
 func _physics_process(delta):
 	#check if dead using networkhandler death
@@ -80,7 +97,8 @@ func host_get_controls():
 	pushpull = controls[1]
 	summon = controls[2]
 	grab = controls[3]
-	mouse_position = controls[4]
+	dash = controls[4]
+	mouse_position = controls[5]
 
 #Required inputs: Camera location and current body location
 func get_controls(cam):
@@ -95,12 +113,14 @@ func get_controls(cam):
 	
 	var grab = Input.get_action_strength("temp_float")
 	
+	var dash = Input.get_action_strength("move_dash")
+	
 	var offset = deg2rad(90)
 	
 	if(cam != null):
 		mouse_position = cam.raycast_position
 	
-	return [input_vector, pushpull, summon, grab, mouse_position]
+	return [input_vector, pushpull, summon, grab, dash, mouse_position]
 
 func puppet_update(delta):
 	if(mode != MODE_KINEMATIC):
@@ -130,7 +150,8 @@ func update(delta):
 	pushpull = controls[1] 
 	summon = controls[2]
 	grab = controls[3]
-	mouse_position = controls[4]
+	dash = controls[4]
+	mouse_position = controls[5]
 	
 	angle_update()
 	pushbox.knockback_vector=charged_power*PUSH_POWER*current_angle
@@ -161,25 +182,35 @@ func update(delta):
 func move_state(delta, mouse_angle):
 	#Handle movement, set to directional or set to 0
 	if (movement != Vector2.ZERO):
-		velocity = velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), SPEED*delta)
+		velocity = Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED)
 	else:
 		velocity = Vector3.ZERO
 	
-	#Handle summoning rocks, for which a player cannot have been doing other shit
-	if(summon and rock_summoned == false):
-		state = SUMMON;
-		rock_summoned = true
-	if(!summon):
-		rock_summoned = false
-		if(grab==1):
-			state = GRAB
-		else:
-			if(pushpull==1 and push_cooldown==0):
-				state = PUSH
-			elif(pushpull==0):
-				push_cooldown=0
-	#Handle rotation of the character towards correct direction
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	
+	#Handle summoning rocks, for which a player cannot have been doing other shit
+	# Priority order: dash,summon, Grab, Push/pull
+	if(dash and can_dash <= 0.0):
+		set_angular_velocity(Vector3.ZERO)
+		state = DASH
+		dash_angle=current_angle
+		rock_summoned = false
+	else:
+		can_dash -= 1.0
+		if(summon and rock_summoned == false):
+			set_angular_velocity(Vector3.ZERO)
+			state = SUMMON;
+			rock_summoned = true
+		else:
+			rock_summoned = false
+			if(grab==1):
+				state = GRAB
+			else:
+				if(pushpull==1 and push_cooldown==0):
+					push_mouse_position=mouse_position
+					state = PUSH
+				elif(pushpull==0):
+					push_cooldown=0
 	
 	move()
 
@@ -187,9 +218,17 @@ func move():
 	add_force(velocity, Vector3.ZERO)
 
 func dash_state(delta):
-	pass
+	anim="dash"
+	velocity = dash_angle*MAX_SPEED*DASH_INC
+	move()
+
+func dash_finished():
+	anim="idle"
+	state=MOVE
+	can_dash=DASH_COOLDOWN
 
 func grab_state(delta):
+	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	#check if grabbing got cancelled
 	if (check_cancel_grab()):
 		return
@@ -197,7 +236,7 @@ func grab_state(delta):
 	anim="grabbing"
 	
 	#update the shape of the grabbing box
-	grabbox.transform.origin.z-=0.05
+	grabbox.transform.origin.z -= 0.05*SCALE
 	grabbox.shape.shape.set_height(grabbox.shape.shape.get_height()+0.1)
 	
 	if (movement != Vector2.ZERO):
@@ -231,8 +270,8 @@ func check_cancel_grab():
 		anim="idle"
 		state=MOVE
 		grabbox.drop_rock()
-		grabbox.transform.origin.z=-1.8
-		grabbox.shape.shape.set_height(0.5)
+		grabbox.transform.origin.z=(-1.8*SCALE)
+		grabbox.shape.shape.set_height(0.5*SCALE)
 		return true
 	return false
 
@@ -249,7 +288,7 @@ func _on_GrabBox_lost_rock():
 	state=MOVE
 	grabbox.drop_rock()
 	grabbox.transform.origin.z=-1.8
-	grabbox.scale.z=1
+	grabbox.shape.shape.set_height(0.5)
 
 func summon_state():
 	velocity = Vector3.ZERO
@@ -277,7 +316,13 @@ func summon_power_up():
 		state=SUMMONING
 
 func push_state(delta):
+	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
 	velocity = Vector3.ZERO
+	
+	#update pushbox shape
+	if(pushbox.shape.shape.get_height()<25*SCALE):
+		pushbox.shape.shape.set_height(pushbox.shape.shape.get_height()+5)
+		pushbox.transform.origin.z-=2.5*SCALE
 	anim = "push_charge"
 
 func pushing_state():
@@ -289,6 +334,8 @@ func push_power_up():
 		state=PUSHING
 
 func push_complete():
+	pushbox.shape.shape.set_height(1)
+	pushbox.transform.origin.z=(-1.0*SCALE)
 	state = MOVE
 	anim = "idle"
 	charged_power=0.5
@@ -307,14 +354,15 @@ func angle_update():
 	current_angle = Vector3(-sin(curang),0,-cos(curang))
 	
 	if(mouse_position != Vector3.ZERO):
-		var up_dir = Vector3.UP
-		var target_angle_y = get_transform().looking_at(mouse_position, up_dir).basis.get_euler().y;
-		var rotation_angle = wrapf(target_angle_y - current_angle_y, -PI, PI);
-		
-		mouse_angle = up_dir * (rotation_angle);
+		mouse_angle = get_mouse_angle(current_angle_y, mouse_position)
+
+func get_mouse_angle(current_angle, position):
+	var up_dir = Vector3.UP
+	var target_angle_y = get_transform().looking_at(position, up_dir).basis.get_euler().y;
+	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
+	
+	return up_dir * rotation_angle;
 
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
 	network_handler.timeout(get_rotation(),get_transform().origin,anim)
-
-
