@@ -110,4 +110,4 @@ mesh = ExtResource( 2 )
 material/0 = null
 
 [node name="Void" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
