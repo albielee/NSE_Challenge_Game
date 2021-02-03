@@ -89,6 +89,9 @@ func _physics_process(delta):
 	
 	handle_animations(anim)
 
+func get_network_handler():
+	return network_handler
+
 func host_get_controls():
 	controls = network_handler.update_controls()
 	movement = controls[0]
@@ -152,11 +155,13 @@ func update(delta):
 	mouse_position = controls[5]
 	
 	angle_update()
-	pushbox.knockback_vector=PUSH_POWER*current_angle
 	grabbox.knockback_vector=PUSH_POWER*current_angle
 	grabbox.pullin_vector=-PUSH_POWER*current_angle
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
-	pushbox.update(mouse_position, global_transform.origin)
+	if (pushbox.rock != null): 
+		pushbox.power = PUSH_POWER
+		pushbox.update_angle(get_transform().looking_at(pushbox.rock_position, Vector3.UP).basis.get_euler().y, mouse_angle)
+		pushbox.update(mouse_position, global_transform.origin)
 	
 	match state:
 		MOVE:
@@ -184,7 +189,7 @@ func move_state(delta, mouse_angle):
 		velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
-	pushbox.update_mouse_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y)
+#	pushbox.store_mouse_angle()
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull

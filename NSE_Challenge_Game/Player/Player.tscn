@@ -146,6 +146,21 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=8]
 length = 0.1
 loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PushBox/CollisionShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -154,23 +169,6 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "push_power_up"
-} ]
-}
-
-[sub_resource type="Animation" id=9]
-length = 0.5
-tracks/0/type = "method"
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -184,22 +182,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("MeshInstance:mesh")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -253,7 +239,7 @@ animation = "idle"
 animation = "push_charge"
 
 [sub_resource type="AnimationNodeAnimation" id=17]
-animation = "push_generic"
+animation = "push_over"
 
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "summon_charge"
@@ -304,19 +290,22 @@ states/idle/node = SubResource( 15 )
 states/idle/position = Vector2( 444, 80 )
 states/push_charge/node = SubResource( 16 )
 states/push_charge/position = Vector2( 565, -66.984 )
-states/push_generic/node = SubResource( 17 )
-states/push_generic/position = Vector2( 706, 9 )
+states/push_over/node = SubResource( 17 )
+states/push_over/position = Vector2( 706, 9 )
 states/summon_charge/node = SubResource( 18 )
 states/summon_charge/position = Vector2( 113, -18.984 )
 states/summon_generic/node = SubResource( 19 )
 states/summon_generic/position = Vector2( 338, -74.984 )
-transitions = [ "push_generic", "idle", SubResource( 20 ), "idle", "grabbing", SubResource( 21 ), "grabbing", "idle", SubResource( 22 ), "grabbing", "grabmax", SubResource( 23 ), "grabmax", "idle", SubResource( 24 ), "idle", "push_charge", SubResource( 25 ), "push_charge", "push_generic", SubResource( 26 ), "idle", "summon_charge", SubResource( 27 ), "summon_charge", "summon_generic", SubResource( 28 ), "summon_generic", "idle", SubResource( 29 ), "idle", "dash", SubResource( 30 ), "dash", "idle", SubResource( 31 ) ]
+transitions = [ "push_over", "idle", SubResource( 20 ), "idle", "grabbing", SubResource( 21 ), "grabbing", "idle", SubResource( 22 ), "grabbing", "grabmax", SubResource( 23 ), "grabmax", "idle", SubResource( 24 ), "idle", "push_charge", SubResource( 25 ), "push_charge", "push_over", SubResource( 26 ), "idle", "summon_charge", SubResource( 27 ), "summon_charge", "summon_generic", SubResource( 28 ), "summon_generic", "idle", SubResource( 29 ), "idle", "dash", SubResource( 30 ), "dash", "idle", SubResource( 31 ) ]
 start_node = "idle"
 graph_offset = Vector2( 0, -83.984 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=33]
 
-[node name="Player" type="RigidBody"]
+[node name="Player" type="RigidBody" groups=[
+"players",
+"resetabble",
+]]
 collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -363,7 +352,7 @@ anims/grabbing = SubResource( 5 )
 anims/grabmax = SubResource( 6 )
 anims/idle = SubResource( 7 )
 anims/push_charge = SubResource( 8 )
-anims/push_generic = SubResource( 9 )
+anims/push_over = SubResource( 9 )
 anims/summon_charge = SubResource( 10 )
 anims/summon_generic = SubResource( 11 )
 

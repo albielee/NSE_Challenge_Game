@@ -14,7 +14,7 @@ func detect_players_left():
 	#if more than one player
 	if(len(players) > 1):
 		for p in players:
-			if(p.get_node("NetworkHandler").remote_dead == false):
+			if(p.get_network_handler().remote_dead == false):
 				players_left += 1
 		if(players_left == 1):
 			return true

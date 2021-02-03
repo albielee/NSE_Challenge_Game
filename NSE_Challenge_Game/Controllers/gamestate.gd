@@ -73,33 +73,31 @@ remote func pre_start_game(spawn_points, roundSettings):
 	var map = roundSettings[0]
 	var world = load(map).instance()
 	get_tree().get_root().add_child(world)
-
+	
 	get_tree().get_root().get_node("Lobby").hide()
-
+	
 	var player_scene = load("res://Player/Player.tscn")
-
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).get_transform().origin
 		var player = player_scene.instance()
-			
+		
 		player.set_name(str(p_id)) # Use unique ID as node name.
 		player.transform.origin = spawn_pos
 		player.set_network_master(p_id) #set unique id as master.
-
+		
 		if p_id == get_tree().get_network_unique_id():
 			# If node for this peer id, set name.
 			player.set_player_name(player_name)
 		else:
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
-			
+		
 		# Add player to groups
 		player.add_to_group("player")
 		player.add_to_group("resettable")
 		
 		world.get_node("Players").add_child(player)
-
-
+	
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start.
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
@@ -144,7 +142,7 @@ func get_player_name():
 
 func begin_game(roundSettings):
 	assert(get_tree().is_network_server())
-
+	
 	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
 	var spawn_points = {}
 	spawn_points[1] = 0 # Server in spawn point 0.
