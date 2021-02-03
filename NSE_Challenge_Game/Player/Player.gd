@@ -57,7 +57,7 @@ onready var grabbox = $GrabBox
 onready var network_handler = $NetworkHandler
 onready var animationtree = $AnimationTree	
 onready var animationstate = animationtree.get("parameters/playback")
-onready var spawn_position = network_handler.spawn_position
+onready var spawn_position = Vector3.ZERO
 
 func _ready():
 	set_linear_damp(FRICTION)
@@ -368,3 +368,7 @@ func get_mouse_angle(current_angle, position):
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
 	network_handler.timeout(get_rotation(),get_transform().origin,anim)
+
+sync func reset():
+	network_handler.reset()
+	

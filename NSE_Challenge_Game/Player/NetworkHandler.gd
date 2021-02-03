@@ -25,7 +25,7 @@ var velocity = Vector3.ZERO
 var rock_summoned = false
 var dead = false
 
-var spawn_position = Vector3.ZERO
+onready var spawn_position = get_parent().spawn_position
 var old_position = Vector3.ZERO
 
 func update_controls():
@@ -99,14 +99,13 @@ func timeout(cur_rotation,cur_position,cur_animation):
 #	pc.set_mode(RigidBody.MODE_KINEMATIC)
 #	translation = Vector3.ZERO
 
-master func reset():
+func reset():
 #	pc.set_mode(RigidBody.MODE_KINEMATIC)
 	
 	#bring player back to life
 	remote_dead = false
-	print("RESET")
 	#bring player back to spawn position
-	translation = spawn_position
+	get_parent().transform.origin = spawn_position
 #	state = MOVE
 	
 #	pc.set_mode(RigidBody.MODE_RIGID)

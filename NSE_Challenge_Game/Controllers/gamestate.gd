@@ -80,6 +80,7 @@ remote func pre_start_game(spawn_points, roundSettings):
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).get_transform().origin
 		var player = player_scene.instance()
+		player.spawn_position = spawn_pos
 		
 		player.set_name(str(p_id)) # Use unique ID as node name.
 		player.transform.origin = spawn_pos

@@ -29,10 +29,9 @@ func restart_round():
 	#All objects that can be reset will be put in the resettable group
 	#all objects in resettable should have a reset function
 	for o in get_tree().get_nodes_in_group("resettable"):
+		o.rpc("reset")
+		o.reset()
 		pass
-		#o.rpc("reset")
-		#o.reset()
-		
 """
 OLD CODE BUT MAY BE USEFUL LATER
 
