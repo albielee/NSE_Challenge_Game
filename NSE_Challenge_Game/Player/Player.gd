@@ -51,6 +51,7 @@ export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
 
 onready var pushbox = $PushBox
+onready var pullbox = $PullBox
 onready var grabbox = $GrabBox
 
 onready var network_handler = $NetworkHandler
@@ -66,6 +67,9 @@ func _ready():
 	
 	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
 	pushbox.transform.origin.z=(-1.0*SCALE)
+	
+	pullbox.scale=Vector3(2*SCALE,SCALE,SCALE)
+	pullbox.transform.origin.z=(-1.0*SCALE)
 	
 	grabbox.scale=Vector3(SCALE,SCALE,SCALE)
 	grabbox.transform.origin.z=(-1.8*SCALE)
@@ -155,15 +159,14 @@ func update(delta):
 	mouse_position = controls[5]
 	
 	angle_update()
-	grabbox.knockback_vector=PUSH_POWER*current_angle
-	grabbox.pullin_vector=-PUSH_POWER*current_angle
+	grabbox.knockback_vector=300*current_angle
+	grabbox.pullin_vector=-300*current_angle
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
-	pushbox.knockback_vector=PUSH_POWER*current_angle
+	pushbox.knockback_vector=current_angle
 	if (pushbox.rock != null): 
-		pushbox.power = PUSH_POWER
 #		pushbox.update_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y, mouse_angle)
 		pushbox.update_angle(get_transform().basis.get_euler().y, mouse_angle)
-		pushbox.update(mouse_position, global_transform.origin, get_transform().basis.get_euler().y)
+		pushbox.update(mouse_position, global_transform.origin)
 	
 	match state:
 		MOVE:

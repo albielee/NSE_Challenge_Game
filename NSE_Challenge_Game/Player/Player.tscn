@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
@@ -7,11 +7,14 @@
 [ext_resource path="res://Player/PlayerModels/Longboy.tres" type="CubeMesh" id=5]
 [ext_resource path="res://Player/GrabBox.gd" type="Script" id=6]
 [ext_resource path="res://Player/PlayerModels/Cubeflatboy.tres" type="CubeMesh" id=7]
+[ext_resource path="res://Player/PullBox.gd" type="Script" id=8]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 2, 1 )
 
 [sub_resource type="CapsuleShape" id=2]
+
+[sub_resource type="CapsuleShape" id=34]
 
 [sub_resource type="CapsuleShape" id=3]
 radius = 2.0
@@ -314,7 +317,6 @@ SCALE = 0.6
 MAX_SPEED = 800
 SPEED = 8000
 TURN_SPEED = 800
-PUSH_POWER = 1200
 DASH_INC = 5.0
 GRAB_DROPOFF_VAL = 10.0
 
@@ -326,9 +328,18 @@ shape = SubResource( 1 )
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0.167053, 0.00317383, -4.98615 )
 collision_layer = 32
 collision_mask = 0
+PUSH_POWER = 900
 
 [node name="CollisionShape" parent="PushBox" index="0"]
 shape = SubResource( 2 )
+disabled = true
+
+[node name="PullBox" parent="." instance=ExtResource( 2 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 8 )
+
+[node name="CollisionShape" parent="PullBox" index="0"]
+shape = SubResource( 34 )
 disabled = true
 
 [node name="GrabBox" parent="." instance=ExtResource( 2 )]
@@ -376,5 +387,7 @@ autostart = true
 [connection signal="timeout" from="NetworkHandler/SendData" to="." method="_on_SendData_timeout"]
 
 [editable path="PushBox"]
+
+[editable path="PullBox"]
 
 [editable path="GrabBox"]
