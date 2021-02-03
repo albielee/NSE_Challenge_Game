@@ -7,6 +7,7 @@ var grab = 0.0
 var dash = 0.0
 var mouse_position = Vector3.ZERO
 var controls = [movement, pushpull, summon, grab, dash, mouse_position]
+var player_name = ""
 
 var mouse_angle = Vector3.ZERO
 var current_angle = Vector3.ZERO
@@ -347,6 +348,7 @@ func pull_state(delta):
 	pass
 
 func set_player_name(name):
+	player_name = name
 	pass
 #	network_handler.set_player_name(name)
 

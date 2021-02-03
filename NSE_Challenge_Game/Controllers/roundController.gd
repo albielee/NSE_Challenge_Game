@@ -1,11 +1,24 @@
 extends Control
 
+var scores = {}
+var first_run=true
+func create_scores():
+	var players = get_tree().get_nodes_in_group("player")
+	for p in players:
+		scores[p.player_name]=0
+
+
 func _process(delta):
+	if (first_run):
+		first_run = false
+		create_scores()
 	#If the host:
 	if(get_tree().is_network_server()):
 		#Check if one player is left
 		var one_player_left = detect_players_left()
 		if(one_player_left):
+			var last_player = get_last_player()
+			scores[last_player]+=1
 			restart_round()
 
 func detect_players_left():
@@ -21,6 +34,9 @@ func detect_players_left():
 		return false
 	else:
 		return players[0].get_node("NetworkHandler").remote_dead
+
+func get_last_player():
+	pass
 
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions
