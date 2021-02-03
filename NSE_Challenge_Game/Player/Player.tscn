@@ -14,14 +14,13 @@ extents = Vector3( 1, 2, 1 )
 
 [sub_resource type="CapsuleShape" id=2]
 
-[sub_resource type="CapsuleShape" id=34]
-
 [sub_resource type="CapsuleShape" id=3]
+
+[sub_resource type="CapsuleShape" id=4]
 radius = 2.0
 height = 0.5
 
-[sub_resource type="Animation" id=4]
-resource_name = "dash"
+[sub_resource type="Animation" id=5]
 length = 0.15
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -38,7 +37,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("MeshInstance:mesh")
 tracks/0/interp = 1
@@ -78,7 +77,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -106,7 +105,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -146,7 +145,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -162,7 +161,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -191,7 +190,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.1
 loop = true
 tracks/0/type = "method"
@@ -209,7 +208,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.3
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -226,43 +225,41 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "dash"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "grabbing"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "grabmax"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "push_charge"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "push_over"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "summon_charge"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "summon_generic"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 switch_mode = 2
 auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
@@ -273,41 +270,43 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=32]
-states/dash/node = SubResource( 12 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=33]
+states/dash/node = SubResource( 13 )
 states/dash/position = Vector2( 692, 109.016 )
-states/grabbing/node = SubResource( 13 )
+states/grabbing/node = SubResource( 14 )
 states/grabbing/position = Vector2( 444, 177 )
-states/grabmax/node = SubResource( 14 )
+states/grabmax/node = SubResource( 15 )
 states/grabmax/position = Vector2( 240, 80 )
-states/idle/node = SubResource( 15 )
+states/idle/node = SubResource( 16 )
 states/idle/position = Vector2( 444, 80 )
-states/push_charge/node = SubResource( 16 )
+states/push_charge/node = SubResource( 17 )
 states/push_charge/position = Vector2( 565, -66.984 )
-states/push_over/node = SubResource( 17 )
+states/push_over/node = SubResource( 18 )
 states/push_over/position = Vector2( 706, 9 )
-states/summon_charge/node = SubResource( 18 )
+states/summon_charge/node = SubResource( 19 )
 states/summon_charge/position = Vector2( 113, -18.984 )
-states/summon_generic/node = SubResource( 19 )
+states/summon_generic/node = SubResource( 20 )
 states/summon_generic/position = Vector2( 338, -74.984 )
-transitions = [ "push_over", "idle", SubResource( 20 ), "idle", "grabbing", SubResource( 21 ), "grabbing", "idle", SubResource( 22 ), "grabbing", "grabmax", SubResource( 23 ), "grabmax", "idle", SubResource( 24 ), "idle", "push_charge", SubResource( 25 ), "push_charge", "push_over", SubResource( 26 ), "idle", "summon_charge", SubResource( 27 ), "summon_charge", "summon_generic", SubResource( 28 ), "summon_generic", "idle", SubResource( 29 ), "idle", "dash", SubResource( 30 ), "dash", "idle", SubResource( 31 ) ]
+transitions = [ "push_over", "idle", SubResource( 21 ), "idle", "grabbing", SubResource( 22 ), "grabbing", "idle", SubResource( 23 ), "grabbing", "grabmax", SubResource( 24 ), "grabmax", "idle", SubResource( 25 ), "idle", "push_charge", SubResource( 26 ), "push_charge", "push_over", SubResource( 27 ), "idle", "summon_charge", SubResource( 28 ), "summon_charge", "summon_generic", SubResource( 29 ), "summon_generic", "idle", SubResource( 30 ), "idle", "dash", SubResource( 31 ), "dash", "idle", SubResource( 32 ) ]
 start_node = "idle"
 graph_offset = Vector2( 0, -83.984 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=34]
 
 [node name="Player" type="RigidBody" groups=[
-"players",
-"resetabble",
+"player",
+"resettable",
 ]]
 collision_mask = 7
 axis_lock_angular_x = true
@@ -339,7 +338,7 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 8 )
 
 [node name="CollisionShape" parent="PullBox" index="0"]
-shape = SubResource( 34 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="GrabBox" parent="." instance=ExtResource( 2 )]
@@ -349,7 +348,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape" parent="GrabBox" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -358,20 +357,20 @@ mesh = ExtResource( 5 )
 material/0 = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dash = SubResource( 4 )
-anims/grabbing = SubResource( 5 )
-anims/grabmax = SubResource( 6 )
-anims/idle = SubResource( 7 )
-anims/push_charge = SubResource( 8 )
-anims/push_over = SubResource( 9 )
-anims/summon_charge = SubResource( 10 )
-anims/summon_generic = SubResource( 11 )
+anims/dash = SubResource( 5 )
+anims/grabbing = SubResource( 6 )
+anims/grabmax = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/push_charge = SubResource( 9 )
+anims/push_over = SubResource( 10 )
+anims/summon_charge = SubResource( 11 )
+anims/summon_generic = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 32 )
+tree_root = SubResource( 33 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 33 )
+parameters/playback = SubResource( 34 )
 
 [node name="NetworkHandler" type="Spatial" parent="."]
 script = ExtResource( 1 )

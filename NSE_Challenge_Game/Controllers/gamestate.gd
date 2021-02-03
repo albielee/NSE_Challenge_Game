@@ -93,9 +93,6 @@ remote func pre_start_game(spawn_points, roundSettings):
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
 		
-		# Add player to groups
-		player.add_to_group("player")
-		player.add_to_group("resettable")
 		
 		world.get_node("Players").add_child(player)
 	
