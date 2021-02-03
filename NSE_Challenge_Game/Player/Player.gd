@@ -44,7 +44,7 @@ export var FRICTION = 10
 export var MAX_SPEED = 500
 export var SPEED = 2000
 export var TURN_SPEED = 400
-export var PUSH_POWER = 500
+export var PUSH_POWER = 300
 export var DASH_INC = 2.0
 export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
@@ -158,10 +158,12 @@ func update(delta):
 	grabbox.knockback_vector=PUSH_POWER*current_angle
 	grabbox.pullin_vector=-PUSH_POWER*current_angle
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
+	pushbox.knockback_vector=PUSH_POWER*current_angle
 	if (pushbox.rock != null): 
 		pushbox.power = PUSH_POWER
-		pushbox.update_angle(get_transform().looking_at(pushbox.rock_position, Vector3.UP).basis.get_euler().y, mouse_angle)
-		pushbox.update(mouse_position, global_transform.origin)
+#		pushbox.update_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y, mouse_angle)
+		pushbox.update_angle(get_transform().basis.get_euler().y, mouse_angle)
+		pushbox.update(mouse_position, global_transform.origin, get_transform().basis.get_euler().y)
 	
 	match state:
 		MOVE:

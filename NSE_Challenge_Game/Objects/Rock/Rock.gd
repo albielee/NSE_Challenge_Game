@@ -4,6 +4,8 @@ extends RigidBody
 remote var remote_position = Vector3.ZERO
 remote var remote_rotation = 0.0
 
+var in_zone = false
+
 onready var hitbox = $Hitbox
 
 var i = 1
@@ -16,6 +18,11 @@ func _physics_process(delta):
 		if(mode != MODE_RIGID):
 			set_mode(RigidBody.RIGID)
 		hitbox.face=get_transform().basis.get_euler().y
+		if(in_zone):
+			set_linear_damp(1)
+		else:
+			if (sqrt(pow(linear_velocity.x, 2) + pow(linear_velocity.y,2)) < 1):
+				set_linear_damp(5)
 	else:
 		#This will allow the setting of positional arguments
 		if(mode != MODE_KINEMATIC):
@@ -35,12 +42,14 @@ sync func reset():
 
 func _on_Hitbox_pushed():
 	add_force(hitbox.knockback, Vector3.ZERO)
-
-func _on_Hitbox_nozone():
-	set_linear_damp(5)
-
-func _on_Hitbox_zone():
-	set_linear_damp(1)
-
+	
 func _on_Hitbox_spun():
 	set_angular_velocity(hitbox.angular)
+
+
+func _on_Hitbox_nozone():
+	in_zone = false
+
+func _on_Hitbox_zone():
+	in_zone = true
+
