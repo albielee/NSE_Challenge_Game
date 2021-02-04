@@ -19,13 +19,13 @@ var angle_set = false
 
 onready var shape = $CollisionShape
 
-func update(mouse_position, player_position):
+func update(mouse_position, player_position, player_to_rock):
 	if (rock!=null):
 		if !angle_set:
 			angle_set = true
 			target_angle = current_target_angle
 		
-		player_rock = wrapf(current_target_angle,-PI,PI)
+		player_rock = wrapf(player_to_rock,-PI,PI)
 		var fire_vector = Vector3(-sin(player_rock),0,-cos(player_rock))
 		rock_push_vector=fire_vector*PUSH_POWER/100
 		
@@ -48,6 +48,8 @@ func update(mouse_position, player_position):
 		var rpv = rock_push_vector.normalized()
 		var leftmotion = Vector3(-rpv.z, 0, rpv.x)*SIDEFORCE
 		var rightmotion = Vector3(rpv.z, 0, -rpv.x)*SIDEFORCE
+		
+		print(player_rock)
 		
 		if sin(player_mouse.y-player_rock+current_target_angle) > 0.1:
 			rock.add_force(rightmotion)

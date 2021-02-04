@@ -327,6 +327,7 @@ shape = SubResource( 1 )
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0.167053, 0.00317383, -4.98615 )
 collision_layer = 32
 collision_mask = 0
+SIDEFORCE = 15
 PUSH_POWER = 900
 
 [node name="CollisionShape" parent="PushBox" index="0"]
