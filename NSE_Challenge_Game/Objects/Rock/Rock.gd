@@ -22,7 +22,7 @@ func _physics_process(delta):
 		hitbox.face=get_transform().basis.get_euler().y
 		hitbox.speed=speed
 		if(in_zone):
-			set_linear_damp(1)
+			set_linear_damp(0.5)
 		else:
 			if (speed < 1):
 				set_linear_damp(5)

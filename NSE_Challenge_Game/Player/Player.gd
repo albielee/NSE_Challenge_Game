@@ -191,6 +191,7 @@ func move_state(delta, mouse_angle):
 	#Handle movement, set to directional or set to 0
 	if (movement != Vector2.ZERO):
 		velocity = Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED)
+		dash_angle = Vector3(movement.x,0,movement.y)
 	else:
 		velocity = Vector3.ZERO
 	
@@ -202,7 +203,6 @@ func move_state(delta, mouse_angle):
 	if(dash and can_dash <= 0.0):
 		set_angular_velocity(Vector3.ZERO)
 		state = DASH
-		dash_angle=current_angle
 		rock_summoned = false
 	else:
 		can_dash -= 1.0

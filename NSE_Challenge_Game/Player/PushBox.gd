@@ -44,7 +44,7 @@ func update(mouse_position, player_to_rock):
 		
 		rock.angular_velocity((Vector3.UP * rotation_angle)*5)
 		rock_position = rock.global_transform.origin
-		rock.add_force(rock_push_vector)
+#		rock.add_force(rock_push_vector)
 		
 		if player_position.y+0.2-rock_position.y > 0:
 			rock.add_force(Vector3.UP*rock.gravity)
@@ -62,10 +62,10 @@ func update(mouse_position, player_to_rock):
 		
 		if sin(player_mouse.y-player_rock+current_target_angle) > 0.1:
 			rock.add_force(rightmotion)
-			target_angle += SIDEFORCE*0.00075
+			target_angle += SIDEFORCE*0.0005
 		elif sin(player_mouse.y-player_rock+current_target_angle) < -0.1:
 			rock.add_force(leftmotion)
-			target_angle -= SIDEFORCE*0.00075
+			target_angle -= SIDEFORCE*0.0005
 
 func _on_PushBox_area_entered(area):
 	if not area in rocks:
