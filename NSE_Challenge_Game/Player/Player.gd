@@ -8,6 +8,7 @@ var dash = 0.0
 var mouse_position = Vector3.ZERO
 var controls = [movement, pushpull, summon, grab, dash, mouse_position]
 var player_name = ""
+var touched = false
 
 var mouse_angle = Vector3.ZERO
 var current_angle = Vector3.ZERO
@@ -115,20 +116,18 @@ func get_controls(cam):
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	input_vector = input_vector.normalized()
 	
-	var pushpull = Input.get_action_strength("push")-Input.get_action_strength("pull")
+	var _pushpull = Input.get_action_strength("push")-Input.get_action_strength("pull")
 	
-	var summon = Input.get_action_strength("summon_rock")
+	var _summon = Input.get_action_strength("summon_rock")
 	
-	var grab = Input.get_action_strength("temp_float")
+	var _grab = Input.get_action_strength("temp_float")
 	
-	var dash = Input.get_action_strength("move_dash")
-	
-	var offset = deg2rad(90)
+	var _dash = Input.get_action_strength("move_dash")
 	
 	if(cam != null):
 		mouse_position = cam.raycast_position
 	
-	return [input_vector, pushpull, summon, grab, dash, mouse_position]
+	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
 
 func puppet_update(delta):
 	if(mode != MODE_KINEMATIC):
@@ -154,7 +153,8 @@ func update(delta):
 	if(mode != MODE_RIGID):
 		set_mode(RigidBody.MODE_RIGID)
 	
-	set_last_attacker()
+	if touched: set_last_attacker()
+	
 	movement = controls[0] 
 	pushpull = controls[1] 
 	summon = controls[2]
@@ -192,6 +192,7 @@ func update(delta):
 
 func set_last_attacker():
 	var bodies = get_colliding_bodies()
+	touched = false
 	for b in bodies:
 		if b.is_in_group("rock"):
 			if b.last_mover!="":
@@ -387,3 +388,5 @@ sync func reset():
 	last_attacker=""
 	network_handler.reset()
 	
+func _on_Player_body_entered(body):
+	touched = true
