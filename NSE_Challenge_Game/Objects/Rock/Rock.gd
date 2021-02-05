@@ -22,10 +22,13 @@ func _physics_process(delta):
 		hitbox.face=get_transform().basis.get_euler().y
 		hitbox.speed=speed
 		if(in_zone):
+			hitbox.flying = true
 			set_linear_damp(0.5)
 		else:
 			if (speed < 1):
+				hitbox.flying = false
 				set_linear_damp(5)
+			else: hitbox.flying = true
 	else:
 		#This will allow the setting of positional arguments
 		if(mode != MODE_KINEMATIC):

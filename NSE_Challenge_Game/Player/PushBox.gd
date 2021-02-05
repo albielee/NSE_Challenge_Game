@@ -6,7 +6,7 @@ export var PUSH_POWER = 600
 var rock = null
 var rocks = []
 var first_push = false
-var timer = 15
+var timer = 4
 var rock_position = Vector3.ZERO
 var player_position = Vector3.ZERO
 var player_rock = 0
@@ -79,7 +79,7 @@ func do_push():
 		for i in rocks:
 			var dist = i.global_transform.origin.distance_to(player_position)
 			rockdic[dist] = i
-			if dist < mini: mini = dist
+			if dist < mini and not i.flying: mini = dist
 		if (rock==null and mini < 50):
 			rock=rockdic[mini]
 			rock_position = rock.global_transform.origin
@@ -99,7 +99,7 @@ func release():
 	angle_set = false
 	first_push = false
 	rocks = []
-	timer = 15
+	timer = 4
 	if rock != null:
 		rock.out_zone() #Set rock directly back to "normal mode"
 		rock = null
