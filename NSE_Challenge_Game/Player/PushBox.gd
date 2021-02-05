@@ -89,7 +89,7 @@ func do_push():
 			rock.get_parent().last_mover = get_parent().player_name #assigns player to rock
 		for i in rocks:
 			if (rock != i):
-				i.add_force(knockback_vector*PUSH_POWER/5)
+				i.add_force(knockback_vector*PUSH_POWER/8)
 
 func update_angle(target_angle_y, player_mouse_angle, player_pos):
 	current_target_angle = target_angle_y

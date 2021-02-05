@@ -207,7 +207,6 @@ func move_state(delta, mouse_angle):
 		velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
-#	pushbox.store_mouse_angle()
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull
@@ -346,6 +345,7 @@ func push_state(delta):
 			pushbox.do_push()
 		anim = "push_charge"
 	else: 
+		pushbox.do_push()
 		anim = "push_over"
 
 func push_complete():
