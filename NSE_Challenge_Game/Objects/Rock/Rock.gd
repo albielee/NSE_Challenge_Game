@@ -9,6 +9,8 @@ var speed = 0
 
 onready var hitbox = $Hitbox
 
+var last_mover=""
+
 var i = 1
 
 func _ready():

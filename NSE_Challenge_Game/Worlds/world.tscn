@@ -111,3 +111,4 @@ material/0 = null
 
 [node name="Void" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
+[connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]

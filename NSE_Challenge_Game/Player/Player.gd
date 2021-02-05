@@ -39,6 +39,8 @@ var rock_summoned = false
 var dash_angle = current_angle
 var can_dash = 0.0
 
+var last_attacker=""
+
 export var SCALE = 1.0
 export var MASS = 10
 export var FRICTION = 10
@@ -152,6 +154,7 @@ func update(delta):
 	if(mode != MODE_RIGID):
 		set_mode(RigidBody.MODE_RIGID)
 	
+	set_last_attacker()
 	movement = controls[0] 
 	pushpull = controls[1] 
 	summon = controls[2]
@@ -186,6 +189,14 @@ func update(delta):
 			grab_state(delta)
 		GRABBED:
 			grabbed_state(delta)
+
+func set_last_attacker():
+	var bodies = get_colliding_bodies()
+	for b in bodies:
+		if b.is_in_group("rock"):
+			if b.last_mover!="":
+				last_attacker = b.last_mover
+				break
 
 func move_state(delta, mouse_angle):
 	#Handle movement, set to directional or set to 0
@@ -373,5 +384,6 @@ func _on_SendData_timeout():
 	network_handler.timeout(get_rotation(),get_transform().origin,anim)
 
 sync func reset():
+	last_attacker=""
 	network_handler.reset()
 	

@@ -9,11 +9,11 @@ func create_scores():
 
 
 func _process(delta):
-	if (first_run):
-		first_run = false
-		create_scores()
 	#If the host:
 	if(get_tree().is_network_server()):
+		if (first_run):
+			first_run = false
+			create_scores()
 		#Check if one player is left
 		var one_player_left = detect_players_left()
 		if(one_player_left):
@@ -38,6 +38,7 @@ func detect_players_left():
 func get_last_player():
 	pass
 
+
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions
 	#in objects that may have changed.
@@ -48,6 +49,14 @@ func restart_round():
 		o.rpc("reset")
 		o.reset()
 		pass
+		
+func _on_Void_player_fell(dead_player,killing_player):
+	if(killing_player==""):
+		print("a player ended their own suffering")
+	else:
+		scores[killing_player]+=1
+		print(scores)
+	pass # Replace with function body.
 """
 OLD CODE BUT MAY BE USEFUL LATER
 
@@ -96,3 +105,6 @@ func _ready():
 func _on_exit_game_pressed():
 	gamestate.end_game()
 """
+
+
+
