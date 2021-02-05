@@ -5,6 +5,7 @@ remote var remote_position = Vector3.ZERO
 remote var remote_rotation = 0.0
 
 var in_zone = false
+var speed = 0
 
 onready var hitbox = $Hitbox
 
@@ -17,11 +18,13 @@ func _physics_process(delta):
 	if(get_tree().is_network_server()):
 		if(mode != MODE_RIGID):
 			set_mode(RigidBody.RIGID)
+		speed = sqrt(pow(linear_velocity.x, 2) + pow(linear_velocity.z,2))
 		hitbox.face=get_transform().basis.get_euler().y
+		hitbox.speed=speed
 		if(in_zone):
 			set_linear_damp(1)
 		else:
-			if (sqrt(pow(linear_velocity.x, 2) + pow(linear_velocity.y,2)) < 1):
+			if (speed < 1):
 				set_linear_damp(5)
 	else:
 		#This will allow the setting of positional arguments

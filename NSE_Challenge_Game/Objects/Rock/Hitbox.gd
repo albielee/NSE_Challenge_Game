@@ -3,6 +3,7 @@ extends Area
 var knockback = Vector3.ZERO
 var angular = 0
 var face = 0
+var speed = 0.0
 
 signal pushed
 signal zone

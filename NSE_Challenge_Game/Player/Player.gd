@@ -164,10 +164,10 @@ func update(delta):
 	grabbox.pullin_vector=-300*current_angle
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
 	pushbox.knockback_vector=current_angle
-	pushbox.update_angle(get_transform().basis.get_euler().y, mouse_angle)
+	pushbox.update_angle(get_transform().basis.get_euler().y, mouse_angle,  global_transform.origin)
 	if (pushbox.rock != null): 
 #		pushbox.update_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y, mouse_angle)
-		pushbox.update(mouse_position, global_transform.origin, get_transform().looking_at(pushbox.rock_position, Vector3.UP).basis.get_euler().y)
+		pushbox.update(mouse_position, get_transform().looking_at(pushbox.rock_position, Vector3.UP).basis.get_euler().y)
 	
 	match state:
 		MOVE:
@@ -220,7 +220,6 @@ func move_state(delta, mouse_angle):
 					state = PUSH
 				elif(pushpull==0):
 					push_cooldown=0
-	
 	move()
 
 func move():
@@ -329,12 +328,14 @@ func push_state(delta):
 	velocity = Vector3.ZERO
 	if pushpull == 1 and anim != "push_over":
 		#update pushbox shape
-		if(pushbox.shape.shape.get_height()<25*SCALE):
+		if(pushbox.shape.shape.get_height()<40*SCALE):
 			pushbox.shape.shape.set_height(pushbox.shape.shape.get_height()+5)
 			pushbox.transform.origin.z-=2.5*SCALE
-	
+		else:
+			pushbox.do_push()
 		anim = "push_charge"
-	else: anim = "push_over"
+	else: 
+		anim = "push_over"
 
 func push_complete():
 	pushbox.shape.shape.set_height(1)
