@@ -54,7 +54,6 @@ func _on_Hitbox_pushed():
 func _on_Hitbox_spun():
 	set_angular_velocity(hitbox.angular)
 
-
 func _on_Hitbox_nozone():
 	in_zone = false
 

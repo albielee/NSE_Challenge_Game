@@ -52,7 +52,7 @@ func get_cam():
 	return get_tree().get_nodes_in_group("Camera")[0]
 
 func all_summon_rock(rock_name, rock_pos, rock_size):
-	rpc("summon_rock", rock_name, rock_pos, rock_size, get_tree().get_network_unique_id())
+	summon_rock(rock_name, rock_pos, rock_size, get_tree().get_network_unique_id())
 
 sync func summon_rock(rock_name, rock_pos, rock_size, by_who):
 	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
@@ -100,12 +100,8 @@ func timeout(cur_rotation,cur_position,cur_animation):
 #	translation = Vector3.ZERO
 
 func reset():
-#	pc.set_mode(RigidBody.MODE_KINEMATIC)
-	
 	#bring player back to life
 	remote_dead = false
 	#bring player back to spawn position
 	get_parent().transform.origin = spawn_position
-#	state = MOVE
-	
-#	pc.set_mode(RigidBody.MODE_RIGID)
+	get_parent().state=0

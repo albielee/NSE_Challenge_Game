@@ -135,7 +135,7 @@ func puppet_update(delta):
 
 	var p = get_transform().origin
 
-	var interpolate_speed = 0.1
+	var interpolate_speed = 1
 	var x = move_toward(p.x, network_handler.remote_position.x, interpolate_speed)
 	var y = move_toward(p.y, network_handler.remote_position.y, interpolate_speed)
 	var z = move_toward(p.z, network_handler.remote_position.z, interpolate_speed)
