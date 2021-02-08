@@ -2,7 +2,7 @@ extends Camera
 
 var raycast_position = Vector3.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	cursor_raycast()
 
 func cursor_raycast():

@@ -158,12 +158,12 @@ func begin_game(roundSettings):
 
 func end_game():
 	return
-	if has_node("/root/World"): # Game is in progress.
-		# End it
-		get_node("/root/World").queue_free()
-
-	emit_signal("game_ended")
-	players.clear()
+#	if has_node("/root/World"): # Game is in progress.
+#		# End it
+#		get_node("/root/World").queue_free()
+#
+#	emit_signal("game_ended")
+#	players.clear()
 
 
 func _ready():

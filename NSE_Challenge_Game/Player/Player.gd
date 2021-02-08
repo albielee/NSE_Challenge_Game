@@ -12,7 +12,7 @@ var touched = false
 
 var mouse_angle = Vector3.ZERO
 var current_angle = Vector3.ZERO
-var velocity = Vector3.ZERO
+var move_velocity = Vector3.ZERO
 
 enum {
 	MOVE,
@@ -64,7 +64,7 @@ onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = Vector3.ZERO
 
 func _ready():
-	set_linear_damp(FRICTION)
+	set_linear_damp(10)
 	set_mass(MASS)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	$MeshInstance.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
@@ -84,30 +84,18 @@ func _physics_process(delta):
 	if(state != FALL and state != DEATH and network_handler.remote_dead):
 		state = FALL
 	
+	#If current player: Give controls to host
+	#If other player: Receive the controls for that player
 	if(network_handler.is_current_player()):
 		controls = get_controls(network_handler.get_cam())
-		network_handler.current_player(controls)
-	else:
-		host_get_controls()
-	
-	if(network_handler.is_host()):
 		update(delta)
 	else:
 		puppet_update(delta)
-	
+
 	handle_animations(anim)
 
 func get_network_handler():
 	return network_handler
-
-func host_get_controls():
-	controls = network_handler.update_controls()
-	movement = controls[0]
-	pushpull = controls[1]
-	summon = controls[2]
-	grab = controls[3]
-	dash = controls[4]
-	mouse_position = controls[5]
 
 #Required inputs: Camera location and current body location
 func get_controls(cam):
@@ -130,18 +118,25 @@ func get_controls(cam):
 	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
 
 func puppet_update(delta):
-	if(mode != MODE_KINEMATIC):
-		set_mode(RigidBody.MODE_KINEMATIC)
-
+	if(mode != MODE_RIGID):
+		set_mode(RigidBody.MODE_RIGID)
+	
 	var p = get_transform().origin
-
+	
+	var r_stats = network_handler.update_stats()
+	var r_rotation = r_stats[0]
+	var r_position = r_stats[1]
+	var r_animation = r_stats[2]
+	
 	var interpolate_speed = 1
-	var x = move_toward(p.x, network_handler.remote_position.x, interpolate_speed)
-	var y = move_toward(p.y, network_handler.remote_position.y, interpolate_speed)
-	var z = move_toward(p.z, network_handler.remote_position.z, interpolate_speed)
+	var x = move_toward(p.x, r_position.x, interpolate_speed)
+	var y = move_toward(p.y, r_position.y, interpolate_speed)
+	var z = move_toward(p.z, r_position.z, interpolate_speed)
 	transform.origin = Vector3(x,y,z)
-	set_rotation(network_handler.remote_rotation)
-	anim = network_handler.remote_animation
+	
+	set_rotation(r_rotation)
+	
+	anim = r_animation
 
 func handle_animations(animation):
 	if (animation!=prevanim):
@@ -202,10 +197,10 @@ func set_last_attacker():
 func move_state(delta, mouse_angle):
 	#Handle movement, set to directional or set to 0
 	if (movement != Vector2.ZERO):
-		velocity = Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED)
+		move_velocity = Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED)
 		dash_angle = Vector3(movement.x,0,movement.y)
 	else:
-		velocity = Vector3.ZERO
+		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION)
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
@@ -234,11 +229,13 @@ func move_state(delta, mouse_angle):
 	move()
 
 func move():
-	add_force(velocity, Vector3.ZERO)
+#	add_force(move_velocity, Vector3.ZERO)
+	if (move_velocity!=Vector3.ZERO):
+		set_linear_velocity(move_velocity)
 
 func dash_state(delta):
 	anim="dash"
-	velocity = dash_angle*MAX_SPEED*DASH_INC
+	move_velocity = dash_angle*MAX_SPEED*DASH_INC
 	move()
 
 func dash_finished():
@@ -259,9 +256,9 @@ func grab_state(delta):
 	grabbox.shape.shape.set_height(grabbox.shape.shape.get_height()+0.1)
 	
 	if (movement != Vector2.ZERO):
-		velocity = velocity.move_toward(Vector3(movement.x*MAX_SPEED/3,0,movement.y*MAX_SPEED/3), SPEED*delta)
+		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED/3,0,movement.y*MAX_SPEED/3), SPEED*delta)
 	else:
-		velocity = Vector3.ZERO
+		move_velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED/5*delta)
 	move()
@@ -277,9 +274,9 @@ func grabbed_state(delta):
 		grabbox.push(transform.origin, GRAB_DROPOFF_VAL)
 	
 	if (movement != Vector2.ZERO):
-		velocity = velocity.move_toward(Vector3(movement.x*MAX_SPEED/2.5,0,movement.y*MAX_SPEED/2.5), SPEED*delta)
+		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED/2.5,0,movement.y*MAX_SPEED/2.5), SPEED*delta)
 	else:
-		velocity = Vector3.ZERO
+		move_velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED/4*delta)
 	move()
@@ -310,14 +307,14 @@ func _on_GrabBox_lost_rock():
 	grabbox.shape.shape.set_height(0.5)
 
 func summon_state():
-	velocity = Vector3.ZERO
+	move_velocity = Vector3.ZERO
 	anim = "summon_charge"
 
 func summoning_state():
 	anim = "summon_generic"
 
 func summon_complete():
-	velocity = Vector3.ZERO
+	move_velocity = Vector3.ZERO
 	
 	var rock_name = get_name()
 	var offset = summon_size
@@ -336,7 +333,7 @@ func summon_power_up():
 
 func push_state(delta):
 	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
-	velocity = Vector3.ZERO
+	move_velocity = Vector3.ZERO
 	if pushpull == 1 and anim != "push_over":
 		#update pushbox shape
 		if(pushbox.shape.shape.get_height()<40*SCALE):
@@ -382,7 +379,7 @@ func get_mouse_angle(current_angle, position):
 
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
-	network_handler.timeout(get_rotation(),get_transform().origin,anim)
+	network_handler.timeout(get_rotation(),get_transform().origin,anim,get_angular_velocity())
 
 sync func reset():
 	last_attacker=""
