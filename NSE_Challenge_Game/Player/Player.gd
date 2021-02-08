@@ -20,10 +20,13 @@ var move_velocity = Vector3.ZERO
 var puppet_last_position = transform.origin
 var puppet_next_position = transform.origin
 var r_rotation = Vector3.ZERO
-var r_position = Vector3.ZERO
+var r_position = transform.origin
 var r_animation = "idle"
 var r_velocity = Vector3.ZERO
 var r_stats = [r_rotation,r_position,r_animation,r_velocity]
+
+var lp = Vector3.ZERO
+var lptime = 1
 
 enum {
 	MOVE,
@@ -70,6 +73,8 @@ export var DASH_INC = 2.0
 export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
+
+onready var UPDATE_INTERVAL = 1/32 #this should be the settings.tickrate.
 
 onready var pushbox = $PushBox
 onready var pullbox = $PullBox
@@ -142,11 +147,8 @@ func puppet_update(delta):
 	
 	var p = get_transform().origin
 	
-	var interpolate_speed = 0.1
-	var x = move_toward(p.x, puppet_next_position.x, interpolate_speed)
-	var y = move_toward(p.y, puppet_next_position.y, interpolate_speed)
-	var z = move_toward(p.z, puppet_next_position.z, interpolate_speed)
-	transform.origin = Vector3(x,y,z)
+	if current_time < lptime:
+		transform.origin = p+(lp*delta)
 	
 	set_rotation(r_rotation)
 	
@@ -159,14 +161,19 @@ func _on_NetworkHandler_packet_received():
 	packet_time = current_time
 	elapsed_time = packet_time - last_packet_time
 	
+	var jitter = elapsed_time - UPDATE_INTERVAL
+	lptime = current_time + UPDATE_INTERVAL + jitter
+	
 	r_stats = network_handler.update_stats()
 	r_rotation = r_stats[0]
 	r_position = r_stats[1]
 	r_animation = r_stats[2]
 	r_velocity = r_stats[3]
 	
-	puppet_last_position = puppet_next_position
-	puppet_next_position = puppet_last_position + r_velocity * elapsed_time
+	transform.origin = r_position
+	puppet_next_position = r_position + r_velocity * elapsed_time
+	
+	lp = (puppet_next_position-r_position) / (UPDATE_INTERVAL + jitter)
 
 func handle_animations(animation):
 	if (animation!=prevanim):
