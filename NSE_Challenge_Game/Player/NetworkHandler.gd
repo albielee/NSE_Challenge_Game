@@ -17,11 +17,15 @@ puppet var puppet_controls = [puppet_control_movement, puppet_control_pushpull, 
 remote var remote_position = Vector3.ZERO
 remote var remote_rotation = Vector3.ZERO
 remote var remote_animation = "idle"
+remote var remote_velocity = Vector3.ZERO
+
+remote var remote_stats = [remote_position, remote_rotation, 
+remote_animation, remote_velocity] setget received_packet
 
 #dead data
 remote var remote_dead = false
 
-remote var remote_stats = [remote_position, remote_rotation, remote_animation, remote_dead]
+signal packet_received
 
 var velocity = Vector3.ZERO
 var rock_summoned = false
@@ -32,6 +36,10 @@ var old_position = Vector3.ZERO
 
 func update_stats():
 	return remote_stats
+
+func received_packet(stats):
+	remote_stats=stats
+	emit_signal("packet_received")
 
 func is_current_player():
 	return (is_network_master() and !remote_dead)

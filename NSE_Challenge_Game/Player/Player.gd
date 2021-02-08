@@ -6,13 +6,24 @@ var summon = 0.0
 var grab = 0.0
 var dash = 0.0
 var mouse_position = Vector3.ZERO
+
 var controls = [movement, pushpull, summon, grab, dash, mouse_position]
+
 var player_name = ""
+
 var touched = false
 
 var mouse_angle = Vector3.ZERO
 var current_angle = Vector3.ZERO
 var move_velocity = Vector3.ZERO
+
+var puppet_last_position = transform.origin
+var puppet_next_position = transform.origin
+var r_rotation = Vector3.ZERO
+var r_position = Vector3.ZERO
+var r_animation = "idle"
+var r_velocity = Vector3.ZERO
+var r_stats = [r_rotation,r_position,r_animation,r_velocity]
 
 enum {
 	MOVE,
@@ -27,6 +38,11 @@ enum {
 	DEATH
 }
 var state = MOVE
+
+var current_time = 0
+var last_packet_time = 0
+var packet_time = 0
+var elapsed_time = 0
 
 var anim = "idle"
 var prevanim = "idle"
@@ -45,7 +61,8 @@ var last_attacker=""
 export var SCALE = 1.0
 export var MASS = 10
 export var FRICTION = 10
-export var MAX_SPEED = 500
+export var MAX_SPEED = 8
+export var ACCELERATION = 10
 export var SPEED = 2000
 export var TURN_SPEED = 400
 export var PUSH_POWER = 300
@@ -80,6 +97,8 @@ func _ready():
 	grabbox.shape.shape.set_height(0.5*SCALE)
 
 func _physics_process(delta):
+	current_time += delta
+	
 	#check if dead using networkhandler death
 	if(state != FALL and state != DEATH and network_handler.remote_dead):
 		state = FALL
@@ -123,20 +142,31 @@ func puppet_update(delta):
 	
 	var p = get_transform().origin
 	
-	var r_stats = network_handler.update_stats()
-	var r_rotation = r_stats[0]
-	var r_position = r_stats[1]
-	var r_animation = r_stats[2]
-	
-	var interpolate_speed = 1
-	var x = move_toward(p.x, r_position.x, interpolate_speed)
-	var y = move_toward(p.y, r_position.y, interpolate_speed)
-	var z = move_toward(p.z, r_position.z, interpolate_speed)
+	var interpolate_speed = 0.1
+	var x = move_toward(p.x, puppet_next_position.x, interpolate_speed)
+	var y = move_toward(p.y, puppet_next_position.y, interpolate_speed)
+	var z = move_toward(p.z, puppet_next_position.z, interpolate_speed)
 	transform.origin = Vector3(x,y,z)
 	
 	set_rotation(r_rotation)
 	
 	anim = r_animation
+	
+	set_linear_velocity(r_velocity)
+
+func _on_NetworkHandler_packet_received():
+	last_packet_time = packet_time
+	packet_time = current_time
+	elapsed_time = packet_time - last_packet_time
+	
+	r_stats = network_handler.update_stats()
+	r_rotation = r_stats[0]
+	r_position = r_stats[1]
+	r_animation = r_stats[2]
+	r_velocity = r_stats[3]
+	
+	puppet_last_position = puppet_next_position
+	puppet_next_position = puppet_last_position + r_velocity * elapsed_time
 
 func handle_animations(animation):
 	if (animation!=prevanim):
@@ -197,10 +227,10 @@ func set_last_attacker():
 func move_state(delta, mouse_angle):
 	#Handle movement, set to directional or set to 0
 	if (movement != Vector2.ZERO):
-		move_velocity = Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED)
+		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
 		dash_angle = Vector3(movement.x,0,movement.y)
 	else:
-		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION)
+		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
@@ -229,13 +259,12 @@ func move_state(delta, mouse_angle):
 	move()
 
 func move():
-#	add_force(move_velocity, Vector3.ZERO)
 	if (move_velocity!=Vector3.ZERO):
 		set_linear_velocity(move_velocity)
 
 func dash_state(delta):
 	anim="dash"
-	move_velocity = dash_angle*MAX_SPEED*DASH_INC
+	move_velocity = move_velocity.move_toward(dash_angle*MAX_SPEED*DASH_INC,ACCELERATION*DASH_INC*delta)
 	move()
 
 func dash_finished():
@@ -280,7 +309,7 @@ func grabbed_state(delta):
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED/4*delta)
 	move()
-	
+
 func check_cancel_grab():
 	if (grab==0):
 		anim="idle"
@@ -360,7 +389,6 @@ func pull_state(delta):
 func set_player_name(name):
 	player_name = name
 	pass
-#	network_handler.set_player_name(name)
 
 func angle_update():
 	var current_angle_y = get_transform().basis.get_euler().y;
@@ -379,11 +407,11 @@ func get_mouse_angle(current_angle, position):
 
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
-	network_handler.timeout(get_rotation(),get_transform().origin,anim,get_angular_velocity())
+	network_handler.timeout(get_rotation(),get_transform().origin,anim,linear_velocity)
 
 sync func reset():
 	last_attacker=""
 	network_handler.reset()
-	
+
 func _on_Player_body_entered(body):
 	touched = true
