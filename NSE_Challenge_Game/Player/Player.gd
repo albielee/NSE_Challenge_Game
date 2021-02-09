@@ -59,7 +59,8 @@ onready var pullbox = $PullBox
 onready var grabbox = $GrabBox
 
 onready var network_handler = $NetworkHandler
-onready var animationtree = $AnimationTree	
+onready var animationtree = $AnimationTree
+onready var animationplayer = $player_animation/AnimationPlayer
 onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = Vector3.ZERO
 
@@ -135,7 +136,7 @@ func puppet_update(delta):
 
 	var p = get_transform().origin
 
-	var interpolate_speed = 0.1
+	var interpolate_speed = 1
 	var x = move_toward(p.x, network_handler.remote_position.x, interpolate_speed)
 	var y = move_toward(p.y, network_handler.remote_position.y, interpolate_speed)
 	var z = move_toward(p.z, network_handler.remote_position.z, interpolate_speed)
@@ -180,7 +181,7 @@ func update(delta):
 		SUMMON:
 			summon_state()
 		SUMMONING:
-			summoning_state()
+			summoning_state(delta)
 		PUSH:
 			push_state(delta)
 		PULL:
@@ -209,6 +210,17 @@ func move_state(delta, mouse_angle):
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
+	#running animations based on player controls. Forwards > backwards > left and right
+	if(movement.x > 0):
+		anim = "run_right-loop"
+	if(movement.x < 0):
+		anim = "run_right-loop"
+	if(movement.y < 0):
+		anim = "run_forward-loop"
+	if(movement.y > 0):
+		anim = "run_backward-loop"
+	
+	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull
 	if(dash and can_dash <= 0.0):
@@ -218,10 +230,10 @@ func move_state(delta, mouse_angle):
 	else:
 		can_dash -= 1.0
 		if(summon and rock_summoned == false):
-			set_angular_velocity(Vector3.ZERO)
-			state = SUMMON;
+			#set_angular_velocity(Vector3.ZERO)
+			state = SUMMONING;
 			rock_summoned = true
-		else:
+		elif(state != SUMMONING):
 			rock_summoned = false
 			if(grab==1):
 				state = GRAB
@@ -313,26 +325,29 @@ func summon_state():
 	velocity = Vector3.ZERO
 	anim = "summon_charge"
 
-func summoning_state():
-	anim = "summon_generic"
+func summoning_state(delta):
+	velocity = velocity.move_toward(Vector3.ZERO, delta)
+	
+	anim = "summon_charge"
+	var summon_speed = 1
+	summon_size+=summon_speed*delta
+	if (summon == 0.0) or (summon_size > 3.0):
+		var rock_name = get_name()
+		var offset = summon_size
+		var y_rot = -get_transform().basis.get_euler().y
+		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
+		network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
+		
+		summon_size=0.5
+		anim = "idle"
+		state = MOVE
 
 func summon_complete():
 	velocity = Vector3.ZERO
 	
-	var rock_name = get_name()
-	var offset = summon_size
-	var y_rot = -get_transform().basis.get_euler().y
-	var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-	network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
-	
-	summon_size=0.5
-	anim = "idle"
-	state = MOVE
 
 func summon_power_up():
-	summon_size+=0.5
-	if (summon == 0.0) or (summon_size == 3.0):
-		state=SUMMONING
+	pass
 
 func push_state(delta):
 	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
