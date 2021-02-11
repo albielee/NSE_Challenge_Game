@@ -1,7 +1,6 @@
 extends Control
 
-var countdown_sprites = [$Number3,$Number2,$Number1]
-
+onready var countdown_sprites = [$Number3,$Number2,$Number1]
 var scores = {}
 var first_run=true
 func create_scores():
@@ -11,11 +10,14 @@ func create_scores():
 
 
 func _process(delta):
+	if (first_run):
+		first_run = false
+		create_scores()
+		initialise_scoreboard()
 	#If the host:
 	if(get_tree().is_network_server()):
-		if (first_run):
-			first_run = false
-			create_scores()
+		
+		
 		#Check if one player is left
 		var one_player_left = detect_players_left()
 		if(one_player_left):
@@ -40,6 +42,7 @@ func detect_players_left():
 func get_last_player():
 	pass
 
+	
 func play_countdown():
 	get_tree().paused = true
 	for i in range(3,0,-1):
@@ -55,19 +58,46 @@ func restart_round():
 	
 	#All objects that can be reset will be put in the resettable group
 	#all objects in resettable should have a reset function
-	play_countdown()
+	
 	for o in get_tree().get_nodes_in_group("resettable"):
 		o.rpc("reset")
 		o.reset()
-		pass
+	play_countdown()
 		
 func _on_Void_player_fell(dead_player,killing_player):
-	if(killing_player==""):
+	if(get_tree().is_network_server()):
+		update_score(killing_player)
+		rpc("update_score",killing_player)
+	#update_score(killing_player)
+
+remote func update_score(player):
+	if(player==""):
 		print("a player ended their own suffering")
 	else:
-		scores[killing_player]+=1
+		scores[player]+=1
 		print(scores)
-	pass # Replace with function body.
+	update_scoreboard()
+
+func _input(event):
+	if event.is_action_pressed("scoreboard"):
+		$Scoreboard.visible = true
+	elif event.is_action_released("scoreboard"):
+		$Scoreboard.visible = false
+		
+
+func initialise_scoreboard():
+	var i = 1
+	for player in scores.keys():
+		get_node("Scoreboard/PlayerNames/Player"+str(i)).text = player
+		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
+		i+=1
+		
+func update_scoreboard():
+	var i = 1
+	for player in scores.keys():
+		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
+		i+=1
+
 """
 OLD CODE BUT MAY BE USEFUL LATER
 

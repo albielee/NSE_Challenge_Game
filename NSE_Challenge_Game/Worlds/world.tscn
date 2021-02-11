@@ -78,6 +78,80 @@ visible = false
 position = Vector2( 512, 300 )
 texture = ExtResource( 7 )
 
+[node name="Scoreboard" type="Panel" parent="RoundController"]
+visible = false
+margin_left = 362.0
+margin_top = 150.0
+margin_right = 662.0
+margin_bottom = 450.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RoundController/Scoreboard"]
+margin_left = 124.214
+margin_top = 7.93701
+margin_right = 166.214
+margin_bottom = 38.937
+text = "Scores
+"
+
+[node name="PlayerNames" type="VBoxContainer" parent="RoundController/Scoreboard"]
+margin_left = 30.0
+margin_top = 40.0
+margin_right = 210.0
+margin_bottom = 155.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_right = 180.0
+margin_bottom = 14.0
+
+[node name="Player2" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_top = 18.0
+margin_right = 180.0
+margin_bottom = 32.0
+
+[node name="Player3" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_top = 36.0
+margin_right = 180.0
+margin_bottom = 50.0
+
+[node name="Player4" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_top = 54.0
+margin_right = 180.0
+margin_bottom = 68.0
+
+[node name="PlayerScores" type="VBoxContainer" parent="RoundController/Scoreboard"]
+margin_left = 210.0
+margin_top = 40.0
+margin_right = 250.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Player2" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_top = 18.0
+margin_right = 40.0
+margin_bottom = 32.0
+
+[node name="Player3" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_top = 36.0
+margin_right = 40.0
+margin_bottom = 50.0
+
+[node name="Player4" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_top = 54.0
+margin_right = 40.0
+margin_bottom = 68.0
+
 [node name="Camera" parent="." groups=[
 "Camera",
 ] instance=ExtResource( 1 )]
