@@ -379,6 +379,7 @@ parameters/playback = SubResource( 34 )
 script = ExtResource( 1 )
 
 [node name="SendData" type="Timer" parent="NetworkHandler"]
+process_mode = 0
 wait_time = 0.01
 autostart = true
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

@@ -1,3 +1,3 @@
 extends Node
 
-var tickrate = 24
+var tickrate = 32

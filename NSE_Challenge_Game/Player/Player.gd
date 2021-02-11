@@ -15,11 +15,13 @@ var touched = false
 
 var mouse_angle = Vector3.ZERO
 var current_angle = Vector3.ZERO
+var current_dir = Vector3.ZERO
 var move_velocity = Vector3.ZERO
 
 var puppet_last_position = transform.origin
 var puppet_next_position = transform.origin
-var r_rotation = Vector3.ZERO
+var puppet_speed = 0
+var r_rotation = 0
 var r_position = transform.origin
 var r_animation = "idle"
 var r_velocity = Vector3.ZERO
@@ -61,6 +63,8 @@ var can_dash = 0.0
 
 var last_attacker=""
 
+var last_time = 0
+
 export var SCALE = 1.0
 export var MASS = 10
 export var FRICTION = 10
@@ -74,7 +78,7 @@ export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
 
-onready var UPDATE_INTERVAL = 1/32 #this should be the settings.tickrate.
+onready var UPDATE_INTERVAL = 1 / $"/root/Settings".tickrate
 
 onready var pushbox = $PushBox
 onready var pullbox = $PullBox
@@ -115,7 +119,7 @@ func _physics_process(delta):
 		update(delta)
 	else:
 		puppet_update(delta)
-
+	
 	handle_animations(anim)
 
 func get_network_handler():
@@ -146,23 +150,47 @@ func puppet_update(delta):
 		set_mode(RigidBody.MODE_RIGID)
 	
 	var p = get_transform().origin
+	var dir = (puppet_next_position-p).normalized()
+	var dist = p.distance_to(puppet_next_position)
+	var timetogetthere = lptime - current_time
 	
-	if current_time < lptime:
-		transform.origin = p+(lp*delta)
+	if timetogetthere > 0: 
+		puppet_speed = dist / timetogetthere
+		print(puppet_speed)
 	
-	set_rotation(r_rotation)
+	#time when next package will probably arrive minus the current time
+#	if timetogetthere > 0:
+#		puppet_speed = (dist / timetogetthere)
+#		set_linear_velocity(puppet_speed*dir)
+#	else:
+	if dist > 0.5:
+#		transform.origin = puppet_next_position
+		print('yo')
+		set_linear_velocity(puppet_speed*dir)
+	elif dist > 0.1:
+		print('close')
+		set_linear_velocity(dist*dir)
+	else:
+		print('there')
+		set_linear_velocity(Vector3.ZERO)
+	
+#	transform.origin = puppet_next_position
+	
+	puppet_rotation(r_rotation,delta)
 	
 	anim = r_animation
+
+func puppet_rotation(target,delta):
+	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
 	
-	set_linear_velocity(r_velocity)
+	set_angular_velocity(angular_veloc*TURN_SPEED*delta)
 
 func _on_NetworkHandler_packet_received():
-	last_packet_time = packet_time
-	packet_time = current_time
-	elapsed_time = packet_time - last_packet_time
+	elapsed_time = current_time - last_packet_time
+	last_packet_time = current_time
 	
 	var jitter = elapsed_time - UPDATE_INTERVAL
-	lptime = current_time + UPDATE_INTERVAL + jitter
+	lptime = current_time + UPDATE_INTERVAL - jitter
 	
 	r_stats = network_handler.update_stats()
 	r_rotation = r_stats[0]
@@ -170,10 +198,9 @@ func _on_NetworkHandler_packet_received():
 	r_animation = r_stats[2]
 	r_velocity = r_stats[3]
 	
-	transform.origin = r_position
-	puppet_next_position = r_position + r_velocity * elapsed_time
+	puppet_next_position = r_position + (r_velocity * elapsed_time)
 	
-	lp = (puppet_next_position-r_position) / (UPDATE_INTERVAL + jitter)
+#	lp = (puppet_next_position-r_position) / (UPDATE_INTERVAL + jitter)
 
 func handle_animations(animation):
 	if (animation!=prevanim):
@@ -409,12 +436,13 @@ func get_mouse_angle(current_angle, position):
 	var up_dir = Vector3.UP
 	var target_angle_y = get_transform().looking_at(position, up_dir).basis.get_euler().y;
 	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
-	
 	return up_dir * rotation_angle;
 
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
-	network_handler.timeout(get_rotation(),get_transform().origin,anim,linear_velocity)
+	if(network_handler.is_host()):
+		last_time = current_time
+	network_handler.timeout(get_transform().basis.get_euler().y, get_transform().origin, anim, linear_velocity)
 
 sync func reset():
 	last_attacker=""
