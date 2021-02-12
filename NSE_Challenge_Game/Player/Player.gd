@@ -1,5 +1,18 @@
 extends RigidBody
 
+export var SCALE = 1.0
+export var MASS = 10
+export var FRICTION = 10
+export var MAX_SPEED = 8
+export var ACCELERATION = 10
+export var SPEED = 2000
+export var TURN_SPEED = 400
+export var PUSH_POWER = 300
+export var DASH_INC = 2.0
+export var DASH_COOLDOWN = 40.0
+export var GRAB_POWER = 10
+export var GRAB_DROPOFF_VAL = 1.0
+
 var movement = Vector2.ZERO
 var pushpull = 0.0
 var summon = 0.0
@@ -20,15 +33,15 @@ var move_velocity = Vector3.ZERO
 
 var puppet_last_position = transform.origin
 var puppet_next_position = transform.origin
-var puppet_speed = 0
-var r_rotation = 0
+var puppet_speed = 0.0
+var r_rotation = 0.0
 var r_position = transform.origin
 var r_animation = "idle"
 var r_velocity = Vector3.ZERO
 var r_stats = [r_rotation,r_position,r_animation,r_velocity]
 
 var lp = Vector3.ZERO
-var lptime = 1
+var lptime = 1.0
 
 enum {
 	MOVE,
@@ -44,10 +57,13 @@ enum {
 }
 var state = MOVE
 
-var current_time = 0
-var last_packet_time = 0
-var packet_time = 0
-var elapsed_time = 0
+var current_time = 0.0
+var last_packet_time = 0.0
+var packet_time = 0.0
+var elapsed_time = 0.0
+var proj_packet_time = 0.0
+var ideal_updates_per_packet = 0.0
+var updates_per_packet = 0.0
 
 var anim = "idle"
 var prevanim = "idle"
@@ -65,20 +81,7 @@ var last_attacker=""
 
 var last_time = 0
 
-export var SCALE = 1.0
-export var MASS = 10
-export var FRICTION = 10
-export var MAX_SPEED = 8
-export var ACCELERATION = 10
-export var SPEED = 2000
-export var TURN_SPEED = 400
-export var PUSH_POWER = 300
-export var DASH_INC = 2.0
-export var DASH_COOLDOWN = 40.0
-export var GRAB_POWER = 10
-export var GRAB_DROPOFF_VAL = 1.0
-
-onready var UPDATE_INTERVAL = 1 / $"/root/Settings".tickrate
+onready var UPDATE_INTERVAL = 1.0 / $"/root/Settings".tickrate
 
 onready var pushbox = $PushBox
 onready var pullbox = $PullBox
@@ -88,6 +91,11 @@ onready var network_handler = $NetworkHandler
 onready var animationtree = $AnimationTree	
 onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = Vector3.ZERO
+
+var _updates = 0.0
+var _packets = 0.0
+var avg = 0.0
+var _delta = 0.0
 
 func _ready():
 	set_linear_damp(10)
@@ -104,6 +112,8 @@ func _ready():
 	grabbox.scale=Vector3(SCALE,SCALE,SCALE)
 	grabbox.transform.origin.z=(-1.8*SCALE)
 	grabbox.shape.shape.set_height(0.5*SCALE)
+	
+	proj_packet_time = UPDATE_INTERVAL
 
 func _physics_process(delta):
 	current_time += delta
@@ -146,39 +156,41 @@ func get_controls(cam):
 	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
 
 func puppet_update(delta):
+	_delta = delta
+#	print(updates_per_packet)
 	if(mode != MODE_RIGID):
 		set_mode(RigidBody.MODE_RIGID)
+	
+	var time = 0
+	
+	if len(buffer) > 0 and time <= 0:
+		var statstime = buffer.pop_front()
+		time = statstime[1]
+		r_stats = statstime[0]
+		r_rotation = r_stats[0]
+		r_position = r_stats[1]
+		r_animation = r_stats[2]
+		r_velocity = r_stats[3]
 	
 	var p = get_transform().origin
 	var dir = (puppet_next_position-p).normalized()
 	var dist = p.distance_to(puppet_next_position)
-	var timetogetthere = lptime - current_time
+	var speed = r_velocity.length()
 	
-	if timetogetthere > 0: 
-		puppet_speed = dist / timetogetthere
-		print(puppet_speed)
+	if time > 0: 
+		puppet_speed = dist / time
+		
+		#inter fucking polate this shit
+		var cur_speed = get_linear_velocity()
+		var goal_speed = puppet_speed*dir
+		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/0.5))
 	
-	#time when next package will probably arrive minus the current time
-#	if timetogetthere > 0:
-#		puppet_speed = (dist / timetogetthere)
-#		set_linear_velocity(puppet_speed*dir)
-#	else:
-	if dist > 0.5:
-#		transform.origin = puppet_next_position
-		print('yo')
-		set_linear_velocity(puppet_speed*dir)
-	elif dist > 0.1:
-		print('close')
-		set_linear_velocity(dist*dir)
-	else:
-		print('there')
-		set_linear_velocity(Vector3.ZERO)
-	
-#	transform.origin = puppet_next_position
-	
+	#actually also interpolate this shit
 	puppet_rotation(r_rotation,delta)
 	
 	anim = r_animation
+	
+	time -= delta
 
 func puppet_rotation(target,delta):
 	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
@@ -186,21 +198,39 @@ func puppet_rotation(target,delta):
 	set_angular_velocity(angular_veloc*TURN_SPEED*delta)
 
 func _on_NetworkHandler_packet_received():
+	#how long since the last packet?
 	elapsed_time = current_time - last_packet_time
+	
+	avg = average_packet_time(elapsed_time)
+	
+	#the next packet will probably arrive earlier/later depending on how early/late this one was
+	proj_packet_time = UPDATE_INTERVAL - (elapsed_time-UPDATE_INTERVAL)
+	
+	#set this time to be the time the last packet arrived
 	last_packet_time = current_time
 	
-	var jitter = elapsed_time - UPDATE_INTERVAL
-	lptime = current_time + UPDATE_INTERVAL - jitter
+	lptime = proj_packet_time
 	
-	r_stats = network_handler.update_stats()
-	r_rotation = r_stats[0]
-	r_position = r_stats[1]
-	r_animation = r_stats[2]
-	r_velocity = r_stats[3]
+	build_buffer(network_handler.update_stats(), avg)
 	
 	puppet_next_position = r_position + (r_velocity * elapsed_time)
 	
 #	lp = (puppet_next_position-r_position) / (UPDATE_INTERVAL + jitter)
+
+var packets = []
+var buffer = []
+
+func build_buffer(newstats, average):
+	buffer.push_back([newstats,average])
+
+func average_packet_time(newpacket_elapsed):
+	packets.append(newpacket_elapsed)
+	if len(packets) > 50:
+		packets.remove(0)
+	var total = 0.0
+	for time in packets:
+		total += time
+	return total/len(packets)
 
 func handle_animations(animation):
 	if (animation!=prevanim):
