@@ -120,6 +120,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ErrorLabel" type="Label" parent="Connect/IPLabel"]
+margin_left = -3.5
+margin_top = 53.5
+margin_right = 238.5
+margin_bottom = 67.5
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
+align = 1
+
 [node name="IPAddress" type="LineEdit" parent="Connect"]
 margin_left = 20.5
 margin_top = 90.5
@@ -142,16 +152,6 @@ text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ErrorLabel" type="Label" parent="Connect"]
-margin_left = 15.0
-margin_top = 125.0
-margin_right = 257.0
-margin_bottom = 139.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
-align = 1
 
 [node name="BackButton" type="Button" parent="Connect" groups=[
 "button",
