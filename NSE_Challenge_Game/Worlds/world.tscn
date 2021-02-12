@@ -1,15 +1,23 @@
+<<<<<<< HEAD
 [gd_scene load_steps=16 format=2]
+=======
+[gd_scene load_steps=11 format=2]
+>>>>>>> multiplayer_mergeboy
 
 [ext_resource path="res://Controllers/Camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/World/grass_1.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Objects/Scene/Void.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Controllers/RoundController.tscn" type="PackedScene" id=4]
+<<<<<<< HEAD
 [ext_resource path="res://Assets/Numbers/number1.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Numbers/number2.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Numbers/number3.png" type="Texture" id=7]
 [ext_resource path="res://Assets/World/Tall Grass/GrassCluster.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/World/Clouds/Cloud.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/World/Clouds/flat_cloud.tscn" type="PackedScene" id=10]
+=======
+[ext_resource path="res://Worlds/RockNetworkHandler.gd" type="Script" id=5]
+>>>>>>> multiplayer_mergeboy
 
 [sub_resource type="Environment" id=1]
 background_color = Color( 0.431373, 0.431373, 0.431373, 0.333333 )
@@ -46,6 +54,14 @@ albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 [sub_resource type="BoxShape" id=5]
 
 [node name="World" type="Spatial"]
+
+[node name="RockNetworkHandler" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="SendData" type="Timer" parent="RockNetworkHandler"]
+process_mode = 0
+wait_time = 0.1
+autostart = true
 
 [node name="SpawnPoints" type="Spatial" parent="."]
 
@@ -300,6 +316,7 @@ transform = Transform( -8.14603e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -8.14603e-08, 4
 mesh = ExtResource( 2 )
 material/0 = null
 
+<<<<<<< HEAD
 [node name="Clouds" type="Spatial" parent="Environment"]
 
 [node name="Cloud" parent="Environment/Clouds" instance=ExtResource( 9 )]
@@ -327,4 +344,9 @@ transform = Transform( 0.5, 0, 0, 0, 0.1, 0, 0, 0, 0.505, 62.0387, -10.0464, -3.
 
 [node name="flat_cloud3" parent="Environment/Clouds" instance=ExtResource( 10 )]
 transform = Transform( 0.5, 0, 0, 0, 0.1, 0, 0, 0, 0.505, 62.0387, -9.43155, 5.30299 )
+=======
+[node name="Void" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
+[connection signal="timeout" from="RockNetworkHandler/SendData" to="RockNetworkHandler" method="_on_Timer_timeout"]
+>>>>>>> multiplayer_mergeboy
 [connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
