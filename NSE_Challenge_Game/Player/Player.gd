@@ -1,18 +1,5 @@
 extends RigidBody
 
-export var SCALE = 1.0
-export var MASS = 10
-export var FRICTION = 10
-export var MAX_SPEED = 8
-export var ACCELERATION = 10
-export var SPEED = 2000
-export var TURN_SPEED = 400
-export var PUSH_POWER = 300
-export var DASH_INC = 2.0
-export var DASH_COOLDOWN = 40.0
-export var GRAB_POWER = 10
-export var GRAB_DROPOFF_VAL = 1.0
-
 #this is set to the tree's unique ID
 var playerid = 0
 
@@ -85,8 +72,7 @@ var can_dash = 0.0
 
 var last_attacker=""
 
-<<<<<<< HEAD
-
+export var ACCELERATION = 100
 export var SCALE = 1.0
 export var MASS = 10
 export var FRICTION = 10
@@ -98,11 +84,9 @@ export var DASH_INC = 2.0
 export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
-=======
 var last_time = 0
 
 onready var UPDATE_INTERVAL = 1.0 / $"/root/Settings".tickrate
->>>>>>> multiplayer_mergeboy
 
 onready var pushbox = $PushBox
 onready var pullbox = $PullBox
@@ -252,15 +236,6 @@ func _on_NetworkHandler_packet_received():
 	
 	build_buffer(network_handler.update_stats(), avg)
 
-<<<<<<< HEAD
-	var interpolate_speed = 1
-	var x = move_toward(p.x, network_handler.remote_position.x, interpolate_speed)
-	var y = move_toward(p.y, network_handler.remote_position.y, interpolate_speed)
-	var z = move_toward(p.z, network_handler.remote_position.z, interpolate_speed)
-	transform.origin = Vector3(x,y,z)
-	set_rotation(network_handler.remote_rotation)
-	anim = network_handler.remote_animation
-=======
 func build_buffer(newstats, average):
 	buffer.push_back([newstats,average])
 
@@ -272,7 +247,6 @@ func average_packet_time(newpacket_elapsed):
 	for time in packets:
 		total += time
 	return total/len(packets)
->>>>>>> multiplayer_mergeboy
 
 func handle_animations(animation):
 	if (animation!=prevanim):
@@ -348,12 +322,8 @@ func move_state(delta, mouse_angle):
 	
 		$animationblend.point_pos = Vector2(blend_x, blend_y)
 	else:
-<<<<<<< HEAD
 		anim = "idle"
-		velocity = Vector3.ZERO
-=======
 		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
->>>>>>> multiplayer_mergeboy
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
@@ -461,16 +431,11 @@ func _on_GrabBox_lost_rock():
 	grabbox.shape.shape.set_height(0.5)
 
 func summon_state():
-<<<<<<< HEAD
-	velocity = Vector3.ZERO
-	anim = "summon_start"
-=======
 	move_velocity = Vector3.ZERO
-	anim = "summon_charge"
->>>>>>> multiplayer_mergeboy
+	anim = "summon_start"
 
 func summoning_state(delta):
-	velocity = velocity.move_toward(Vector3.ZERO, delta)
+	move_velocity = move_velocity.move_toward(Vector3.ZERO, delta)
 	
 	anim = "summon_start"
 	var summon_speed = 1
@@ -487,32 +452,13 @@ func summoning_state(delta):
 		state = MOVE
 
 func summon_complete():
-<<<<<<< HEAD
-	velocity = Vector3.ZERO
-	
-
-func summon_power_up():
-	pass
-=======
-	if(network_handler.is_current_player()):
-		move_velocity = Vector3.ZERO
-		
-		var rock_name = get_name()
-		var offset = summon_size
-		var y_rot = -get_transform().basis.get_euler().y
-		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-		network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
-		
-		summon_size=0.5
-		anim = "idle"
-		state = MOVE
+	move_velocity = Vector3.ZERO
 
 func summon_power_up():
 	if(network_handler.is_current_player()):
 		summon_size+=0.5
 		if (summon == 0.0) or (summon_size == 3.0):
 			state=SUMMONING
->>>>>>> multiplayer_mergeboy
 
 func push_state(delta):
 	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
