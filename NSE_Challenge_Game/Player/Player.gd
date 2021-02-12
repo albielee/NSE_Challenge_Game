@@ -30,6 +30,9 @@ var state = MOVE
 
 var anim = "idle"
 var prevanim = "idle"
+#movement animation blend space
+var blend_x = 0
+var blend_y = 0
 
 var push_cooldown = 0
 var push_mouse_position = mouse_position
@@ -41,6 +44,7 @@ var dash_angle = current_angle
 var can_dash = 0.0
 
 var last_attacker=""
+
 
 export var SCALE = 1.0
 export var MASS = 10
@@ -208,9 +212,12 @@ func move_state(delta, mouse_angle):
 		anim = "movement"
 		
 		var	angle_to_movement = - abs(get_transform().basis.get_euler().y+(2*PI) - atan2(-movement.y, movement.x))
-		var blend_x = cos(angle_to_movement)
-		var blend_y = sin(angle_to_movement)
-
+		var blend_to_x = cos(angle_to_movement)
+		var blend_to_y = sin(angle_to_movement)
+		#Now interpolate the blend points so the transition is gradual
+		var inter_spd = 0.1
+		blend_x = lerp(blend_x, blend_to_x, inter_spd)
+		blend_y = lerp(blend_y, blend_to_y, inter_spd)
 		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
 	
 		$animationblend.point_pos = Vector2(blend_x, blend_y)
@@ -219,10 +226,6 @@ func move_state(delta, mouse_angle):
 		velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
-	
-	
-	
-	
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull
@@ -326,12 +329,12 @@ func _on_GrabBox_lost_rock():
 
 func summon_state():
 	velocity = Vector3.ZERO
-	anim = "summon_charge"
+	anim = "summon_start"
 
 func summoning_state(delta):
 	velocity = velocity.move_toward(Vector3.ZERO, delta)
 	
-	anim = "summon_charge"
+	anim = "summon_start"
 	var summon_speed = 1
 	summon_size+=summon_speed*delta
 	if (summon == 0.0) or (summon_size > 3.0):
