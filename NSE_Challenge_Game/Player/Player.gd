@@ -205,20 +205,47 @@ func move_state(delta, mouse_angle):
 	if (movement != Vector2.ZERO):
 		velocity = Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED)
 		dash_angle = Vector3(movement.x,0,movement.y)
+		anim = "movement"
+		var temp = 0
+		#print(get_transform().origin.z)
+		var vert_pos = mouse_position.z-get_transform().origin.z
+		var hori_pos = get_transform().origin.x-mouse_position.x
+		#print("vert =" + str(vert_pos))
+		#print("hori =" + str(hori_pos))
+		#if(mouse_position.z > get_transform().origin.z):
+		#	temp = deg2rad(180)
+		#else:
+		#	temp = deg2rad(-180)
+		#var angle_to_movement = 0
+		#if(hori_pos > 0):
+		#	angle_to_movement = abs(get_transform().basis.get_euler().y - atan2(movement.y, movement.x))
+		#elif(hori_pos <= 0):
+		#var A = movement.rotated(mouse_angle.y)
+		#var ma = mouse_position.normalized()
+		#ma = atan2(ma.z, ma.x)+deg2rad(90)
+		#var X = movement.dot(Vector2(cos(ma),-sin(ma)))
+		#var Y = movement.dot(Vector2(sin(ma),cos(ma)))
+		#print(atan2(Y,X))
+		
+		var	angle_to_movement = - abs(get_transform().basis.get_euler().y - atan2(movement.y, movement.x))
+		var blend_x = cos(angle_to_movement)
+		var blend_y = sin(angle_to_movement)
+		
+		#var pos = Vector2(30,30)
+		#var line_s = 30
+
+		#print(animationtree.set("parameters/movement/blend_position"))
+		$animationblend.point_pos = Vector2(blend_x, blend_y)
+		
+		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
 	else:
+		anim = "idle"
 		velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
-	#running animations based on player controls. Forwards > backwards > left and right
-	if(movement.x > 0):
-		anim = "run_right-loop"
-	if(movement.x < 0):
-		anim = "run_right-loop"
-	if(movement.y < 0):
-		anim = "run_forward-loop"
-	if(movement.y > 0):
-		anim = "run_backward-loop"
+	
+	
 	
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
