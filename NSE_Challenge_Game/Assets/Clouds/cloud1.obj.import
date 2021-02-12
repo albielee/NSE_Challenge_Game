@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/cloud1.obj-3fe70371f73da4e4642f3575cd3d62ae.mesh"
+
+[deps]
+
+files=[ "res://.import/cloud1.obj-3fe70371f73da4e4642f3575cd3d62ae.mesh" ]
+
+source_file="res://Assets/Clouds/cloud1.obj"
+dest_files=[ "res://.import/cloud1.obj-3fe70371f73da4e4642f3575cd3d62ae.mesh", "res://.import/cloud1.obj-3fe70371f73da4e4642f3575cd3d62ae.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
