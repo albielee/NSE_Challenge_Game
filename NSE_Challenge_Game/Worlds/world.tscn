@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/World/grass_1.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Objects/Scene/Void.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Controllers/RoundController.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Worlds/PlayerNetworkHandler.gd" type="Script" id=5]
+[ext_resource path="res://Worlds/RockNetworkHandler.gd" type="Script" id=5]
 
 [sub_resource type="Environment" id=1]
 background_color = Color( 0.431373, 0.431373, 0.431373, 0.333333 )
@@ -42,10 +42,10 @@ albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 
 [node name="World" type="Spatial"]
 
-[node name="PlayerNetworkHandler" type="Node" parent="."]
+[node name="RockNetworkHandler" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[node name="SendData" type="Timer" parent="PlayerNetworkHandler"]
+[node name="SendData" type="Timer" parent="RockNetworkHandler"]
 process_mode = 0
 wait_time = 0.1
 autostart = true
@@ -120,5 +120,5 @@ material/0 = null
 
 [node name="Void" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
-[connection signal="timeout" from="PlayerNetworkHandler/SendData" to="PlayerNetworkHandler" method="_on_Timer_timeout"]
+[connection signal="timeout" from="RockNetworkHandler/SendData" to="RockNetworkHandler" method="_on_Timer_timeout"]
 [connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]

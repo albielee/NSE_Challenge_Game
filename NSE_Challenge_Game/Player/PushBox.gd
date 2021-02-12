@@ -85,7 +85,7 @@ func do_push():
 			rock_position = rock.global_transform.origin
 			rock.add_force(knockback_vector*PUSH_POWER)
 			rock.add_force(Vector3.UP*20)
-			rock.in_zone() #This is setting the rock to "push mode"
+			rock.in_zone(get_parent().playerid) #This is setting the rock to "push mode"
 			rock.get_parent().last_mover = get_parent().player_name #assigns player to rock
 		for i in rocks:
 			if (rock != i):

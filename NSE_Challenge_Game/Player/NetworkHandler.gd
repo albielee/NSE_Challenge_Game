@@ -32,6 +32,7 @@ var rock_summoned = false
 var dead = false
 
 onready var spawn_position = get_parent().spawn_position
+onready var rock_network_handler = get_node("/root/World/RockNetworkHandler")
 var old_position = Vector3.ZERO
 
 func update_stats():
@@ -51,16 +52,18 @@ func get_cam():
 	return get_tree().get_nodes_in_group("Camera")[0]
 
 func all_summon_rock(rock_name, rock_pos, rock_size):
-	summon_rock(rock_name, rock_pos, rock_size, get_tree().get_network_unique_id())
+	rpc("summon_rock", rock_name, rock_pos, rock_size, get_tree().get_network_unique_id())
 
 sync func summon_rock(rock_name, rock_pos, rock_size, by_who):
 	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
-	rock.set_name(rock_name)
+	rock.set_id(rock_network_handler.get_rock_id())
 	
+	rock.set_name(rock_name)
 	rock.translation = rock_pos
 	rock.scale = Vector3(rock_size,rock_size,rock_size)
+	rock.owned_by = by_who
 
-	get_node("../..").add_child(rock)
+	rock_network_handler.create_rock(rock)
 
 func timeout(cur_rotation,cur_position,cur_animation,cur_velocity):
 	if(is_current_player()):

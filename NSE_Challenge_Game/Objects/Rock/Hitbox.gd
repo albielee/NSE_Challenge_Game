@@ -6,6 +6,7 @@ var face = 0
 var speed = 0.0
 var flying = false
 var pushed = false
+var owned_by = 0
 
 signal pushed
 signal zone
@@ -20,7 +21,8 @@ func angular_velocity(value):
 	angular = value
 	emit_signal("spun")
 
-func in_zone():
+func in_zone(pusher):
+	owned_by = pusher
 	pushed = true
 	emit_signal("zone")
 	

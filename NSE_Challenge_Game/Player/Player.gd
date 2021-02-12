@@ -13,6 +13,9 @@ export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
 
+#this is set to the tree's unique ID
+var playerid = 0
+
 var movement = Vector2.ZERO
 var pushpull = 0.0
 var summon = 0.0
@@ -94,8 +97,11 @@ onready var spawn_position = Vector3.ZERO
 
 var _updates = 0.0
 var _packets = 0.0
-var avg = 0.0
-var _delta = 0.0
+var avg = 1.0
+var time = 0.0
+var packets = []
+var buffer = []
+var prev_speed = 0.0
 
 func _ready():
 	set_linear_damp(10)
@@ -114,6 +120,8 @@ func _ready():
 	grabbox.shape.shape.set_height(0.5*SCALE)
 	
 	proj_packet_time = UPDATE_INTERVAL
+	
+	if network_handler.is_current_player(): playerid = get_tree().get_network_unique_id()
 
 func _physics_process(delta):
 	current_time += delta
@@ -156,34 +164,47 @@ func get_controls(cam):
 	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
 
 func puppet_update(delta):
-	_delta = delta
-#	print(updates_per_packet)
-	if(mode != MODE_RIGID):
-		set_mode(RigidBody.MODE_RIGID)
-	
-	var time = 0
+#	time = 0
 	
 	if len(buffer) > 0 and time <= 0:
+		prev_speed = r_velocity.length()
 		var statstime = buffer.pop_front()
-		time = statstime[1]
+		time += statstime[1]
+		
 		r_stats = statstime[0]
 		r_rotation = r_stats[0]
 		r_position = r_stats[1]
 		r_animation = r_stats[2]
 		r_velocity = r_stats[3]
+		
+		puppet_next_position = r_position + (r_velocity * time)
 	
 	var p = get_transform().origin
 	var dir = (puppet_next_position-p).normalized()
 	var dist = p.distance_to(puppet_next_position)
 	var speed = r_velocity.length()
+	var cur_speed = get_linear_velocity()
 	
-	if time > 0: 
-		puppet_speed = dist / time
-		
-		#inter fucking polate this shit
-		var cur_speed = get_linear_velocity()
-		var goal_speed = puppet_speed*dir
-		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/time))
+	var next_speed = 0.0
+	if speed == 10:
+		next_speed = 10
+	if speed < prev_speed:
+		next_speed = prev_speed - speed
+	if speed > prev_speed:
+		if speed+prev_speed<10:
+			next_speed = speed+prev_speed
+		else:
+			next_speed = speed+prev_speed
+	
+	set_linear_velocity(cur_speed.move_toward(next_speed*dir,ACCELERATION*delta))
+	
+#	if time > 0: 
+#		puppet_speed = dist / time
+#
+#		#inter fucking polate this shit
+#		var cur_speed = get_linear_velocity()
+#		var goal_speed = speed*dir
+#		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/avg))
 	
 	#actually also interpolate this shit
 	puppet_rotation(r_rotation,delta)
@@ -203,22 +224,10 @@ func _on_NetworkHandler_packet_received():
 	
 	avg = average_packet_time(elapsed_time)
 	
-	#the next packet will probably arrive earlier/later depending on how early/late this one was
-	proj_packet_time = UPDATE_INTERVAL - (elapsed_time-UPDATE_INTERVAL)
-	
 	#set this time to be the time the last packet arrived
 	last_packet_time = current_time
 	
-	lptime = proj_packet_time
-	
 	build_buffer(network_handler.update_stats(), avg)
-	
-	puppet_next_position = r_position + (r_velocity * elapsed_time)
-	
-#	lp = (puppet_next_position-r_position) / (UPDATE_INTERVAL + jitter)
-
-var packets = []
-var buffer = []
 
 func build_buffer(newstats, average):
 	buffer.push_back([newstats,average])
@@ -332,9 +341,10 @@ func dash_state(delta):
 	move()
 
 func dash_finished():
-	anim="idle"
-	state=MOVE
-	can_dash=DASH_COOLDOWN
+	if(network_handler.is_current_player()):
+		anim="idle"
+		state=MOVE
+		can_dash=DASH_COOLDOWN
 
 func grab_state(delta):
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
@@ -385,8 +395,9 @@ func check_cancel_grab():
 	return false
 
 func max_grab():
-	state=GRABBED
-	anim = "grabmax"
+	if(network_handler.is_current_player()):
+		state=GRABBED
+		anim = "grabmax"
 
 func _on_GrabBox_encounter_rock():
 	state = GRABBED
@@ -407,22 +418,24 @@ func summoning_state():
 	anim = "summon_generic"
 
 func summon_complete():
-	move_velocity = Vector3.ZERO
-	
-	var rock_name = get_name()
-	var offset = summon_size
-	var y_rot = -get_transform().basis.get_euler().y
-	var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-	network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
-	
-	summon_size=0.5
-	anim = "idle"
-	state = MOVE
+	if(network_handler.is_current_player()):
+		move_velocity = Vector3.ZERO
+		
+		var rock_name = get_name()
+		var offset = summon_size
+		var y_rot = -get_transform().basis.get_euler().y
+		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
+		network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
+		
+		summon_size=0.5
+		anim = "idle"
+		state = MOVE
 
 func summon_power_up():
-	summon_size+=0.5
-	if (summon == 0.0) or (summon_size == 3.0):
-		state=SUMMONING
+	if(network_handler.is_current_player()):
+		summon_size+=0.5
+		if (summon == 0.0) or (summon_size == 3.0):
+			state=SUMMONING
 
 func push_state(delta):
 	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
@@ -440,12 +453,13 @@ func push_state(delta):
 		anim = "push_over"
 
 func push_complete():
-	pushbox.shape.shape.set_height(1)
-	pushbox.transform.origin.z=-1.0*SCALE
-	state = MOVE
-	anim = "idle"
-	push_cooldown=1
-	pushbox.release()
+	if(network_handler.is_current_player()):
+		pushbox.shape.shape.set_height(1)
+		pushbox.transform.origin.z=-1.0*SCALE
+		state = MOVE
+		anim = "idle"
+		push_cooldown=1
+		pushbox.release()
 
 func pull_state(delta):
 	pass
@@ -470,8 +484,6 @@ func get_mouse_angle(current_angle, position):
 
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
-	if(network_handler.is_host()):
-		last_time = current_time
 	network_handler.timeout(get_transform().basis.get_euler().y, get_transform().origin, anim, linear_velocity)
 
 sync func reset():
