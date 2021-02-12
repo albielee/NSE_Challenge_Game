@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/flat_cloud.png-9504fd5ac136fe6d8d8c3aee7d1f36f9.stex"
+path="res://.import/grass_tall2.png-ca679b7b481531c5fd630352cba0e9cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Clouds/flat_cloud.png"
-dest_files=[ "res://.import/flat_cloud.png-9504fd5ac136fe6d8d8c3aee7d1f36f9.stex" ]
+source_file="res://Assets/World/Tall Grass/grass_tall2.png"
+dest_files=[ "res://.import/grass_tall2.png-ca679b7b481531c5fd630352cba0e9cd.stex" ]
 
 [params]
 

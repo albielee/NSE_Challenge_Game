@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grass_tall1.png-5cf13afc7c051f0df2959c22677a0a8e.stex"
+path="res://.import/grass_tall1.png-5b5f29cd37d0eff65671136e415e61c4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tall Grass/grass_tall1.png"
-dest_files=[ "res://.import/grass_tall1.png-5cf13afc7c051f0df2959c22677a0a8e.stex" ]
+source_file="res://Assets/World/Tall Grass/grass_tall1.png"
+dest_files=[ "res://.import/grass_tall1.png-5b5f29cd37d0eff65671136e415e61c4.stex" ]
 
 [params]
 
