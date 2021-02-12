@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Controllers/Camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/World/grass_1.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Objects/Scene/Void.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Controllers/RoundController.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Tall Grass/GrassCluster.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Controllers/RoundController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Numbers/number1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Numbers/number2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Numbers/number3.png" type="Texture" id=7]
 
 [sub_resource type="Environment" id=1]
 background_color = Color( 0.431373, 0.431373, 0.431373, 0.333333 )
@@ -42,13 +44,6 @@ albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 
 [node name="World" type="Spatial"]
 
-[node name="PlayerNetworkHandler" type="Node" parent="."]
-
-[node name="SendData" type="Timer" parent="PlayerNetworkHandler"]
-process_mode = 0
-wait_time = 0.1
-autostart = true
-
 [node name="SpawnPoints" type="Spatial" parent="."]
 
 [node name="0" type="Position3D" parent="SpawnPoints"]
@@ -65,13 +60,97 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.63685 )
 
 [node name="Players" type="Spatial" parent="."]
 
-[node name="RoundController2" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 4 )
+[node name="RoundController" parent="." instance=ExtResource( 4 )]
+pause_mode = 2
+
+[node name="Number1" type="Sprite" parent="RoundController"]
+visible = false
+position = Vector2( 512, 300 )
+texture = ExtResource( 5 )
+
+[node name="Number2" type="Sprite" parent="RoundController"]
+visible = false
+position = Vector2( 512, 300 )
+texture = ExtResource( 6 )
+
+[node name="Number3" type="Sprite" parent="RoundController"]
+visible = false
+position = Vector2( 512, 300 )
+texture = ExtResource( 7 )
+
+[node name="Scoreboard" type="Panel" parent="RoundController"]
+visible = false
+margin_left = 362.0
+margin_top = 150.0
+margin_right = 662.0
+margin_bottom = 450.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="RoundController/Scoreboard"]
+margin_left = 124.214
+margin_top = 7.93701
+margin_right = 166.214
+margin_bottom = 38.937
+text = "Scores
+"
+
+[node name="PlayerNames" type="VBoxContainer" parent="RoundController/Scoreboard"]
+margin_left = 30.0
+margin_top = 40.0
+margin_right = 210.0
+margin_bottom = 155.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_right = 180.0
+margin_bottom = 14.0
+
+[node name="Player2" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_top = 18.0
+margin_right = 180.0
+margin_bottom = 32.0
+
+[node name="Player3" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_top = 36.0
+margin_right = 180.0
+margin_bottom = 50.0
+
+[node name="Player4" type="Label" parent="RoundController/Scoreboard/PlayerNames"]
+margin_top = 54.0
+margin_right = 180.0
+margin_bottom = 68.0
+
+[node name="PlayerScores" type="VBoxContainer" parent="RoundController/Scoreboard"]
+margin_left = 210.0
+margin_top = 40.0
+margin_right = 250.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_right = 40.0
+margin_bottom = 14.0
+
+[node name="Player2" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_top = 18.0
+margin_right = 40.0
+margin_bottom = 32.0
+
+[node name="Player3" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_top = 36.0
+margin_right = 40.0
+margin_bottom = 50.0
+
+[node name="Player4" type="Label" parent="RoundController/Scoreboard/PlayerScores"]
+margin_top = 54.0
+margin_right = 40.0
+margin_bottom = 68.0
 
 [node name="Camera" parent="." groups=[
 "Camera",
@@ -83,8 +162,6 @@ near = 0.01
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795335, 0 )
-collision_layer = 2
-collision_mask = 0
 
 [node name="Tower" type="MeshInstance" parent="StaticBody"]
 transform = Transform( 7.35151, 0, 0, 0, 18.548, 0, 0, 0, 6.84089, 0, -20.3118, 0 )
@@ -127,7 +204,4 @@ material/0 = null
 
 [node name="Void" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
-
-[node name="GrassCluster" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78249, -0.986158, -0.608311 )
-[connection signal="timeout" from="PlayerNetworkHandler/SendData" to="PlayerNetworkHandler" method="_on_Timer_timeout"]
+[connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
