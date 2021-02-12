@@ -102,6 +102,7 @@ var time = 0.0
 var packets = []
 var buffer = []
 var prev_speed = 0.0
+var next_speed = 0.0
 
 func _ready():
 	set_linear_damp(10)
@@ -185,18 +186,21 @@ func puppet_update(delta):
 	var speed = r_velocity.length()
 	var cur_speed = get_linear_velocity()
 	
-	var next_speed = 0.0
+	var interp = 1/20
+	
 	if speed == 10:
 		next_speed = 10
 	if speed < prev_speed:
-		next_speed = prev_speed - speed
+		next_speed += ((prev_speed - speed)-next_speed) * interp
+#		next_speed = (prev_speed - speed)
 	if speed > prev_speed:
 		if speed+prev_speed<10:
-			next_speed = speed+prev_speed
+			next_speed += ((prev_speed - speed)-next_speed)* interp
+#			next_speed = speed+prev_speed
 		else:
-			next_speed = speed+prev_speed
+			next_speed = 10
 	
-	set_linear_velocity(cur_speed.move_toward(next_speed*dir,ACCELERATION*delta))
+	set_linear_velocity(cur_speed.move_toward(next_speed*dir,100*delta))
 	
 #	if time > 0: 
 #		puppet_speed = dist / time
