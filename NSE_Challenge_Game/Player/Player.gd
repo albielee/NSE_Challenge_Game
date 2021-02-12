@@ -142,7 +142,7 @@ func get_controls(cam):
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	input_vector = input_vector.normalized()
 	
-	var _pushpull = Input.get_action_strength("push")-Input.get_action_strength("pull")
+	var _pushpull = Input.get_action_strength("push") - Input.get_action_strength("pull")
 	
 	var _summon = Input.get_action_strength("summon_rock")
 	
@@ -183,7 +183,7 @@ func puppet_update(delta):
 		#inter fucking polate this shit
 		var cur_speed = get_linear_velocity()
 		var goal_speed = puppet_speed*dir
-		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/0.5))
+		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/time))
 	
 	#actually also interpolate this shit
 	puppet_rotation(r_rotation,delta)
