@@ -189,19 +189,19 @@ func puppet_update(delta):
 	var speed = r_velocity.length()
 	var cur_speed = get_linear_velocity()
 	
-	var interp = 1/20
+	var interp = 1
 	
 	if speed == 10:
 		next_speed = 10
 	if speed < prev_speed:
-		next_speed += ((prev_speed - speed)-next_speed) * interp
-#		next_speed = (prev_speed - speed)
+		next_speed += ((prev_speed - speed)-next_speed) * interp/20
 	if speed > prev_speed:
 		if speed+prev_speed<10:
-			next_speed += ((prev_speed - speed)-next_speed)* interp
-#			next_speed = speed+prev_speed
+			next_speed = prev_speed + speed
 		else:
 			next_speed = 10
+	
+#	transform.origin = puppet_next_position
 	
 	set_linear_velocity(cur_speed.move_toward(next_speed*dir,100*delta))
 	
@@ -232,13 +232,13 @@ func build_buffer(newstats, average):
 	buffer.push_back([newstats,average])
 
 func average_packet_time(newpacket_elapsed):
-	packets.append(newpacket_elapsed)
+	packets.push_back(newpacket_elapsed)
 	if len(packets) > 50:
-		packets.remove(0)
+		packets.pop_front()
 	var total = 0.0
 	for time in packets:
 		total += time
-	return total/len(packets)
+	return total/(len(packets)+len(buffer))
 
 func handle_animations(animation):
 	if (animation!=prevanim):
