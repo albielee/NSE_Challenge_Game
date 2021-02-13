@@ -64,7 +64,7 @@ var blend_y = 0
 var push_cooldown = 0
 var push_mouse_position = mouse_position
 
-var summon_size = 0.5
+var summon_size = 2.5
 var rock_summoned = false
 
 var dash_angle = current_angle
@@ -204,14 +204,6 @@ func puppet_update(delta):
 			next_speed = 10
 	
 	set_linear_velocity(cur_speed.move_toward(next_speed*dir,100*delta))
-	
-#	if time > 0: 
-#		puppet_speed = dist / time
-#
-#		#inter fucking polate this shit
-#		var cur_speed = get_linear_velocity()
-#		var goal_speed = speed*dir
-#		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/avg))
 	
 	#actually also interpolate this shit
 	puppet_rotation(r_rotation,delta)
@@ -447,7 +439,7 @@ func summoning_state(delta):
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
 		network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
 		
-		summon_size=0.5
+		summon_size=2.5
 		anim = "idle"
 		state = MOVE
 
