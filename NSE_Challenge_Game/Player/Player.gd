@@ -189,12 +189,12 @@ func puppet_update(delta):
 	var speed = r_velocity.length()
 	var cur_speed = get_linear_velocity()
 	
-	var interp = 1
+	var interp = 1/1.5
 	
 	if speed == 10:
 		next_speed = 10
 	if speed < prev_speed:
-		next_speed += ((prev_speed - speed)-next_speed) * interp/20
+		next_speed += ((prev_speed - speed)-next_speed) * interp
 	if speed > prev_speed:
 		if speed+prev_speed<10:
 			next_speed = prev_speed + speed
@@ -209,8 +209,8 @@ func puppet_update(delta):
 	puppet_rotation(r_rotation,delta)
 	
 	anim = r_animation
-	
-	time -= delta
+	if time > 0:
+		time -= delta
 
 func puppet_rotation(target,delta):
 	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
@@ -218,6 +218,7 @@ func puppet_rotation(target,delta):
 	set_angular_velocity(angular_veloc*TURN_SPEED*delta)
 
 func _on_NetworkHandler_packet_received():
+	print(time)
 	#how long since the last packet?
 	elapsed_time = current_time - last_packet_time
 	
