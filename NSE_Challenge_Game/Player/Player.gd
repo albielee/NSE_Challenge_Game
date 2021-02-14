@@ -63,8 +63,9 @@ var blend_y = 0
 
 var push_cooldown = 0
 var push_mouse_position = mouse_position
+var started_pushing = false
 
-var summon_size = 2.5
+var summon_size = 0.5
 var rock_summoned = false
 
 var dash_angle = current_angle
@@ -276,8 +277,6 @@ func update(delta):
 			move_state(delta, mouse_angle)
 		DASH:
 			dash_state(delta)
-		SUMMON:
-			summon_state()
 		SUMMONING:
 			summoning_state(delta)
 		PUSH:
@@ -333,7 +332,7 @@ func move_state(delta, mouse_angle):
 			#set_angular_velocity(Vector3.ZERO)
 			state = SUMMONING;
 			rock_summoned = true
-		elif(state != SUMMONING):
+		elif(state != SUMMONING and !summon):
 			rock_summoned = false
 			if(grab==1):
 				state = GRAB
@@ -350,9 +349,16 @@ func move():
 		set_linear_velocity(move_velocity)
 
 func dash_state(delta):
+	if(anim != "dash"):
+		var dash_time = 0.1
+		$ActionTimer.start(dash_time)
 	anim="dash"
 	move_velocity = move_velocity.move_toward(dash_angle*MAX_SPEED*DASH_INC,ACCELERATION*DASH_INC*delta)
 	move()
+	print($ActionTimer.time_left)
+	if($ActionTimer.time_left < 0.02):
+		dash_finished()
+	
 
 func dash_finished():
 	if(network_handler.is_current_player()):
@@ -424,10 +430,6 @@ func _on_GrabBox_lost_rock():
 	grabbox.transform.origin.z=-1.8
 	grabbox.shape.shape.set_height(0.5)
 
-func summon_state():
-	move_velocity = Vector3.ZERO
-	anim = "summon_start"
-
 func summoning_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, delta)
 	
@@ -440,13 +442,9 @@ func summoning_state(delta):
 		var y_rot = -get_transform().basis.get_euler().y
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
 		network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
-		
-		summon_size=2.5
-		anim = "idle"
-		state = MOVE
 
-func summon_complete():
-	move_velocity = Vector3.ZERO
+		summon_size=0.5
+		state = MOVE
 
 func summon_power_up():
 	if(network_handler.is_current_player()):
@@ -457,17 +455,25 @@ func summon_power_up():
 func push_state(delta):
 	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
 	move_velocity = Vector3.ZERO
-	if pushpull == 1 and anim != "push_over":
+	if pushpull == 1:
 		#update pushbox shape
 		if(pushbox.shape.shape.get_height()<40*SCALE):
 			pushbox.shape.shape.set_height(pushbox.shape.shape.get_height()+5)
 			pushbox.transform.origin.z-=2.5*SCALE
 		else:
 			pushbox.do_push()
-		anim = "push_charge"
+		if(!started_pushing):
+			anim = "push_charge"
+			started_pushing = true
 	else: 
-		pushbox.do_push()
-		anim = "push_over"
+		started_pushing = false
+		push_complete()
+		#pushbox.do_push()
+		#anim = "idle"
+		#state = MOVE
+
+func push_hold():
+	anim = "push_hold"
 
 func push_complete():
 	if(network_handler.is_current_player()):
