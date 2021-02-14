@@ -64,7 +64,7 @@ onready var grabbox = $GrabBox
 
 onready var network_handler = $NetworkHandler
 onready var animationtree = $AnimationTree
-onready var animationplayer = $player_animation/AnimationPlayer
+onready var animationplayer = $player_animations/AnimationPlayer
 onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = Vector3.ZERO
 
@@ -83,6 +83,8 @@ func _ready():
 	grabbox.scale=Vector3(SCALE,SCALE,SCALE)
 	grabbox.transform.origin.z=(-1.8*SCALE)
 	grabbox.shape.shape.set_height(0.5*SCALE)
+	
+	animationplayer.set_speed_scale(3)
 
 func _physics_process(delta):
 	#check if dead using networkhandler death
