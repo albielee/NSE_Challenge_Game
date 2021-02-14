@@ -185,6 +185,18 @@ func puppet_update(delta):
 		
 		puppet_next_position = r_position + (r_velocity * time)
 	
+	#If other player is running about, do same blend point code as player athough with velocity not movement now
+	if(r_animation == "movement"):
+		var vel_norm = r_velocity.normalized()
+		var	angle_to_movement = - abs(get_transform().basis.get_euler().y+(2*PI) - atan2(-vel_norm.z, vel_norm.x))
+		var blend_to_x = cos(angle_to_movement)
+		var blend_to_y = sin(angle_to_movement)
+		#Now interpolate the blend points so the transition is gradual
+		var inter_spd = 0.1
+		blend_x = lerp(blend_x, blend_to_x, inter_spd)
+		blend_y = lerp(blend_y, blend_to_y, inter_spd)
+		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
+	
 	var p = get_transform().origin
 	var dir = (puppet_next_position-p).normalized()
 	var dist = p.distance_to(puppet_next_position)
