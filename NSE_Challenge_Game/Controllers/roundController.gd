@@ -13,7 +13,7 @@ func _process(delta):
 	if (first_run):
 		first_run = false
 		create_scores()
-		initialise_scoreboard()
+#		initialise_scoreboard()
 	#If the host:
 	if(get_tree().is_network_server()):
 		
@@ -76,7 +76,7 @@ remote func update_score(player):
 	else:
 		scores[player]+=1
 		print(scores)
-	update_scoreboard()
+#	update_scoreboard()
 
 func _input(event):
 	if event.is_action_pressed("scoreboard"):
