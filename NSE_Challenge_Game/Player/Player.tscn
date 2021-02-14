@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
@@ -14125,6 +14125,9 @@ length = 0.3
 [sub_resource type="AnimationNodeAnimation" id=29]
 animation = "dash"
 
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "fall"
+
 [sub_resource type="AnimationNodeAnimation" id=30]
 animation = "grabbing"
 
@@ -14208,13 +14211,17 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=61]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+
 [sub_resource type="AnimationNodeStateMachine" id=56]
 states/dash/node = SubResource( 29 )
 states/dash/position = Vector2( 612, 167.016 )
+states/fall/node = SubResource( 62 )
+states/fall/position = Vector2( 390, 193.316 )
 states/grabbing/node = SubResource( 30 )
-states/grabbing/position = Vector2( 444, 177 )
+states/grabbing/position = Vector2( 179, 144 )
 states/grabmax/node = SubResource( 31 )
-states/grabmax/position = Vector2( 240, 80 )
+states/grabmax/position = Vector2( 157, 62 )
 states/idle/node = SubResource( 32 )
 states/idle/position = Vector2( 452, 73 )
 states/movement/node = SubResource( 37 )
@@ -14227,9 +14234,9 @@ states/summon_generic/node = SubResource( 40 )
 states/summon_generic/position = Vector2( 338, -74.984 )
 states/summon_start/node = SubResource( 41 )
 states/summon_start/position = Vector2( 148, -18.984 )
-transitions = [ "push_hold", "idle", SubResource( 42 ), "idle", "grabbing", SubResource( 43 ), "grabbing", "idle", SubResource( 44 ), "grabbing", "grabmax", SubResource( 45 ), "grabmax", "idle", SubResource( 46 ), "idle", "push_charge", SubResource( 47 ), "idle", "summon_start", SubResource( 49 ), "summon_generic", "idle", SubResource( 50 ), "idle", "dash", SubResource( 51 ), "dash", "idle", SubResource( 52 ), "summon_start", "idle", SubResource( 53 ), "idle", "movement", SubResource( 54 ), "movement", "idle", SubResource( 55 ), "push_charge", "push_hold", SubResource( 60 ), "push_charge", "idle", SubResource( 61 ) ]
+transitions = [ "push_hold", "idle", SubResource( 42 ), "idle", "grabbing", SubResource( 43 ), "grabbing", "idle", SubResource( 44 ), "grabbing", "grabmax", SubResource( 45 ), "grabmax", "idle", SubResource( 46 ), "idle", "push_charge", SubResource( 47 ), "idle", "summon_start", SubResource( 49 ), "summon_generic", "idle", SubResource( 50 ), "idle", "dash", SubResource( 51 ), "dash", "idle", SubResource( 52 ), "summon_start", "idle", SubResource( 53 ), "idle", "movement", SubResource( 54 ), "movement", "idle", SubResource( 55 ), "push_charge", "push_hold", SubResource( 60 ), "push_charge", "idle", SubResource( 61 ), "idle", "fall", SubResource( 63 ) ]
 start_node = "idle"
-graph_offset = Vector2( 0, -83.984 )
+graph_offset = Vector2( 0, -1.68401 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=57]
 

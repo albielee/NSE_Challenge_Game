@@ -287,6 +287,8 @@ func update(delta):
 			grab_state(delta)
 		GRABBED:
 			grabbed_state(delta)
+		FALL:
+			fall_state(delta)
 
 func set_last_attacker():
 	var bodies = get_colliding_bodies()
@@ -365,6 +367,12 @@ func dash_finished():
 		anim="idle"
 		state=MOVE
 		can_dash=DASH_COOLDOWN
+
+func set_fall_state():
+	state = FALL
+
+func fall_state(delta):
+	anim = "fall"
 
 func grab_state(delta):
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
