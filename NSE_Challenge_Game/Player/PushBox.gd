@@ -44,7 +44,6 @@ func update(mouse_position, player_to_rock):
 		
 		rock.angular_velocity((Vector3.UP * rotation_angle)*5)
 		rock_position = rock.global_transform.origin
-#		rock.add_force(rock_push_vector)
 		
 		if player_position.y+0.2-rock_position.y > 0:
 			rock.add_force(Vector3.UP*rock.gravity)
@@ -79,6 +78,9 @@ func do_push():
 		for i in rocks:
 			var dist = i.global_transform.origin.distance_to(player_position)
 			rockdic[dist] = i
+			print()
+			print(i.get_parent().owned_by)
+			print(get_tree().get_network_unique_id())
 			if dist < mini and not i.flying: mini = dist
 		if (rock==null and mini < 50):
 			rock=rockdic[mini]

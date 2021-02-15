@@ -53,7 +53,7 @@ func pull_center(grab_force):
 func _on_GrabBox_area_entered(area):
 	if (rock==null):
 		rock=area
-		rock.in_zone(2) #This was giving me an error about invalid argument randomly so I put a 2 in it
+		rock.in_zone(get_parent().playerid) #This was giving me an error about invalid argument randomly so I put a 2 in it
 
 func is_center(rockloc, meloc):
 	if meloc.distance_to(rockloc) < 1:

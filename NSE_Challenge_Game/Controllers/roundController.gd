@@ -42,15 +42,13 @@ func detect_players_left():
 func get_last_player():
 	pass
 
-	
 func play_countdown():
 	get_tree().paused = true
 	for i in range(3,0,-1):
-		get_node("Number"+str(i)).visible = true
+#		get_node("Number"+str(i)).visible = true
 		yield(get_tree().create_timer(1.0), "timeout")
-		get_node("Number"+str(i)).visible = false
+#		get_node("Number"+str(i)).visible = false
 	get_tree().paused = false
-		
 
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions

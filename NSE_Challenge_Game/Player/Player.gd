@@ -171,6 +171,9 @@ func get_controls(cam):
 
 func puppet_update(delta):
 #	time = 0
+	var p = get_transform().origin
+	var dir = (puppet_next_position-p).normalized()
+	var dist = p.distance_to(puppet_next_position)
 	
 	if len(buffer) > 0 and time <= 0:
 		prev_speed = r_velocity.length()
@@ -184,6 +187,22 @@ func puppet_update(delta):
 		r_velocity = r_stats[3]
 		
 		puppet_next_position = r_position + (r_velocity * time)
+		
+		
+		
+		var interp = 1/1.5
+		var speed = r_velocity.length()
+		if speed == 10:
+			next_speed = 10
+		if speed < prev_speed:
+			if dist > 0.05:
+				next_speed = 5*dist + next_speed + (((prev_speed - speed)-next_speed) * interp)
+			else: next_speed += ((prev_speed - speed)-next_speed) * interp
+		if speed > prev_speed:
+			if speed+prev_speed<10:
+				next_speed = prev_speed + speed
+			else:
+				next_speed = 10
 	
 	#If other player is running about, do same blend point code as player athough with velocity not movement now
 	if(r_animation == "movement"):
@@ -197,27 +216,12 @@ func puppet_update(delta):
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
 		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
 	
-	var p = get_transform().origin
-	var dir = (puppet_next_position-p).normalized()
-	var dist = p.distance_to(puppet_next_position)
-	var speed = r_velocity.length()
-	var cur_speed = get_linear_velocity()
-	
-	var interp = 1/1.5
-	
-	if speed == 10:
-		next_speed = 10
-	if speed < prev_speed:
-		next_speed += ((prev_speed - speed)-next_speed) * interp
-	if speed > prev_speed:
-		if speed+prev_speed<10:
-			next_speed = prev_speed + speed
-		else:
-			next_speed = 10
-	
 #	transform.origin = puppet_next_position
+	print(dist)
 	
-	set_linear_velocity(cur_speed.move_toward(next_speed*dir,100*delta))
+	if dist >= 1:
+		set_linear_velocity(next_speed*dir*dist)
+	else: set_linear_velocity(next_speed*dir)
 	
 	#actually also interpolate this shit
 	puppet_rotation(r_rotation,delta)
@@ -232,7 +236,7 @@ func puppet_rotation(target,delta):
 	set_angular_velocity(angular_veloc*TURN_SPEED*delta)
 
 func _on_NetworkHandler_packet_received():
-	print(time)
+#	print(len(buffer))
 	#how long since the last packet?
 	elapsed_time = current_time - last_packet_time
 	
@@ -369,7 +373,6 @@ func dash_state(delta):
 	anim="dash"
 	move_velocity = move_velocity.move_toward(dash_angle*MAX_SPEED*DASH_INC,ACCELERATION*DASH_INC*delta)
 	move()
-	print($ActionTimer.time_left)
 	if($ActionTimer.time_left < 0.02):
 		dash_finished()
 	
@@ -477,6 +480,7 @@ func push_state(delta):
 	move_velocity = Vector3.ZERO
 	if pushpull == 1:
 		#update pushbox shape
+		pushbox.shape.disabled = false
 		if(pushbox.shape.shape.get_height()<40*SCALE):
 			pushbox.shape.shape.set_height(pushbox.shape.shape.get_height()+5)
 			pushbox.transform.origin.z-=2.5*SCALE
@@ -499,6 +503,7 @@ func push_complete():
 	if(network_handler.is_current_player()):
 		pushbox.shape.shape.set_height(1)
 		pushbox.transform.origin.z=-1.0*SCALE
+		pushbox.shape.disabled = true
 		state = MOVE
 		anim = "idle"
 		push_cooldown=1

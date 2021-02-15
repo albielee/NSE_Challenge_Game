@@ -14125,65 +14125,65 @@ length = 0.3
 [sub_resource type="AnimationNodeAnimation" id=29]
 animation = "dash"
 
-[sub_resource type="AnimationNodeAnimation" id=62]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "fall"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "grabbing"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "grabmax"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "run_forward-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "run_right-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "run_backward-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "run_l-loop"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=37]
-blend_point_0/node = SubResource( 33 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=38]
+blend_point_0/node = SubResource( 34 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 34 )
+blend_point_1/node = SubResource( 35 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 35 )
+blend_point_2/node = SubResource( 36 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 36 )
+blend_point_3/node = SubResource( 37 )
 blend_point_3/pos = Vector2( -1, 0 )
 
-[sub_resource type="AnimationNodeAnimation" id=38]
+[sub_resource type="AnimationNodeAnimation" id=39]
 animation = "push_charge"
 
-[sub_resource type="AnimationNodeAnimation" id=39]
+[sub_resource type="AnimationNodeAnimation" id=40]
 animation = "push_hold"
 
-[sub_resource type="AnimationNodeAnimation" id=40]
+[sub_resource type="AnimationNodeAnimation" id=41]
 animation = "summon_generic"
 
-[sub_resource type="AnimationNodeAnimation" id=41]
+[sub_resource type="AnimationNodeAnimation" id=42]
 animation = "summon_start"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=49]
 
@@ -14205,42 +14205,42 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=55]
 switch_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
 
-[sub_resource type="AnimationNodeStateMachine" id=56]
+[sub_resource type="AnimationNodeStateMachine" id=59]
 states/dash/node = SubResource( 29 )
 states/dash/position = Vector2( 612, 167.016 )
-states/fall/node = SubResource( 62 )
+states/fall/node = SubResource( 30 )
 states/fall/position = Vector2( 390, 193.316 )
-states/grabbing/node = SubResource( 30 )
+states/grabbing/node = SubResource( 31 )
 states/grabbing/position = Vector2( 179, 144 )
-states/grabmax/node = SubResource( 31 )
+states/grabmax/node = SubResource( 32 )
 states/grabmax/position = Vector2( 157, 62 )
-states/idle/node = SubResource( 32 )
+states/idle/node = SubResource( 33 )
 states/idle/position = Vector2( 452, 73 )
-states/movement/node = SubResource( 37 )
+states/movement/node = SubResource( 38 )
 states/movement/position = Vector2( 802, 67.016 )
-states/push_charge/node = SubResource( 38 )
+states/push_charge/node = SubResource( 39 )
 states/push_charge/position = Vector2( 528, -68.984 )
-states/push_hold/node = SubResource( 39 )
+states/push_hold/node = SubResource( 40 )
 states/push_hold/position = Vector2( 700, -0.984001 )
-states/summon_generic/node = SubResource( 40 )
+states/summon_generic/node = SubResource( 41 )
 states/summon_generic/position = Vector2( 338, -74.984 )
-states/summon_start/node = SubResource( 41 )
+states/summon_start/node = SubResource( 42 )
 states/summon_start/position = Vector2( 148, -18.984 )
-transitions = [ "push_hold", "idle", SubResource( 42 ), "idle", "grabbing", SubResource( 43 ), "grabbing", "idle", SubResource( 44 ), "grabbing", "grabmax", SubResource( 45 ), "grabmax", "idle", SubResource( 46 ), "idle", "push_charge", SubResource( 47 ), "idle", "summon_start", SubResource( 49 ), "summon_generic", "idle", SubResource( 50 ), "idle", "dash", SubResource( 51 ), "dash", "idle", SubResource( 52 ), "summon_start", "idle", SubResource( 53 ), "idle", "movement", SubResource( 54 ), "movement", "idle", SubResource( 55 ), "push_charge", "push_hold", SubResource( 60 ), "push_charge", "idle", SubResource( 61 ), "idle", "fall", SubResource( 63 ) ]
+transitions = [ "push_hold", "idle", SubResource( 43 ), "idle", "grabbing", SubResource( 44 ), "grabbing", "idle", SubResource( 45 ), "grabbing", "grabmax", SubResource( 46 ), "grabmax", "idle", SubResource( 47 ), "idle", "push_charge", SubResource( 48 ), "idle", "summon_start", SubResource( 49 ), "summon_generic", "idle", SubResource( 50 ), "idle", "dash", SubResource( 51 ), "dash", "idle", SubResource( 52 ), "summon_start", "idle", SubResource( 53 ), "idle", "movement", SubResource( 54 ), "movement", "idle", SubResource( 55 ), "push_charge", "push_hold", SubResource( 56 ), "push_charge", "idle", SubResource( 57 ), "idle", "fall", SubResource( 58 ) ]
 start_node = "idle"
-graph_offset = Vector2( 0, -1.68401 )
+graph_offset = Vector2( 0, -122.5 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=57]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=60]
 
-[sub_resource type="ParticlesMaterial" id=58]
+[sub_resource type="ParticlesMaterial" id=61]
 lifetime_randomness = 1.0
 emission_shape = 2
 emission_box_extents = Vector3( 3, 3, 3 )
@@ -14252,7 +14252,7 @@ scale = 0.04
 scale_random = 0.05
 color = Color( 1, 1, 1, 0.0745098 )
 
-[sub_resource type="CubeMesh" id=59]
+[sub_resource type="CubeMesh" id=62]
 
 [node name="Player" type="RigidBody" groups=[
 "player",
@@ -14262,7 +14262,7 @@ collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 3 )
-SCALE = 0.6
+SCALE = 0.4
 FRICTION = 100
 MAX_SPEED = 10
 SPEED = 8000
@@ -14283,7 +14283,6 @@ PUSH_POWER = 1500
 
 [node name="CollisionShape" parent="PushBox" index="0"]
 shape = SubResource( 2 )
-disabled = true
 
 [node name="PullBox" parent="." instance=ExtResource( 2 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -15799,10 +15798,10 @@ anims/summon_charge = SubResource( 27 )
 anims/summon_generic = SubResource( 28 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 56 )
+tree_root = SubResource( 59 )
 anim_player = NodePath("../player_animations/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 57 )
+parameters/playback = SubResource( 60 )
 parameters/movement/blend_position = Vector2( 0, 0.00454545 )
 
 [node name="NetworkHandler" type="Spatial" parent="."]
@@ -15823,8 +15822,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 58 )
-draw_pass_1 = SubResource( 59 )
+process_material = SubResource( 61 )
+draw_pass_1 = SubResource( 62 )
 
 [node name="beam_1" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -1.82314 )
@@ -15833,8 +15832,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 58 )
-draw_pass_1 = SubResource( 59 )
+process_material = SubResource( 61 )
+draw_pass_1 = SubResource( 62 )
 
 [node name="beam_2" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -1.82314 )
@@ -15843,8 +15842,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 58 )
-draw_pass_1 = SubResource( 59 )
+process_material = SubResource( 61 )
+draw_pass_1 = SubResource( 62 )
 
 [node name="beam_3" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -1.82314 )
@@ -15853,8 +15852,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 58 )
-draw_pass_1 = SubResource( 59 )
+process_material = SubResource( 61 )
+draw_pass_1 = SubResource( 62 )
 
 [node name="beam_4" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -1.82314 )
@@ -15863,8 +15862,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 58 )
-draw_pass_1 = SubResource( 59 )
+process_material = SubResource( 61 )
+draw_pass_1 = SubResource( 62 )
 
 [node name="beam_5" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -1.82314 )
@@ -15873,8 +15872,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 58 )
-draw_pass_1 = SubResource( 59 )
+process_material = SubResource( 61 )
+draw_pass_1 = SubResource( 62 )
 
 [node name="animationblend" type="Control" parent="."]
 margin_right = 40.0
