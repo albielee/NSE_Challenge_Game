@@ -188,15 +188,13 @@ func puppet_update(delta):
 		
 		puppet_next_position = r_position + (r_velocity * time)
 		
-		
-		
 		var interp = 1/1.5
 		var speed = r_velocity.length()
 		if speed == 10:
 			next_speed = 10
 		if speed < prev_speed:
 			if dist > 0.05:
-				next_speed = 5*dist + next_speed + (((prev_speed - speed)-next_speed) * interp)
+				next_speed = dist + next_speed + (((prev_speed - speed)-next_speed) * interp)
 			else: next_speed += ((prev_speed - speed)-next_speed) * interp
 		if speed > prev_speed:
 			if speed+prev_speed<10:
