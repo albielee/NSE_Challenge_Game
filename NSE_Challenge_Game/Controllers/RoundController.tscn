@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Controllers/RoundController.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Numbers/number2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Numbers/number1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Numbers/number3.png" type="Texture" id=4]
 
 [node name="RoundController" type="Control"]
 margin_right = 40.0
@@ -9,3 +12,105 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Number1" type="Sprite" parent="."]
+visible = false
+position = Vector2( 512, 300 )
+texture = ExtResource( 3 )
+
+[node name="Number2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 512, 300 )
+texture = ExtResource( 2 )
+
+[node name="Number3" type="Sprite" parent="."]
+visible = false
+position = Vector2( 512, 300 )
+texture = ExtResource( 4 )
+
+[node name="Scoreboard" type="Panel" parent="."]
+visible = false
+margin_left = 334.042
+margin_top = 73.5894
+margin_right = 682.042
+margin_bottom = 390.589
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerScores" type="VBoxContainer" parent="Scoreboard"]
+margin_left = 230.0
+margin_top = 67.0
+margin_right = 318.0
+margin_bottom = 230.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1" type="Label" parent="Scoreboard/PlayerScores"]
+margin_right = 88.0
+margin_bottom = 14.0
+
+[node name="Player2" type="Label" parent="Scoreboard/PlayerScores"]
+margin_top = 18.0
+margin_right = 88.0
+margin_bottom = 32.0
+
+[node name="Player3" type="Label" parent="Scoreboard/PlayerScores"]
+margin_top = 36.0
+margin_right = 88.0
+margin_bottom = 50.0
+
+[node name="Player4" type="Label" parent="Scoreboard/PlayerScores"]
+margin_top = 54.0
+margin_right = 88.0
+margin_bottom = 68.0
+
+[node name="PlayerNames" type="VBoxContainer" parent="Scoreboard"]
+margin_left = 38.0
+margin_top = 70.0
+margin_right = 174.0
+margin_bottom = 241.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1" type="Label" parent="Scoreboard/PlayerNames"]
+margin_right = 136.0
+margin_bottom = 14.0
+
+[node name="Player2" type="Label" parent="Scoreboard/PlayerNames"]
+margin_top = 18.0
+margin_right = 136.0
+margin_bottom = 32.0
+
+[node name="Player3" type="Label" parent="Scoreboard/PlayerNames"]
+margin_top = 36.0
+margin_right = 136.0
+margin_bottom = 50.0
+
+[node name="Player4" type="Label" parent="Scoreboard/PlayerNames"]
+margin_top = 54.0
+margin_right = 136.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="Scoreboard"]
+margin_left = 139.0
+margin_top = 11.0
+margin_right = 181.0
+margin_bottom = 42.0
+text = "Scores
+"
+
+[node name="ResetButton" type="Button" parent="Scoreboard"]
+margin_left = 38.0
+margin_top = 237.0
+margin_right = 132.0
+margin_bottom = 282.0
+
+[node name="Label" type="Label" parent="Scoreboard/ResetButton"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Reset round
+(admin only)"
+[connection signal="pressed" from="Scoreboard/ResetButton" to="." method="_on_ResetButton_pressed"]

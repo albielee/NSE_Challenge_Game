@@ -13,7 +13,7 @@ func _process(delta):
 	if (first_run):
 		first_run = false
 		create_scores()
-#		initialise_scoreboard()
+		initialise_scoreboard()
 	#If the host:
 	if(get_tree().is_network_server()):
 		
@@ -42,13 +42,15 @@ func detect_players_left():
 func get_last_player():
 	pass
 
+	
 func play_countdown():
 	get_tree().paused = true
 	for i in range(3,0,-1):
-#		get_node("Number"+str(i)).visible = true
+		get_node("Number"+str(i)).visible = true
 		yield(get_tree().create_timer(1.0), "timeout")
-#		get_node("Number"+str(i)).visible = false
+		get_node("Number"+str(i)).visible = false
 	get_tree().paused = false
+		
 
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions
@@ -74,7 +76,7 @@ remote func update_score(player):
 	else:
 		scores[player]+=1
 		print(scores)
-#	update_scoreboard()
+	update_scoreboard()
 
 func _input(event):
 	if event.is_action_pressed("scoreboard"):
@@ -95,6 +97,8 @@ func update_scoreboard():
 	for player in scores.keys():
 		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
 		i+=1
+
+
 
 """
 OLD CODE BUT MAY BE USEFUL LATER
@@ -146,4 +150,7 @@ func _on_exit_game_pressed():
 """
 
 
-
+func _on_ResetButton_pressed():
+	if(get_tree().is_network_server()):
+		$Scoreboard.visible = false
+		restart_round()
