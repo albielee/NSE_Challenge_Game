@@ -470,7 +470,7 @@ func summoning_state(delta):
 		#anim = "summon_hold"
 		var summon_speed = 1
 		summon_size+=summon_speed*delta
-		network_handler.all_grow_rock(growing_rock, summon_size)
+		#network_handler.all_grow_rock(growing_rock, summon_size)
 		if (summon == 0.0) or (summon_size > 3.0):
 			summon_size=0.5
 			state = MOVE
