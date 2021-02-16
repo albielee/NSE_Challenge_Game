@@ -216,7 +216,7 @@ func puppet_update(delta):
 		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
 	
 #	transform.origin = puppet_next_position
-	print(dist)
+#	print(dist)
 	
 	if dist >= 1:
 		set_linear_velocity(next_speed*dir*dist)
