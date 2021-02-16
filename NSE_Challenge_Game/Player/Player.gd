@@ -67,6 +67,7 @@ var started_pushing = false
 
 var summon_size = 0.5
 var rock_summoned = false
+var growing_rock = null
 
 var dash_angle = current_angle
 var can_dash = 0.0
@@ -328,7 +329,7 @@ func move_state(delta, mouse_angle):
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
 		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
-	
+
 		$animationblend.point_pos = Vector2(blend_x, blend_y)
 	else:
 		anim = "idle"
@@ -347,7 +348,6 @@ func move_state(delta, mouse_angle):
 		if(summon and rock_summoned == false):
 			#set_angular_velocity(Vector3.ZERO)
 			state = SUMMONING;
-			rock_summoned = true
 		elif(state != SUMMONING and !summon):
 			rock_summoned = false
 			if(grab==1):
@@ -454,18 +454,27 @@ func _on_GrabBox_lost_rock():
 func summoning_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, delta)
 	
-	anim = "summon_start"
-	var summon_speed = 1
-	summon_size+=summon_speed*delta
-	if (summon == 0.0) or (summon_size > 3.0):
-		var rock_name = get_name()
+	var rock_name = get_name()
+	growing_rock = get_node("/root/World/RockNetworkHandler/"+String(rock_name))
+
+	if(!rock_summoned):
+		anim = "summon_start"
+		rock_summoned = true
 		var offset = summon_size
 		var y_rot = -get_transform().basis.get_euler().y
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-		network_handler.all_summon_rock(rock_name, rock_pos, summon_size)
-
-		summon_size=0.5
-		state = MOVE
+		var start_size = 0.5
+		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
+	elif(growing_rock != null):
+		print(growing_rock)
+		#anim = "summon_hold"
+		var summon_speed = 1
+		summon_size+=summon_speed*delta
+		network_handler.all_grow_rock(growing_rock, summon_size)
+		if (summon == 0.0) or (summon_size > 3.0):
+			summon_size=0.5
+			state = MOVE
+		print(summon)
 
 func summon_power_up():
 	if(network_handler.is_current_player()):
@@ -484,9 +493,12 @@ func push_state(delta):
 			pushbox.transform.origin.z-=2.5*SCALE
 		else:
 			pushbox.do_push()
+			
 		if(!started_pushing):
 			anim = "push_charge"
 			started_pushing = true
+		else:
+			anim = "push_hold"
 	else: 
 		started_pushing = false
 		push_complete()
