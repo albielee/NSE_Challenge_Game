@@ -127,7 +127,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
 [node name="FallAreas" type="Spatial" parent="."]
 
 [node name="FallArea" parent="FallAreas" instance=ExtResource( 6 )]
-transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1.98834, 0 )
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -2.1, 0 )
 
 [node name="FallArea2" parent="FallAreas" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 4, 0, 0, 0, 9, -9.41805, 2.7873, 0.395683 )

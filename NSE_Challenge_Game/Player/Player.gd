@@ -460,13 +460,12 @@ func summoning_state(delta):
 	if(!rock_summoned):
 		anim = "summon_start"
 		rock_summoned = true
-		var offset = summon_size
+		var offset = 2.0
 		var y_rot = -get_transform().basis.get_euler().y
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-		var start_size = 0.5
+		var start_size = 2.0
 		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
 	elif(growing_rock != null):
-		print(growing_rock)
 		#anim = "summon_hold"
 		var summon_speed = 1
 		summon_size+=summon_speed*delta
@@ -474,7 +473,7 @@ func summoning_state(delta):
 		if (summon == 0.0) or (summon_size > 3.0):
 			summon_size=0.5
 			state = MOVE
-		print(summon)
+#		print(summon)
 
 func summon_power_up():
 	if(network_handler.is_current_player()):

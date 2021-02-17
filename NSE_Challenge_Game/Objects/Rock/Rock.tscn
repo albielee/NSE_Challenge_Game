@@ -14,7 +14,7 @@
 "rock",
 ]]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 2147483686
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )
@@ -36,6 +36,15 @@ script = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
 shape = SubResource( 3 )
+
+[node name="KinematicBody" type="KinematicBody" parent="." groups=[
+"ghost",
+]]
+collision_layer = 16
+
+[node name="CollisionShape2" type="CollisionShape" parent="KinematicBody"]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
+shape = SubResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_Rock_body_entered"]
 [connection signal="nozone" from="Hitbox" to="." method="_on_Hitbox_nozone"]
 [connection signal="pushed" from="Hitbox" to="." method="_on_Hitbox_pushed"]
