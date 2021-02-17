@@ -120,3 +120,5 @@ func _on_Start_pressed():
 	roundSettings.append($Players/MapSelector/Label.text)
 	
 	gamestate.begin_game(roundSettings)
+
+
