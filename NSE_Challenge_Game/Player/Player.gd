@@ -113,7 +113,6 @@ func _ready():
 	set_linear_damp(10)
 	set_mass(MASS)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
-	$MeshInstance.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	
 	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
 	pushbox.transform.origin.z=(-1.0*SCALE)

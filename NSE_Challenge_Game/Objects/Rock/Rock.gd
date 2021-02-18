@@ -100,7 +100,7 @@ sync func reset():
 
 func _on_Hitbox_pushed():
 	add_force(hitbox.knockback, Vector3.ZERO)
-	
+
 func _on_Hitbox_spun():
 	set_angular_velocity(hitbox.angular)
 
