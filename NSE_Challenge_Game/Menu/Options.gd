@@ -17,6 +17,7 @@ var default_controls = {
 	"move_dash":KEY_SPACE,
 	"summon_rock":KEY_E}
 	
+var data = default_controls
 var input_mode = false
 
 var current_button = ""
@@ -28,35 +29,22 @@ func controls_file_exists():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var data = {}
 	if controls_file_exists():
 		var file = File.new()
 		file.open("user://controls.json",File.READ)
-		data.parse_json(file.get_line())
-	else:
-		data = default_controls
-	for key in data.keys():
-		InputMap.action_erase_events(key)
-		var event
-		if str(data[key])=="m"+str(BUTTON_LEFT) or str(data[key])=="m"+str(BUTTON_RIGHT):
-			event = InputEventMouseButton.new()
-			event.button_index = int(data[key].substr(1,1))
-			get_node("Buttons/Button"+str(button_map.find(key)+1)+"/Label").text = str(event.button_index)
-		else:
-			event = InputEventKey.new()
-			event.scancode = data[key]
-			print(str(button_map.find(key)+1))
-			get_node("Buttons/Button"+str(button_map.find(key)+1)+"/Label").text = event.as_text()
-		InputMap.action_add_event(key,event)
-	pass # Replace with function body.
+		data = parse_json(file.get_line())
+	set_all_controls(data)
 
 func _input(event):
 	if input_mode:
 		if event is InputEventKey:
-			pass
+			data[current_button] = event.scancode
+			update_button(current_button,event.as_text())
+			input_mode=false
 		elif event is InputEventMouseButton:
-			
-			update_control(1)
+			data[current_button] = "m"+str(event.button_index)
+			update_button(current_button,"m"+str(event.button_index))
+			input_mode=false
 		else:
 			pass
 
@@ -64,9 +52,32 @@ func _input(event):
 #func _process(delta):
 #	pass
 
-func update_control(event):
-	pass
+func set_all_controls(dict):
+	for key in dict.keys():
+		InputMap.action_erase_events(key)
+		var event
+		if str(dict[key])=="m"+str(BUTTON_LEFT) or str(dict[key])=="m"+str(BUTTON_RIGHT):
+			event = InputEventMouseButton.new()
+			event.button_index = int(dict[key].substr(1,1))
+			update_button(key,str(event.button_index))
+		else:
+			event = InputEventKey.new()
+			event.scancode = dict[key]
+			print(str(button_map.find(key)+1))
+			update_button(key,event.as_text())
+		InputMap.action_add_event(key,event)
 
 func _on_Button_pressed(button_idx):
 	input_mode = true
 	current_button = button_map[button_idx]
+
+func update_button(pos,text):
+	get_node("Buttons/Button"+str(button_map.find(pos)+1)+"/Label").text = str(text)
+
+
+func _on_BackButton_pressed():
+	var file = File.new()
+	file.open("user://controls.json",File.WRITE)
+	file.store_line(to_json(data))
+	file.close()
+	set_all_controls(data)

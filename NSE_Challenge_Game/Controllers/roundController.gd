@@ -150,6 +150,8 @@ func _on_exit_game_pressed():
 """
 
 
+
+
 func _on_ResetButton_pressed():
 	if(get_tree().is_network_server()):
 		$Scoreboard.visible = false

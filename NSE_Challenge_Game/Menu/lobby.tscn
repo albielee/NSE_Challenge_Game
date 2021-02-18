@@ -545,6 +545,7 @@ text = "Options"
 [connection signal="pressed" from="Menu/Host/Hosting/StartServerButton" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Menu/Host/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Menu/Options/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Menu/Options/BackButton" to="Menu/Options" method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Menu/Options/Buttons/Button1" to="Menu/Options" method="_on_Button_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="Menu/Options/Buttons/Button2" to="Menu/Options" method="_on_Button_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="Menu/Options/Buttons/Button3" to="Menu/Options" method="_on_Button_pressed" binds= [ 2 ]]
