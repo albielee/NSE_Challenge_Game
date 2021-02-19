@@ -23,6 +23,7 @@ onready var hitbox = $Hitbox
 var last_mover=""
 
 func _ready():
+	set_gravity_scale(5)
 	set_linear_damp(5)
 	add_to_group("rocks")
 	r_stats = [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
@@ -81,10 +82,12 @@ func update(delta):
 	hitbox.speed=speed
 	if(in_zone):
 		hitbox.flying = true
+		set_gravity_scale(1)
 		set_linear_damp(0.5)
 	else:
 		if (speed < 1):
 			hitbox.flying = false
+			set_gravity_scale(5)
 			set_linear_damp(5)
 		else: hitbox.flying = true
 
@@ -110,9 +113,6 @@ func _on_Hitbox_nozone():
 func _on_Hitbox_zone():
 	owned_by=hitbox.owned_by
 	in_zone = true
-	owner_switch()
 
 func _on_Rock_body_entered(body):
-	if body.is_in_group("player"):
-		owned_by = body.playerid
-		owner_switch()
+	pass

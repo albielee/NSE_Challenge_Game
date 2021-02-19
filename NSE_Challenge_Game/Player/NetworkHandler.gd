@@ -75,5 +75,3 @@ func reset():
 	#bring player back to life
 	remote_dead = false
 	#bring player back to spawn position
-	get_parent().transform.origin = spawn_position
-	get_parent().state=0

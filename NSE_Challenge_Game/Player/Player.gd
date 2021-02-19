@@ -43,7 +43,8 @@ enum {
 	GRAB,
 	GRABBED,
 	FALL,
-	DEATH
+	DEATH,
+	PAUSE
 }
 var state = MOVE
 
@@ -303,6 +304,8 @@ func update(delta):
 			grabbed_state(delta)
 		FALL:
 			fall_state(delta)
+		PAUSE:
+			pause_state(delta)
 
 func set_last_attacker():
 	var bodies = get_colliding_bodies()
@@ -328,7 +331,7 @@ func move_state(delta, mouse_angle):
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
 		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
-
+		
 		$animationblend.point_pos = Vector2(blend_x, blend_y)
 	else:
 		anim = "idle"
@@ -358,6 +361,9 @@ func move_state(delta, mouse_angle):
 				elif(pushpull==0):
 					push_cooldown=0
 	move()
+
+func pause_state(delta):
+	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 
 func move():
 	if (move_velocity!=Vector3.ZERO):
@@ -543,8 +549,20 @@ func _on_SendData_timeout():
 	network_handler.timeout(get_transform().basis.get_euler().y, get_transform().origin, anim, linear_velocity)
 
 sync func reset():
-	last_attacker=""
+	last_attacker = ""
+	state = MOVE
+	set_linear_velocity(Vector3.ZERO)
+	set_angular_velocity(Vector3.ZERO)
+	transform.origin = spawn_position
+	anim = "idle"
+	animationstate.travel(anim)
 	network_handler.reset()
+
+func set_paused(yes):
+	if yes:
+		state = PAUSE
+	else:
+		state = MOVE
 
 func _on_Player_body_entered(body):
 	touched = true

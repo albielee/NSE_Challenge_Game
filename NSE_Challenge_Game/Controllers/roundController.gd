@@ -42,15 +42,17 @@ func detect_players_left():
 func get_last_player():
 	pass
 
-	
 func play_countdown():
-	get_tree().paused = true
+	pause_players(true)
 	for i in range(3,0,-1):
 		get_node("Number"+str(i)).visible = true
 		yield(get_tree().create_timer(1.0), "timeout")
 		get_node("Number"+str(i)).visible = false
-	get_tree().paused = false
-		
+	pause_players(false)
+
+func pause_players(yes):
+	for o in get_tree().get_nodes_in_group("player"):
+		o.set_paused(yes)
 
 func restart_round():
 	#Because we dont want to restart the scene, we need to call all reset functions
@@ -61,9 +63,9 @@ func restart_round():
 	
 	for o in get_tree().get_nodes_in_group("resettable"):
 		o.rpc("reset")
-		o.reset()
+#		o.reset()
 	play_countdown()
-		
+
 func _on_Void_player_fell(dead_player,killing_player):
 	if(get_tree().is_network_server()):
 		update_score(killing_player)
@@ -83,7 +85,6 @@ func _input(event):
 		$Scoreboard.visible = true
 	elif event.is_action_released("scoreboard"):
 		$Scoreboard.visible = false
-		
 
 func initialise_scoreboard():
 	var i = 1
@@ -91,7 +92,7 @@ func initialise_scoreboard():
 		get_node("Scoreboard/PlayerNames/Player"+str(i)).text = player
 		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
 		i+=1
-		
+
 func update_scoreboard():
 	var i = 1
 	for player in scores.keys():

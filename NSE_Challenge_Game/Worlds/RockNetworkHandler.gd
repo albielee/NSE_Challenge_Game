@@ -47,10 +47,6 @@ func create_rock(rock):
 	r_rockdic[rock.id] = rock.get_stats()
 	add_child(rock)
 
-func switch_owner(rock):
-	#force all players to recognize the new owner of the rock.
-	rpc("owner_change", rock.id, rock.owned_by)
-
 remote func owner_change(id, player):
 	for rock in get_children():
 		if rock.is_in_group("rocks"):
