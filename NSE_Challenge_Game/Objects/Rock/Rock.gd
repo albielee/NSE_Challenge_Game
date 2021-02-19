@@ -15,6 +15,7 @@ var in_zone = false
 var speed = 0
 var id
 var owned_by = ""
+var time = 0
 
 var buffer = []
 
@@ -38,10 +39,9 @@ func set_id(num):
 	id = num
 
 func puppet_update(delta):
-	var time = 0
-	if len(buffer) > 0:
+	if len(buffer) > 0 and time <= 0:
 		var statstime = buffer.pop_front()
-		time = statstime[1]
+		time += statstime[1]/len(buffer)
 		r_stats = statstime[0]
 		r_position = r_stats[0]
 		r_rotation = r_stats[1]
@@ -62,6 +62,8 @@ func puppet_update(delta):
 		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/time))
 	
 	puppet_rotation(r_rotation,delta)
+	
+	if time > 0: time -= delta
 
 func puppet_rotation(target, delta):
 	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
