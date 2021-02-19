@@ -17,7 +17,7 @@ func _physics_process(delta):
 	old_rot = get_global_transform().basis.get_euler().y
 
 	var ang_to = pos.angle_to(rock_pos) + 2*PI
-	print(ang_to)
+#	print(ang_to)
 	var spacing = (rock_pos - pos)/particles_count
 	var sine_input = deg2rad(180.0)/dist_to_rock
 

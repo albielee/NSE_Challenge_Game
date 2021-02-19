@@ -43,7 +43,8 @@ enum {
 	GRAB,
 	GRABBED,
 	FALL,
-	DEATH
+	DEATH,
+	PAUSE
 }
 var state = MOVE
 
@@ -113,7 +114,6 @@ func _ready():
 	set_linear_damp(10)
 	set_mass(MASS)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
-	$MeshInstance.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	
 	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
 	pushbox.transform.origin.z=(-1.0*SCALE)
@@ -304,6 +304,8 @@ func update(delta):
 			grabbed_state(delta)
 		FALL:
 			fall_state(delta)
+		PAUSE:
+			pause_state(delta)
 
 func set_last_attacker():
 	var bodies = get_colliding_bodies()
@@ -329,7 +331,7 @@ func move_state(delta, mouse_angle):
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
 		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
-
+		
 		$animationblend.point_pos = Vector2(blend_x, blend_y)
 	else:
 		anim = "idle"
@@ -359,6 +361,9 @@ func move_state(delta, mouse_angle):
 				elif(pushpull==0):
 					push_cooldown=0
 	move()
+
+func pause_state(delta):
+	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 
 func move():
 	if (move_velocity!=Vector3.ZERO):
@@ -452,7 +457,7 @@ func _on_GrabBox_lost_rock():
 	grabbox.shape.shape.set_height(0.5)
 
 func summoning_state(delta):
-	move_velocity = move_velocity.move_toward(Vector3.ZERO, delta)
+	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
 	var rock_name = get_name()
 	growing_rock = get_node("/root/World/RockNetworkHandler/"+String(rock_name))
@@ -460,13 +465,12 @@ func summoning_state(delta):
 	if(!rock_summoned):
 		anim = "summon_start"
 		rock_summoned = true
-		var offset = summon_size
+		var offset = 2.0
 		var y_rot = -get_transform().basis.get_euler().y
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-		var start_size = 0.5
+		var start_size = 2.0
 		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
 	elif(growing_rock != null):
-		print(growing_rock)
 		#anim = "summon_hold"
 		var summon_speed = 1
 		summon_size+=summon_speed*delta
@@ -474,7 +478,7 @@ func summoning_state(delta):
 		if (summon == 0.0) or (summon_size > 3.0):
 			summon_size=0.5
 			state = MOVE
-		print(summon)
+#		print(summon)
 
 func summon_power_up():
 	if(network_handler.is_current_player()):
@@ -545,8 +549,20 @@ func _on_SendData_timeout():
 	network_handler.timeout(get_transform().basis.get_euler().y, get_transform().origin, anim, linear_velocity)
 
 sync func reset():
-	last_attacker=""
+	last_attacker = ""
+	state = MOVE
+	set_linear_velocity(Vector3.ZERO)
+	set_angular_velocity(Vector3.ZERO)
+	transform.origin = spawn_position
+	anim = "idle"
+	animationstate.travel(anim)
 	network_handler.reset()
+
+func set_paused(yes):
+	if yes:
+		state = PAUSE
+	else:
+		state = MOVE
 
 func _on_Player_body_entered(body):
 	touched = true

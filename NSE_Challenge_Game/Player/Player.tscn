@@ -1,12 +1,9 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=3]
-[ext_resource path="res://Player/PlayerModels/Cubeboy.tres" type="CubeMesh" id=4]
-[ext_resource path="res://Player/PlayerModels/Longboy.tres" type="CubeMesh" id=5]
 [ext_resource path="res://Player/GrabBox.gd" type="Script" id=6]
-[ext_resource path="res://Player/PlayerModels/Cubeflatboy.tres" type="CubeMesh" id=7]
 [ext_resource path="res://Player/PullBox.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Player/palette.material" type="Material" id=9]
 [ext_resource path="res://Player/GrabBeamHandler.gd" type="Script" id=10]
@@ -14,6 +11,7 @@
 [ext_resource path="res://Assets/Player/player.png" type="Texture" id=12]
 
 [sub_resource type="BoxShape" id=1]
+resource_local_to_scene = true
 extents = Vector3( 1, 2, 1 )
 
 [sub_resource type="CapsuleShape" id=2]
@@ -16243,25 +16241,13 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=23]
-tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:mesh")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 4 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -16269,13 +16255,13 @@ tracks/1/keys = {
 "method": "max_grab"
 } ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("GrabBox/CollisionShape:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("GrabBox/CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -16286,24 +16272,12 @@ tracks/2/keys = {
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:mesh")
+tracks/0/path = NodePath("GrabBox/CollisionShape:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 7 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("GrabBox/CollisionShape:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -16314,7 +16288,7 @@ tracks/1/keys = {
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:mesh")
+tracks/0/path = NodePath("GrabBox/CollisionShape:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -16323,27 +16297,15 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("GrabBox/CollisionShape:disabled")
+tracks/1/path = NodePath("PushBox/CollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("PushBox/CollisionShape:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -16538,11 +16500,12 @@ color = Color( 1, 1, 1, 0.0745098 )
 "player",
 "resettable",
 ]]
-collision_mask = 7
+collision_layer = 2147483649
+collision_mask = 2147483667
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 3 )
-SCALE = 0.6
+SCALE = 0.4
 FRICTION = 100
 MAX_SPEED = 10
 SPEED = 8000
@@ -16581,18 +16544,17 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape" parent="GrabBox" index="0"]
 shape = SubResource( 4 )
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-visible = false
-mesh = ExtResource( 4 )
-material/0 = null
+disabled = true
 
 [node name="player_animations" type="Spatial" parent="."]
 transform = Transform( -1, 3.25841e-07, 5.30863e-14, 0, -1.62921e-07, 1, 3.25841e-07, 1, 1.62921e-07, 0, -0.985485, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
+<<<<<<< HEAD
 transform = Transform( 0.984961, 0.0590931, 0.162357, 2.6077e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
+=======
+transform = Transform( 0.984961, 0.0590932, 0.162357, 2.98023e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
+>>>>>>> rockvsplayer_physics
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"

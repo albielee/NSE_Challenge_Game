@@ -55,7 +55,7 @@ func all_summon_rock(rock_name, rock_pos, rock_size):
 	rpc("summon_rock", rock_name, rock_pos, rock_size, get_tree().get_network_unique_id())
 
 sync func summon_rock(rock_name, rock_pos, rock_size, by_who):
-	var rock = preload("res://Objects/Rock/Rock.tscn").instance()
+	var rock = preload("res://Objects/Rock/Rock2.tscn").instance()
 	rock.set_id(rock_network_handler.get_rock_id())
 	
 	rock.set_name(rock_name)
@@ -75,5 +75,3 @@ func reset():
 	#bring player back to life
 	remote_dead = false
 	#bring player back to spawn position
-	get_parent().transform.origin = spawn_position
-	get_parent().state=0
