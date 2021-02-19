@@ -451,7 +451,7 @@ func _on_GrabBox_lost_rock():
 	grabbox.shape.shape.set_height(0.5)
 
 func summoning_state(delta):
-	move_velocity = move_velocity.move_toward(Vector3.ZERO, delta)
+	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
 	var rock_name = get_name()
 	growing_rock = get_node("/root/World/RockNetworkHandler/"+String(rock_name))
