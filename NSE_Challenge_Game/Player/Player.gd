@@ -33,6 +33,8 @@ var r_stats = [r_rotation,r_position,r_animation,r_velocity]
 var lp = Vector3.ZERO
 var lptime = 1.0
 
+var colour = Color(0.0,0.0,0.0,1.0)
+
 enum {
 	MOVE,
 	DASH,
@@ -528,7 +530,9 @@ func pull_state(delta):
 
 func set_player_name(name):
 	player_name = name
-	pass
+
+func set_player_colour(col):
+	colour = col
 
 func angle_update():
 	var current_angle_y = get_transform().basis.get_euler().y;

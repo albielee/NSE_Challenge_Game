@@ -9,6 +9,11 @@ const MAX_PEERS = 4
 # Name for my player.
 var player_name = "chadlington"
 
+var available_colours = [1,1,1,1]
+var colours = [Color(255,0,0),Color(0,255,0),Color(0,0,255),Color(255,0,255)]
+var player_colour = 0
+var colours_recieved = false
+
 # Names for remote players in id:name format.
 var players = {}
 var players_ready = []
@@ -24,6 +29,9 @@ signal game_error(what)
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
+	
+	#update the player on the colour sit u ation yo
+	rpc_id(id, "update_available_colours", available_colours)
 
 
 # Callback from SceneTree.
@@ -88,9 +96,11 @@ remote func pre_start_game(spawn_points, roundSettings):
 		if p_id == get_tree().get_network_unique_id():
 			# If node for this peer id, set name.
 			player.set_player_name(player_name)
+			player.set_player_colour(player_colour)
 		else:
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
+			player.set_player_colour(colours[p_id])
 		
 		
 		world.get_node("Players").add_child(player)
@@ -123,6 +133,7 @@ func host_game(new_player_name):
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
+	set_colour(0)
 
 
 func join_game(ip, new_player_name):
@@ -154,6 +165,25 @@ func begin_game(roundSettings):
 
 	pre_start_game(spawn_points, roundSettings)
 
+func set_colour(col_index):
+	if(available_colours[player_colour]==0 and player_colour != col_index):
+		available_colours[player_colour] = 1
+		
+	available_colours[col_index] = 0
+	player_colour = col_index
+	var id = get_tree().get_rpc_sender_id()
+	for p in players:
+		if(id != p):
+			rpc_id(p, "update_available_colours", available_colours)
+	
+
+remote func update_available_colours(av_col):
+	available_colours = av_col
+	colours_recieved = true
+	print(available_colours)
+
+func get_available_colours():
+	return available_colours
 
 func end_game():
 	return
