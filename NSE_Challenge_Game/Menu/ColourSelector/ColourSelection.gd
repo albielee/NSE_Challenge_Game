@@ -21,7 +21,8 @@ func _process(delta):
 				colourIndex = 0
 			if(available_colours[colourIndex]):
 				settled = true
-			colourIndex += 1
+			else:
+				colourIndex += 1
 		gamestate.set_colour(colourIndex)
 		colourDisplay.modulate = colours[colourIndex]
 
@@ -29,11 +30,12 @@ func _on_SelectRight_pressed():
 	var available_colours = gamestate.get_available_colours()
 	var settled = false
 	while(!settled):	
-		colourIndex += 1
 		if(colourIndex > 3):
 			colourIndex = 0
 		if(available_colours[colourIndex]):
 			settled = true
+		else:
+			colourIndex += 1
 	gamestate.set_colour(colourIndex)
 	colourDisplay.modulate = colours[colourIndex]
 
@@ -42,10 +44,11 @@ func _on_SelectLeft_pressed():
 	var available_colours = gamestate.get_available_colours()
 	var settled = false
 	while(!settled):	
-		colourIndex -= 1
 		if(colourIndex < 0):
 			colourIndex = 3
 		if(available_colours[colourIndex]):
 			settled = true
+		else:
+			colourIndex -= 1
 	gamestate.set_colour(colourIndex)
 	colourDisplay.modulate = colours[colourIndex]
