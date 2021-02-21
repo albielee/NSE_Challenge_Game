@@ -54,8 +54,8 @@ func puppet_update(delta):
 		r_stats = statstime[0]
 		r_position = r_stats[0]
 		r_rotation = r_stats[1]
-		r_velocity = r_stats[2]
-		r_next_pos = r_position + (r_velocity * time)
+		r_velocity = Vector2(r_stats[2].x,r_stats[2].z)
+		r_next_pos = r_position + (Vector3(r_velocity.x,0,r_velocity.y) * time)
 		
 		speed = r_velocity.length()
 		next_speed = speed
