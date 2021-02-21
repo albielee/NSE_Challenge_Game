@@ -52,14 +52,15 @@ func create_rock(rock):
 	add_child(rock)
 
 func destroy_rock(id):
-	rockdic.erase(id)
-	r_rockdic.erase(id)
+	destroylist.append(id)
 
 remote func all_destroy_rock(id):
 	for rock in get_children():
 		if rock.is_in_group("rocks"):
 			if rock.id == id:
 				rock.destroy()
+				rockdic.erase(id)
+				r_rockdic.erase(id)
 
 func change_owner(id, player):
 	ownerdic[id] = player

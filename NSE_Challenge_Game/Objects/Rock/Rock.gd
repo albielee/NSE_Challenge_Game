@@ -109,7 +109,8 @@ func update(delta):
 func destroy():
 	#the rock has fallen and should be removed from the whole game
 	#can't signal this shit, so I'm just calling get_parent()
-	get_parent().destroy_rock(id)
+	if get_tree().get_network_unique_id() == owned_by:
+		get_parent().destroy_rock(id)
 	
 	queue_free()
 
