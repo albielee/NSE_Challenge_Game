@@ -557,6 +557,15 @@ sync func reset():
 	transform.origin = spawn_position
 	anim = "idle"
 	animationstate.travel(anim)
+	if(not network_handler.is_current_player()):
+		puppet_last_position = transform.origin
+		puppet_next_position = transform.origin
+		puppet_speed = 0.0
+		r_rotation = 0.0
+		r_position = transform.origin
+		r_animation = "idle"
+		r_velocity = Vector3.ZERO
+		r_stats = [r_rotation,r_position,r_animation,r_velocity]
 	network_handler.reset()
 
 func set_paused(yes):

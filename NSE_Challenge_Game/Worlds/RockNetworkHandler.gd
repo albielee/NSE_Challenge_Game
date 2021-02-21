@@ -85,6 +85,5 @@ func _on_Timer_timeout():
 		if rock.is_in_group("rocks"):
 			if get_tree().get_network_unique_id() == rock.owned_by:
 				rockdic[rock.id] = rock.get_stats()
-	print(len(rockdic))
 	rset_unreliable("r_rockdic", rockdic)
 	$SendData.start(1.0/Settings.tickrate)
