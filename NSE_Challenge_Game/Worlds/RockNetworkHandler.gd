@@ -20,6 +20,8 @@ func _physics_process(delta):
 	current_time += delta
 
 func set_rock_stats(dic):
+	#called when a packet of stats for all rocks is received
+	
 	#how long since the last packet?
 	elapsed_time = current_time - last_packet_time
 	
@@ -47,7 +49,14 @@ func create_rock(rock):
 	r_rockdic[rock.id] = rock.get_stats()
 	add_child(rock)
 
-remote func owner_change(id, player):
+func destroy_rock(id):
+	rockdic.erase(id)
+	r_rockdic.erase(id)
+
+func change_owner(id, player):
+	rpc("all_owner_change", id, player)
+
+remote func all_owner_change(id, player):
 	for rock in get_children():
 		if rock.is_in_group("rocks"):
 			if rock.id == id:
@@ -61,5 +70,6 @@ func _on_Timer_timeout():
 		if rock.is_in_group("rocks"):
 			if get_tree().get_network_unique_id() == rock.owned_by:
 				rockdic[rock.id] = rock.get_stats()
+	print(len(rockdic))
 	rset_unreliable("r_rockdic", rockdic)
 	$SendData.start(1.0/Settings.tickrate)

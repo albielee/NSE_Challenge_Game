@@ -61,7 +61,7 @@ func puppet_update(delta):
 		next_speed = speed
 		
 		var interp = 1/1.5
-		if speed < prev_speed:
+		if speed <= prev_speed:
 			if dist > 0.05:
 				next_speed = dist + next_speed + (((prev_speed - speed)-next_speed) * interp)
 			else: next_speed += ((prev_speed - speed)-next_speed) * interp
@@ -85,7 +85,6 @@ func puppet_rotation(target, delta):
 
 func packet_received(average_time):
 	#ain't exactly pretty. TODO: Fix this with signals instead of calls
-	print(len(get_parent().r_rockdic))
 	if id in get_parent().r_rockdic:
 		build_buffer(get_parent().r_rockdic[id], average_time)
 
@@ -109,10 +108,10 @@ func update(delta):
 
 func destroy():
 	#the rock has fallen and should be removed from the whole game
+	#can't signal this shit, so I'm just calling get_parent()
+	get_parent().destroy_rock(id)
+	
 	queue_free()
-
-func owner_switch():
-	get_parent().switch_owner(self)
 
 func get_stats():
 	return [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
@@ -132,6 +131,7 @@ func _on_Hitbox_nozone():
 
 func _on_Hitbox_zone():
 	owned_by=hitbox.owned_by
+	get_parent().change_owner(id, owned_by)
 	in_zone = true
 
 func _on_Rock_body_entered(body):
