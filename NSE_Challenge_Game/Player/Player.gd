@@ -460,7 +460,7 @@ func summoning_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
 	var rock_name = get_name()
-	growing_rock = get_node("/root/World/RockNetworkHandler/"+String(rock_name))
+#	growing_rock = get_node("/root/World/RockNetworkHandler/"+String(rock_name))
 
 	if(!rock_summoned):
 		anim = "summon_start"
@@ -470,6 +470,7 @@ func summoning_state(delta):
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
 		var start_size = 2.0
 		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
+		state = MOVE
 	elif(growing_rock != null):
 		#anim = "summon_hold"
 		var summon_speed = 1
