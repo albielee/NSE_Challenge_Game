@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 4.42
+spread = 7.76
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 0.49
+tangential_accel_random = 1.0
+scale = 5.0
+scale_random = 1.0
+
+[sub_resource type="CubeMesh" id=2]
+
+[node name="ParticleCloudsTest" type="Spatial"]
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0610085, -0.0483484, -0.00322723 )
+amount = 50
+lifetime = 49.51
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )
+
+[node name="Particles2" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0610085, -0.0483484, -10.0032 )
+amount = 50
+lifetime = 49.51
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )
+
+[node name="Particles3" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0610085, -0.0483484, -20.0032 )
+amount = 50
+lifetime = 49.51
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )
+
+[node name="Particles4" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0610085, -0.0483484, -30.0032 )
+amount = 50
+lifetime = 49.51
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )
+
+[node name="Particles5" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0610085, -0.0483484, -41.0032 )
+amount = 50
+lifetime = 49.51
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )
+
+[node name="Particles6" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0610085, -0.0483484, -53.0032 )
+amount = 50
+lifetime = 49.51
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )

@@ -8,6 +8,8 @@
 anchor_top = 0.00198201
 anchor_right = 1.0
 anchor_bottom = 1.00198
+margin_top = -0.891904
+margin_bottom = -0.891907
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 3 )
@@ -172,8 +174,10 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="Menu" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -192.0
+margin_top = -32.0
+margin_right = -152.0
+margin_bottom = 8.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,18 +1,16 @@
 extends Spatial
 
 
-var x_limit = -30
-var height_dif = 2
-var z_dif = 18
-var spawn_pos = Vector3(rand_range(x_limit+10, 30), rand_range(-height_dif-1,-2), rand_range(-z_dif/4,z_dif))
+var x_limit = -70
+var height_dif = 10
+var upper_z_dif = -50
+var lower_z_dif = 5
 
-var move_speed = rand_range(1,3)
+var move_speed = rand_range(1,2)
 
-func _ready():
-	transform.origin = spawn_pos
 
 func _process(delta):
 	transform.origin.x -= move_speed*delta
 	if(transform.origin.x < x_limit):
-		transform.origin = Vector3(30, rand_range(-height_dif-1,-2), rand_range(-z_dif,z_dif))
+		transform.origin = Vector3(rand_range(50,70), rand_range(-height_dif-1,-2), rand_range(lower_z_dif,upper_z_dif))
 		move_speed = rand_range(1,3)
