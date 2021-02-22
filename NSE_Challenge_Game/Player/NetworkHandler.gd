@@ -62,7 +62,7 @@ sync func summon_rock(rock_name, rock_pos, rock_size, by_who):
 	rock.translation = rock_pos
 	rock.scale = Vector3(rock_size,rock_size,rock_size)
 	rock.owned_by = by_who
-
+	
 	rock_network_handler.create_rock(rock)
 
 func timeout(cur_rotation,cur_position,cur_animation,cur_velocity):

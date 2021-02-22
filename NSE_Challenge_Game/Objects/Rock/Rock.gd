@@ -12,9 +12,14 @@ var cur_rotation = 0.0
 var cur_velocity = Vector3.ZERO
 
 var in_zone = false
-var speed = 0
+
 var id
 var owned_by = ""
+var time = 0
+
+var prev_speed = 0
+var speed = 0
+var next_speed = 0
 
 var buffer = []
 
@@ -38,30 +43,40 @@ func set_id(num):
 	id = num
 
 func puppet_update(delta):
-	var time = 0
-	if len(buffer) > 0:
-		var statstime = buffer.pop_front()
-		time = statstime[1]
-		r_stats = statstime[0]
-		r_position = r_stats[0]
-		r_rotation = r_stats[1]
-		r_velocity = r_stats[2]
-		r_next_pos = r_position + (r_velocity * time)
-	
 	var p = get_transform().origin
 	var dir = (r_next_pos-p).normalized()
 	var dist = p.distance_to(r_next_pos)
-	var speed = r_velocity.length()
 	
-	if time > 0: 
-		var puppet_speed = dist / time
+	if len(buffer) > 0 and time <= 0:
+		prev_speed = r_velocity.length()
+		var statstime = buffer.pop_front()
+		time += statstime[1]/(len(buffer)+1)
+		r_stats = statstime[0]
+		r_position = r_stats[0]
+		r_rotation = r_stats[1]
+		r_velocity = Vector2(r_stats[2].x,r_stats[2].z)
+		r_next_pos = r_position + (Vector3(r_velocity.x,0,r_velocity.y) * time)
 		
-		#inter fucking polate this shit
-		var cur_speed = get_linear_velocity()
-		var goal_speed = puppet_speed*dir
-		set_linear_velocity(cur_speed.linear_interpolate(goal_speed,delta/time))
+		speed = r_velocity.length()
+		next_speed = speed
+		
+		var interp = 1/1.5
+		if speed <= prev_speed:
+			if dist > 0.05:
+				next_speed = dist + next_speed + (((prev_speed - speed)-next_speed) * interp)
+			else: next_speed += ((prev_speed - speed)-next_speed) * interp
+		if speed > prev_speed:
+			next_speed = prev_speed + speed
+	
+	#inter fucking polate this shit
+	var cur_speed = get_linear_velocity()
+	if dist >= 1:
+		set_linear_velocity(next_speed*dir*dist)
+	else: set_linear_velocity(next_speed*dir)
 	
 	puppet_rotation(r_rotation,delta)
+	
+	if time > 0: time -= delta
 
 func puppet_rotation(target, delta):
 	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
@@ -91,8 +106,13 @@ func update(delta):
 			set_linear_damp(5)
 		else: hitbox.flying = true
 
-func owner_switch():
-	get_parent().switch_owner(self)
+func destroy():
+	#the rock has fallen and should be removed from the whole game
+	#can't signal this shit, so I'm just calling get_parent()
+	if get_tree().get_network_unique_id() == owned_by:
+		get_parent().destroy_rock(id)
+	
+	queue_free()
 
 func get_stats():
 	return [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
@@ -112,6 +132,7 @@ func _on_Hitbox_nozone():
 
 func _on_Hitbox_zone():
 	owned_by=hitbox.owned_by
+	get_parent().change_owner(id, owned_by)
 	in_zone = true
 
 func _on_Rock_body_entered(body):
