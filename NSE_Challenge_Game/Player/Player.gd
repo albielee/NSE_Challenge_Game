@@ -533,6 +533,7 @@ func set_player_name(name):
 
 func set_player_colour(col):
 	colour = col
+	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = Color(0.2,1,0.2,1)
 
 func angle_update():
 	var current_angle_y = get_transform().basis.get_euler().y;

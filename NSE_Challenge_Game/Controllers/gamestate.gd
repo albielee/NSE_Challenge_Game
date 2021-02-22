@@ -10,9 +10,10 @@ const MAX_PEERS = 4
 var player_name = "chadlington"
 
 var available_colours = [1,1,1,1]
-var colours = [Color(255,0,0),Color(0,255,0),Color(0,0,255),Color(255,0,255)]
+var colours = [Color(1,0.2,0.2,1),Color(0.2,1,0.2,1),Color(0.2,0.2,1,1),Color(0.8,0.2,0.2,1)]
 var player_colour = 0
 var colours_recieved = false
+var players_colour = {}
 
 # Names for remote players in id:name format.
 var players = {}
