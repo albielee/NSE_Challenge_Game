@@ -30,8 +30,13 @@ func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
 	
-	#update the player on the colour sit u ation yo
-	rpc_id(id, "update_available_colours", available_colours)
+	if(get_tree().is_network_server()):
+		print("ey")
+		
+		#update the player on the colour sit u ation yo
+		rpc_id(id, "update_available_colours", available_colours)
+		for p in players:
+			rpc_id(p, "update_available_colours", available_colours)
 
 
 # Callback from SceneTree.
@@ -133,7 +138,9 @@ func host_game(new_player_name):
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
-	set_colour(0)
+	available_colours[0] = 0
+	player_colour = 0
+	colours_recieved = true
 
 
 func join_game(ip, new_player_name):

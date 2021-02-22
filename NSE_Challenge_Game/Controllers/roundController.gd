@@ -46,8 +46,10 @@ func play_countdown():
 	pause_players(true)
 	for i in range(3,0,-1):
 		get_node("Number"+str(i)).visible = true
+		get_node("Number"+str(i)).playing = true
 		yield(get_tree().create_timer(1.0), "timeout")
 		get_node("Number"+str(i)).visible = false
+		get_node("Number"+str(i)).playing = false
 	pause_players(false)
 
 func pause_players(yes):

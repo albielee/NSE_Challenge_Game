@@ -32,6 +32,7 @@ func _on_host_pressed():
 	
 	var player_name = $Menu/Host/Hosting/Name.text
 	gamestate.host_game(player_name)
+	$Players/ColourSelection.badcodebuticantbefuckeditworks()
 	refresh_lobby()
 
 func _on_join_pressed():
