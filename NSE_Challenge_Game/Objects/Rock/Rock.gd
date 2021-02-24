@@ -40,12 +40,18 @@ func _physics_process(delta):
 		puppet_update(delta)
 		
 	#Playing rock slide sound
-	if($GroundDetector.is_colliding() and speed > 0.1):
-		if(!$AudioStreamPlayer.playing):
-			$AudioStreamPlayer.play()
-			$AudioStreamPlayer.volume_db = speed/10
+	if($GroundDetector.is_colliding()):
+		if(speed > 0.1):
+			if(!$Slide.playing):
+				$Slide.play()
+				$Slide.unit_db  = speed/10
+		else: $Slide.stop()
 	else:
-		$AudioStreamPlayer.stop()
+		if($Slide.playing):
+			$SlideOff.play()
+		$Slide.stop()
+		if(!$InAir.playing):
+			$InAir.play()
 
 func set_id(num):
 	id = num
@@ -145,4 +151,5 @@ func _on_Hitbox_zone():
 	in_zone = true
 
 func _on_Rock_body_entered(body):
-	pass
+	if(body.is_in_group("rock") and speed > 16):
+		$Hit.play()
