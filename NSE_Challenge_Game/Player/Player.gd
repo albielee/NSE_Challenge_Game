@@ -106,6 +106,7 @@ onready var animationtree = $AnimationTree
 onready var animationplayer = $player_animations/AnimationPlayer
 onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = Vector3.ZERO
+onready var sounds = $Sounds
 
 var _updates = 0.0
 var _packets = 0.0
