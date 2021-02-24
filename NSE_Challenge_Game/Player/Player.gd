@@ -148,6 +148,18 @@ func _physics_process(delta):
 		puppet_update(delta)
 	
 	handle_animations(anim)
+	handle_sounds()
+
+func handle_sounds():
+	if(anim == "movement"):
+		play_footsteps()
+	if(anim == "summon_start"):
+		$Sounds/player_summon.play()
+	if(anim == "push_hold"):
+		if(!$Sounds/beam_push.playing):
+			$Sounds/beam_push.play()
+	else:
+		$Sounds/beam_push.stop()	
 
 func play_footsteps():
 	if(!$Sounds/footstep.playing):
@@ -325,7 +337,6 @@ func set_last_attacker():
 func move_state(delta, mouse_angle):
 	#Handle movement, set to directional or set to 0
 	if (movement != Vector2.ZERO):
-		play_footsteps()
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
 		dash_angle = Vector3(movement.x,0,movement.y)
 		anim = "movement"
