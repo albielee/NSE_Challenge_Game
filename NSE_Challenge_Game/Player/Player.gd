@@ -13,6 +13,7 @@ var mouse_position = Vector3.ZERO
 var controls = [movement, pushpull, summon, grab, dash, mouse_position]
 
 var player_name = ""
+var player_col = Color("")
 
 var touched = false
 
@@ -33,7 +34,7 @@ var r_stats = [r_rotation,r_position,r_animation,r_velocity]
 var lp = Vector3.ZERO
 var lptime = 1.0
 
-var colour = Color(0.0,0.0,0.0,1.0)
+var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
 
 enum {
 	MOVE,
@@ -138,6 +139,7 @@ func _ready():
 	if network_handler.is_current_player(): playerid = get_tree().get_network_unique_id()
 
 func _physics_process(delta):
+	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = player_col
 	current_time += delta
 	
 	#check if dead using networkhandler death
@@ -627,8 +629,8 @@ func set_player_name(name):
 	player_name = name
 
 func set_player_colour(col):
-	colour = col
-	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = Color(0.2,1,0.2,1)
+	player_col = col
+	#$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = col
 
 func angle_update():
 	var current_angle_y = get_transform().basis.get_euler().y;

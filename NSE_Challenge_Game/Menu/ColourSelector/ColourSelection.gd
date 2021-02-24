@@ -1,7 +1,7 @@
 extends Control
 
 
-onready var colours = [Color(255,0,0),Color(0,255,0),Color(0,0,255),Color(255,0,255)]
+onready var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
 onready var colourDisplay = $DisplayColour
 
 var colourIndex = 0
@@ -18,7 +18,21 @@ func _process(delta):
 	old_c = pc
 	
 func _on_SelectRight_pressed():
-	gamestate.call_server_next_colour()
+	if(get_tree().is_network_server()):
+		gamestate.available_colours[gamestate.player_colour_index] = 1
+		gamestate.player_colour_index = wrapi(gamestate.player_colour_index+1, 0, 4)
+		var found = false
+		while(!found):
+			if(gamestate.available_colours[gamestate.player_colour_index]):
+				found = true
+				gamestate.available_colours[gamestate.player_colour_index] = 0
+			else:
+				gamestate.player_colour_index = wrapi(gamestate.player_colour_index+1, 0, 4)
+		gamestate.players_colour[1] = gamestate.player_colour_index
+		gamestate.rpc("recieve_colour_index", 1, gamestate.player_colour_index)
+		print(gamestate.available_colours)
+	else:
+		gamestate.call_server_next_colour()
 
 
 func _on_SelectLeft_pressed():
