@@ -42,6 +42,20 @@ func _physics_process(delta):
 		update(delta)
 	else:
 		puppet_update(delta)
+		
+	#Playing rock slide sound
+	if($GroundDetector.is_colliding()):
+		if(speed > 0.1):
+			if(!$Slide.playing):
+				$Slide.play()
+				$Slide.unit_db  = speed/10
+		else: $Slide.stop()
+	else:
+		if($Slide.playing):
+			$SlideOff.play()
+		$Slide.stop()
+		if(!$InAir.playing):
+			$InAir.play()
 
 func set_id(num):
 	id = num
@@ -110,6 +124,7 @@ func update(delta):
 			set_linear_damp(5)
 		else: hitbox.flying = true
 
+
 func destroy():
 	#the rock has fallen and should be removed from the whole game
 	#can't signal this shit, so I'm just calling get_parent()
@@ -140,4 +155,9 @@ func _on_Hitbox_zone():
 	in_zone = true
 
 func _on_Rock_body_entered(body):
+<<<<<<< HEAD
 	print(body)
+=======
+	if(body.is_in_group("rock") and speed > 16):
+		$Hit.play()
+>>>>>>> cc10ef37b1989f35824045d3df447027cb4fadd1

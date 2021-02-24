@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 [gd_scene load_steps=74 format=2]
+=======
+[gd_scene load_steps=78 format=2]
+>>>>>>> cc10ef37b1989f35824045d3df447027cb4fadd1
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=3]
+<<<<<<< HEAD
 [ext_resource path="res://Player/RockHitBox.gd" type="Script" id=4]
+=======
+[ext_resource path="res://Sounds/footstep.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/player_summon.wav" type="AudioStream" id=5]
+>>>>>>> cc10ef37b1989f35824045d3df447027cb4fadd1
 [ext_resource path="res://Player/GrabBox.gd" type="Script" id=6]
+[ext_resource path="res://Sounds/beam_push.wav" type="AudioStream" id=7]
 [ext_resource path="res://Player/PullBox.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Player/palette.material" type="Material" id=9]
 [ext_resource path="res://Player/GrabBeamHandler.gd" type="Script" id=10]
 [ext_resource path="res://Player/animationblend.gd" type="Script" id=11]
 [ext_resource path="res://Assets/Player/player.png" type="Texture" id=12]
+[ext_resource path="res://Sounds/rock_slide_off.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/temp_player_fall.wav" type="AudioStream" id=14]
 
 [sub_resource type="BoxShape" id=1]
 resource_local_to_scene = true
@@ -16564,7 +16576,7 @@ disabled = true
 transform = Transform( -1, 3.25841e-07, 5.30863e-14, 0, -1.62921e-07, 1, 3.25841e-07, 1, 1.62921e-07, 0, -0.985485, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.0590931, 0.162357, 2.6077e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
+transform = Transform( 0.984961, 0.0590932, 0.162357, 2.6077e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
@@ -18237,6 +18249,34 @@ __meta__ = {
 process_mode = 0
 wait_time = 0.002
 autostart = true
+
+[node name="Sounds" type="Spatial" parent="."]
+
+[node name="footstep" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 4 )
+
+[node name="player_summon" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 5 )
+unit_size = 2.8
+max_db = 6.0
+pitch_scale = 1.79
+
+[node name="beam_push" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 7 )
+unit_size = 10.4
+max_db = 6.0
+pitch_scale = 0.86
+area_mask = 4
+
+[node name="player_fall" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 13 )
+unit_size = 9.5
+max_db = 6.0
+pitch_scale = 0.57
+
+[node name="tempplayerfall" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 14 )
+max_db = 6.0
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="start_pushing" from="RockHitBox" to="." method="_on_RockHitBox_start_pushing"]
 [connection signal="stop_pushing" from="RockHitBox" to="." method="_on_RockHitBox_stop_pushing"]
