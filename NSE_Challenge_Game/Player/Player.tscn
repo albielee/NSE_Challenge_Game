@@ -1,8 +1,9 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=3]
+[ext_resource path="res://Player/RockHitBox.gd" type="Script" id=4]
 [ext_resource path="res://Player/GrabBox.gd" type="Script" id=6]
 [ext_resource path="res://Player/PullBox.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Player/palette.material" type="Material" id=9]
@@ -16500,8 +16501,9 @@ color = Color( 1, 1, 1, 0.0745098 )
 "player",
 "resettable",
 ]]
-collision_layer = 2147483649
-collision_mask = 2147483667
+collision_layer = 2147484161
+collision_mask = 2147484179
+contact_monitor = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource( 3 )
@@ -16514,6 +16516,18 @@ DASH_INC = 3.0
 GRAB_DROPOFF_VAL = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="RockHitBox" type="Area" parent="." groups=[
+"ghost",
+"player_rock",
+]]
+collision_layer = 2147484160
+collision_mask = 0
+script = ExtResource( 4 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="RockHitBox"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 1 )
 
@@ -18224,6 +18238,8 @@ process_mode = 0
 wait_time = 0.002
 autostart = true
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="start_pushing" from="RockHitBox" to="." method="_on_RockHitBox_start_pushing"]
+[connection signal="stop_pushing" from="RockHitBox" to="." method="_on_RockHitBox_stop_pushing"]
 [connection signal="area_entered" from="PushBox" to="PushBox" method="_on_PushBox_area_entered"]
 [connection signal="area_entered" from="GrabBox" to="GrabBox" method="_on_GrabBox_area_entered"]
 [connection signal="area_exited" from="GrabBox" to="GrabBox" method="_on_GrabBox_area_exited"]

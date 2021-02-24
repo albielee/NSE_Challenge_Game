@@ -46,7 +46,8 @@ enum {
 	GRABBED,
 	FALL,
 	DEATH,
-	PAUSE
+	PAUSE,
+	SHOVE
 }
 var state = MOVE
 
@@ -76,6 +77,9 @@ var dash_angle = current_angle
 var can_dash = 0.0
 
 var last_attacker=""
+
+var shovable = false
+var s_rock = null
 
 export var ACCELERATION = 100
 export var SCALE = 1.0
@@ -308,7 +312,9 @@ func update(delta):
 			fall_state(delta)
 		PAUSE:
 			pause_state(delta)
-
+		SHOVE:
+			shove_state(delta)
+			
 func set_last_attacker():
 	var bodies = get_colliding_bodies()
 	touched = false
@@ -323,6 +329,7 @@ func move_state(delta, mouse_angle):
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
 		dash_angle = Vector3(movement.x,0,movement.y)
+		
 		anim = "movement"
 		
 		var	angle_to_movement = - abs(get_transform().basis.get_euler().y+(2*PI) - atan2(-movement.y, movement.x))
@@ -360,8 +367,13 @@ func move_state(delta, mouse_angle):
 				if(pushpull==1 and push_cooldown==0):
 					push_mouse_position=mouse_position
 					state = PUSH
+				if(pushpull==-1 and push_cooldown==0):
+					pass
 				elif(pushpull==0):
 					push_cooldown=0
+					if(shovable == true):
+						if check_shove(s_rock):
+							state = SHOVE
 	move()
 
 func pause_state(delta):
@@ -529,6 +541,63 @@ func push_complete():
 func pull_state(delta):
 	pass
 
+func check_shove(rock):
+	var up_dir = Vector3.UP
+	var angle_to_rock = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y
+	
+	var dics = {}
+	var diffs = []
+	var current_angle_y = get_transform().basis.get_euler().y;
+	
+#	print(current_angle_y)
+	
+	for i in [-1,0,1,2]:
+		var f = rock.face + (i * (PI/2))
+		
+		var line = (rock.transform.origin - transform.origin).normalized()
+		var line2ang = atan2(line.x,line.z)
+		
+#		var target_angle_y = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y;
+		var diff = wrapf(line2ang - f, -PI, PI);
+		dics[diff] = f
+		diffs.append(diff)
+	
+	var rot = wrapf(dics[diffs.min()] - current_angle_y, -PI, PI)
+	
+	if rot < PI/8:
+		var target_angle_y = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y;
+		var rotation_angle = wrapf(target_angle_y - current_angle_y, -PI, PI);
+		rock_angle =  up_dir * rotation_angle;
+		return true
+	return false
+
+var rock_angle = Vector3.ZERO
+var i = 0
+func shove_state(delta):
+	#here should be the code for the new animation.
+	#how does that work? I'm gonna set up the controls without any animations
+	anim = "idle"
+	
+	if not shovable:
+		state = MOVE
+	elif not check_shove(s_rock):
+		state = MOVE
+	
+	i += 1
+	print('shoving!!' + var2str(i))
+	
+	if (movement != Vector2.ZERO):
+		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
+		dash_angle = Vector3(movement.x,0,movement.y)
+	else:
+		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
+	
+	set_angular_velocity(rock_angle*TURN_SPEED*delta)
+	
+#	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	
+	move()
+
 func set_player_name(name):
 	player_name = name
 
@@ -581,3 +650,11 @@ func set_paused(yes):
 
 func _on_Player_body_entered(body):
 	touched = true
+
+func _on_RockHitBox_start_pushing():
+	shovable = true
+	s_rock = $RockHitBox.rock
+
+func _on_RockHitBox_stop_pushing():
+	shovable = false
+	s_rock = null

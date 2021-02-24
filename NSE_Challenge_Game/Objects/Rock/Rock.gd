@@ -11,6 +11,8 @@ var cur_position = Vector3.ZERO
 var cur_rotation = 0.0
 var cur_velocity = Vector3.ZERO
 
+var face = 0
+
 var in_zone = false
 
 var id
@@ -24,6 +26,7 @@ var next_speed = 0
 var buffer = []
 
 onready var hitbox = $Hitbox
+onready var playerhitbox = $Hitbox2
 
 var last_mover=""
 
@@ -34,6 +37,7 @@ func _ready():
 	r_stats = [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
 
 func _physics_process(delta):
+	face=get_transform().basis.get_euler().y
 	if get_tree().get_network_unique_id() == owned_by:
 		update(delta)
 	else:
@@ -136,4 +140,4 @@ func _on_Hitbox_zone():
 	in_zone = true
 
 func _on_Rock_body_entered(body):
-	pass
+	print(body)

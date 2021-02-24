@@ -38,7 +38,7 @@ func update(mouse_position, player_to_rock):
 		
 		player_rock = wrapf(player_to_rock,-PI,PI)
 		var fire_vector = Vector3(-sin(player_rock),0,-cos(player_rock))
-		rock_push_vector=fire_vector*PUSH_POWER/100
+		rock_push_vector = fire_vector*PUSH_POWER/100
 		
 		var rotation_angle = wrapf(target_angle - rock.face, -PI/4, PI/4);
 		
