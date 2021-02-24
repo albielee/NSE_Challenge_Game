@@ -6,66 +6,20 @@ onready var colourDisplay = $DisplayColour
 
 var colourIndex = 0
 var run = false
+var old_c = 0
 
 func _ready():
 	colourDisplay.modulate = colours[0]
 
-func badcodebuticantbefuckeditworks():
-	for i in range(5):
-		print("ok")
-		var available_colours = gamestate.get_available_colours()
-		var settled = false
-		while(!settled):	
-			if(colourIndex > 3):
-				colourIndex = 0
-			if(available_colours[colourIndex]):
-				settled = true
-			else:
-				colourIndex += 1
-		gamestate.set_colour(colourIndex)
-		colourDisplay.modulate = colours[colourIndex]
-
 func _process(delta):
-	if(gamestate.colours_recieved and !run):
-		run = true
-		var available_colours = gamestate.get_available_colours()
-		print(available_colours)
-		var settled = false
-		while(!settled):	
-			if(colourIndex > 3):
-				colourIndex = 0
-			if(available_colours[colourIndex]):
-				settled = true
-			else:
-				colourIndex += 1
-		gamestate.set_colour(colourIndex)
-		colourDisplay.modulate = colours[colourIndex]
-		print(colourIndex)
-
+	var pc = gamestate.player_colour_index
+	if(old_c != pc):
+		colourDisplay.modulate = colours[pc]
+	old_c = pc
+	
 func _on_SelectRight_pressed():
-	var available_colours = gamestate.get_available_colours()
-	var settled = false
-	while(!settled):	
-		if(colourIndex > 3):
-			colourIndex = 0
-		if(available_colours[colourIndex]):
-			settled = true
-		else:
-			colourIndex += 1
-	gamestate.set_colour(colourIndex)
-	colourDisplay.modulate = colours[colourIndex]
-	print(colourIndex)
+	gamestate.call_server_next_colour()
 
 
 func _on_SelectLeft_pressed():
-	var available_colours = gamestate.get_available_colours()
-	var settled = false
-	while(!settled):	
-		if(colourIndex < 0):
-			colourIndex = 3
-		if(available_colours[colourIndex]):
-			settled = true
-		else:
-			colourIndex -= 1
-	gamestate.set_colour(colourIndex)
-	colourDisplay.modulate = colours[colourIndex]
+	pass
