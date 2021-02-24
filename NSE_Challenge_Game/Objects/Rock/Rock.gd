@@ -155,9 +155,5 @@ func _on_Hitbox_zone():
 	in_zone = true
 
 func _on_Rock_body_entered(body):
-<<<<<<< HEAD
-	print(body)
-=======
 	if(body.is_in_group("rock") and speed > 16):
 		$Hit.play()
->>>>>>> cc10ef37b1989f35824045d3df447027cb4fadd1
