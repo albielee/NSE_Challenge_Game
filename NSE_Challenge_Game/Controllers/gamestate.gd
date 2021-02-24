@@ -106,8 +106,7 @@ remote func pre_start_game(spawn_points, roundSettings):
 		else:
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
-			player.set_player_colour(colours[p_id])
-		
+#			player.set_player_colour(colours[p_id])
 		
 		world.get_node("Players").add_child(player)
 	
