@@ -38,6 +38,14 @@ func _physics_process(delta):
 		update(delta)
 	else:
 		puppet_update(delta)
+		
+	#Playing rock slide sound
+	if($GroundDetector.is_colliding() and speed > 0.1):
+		if(!$AudioStreamPlayer.playing):
+			$AudioStreamPlayer.play()
+			$AudioStreamPlayer.volume_db = speed/10
+	else:
+		$AudioStreamPlayer.stop()
 
 func set_id(num):
 	id = num
@@ -105,6 +113,7 @@ func update(delta):
 			set_gravity_scale(5)
 			set_linear_damp(5)
 		else: hitbox.flying = true
+
 
 func destroy():
 	#the rock has fallen and should be removed from the whole game
