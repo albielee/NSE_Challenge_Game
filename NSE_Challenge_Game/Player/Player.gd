@@ -159,7 +159,15 @@ func handle_sounds():
 		if(!$Sounds/beam_push.playing):
 			$Sounds/beam_push.play()
 	else:
-		$Sounds/beam_push.stop()	
+		$Sounds/beam_push.stop()
+	
+	if(anim == "fall"):
+		#if(!$Sounds/player_fall.playing):
+			#$Sounds/player_fall.play()
+		if(!$Sounds/tempplayerfall.playing):	
+			$Sounds/tempplayerfall.play()
+	else:
+		$Sounds/player_fall.stop()
 
 func play_footsteps():
 	if(!$Sounds/footstep.playing):
