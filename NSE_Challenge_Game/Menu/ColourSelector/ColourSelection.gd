@@ -30,7 +30,6 @@ func _on_SelectRight_pressed():
 				gamestate.player_colour_index = wrapi(gamestate.player_colour_index+1, 0, 4)
 		gamestate.players_colour[1] = gamestate.player_colour_index
 		gamestate.rpc("recieve_colour_index", 1, gamestate.player_colour_index)
-		print(gamestate.available_colours)
 	else:
 		gamestate.call_server_next_colour()
 

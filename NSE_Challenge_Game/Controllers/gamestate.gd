@@ -44,6 +44,7 @@ func _player_disconnected(id):
 	if has_node("/root/World"): # Game is in progress.
 		if get_tree().is_network_server():
 			emit_signal("game_error", "Player " + players[id] + " disconnected")
+			print("I left")
 			end_game()
 	else: # Game is not in progress.
 		# Unregister this player.
@@ -78,6 +79,8 @@ remote func register_player(new_player_name):
 
 func unregister_player(id):
 	players.erase(id)
+	available_colours[players_colour[id]] = 1
+	players_colour.erase(id)
 	emit_signal("player_list_changed")
 
 
@@ -103,7 +106,6 @@ remote func pre_start_game(spawn_points, roundSettings):
 		
 		if p_id == get_tree().get_network_unique_id():
 			# If node for this peer id, set name.
-			#player.set_player_colour(colours[player_colour_index])
 			player.set_player_name(player_name)
 		else:
 			# Otherwise set name from peer.
@@ -167,14 +169,12 @@ func begin_game(roundSettings):
 	# Call to pre-start game with the spawn points.
 
 	for p in players:
+		rpc_id(p, "recieve_colours_dic", players_colour)
 		rpc_id(p, "pre_start_game", spawn_points, roundSettings)
 		
 	pre_start_game(spawn_points, roundSettings)
 
 remote func send_recieve_color(index):
-	var id=0
-	var col_i=0
-	
 	if(get_tree().is_network_server()):
 		var sender_id = get_tree().get_rpc_sender_id()
 		available_colours[index]=1
@@ -193,20 +193,15 @@ remote func send_recieve_color(index):
 				assert("OH GOD TOO MANY PLAYERS")
 				return
 		rpc_id(sender_id, "recieve_colour_index", sender_id, index)
-		id = sender_id
-		col_i = index
-	
-	players_colour[id] = col_i
+		players_colour[sender_id] = index
 	
 remote func recieve_colour_index(id, index):
-	print("player_colour_index set")
-	players_colour[id] = index
 	player_colour_index = index
 
+remote func recieve_colours_dic(col_dic):
+	players_colour = col_dic
+
 remote func get_available_colour():
-	var id=0
-	var col_i=0
-	
 	if(get_tree().is_network_server()):
 		var i = 0
 		var a = 0
@@ -216,7 +211,6 @@ remote func get_available_colour():
 				print("INFINITE LOOP SOMETHING IS GOING WRONG, TOO MANY PLAYERS?")
 				break
 			a+=1
-			print(available_colours)
 			if(available_colours[i]):
 				available_colours[i] = 0
 				found = true
@@ -224,10 +218,8 @@ remote func get_available_colour():
 				i = wrapi(i+1, 0, 4)
 		var sender_id = get_tree().get_rpc_sender_id()
 		rpc_id(sender_id, "recieve_colour_index", sender_id, i)
-		id = sender_id
-		col_i = i
+		players_colour[sender_id] = i
 	
-	players_colour[id] = col_i
 		
 func call_server_get_available_colour():
 	rpc("get_available_colour")
