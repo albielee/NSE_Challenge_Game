@@ -586,21 +586,16 @@ func check_shove(rock):
 		
 		var line = (rock.transform.origin - transform.origin).normalized()
 		var line2ang = wrapf(atan2(line.x,line.z)-PI, -PI, PI)
-#		if i == 0: print(line2ang)
 		
-#		var target_angle_y = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y;
 		var diff = wrapf(line2ang - f - 3*PI/4, -PI, PI);
 		dics[diff] = f
 		diffs.append(diff)
 	
 	var rot = wrapf(dics[diffs.min()] - current_angle_y, -PI, PI)
-#	print(dics[diffs.min()])
-#	print(rot)
 	
-	if (rot < PI/8) and (rot > -PI/8):
-		var target_angle_y = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y;
-		var rotation_angle = wrapf(target_angle_y - current_angle_y, -PI, PI);
-		rock_angle =  up_dir * rotation_angle;
+	if (rot < PI/16) and (rot > -PI/16):
+		var rotation_angle = wrapf(dics[diffs.min()] - current_angle_y, -PI, PI);
+		rock_angle =  up_dir * rotation_angle
 		return true
 	return false
 
@@ -612,9 +607,11 @@ func shove_state(delta):
 	anim = "idle"
 	
 	if not shovable:
-		state = MOVE
+		stop_shove()
+		return
 	elif not check_shove(s_rock):
-		state = MOVE
+		stop_shove()
+		return
 	
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
@@ -622,11 +619,16 @@ func shove_state(delta):
 	else:
 		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
-	set_angular_velocity(rock_angle*TURN_SPEED*delta)
-	
-#	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	set_angular_velocity(rock_angle*TURN_SPEED*1000*delta)
+	if rock_angle.y < PI/8 and rock_angle.y > -PI/8: 
+		set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,true)
+	else: set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
 	
 	move()
+
+func stop_shove():
+	state = MOVE
+	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
 
 func set_player_name(name):
 	player_name = name
