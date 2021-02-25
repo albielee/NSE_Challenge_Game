@@ -101,6 +101,7 @@ onready var UPDATE_INTERVAL = 1.0 / $"/root/Settings".tickrate
 onready var pushbox = $PushBox
 onready var pullbox = $PullBox
 onready var grabbox = $GrabBox
+onready var rockhitbox = $RockHitBox
 
 onready var network_handler = $NetworkHandler
 onready var animationtree = $AnimationTree
@@ -122,6 +123,8 @@ func _ready():
 	set_linear_damp(10)
 	set_mass(MASS)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
+	
+	rockhitbox.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	
 	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
 	pushbox.transform.origin.z=(-1.0*SCALE)
@@ -509,7 +512,7 @@ func summoning_state(delta):
 		var offset = 2.0
 		var y_rot = -get_transform().basis.get_euler().y
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-		var start_size = 2.0
+		var start_size = 4.0
 		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
 		state = MOVE
 	elif(growing_rock != null):
@@ -582,16 +585,19 @@ func check_shove(rock):
 		var f = rock.face + (i * (PI/2))
 		
 		var line = (rock.transform.origin - transform.origin).normalized()
-		var line2ang = atan2(line.x,line.z)
+		var line2ang = wrapf(atan2(line.x,line.z)-PI, -PI, PI)
+#		if i == 0: print(line2ang)
 		
 #		var target_angle_y = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y;
-		var diff = wrapf(line2ang - f, -PI, PI);
+		var diff = wrapf(line2ang - f - 3*PI/4, -PI, PI);
 		dics[diff] = f
 		diffs.append(diff)
 	
 	var rot = wrapf(dics[diffs.min()] - current_angle_y, -PI, PI)
+#	print(dics[diffs.min()])
+#	print(rot)
 	
-	if rot < PI/8:
+	if (rot < PI/8) and (rot > -PI/8):
 		var target_angle_y = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y;
 		var rotation_angle = wrapf(target_angle_y - current_angle_y, -PI, PI);
 		rock_angle =  up_dir * rotation_angle;
@@ -599,7 +605,7 @@ func check_shove(rock):
 	return false
 
 var rock_angle = Vector3.ZERO
-var i = 0
+
 func shove_state(delta):
 	#here should be the code for the new animation.
 	#how does that work? I'm gonna set up the controls without any animations
@@ -609,9 +615,6 @@ func shove_state(delta):
 		state = MOVE
 	elif not check_shove(s_rock):
 		state = MOVE
-	
-	i += 1
-	print('shoving!!' + var2str(i))
 	
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)

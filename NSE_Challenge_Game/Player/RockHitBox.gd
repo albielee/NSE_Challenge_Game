@@ -12,3 +12,9 @@ func start_pushing(body):
 func stop_pushing(body):
 	rock = null
 	emit_signal("stop_pushing")
+
+func _on_RockHitBox_area_entered(area):
+	start_pushing(area.get_parent())
+
+func _on_RockHitBox_area_exited(area):
+	stop_pushing(area.get_parent())
