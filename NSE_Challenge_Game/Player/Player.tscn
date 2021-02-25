@@ -16,12 +16,10 @@
 [ext_resource path="res://Sounds/temp_player_fall.wav" type="AudioStream" id=14]
 [ext_resource path="res://Player/RockHitBox.gd" type="Script" id=15]
 
-[sub_resource type="BoxShape" id=64]
-extents = Vector3( 1, 2, 1 )
+[sub_resource type="CylinderShape" id=66]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="CylinderShape" id=65]
 resource_local_to_scene = true
-extents = Vector3( 1, 2, 1 )
 
 [sub_resource type="CapsuleShape" id=2]
 
@@ -16529,11 +16527,11 @@ collision_mask = 512
 script = ExtResource( 15 )
 
 [node name="CollisionShape" type="CollisionShape" parent="RockHitBox"]
-shape = SubResource( 64 )
+shape = SubResource( 66 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 65 )
 
 [node name="PushBox" parent="." instance=ExtResource( 2 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0.167053, 0.00317383, -4.98615 )
@@ -16568,7 +16566,7 @@ disabled = true
 transform = Transform( -1, 3.25841e-07, 5.30863e-14, 0, -1.62921e-07, 1, 3.25841e-07, 1, 1.62921e-07, 0, -0.985485, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.0590932, 0.162357, 2.6077e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
+transform = Transform( 0.984961, 0.0590932, 0.162357, 2.42144e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
