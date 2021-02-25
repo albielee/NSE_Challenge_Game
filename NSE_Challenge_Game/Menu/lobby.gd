@@ -1,5 +1,17 @@
 extends Control
 
+enum {
+	JOIN,
+	HOST,
+	EXIT,
+	MENU,
+	OPTIONS,
+	PLAYERS
+}
+var transition = null
+var game_started = false
+onready var l_cam = get_node("/root/LobbyWorld/LobbyCamera")
+
 func _ready():
 	# Called every time the node is added to the scene.
 	gamestate.connect("connection_failed", self, "_on_connection_failed")
@@ -16,6 +28,15 @@ func _ready():
 		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
 		$Menu/Host/Hosting/Name.text = desktop_path[desktop_path.size() - 2]
 
+func _process(delta):
+	if(game_started):
+		if(!l_cam.travelling):
+			#Setup round settings for starting the game
+			var roundSettings = []
+			roundSettings.append($Players/MapSelector/Label.text)
+			gamestate.begin_game(roundSettings)
+
+
 func _on_host_pressed():
 	if $Menu/Host/Hosting/Name.text == "":
 		$Menu/Host/Hosting/ErrorLabel.text = "Invalid name!"
@@ -27,7 +48,10 @@ func _on_host_pressed():
 		return
 	
 	$Menu/Host.hide()
-	$Players.show()
+	$Menu.hide()
+	transition = PLAYERS
+	play_transition_animation("players", false)
+	
 	$Menu/Host/Hosting/ErrorLabel.text = ""
 	
 	var player_name = $Menu/Host/Hosting/Name.text
@@ -46,9 +70,11 @@ func _on_join_pressed():
 	
 	$Connect/ErrorLabel.text = ""
 	$Connect.hide()
-	$Players.show()
-	$Connect/Join.disabled = true
-	$Menu/Host/Hosting/StartServerButton.disabled = true
+	$Menu.hide()
+	transition = PLAYERS
+	play_transition_animation("players", false)
+	$Connect/join.disabled = true
+	$Menu/Host/Hosting/host.disabled = true
 	
 	var player_name = $Connect/Name.text
 	gamestate.join_game(ip, player_name)
@@ -94,12 +120,36 @@ func refresh_lobby():
 
 func _on_HostButton_pressed():
 	$Menu/Main.hide()
-	$Menu/Host.show()
+	transition = HOST
+	play_transition_animation("host", false)
 
 func _on_JoinButton_pressed():
 	$Menu/Main.hide()
-	$Connect.show()
+	transition = JOIN
+	play_transition_animation("join", false)
 
+func _on_TransitionAnims_animation_finished():
+	$TransitionAnims.hide()
+	$TransitionAnims.playing = false
+	$TransitionAnims.frame = 0
+	
+	if(transition == JOIN):
+		$Connect.show()
+	elif(transition == HOST):
+		$Menu/Host.show()
+	elif(transition == PLAYERS):
+		$Players.show()
+	elif(transition == OPTIONS):
+		pass
+	elif(transition == MENU):
+		$Menu/Main.show()
+	
+func play_transition_animation(anim_name, backwards):
+	if(backwards):
+		$TransitionAnims.frame = 6
+	$TransitionAnims.show()
+	$TransitionAnims.play(anim_name, backwards)
+	
 func _on_ExitButton_pressed():
 	#close the game
 	get_tree().quit()
@@ -112,13 +162,19 @@ func _on_BackButton_pressed():
 	$Menu/Options.hide()
 	$Connect.hide()
 	$Menu/Host.hide()
-	$Menu/Main.show()
+	if(transition == JOIN):
+		play_transition_animation("join", true)
+	elif(transition == HOST):
+		play_transition_animation("host", true)
+	elif(transition == OPTIONS):
+		play_transition_animation("options", true)
+
+	transition = MENU
 
 func _on_Start_pressed():
-	#Setup round settings for starting the game
-	var roundSettings = []
-	roundSettings.append($Players/MapSelector/Label.text)
+	game_started = true
+	l_cam.start_travelling(Vector3(0,100,20), Vector3(-10,0,0))
 	
-	gamestate.begin_game(roundSettings)
+
 
 

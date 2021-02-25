@@ -9,31 +9,7 @@
 [ext_resource path="res://Assets/World/Tall Grass/GrassCluster.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/World/Clouds/Cloud.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sounds/wind_ambient.wav" type="AudioStream" id=9]
-
-[sub_resource type="Environment" id=1]
-background_color = Color( 0.431373, 0.431373, 0.431373, 0.333333 )
-background_energy = 0.0
-ambient_light_color = Color( 0.709804, 0.313726, 0.533333, 0.439216 )
-ambient_light_energy = 0.65
-fog_enabled = true
-fog_color = Color( 1, 1, 1, 1 )
-fog_sun_color = Color( 0.996078, 0.682353, 0.203922, 1 )
-fog_depth_begin = 11.4
-fog_depth_end = 231.9
-fog_depth_curve = 1.31951
-fog_transmit_curve = 1.36604
-tonemap_mode = 1
-tonemap_exposure = 1.7
-ss_reflections_enabled = true
-ss_reflections_fade_in = 0.0724453
-dof_blur_far_enabled = true
-dof_blur_far_distance = 15.66
-dof_blur_far_transition = 10.03
-dof_blur_far_amount = 0.04
-dof_blur_far_quality = 2
-dof_blur_near_transition = 0.63
-glow_intensity = 1.85
-glow_bloom = 0.01
+[ext_resource path="res://Worlds/camEnv.tres" type="Environment" id=10]
 
 [sub_resource type="CubeMesh" id=2]
 
@@ -76,12 +52,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.63685 )
 "Camera",
 ] instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 10, 10 )
-environment = SubResource( 1 )
+environment = ExtResource( 10 )
 projection = 2
+current = true
 fov = 65.0
 size = 0.1
 near = 0.06
 far = 310.9
+
+[node name="target_pos" parent="Camera" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29.2794, 24.5683 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795335, 0 )
@@ -336,3 +316,5 @@ pitch_scale = 0.5
 autoplay = true
 [connection signal="timeout" from="RockNetworkHandler/SendData" to="RockNetworkHandler" method="_on_Timer_timeout"]
 [connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
+
+[editable path="Camera"]

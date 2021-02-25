@@ -2,8 +2,13 @@ extends Camera
 
 var raycast_position = Vector3.ZERO
 
+var travelling = false
+onready var tp = $target_pos
+
 func _physics_process(_delta):
 	cursor_raycast()
+	if(travelling):
+		travel_to_locrot()
 
 func cursor_raycast():
 	if (InputEventMouseMotion):
@@ -16,3 +21,11 @@ func cursor_raycast():
 		var raycast_result = space_state.intersect_ray(raycast_from, raycast_to,[self],8, true, true)
 		if(raycast_result):
 			raycast_position = raycast_result.position
+
+func travel_to_locrot():
+	if((transform.origin-tp.transform.origin).length() < 1):
+		travelling = false
+	transform = transform.interpolate_with(tp.transform, 0.001)
+	
+func start_travelling():
+	travelling = true

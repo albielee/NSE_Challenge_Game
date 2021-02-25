@@ -85,12 +85,15 @@ func unregister_player(id):
 
 
 remote func pre_start_game(spawn_points, roundSettings):
+	
 	# Change scene.
+	get_tree().change_scene("res://Worlds/world.tscn")
 	var map = roundSettings[0]
 	var world = load(map).instance()
+	
 	get_tree().get_root().add_child(world)
 	
-	get_tree().get_root().get_node("Lobby").hide()
+	#get_tree().get_root().get_node("LobbyWorld").get_node("Lobby").hide()
 	
 	var player_scene = load("res://Player/Player.tscn")
 	for p_id in spawn_points:
@@ -123,6 +126,7 @@ remote func pre_start_game(spawn_points, roundSettings):
 
 remote func post_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
+	get_node("/root/World/Camera/").start_travelling()
 
 
 remote func ready_to_start(id):

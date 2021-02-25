@@ -10,16 +10,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColourLabel" type="Label" parent="."]
-margin_left = -56.0
-margin_top = -24.0
-margin_right = 71.0
-margin_bottom = -10.0
-text = "Choose your colour:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="SelectRight" type="Button" parent="."]
 margin_left = 24.0
 margin_top = -8.0
@@ -44,5 +34,8 @@ margin_left = -32.0
 margin_top = -8.0
 margin_right = -20.0
 margin_bottom = 12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="SelectRight" to="." method="_on_SelectRight_pressed"]
 [connection signal="pressed" from="SelectLeft" to="." method="_on_SelectLeft_pressed"]
