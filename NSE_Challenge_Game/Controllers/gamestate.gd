@@ -28,13 +28,10 @@ signal game_ended()
 signal game_error(what)
 
 func _process(delta):
-	print("joined = " + str(joined))
-	print("run_once = " + str(run_once))
 	if(joined and run_once):
 		if(!get_tree().is_network_server()):
 			call_server_get_available_colour()
 			run_once = false
-			print("called")
 
 # Callback from SceneTree.
 func _player_connected(id):

@@ -31,7 +31,6 @@ func cursor_raycast():
 
 func travel_to_locrot(spd):
 	if(travelling):
-		print((transform.origin-tp.transform.origin).length())
 		if((transform.origin-tp.transform.origin).length() < 1):
 			travelling = false
 		transform = transform.interpolate_with(tp.transform, spd)
