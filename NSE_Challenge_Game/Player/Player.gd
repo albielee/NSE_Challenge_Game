@@ -299,6 +299,10 @@ func handle_animations(animation):
 		animationstate.travel(animation)
 	prevanim = animationstate.get_current_node()
 
+func _integrate_forces(s):
+	if state == MOVE:
+		rotation = rotation.linear_interpolate(mouse_angle, 1)
+
 #Takes given control input and updates actions of the player
 func update(delta):
 	if(mode != MODE_RIGID):
@@ -376,7 +380,7 @@ func move_state(delta, mouse_angle):
 		anim = "idle"
 		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
-	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+#	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull
@@ -621,14 +625,14 @@ func shove_state(delta):
 	
 	set_angular_velocity(rock_angle*TURN_SPEED*1000*delta)
 	if rock_angle.y < PI/8 and rock_angle.y > -PI/8: 
-		set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,true)
-	else: set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
+		pass
+	else: pass
 	
 	move()
 
 func stop_shove():
 	state = MOVE
-	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
+#	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
 
 func set_player_name(name):
 	player_name = name
@@ -648,7 +652,9 @@ func angle_update():
 func get_mouse_angle(current_angle, position):
 	var up_dir = Vector3.UP
 	var target_angle_y = get_transform().looking_at(position, up_dir).basis.get_euler().y;
-	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
+#	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
+	var rotation_angle = wrapf(target_angle_y, -PI, PI);
+	
 	return up_dir * rotation_angle;
 
 #On timeout, update data back to server: Position, rotation, animation
