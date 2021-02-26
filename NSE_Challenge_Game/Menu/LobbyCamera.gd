@@ -1,12 +1,13 @@
 extends Camera
 
 var travelling = false
-var speed = 1
+var speed = 0
 
-onready var start_pos = transform.origin
-onready var start_rot = transform.basis.get_euler()
-
-onready var tp = $target_pos
+onready var tp = get_parent().get_node("target_pos")
+onready var pos_vec = (tp.transform.origin-transform.origin)
+onready var rot_vec_x = (tp.transform.basis.x-transform.basis.x)
+onready var rot_vec_y = (tp.transform.basis.y-transform.basis.y)
+onready var rot_vec_z = (tp.transform.basis.z-transform.basis.z)
 
 func _process(delta):
 	if(travelling):
@@ -16,7 +17,17 @@ func travel_to_locrot(spd):
 	if((transform.origin-tp.transform.origin).length() < 1):
 		travelling = false
 	
-	transform = transform.interpolate_with(tp.transform, spd)
+	if((transform.origin-tp.transform.origin).length() < 20):
+		set_zfar(1)
 
-func start_travelling(to_pos, to_rot):
+	var d = transform.origin-tp.transform.origin
+	if(speed < 0.4):
+		speed += 0.0002
+	transform.origin += pos_vec*spd
+	transform.basis.y += rot_vec_y*spd
+	transform.basis.z += rot_vec_z*spd
+	transform.basis.x += rot_vec_x*spd
+	#transform = transform.interpolate_with(tp.transform, spd)
+
+func start_travelling():
 	travelling = true

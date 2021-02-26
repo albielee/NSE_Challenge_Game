@@ -10,7 +10,7 @@ enum {
 }
 var transition = null
 var game_started = false
-onready var l_cam = get_node("/root/LobbyWorld/LobbyCamera")
+onready var l_cam = get_parent().get_node("Camera")
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -173,7 +173,7 @@ func _on_BackButton_pressed():
 
 func _on_Start_pressed():
 	game_started = true
-	l_cam.start_travelling(Vector3(0,100,20), Vector3(-10,0,0))
+	l_cam.start_travelling()
 	
 
 

@@ -2,13 +2,20 @@ extends Camera
 
 var raycast_position = Vector3.ZERO
 
-var travelling = false
-onready var tp = $target_pos
+var speed = 1
+var travelling = true
+var sound_played = false #idk why i have to do this but it calls ready twice???
+onready var tp = get_parent().get_node("target_pos")
+
+func _ready():
+	pass
+	#if(!sound_played):
+	#	sound_played = true
+	#	$CloudSwoosh.play()
 
 func _physics_process(_delta):
 	cursor_raycast()
-	if(travelling):
-		travel_to_locrot()
+	travel_to_locrot(speed*_delta)
 
 func cursor_raycast():
 	if (InputEventMouseMotion):
@@ -22,10 +29,12 @@ func cursor_raycast():
 		if(raycast_result):
 			raycast_position = raycast_result.position
 
-func travel_to_locrot():
-	if((transform.origin-tp.transform.origin).length() < 1):
-		travelling = false
-	transform = transform.interpolate_with(tp.transform, 0.001)
+func travel_to_locrot(spd):
+	if(travelling):
+		print((transform.origin-tp.transform.origin).length())
+		if((transform.origin-tp.transform.origin).length() < 1):
+			travelling = false
+		transform = transform.interpolate_with(tp.transform, spd)
 	
 func start_travelling():
 	travelling = true

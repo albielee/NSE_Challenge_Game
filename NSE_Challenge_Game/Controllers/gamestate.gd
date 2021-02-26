@@ -126,7 +126,6 @@ remote func pre_start_game(spawn_points, roundSettings):
 
 remote func post_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
-	get_node("/root/World/Camera/").start_travelling()
 
 
 remote func ready_to_start(id):

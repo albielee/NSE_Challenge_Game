@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://Menu/MapSelector/MapSelector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menu/ColourSelector/ColourSelection.gd" type="Script" id=2]
@@ -17,353 +17,356 @@
 [ext_resource path="res://Assets/Menu/HostPressed.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Menu/HostMenu.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Menu/JoinMenu.png" type="Texture" id=17]
-[ext_resource path="res://Worlds/camEnv.tres" type="Environment" id=18]
+[ext_resource path="res://Worlds/Camera.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Menu/backbutton.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Menu/playersMenuTrans.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Menu/playersMenu.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Menu/TitlePillar.png" type="Texture" id=22]
 [ext_resource path="res://Menu/LobbyCamera.gd" type="Script" id=23]
+[ext_resource path="res://Worlds/WorldLight.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/World/Clouds/cloud1.obj" type="ArrayMesh" id=25]
+[ext_resource path="res://Worlds/Ambiance.tscn" type="PackedScene" id=26]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 19 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 19 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=60]
 atlas = ExtResource( 19 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=61]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 58 ) ],
 "loop": true,
 "name": "hover",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ) ],
+"frames": [ SubResource( 59 ) ],
 "loop": true,
 "name": "focused",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ) ],
+"frames": [ SubResource( 60 ) ],
 "loop": true,
 "name": "unfocused",
 "speed": 5.0
 } ]
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxEmpty" id=86]
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxEmpty" id=87]
 
-[sub_resource type="StyleBoxEmpty" id=7]
+[sub_resource type="StyleBoxEmpty" id=83]
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=88]
 
-[sub_resource type="StyleBoxEmpty" id=9]
+[sub_resource type="StyleBoxEmpty" id=84]
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id=85]
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=64]
 
-[sub_resource type="StyleBoxEmpty" id=12]
+[sub_resource type="StyleBoxEmpty" id=63]
 
-[sub_resource type="StyleBoxEmpty" id=13]
+[sub_resource type="StyleBoxEmpty" id=56]
 
-[sub_resource type="StyleBoxEmpty" id=14]
+[sub_resource type="StyleBoxEmpty" id=65]
 
-[sub_resource type="StyleBoxEmpty" id=15]
+[sub_resource type="StyleBoxEmpty" id=57]
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 6 )
 region = Rect2( 105, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 6 )
 region = Rect2( 210, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 6 )
 region = Rect2( 315, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 6 )
 region = Rect2( 420, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
-[sub_resource type="SpriteFrames" id=23]
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), ExtResource( 11 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "hover",
 "speed": 60.0
 }, {
-"frames": [ SubResource( 21 ) ],
+"frames": [ SubResource( 12 ) ],
 "loop": true,
 "name": "focused",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 22 ) ],
+"frames": [ SubResource( 11 ) ],
 "loop": true,
 "name": "unfocused",
 "speed": 5.0
 } ]
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 9 )
+region = Rect2( 105, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 9 )
+region = Rect2( 210, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 9 )
+region = Rect2( 315, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 9 )
+region = Rect2( 420, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 9 )
+region = Rect2( 525, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 9 )
+region = Rect2( 630, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 9 )
+region = Rect2( 735, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="SpriteFrames" id=21]
+animations = [ {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "hover",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 19 ) ],
+"loop": true,
+"name": "focused",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 30.0
+} ]
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 10 )
+region = Rect2( 105, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 10 )
+region = Rect2( 210, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 9 )
-region = Rect2( 105, 0, 105, 36 )
+atlas = ExtResource( 10 )
+region = Rect2( 315, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 9 )
-region = Rect2( 210, 0, 105, 36 )
+atlas = ExtResource( 10 )
+region = Rect2( 420, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 9 )
-region = Rect2( 315, 0, 105, 36 )
+atlas = ExtResource( 10 )
+region = Rect2( 525, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 9 )
-region = Rect2( 420, 0, 105, 36 )
+atlas = ExtResource( 10 )
+region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 9 )
-region = Rect2( 525, 0, 105, 36 )
+atlas = ExtResource( 10 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 9 )
-region = Rect2( 630, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 9 )
-region = Rect2( 735, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 9 )
+atlas = ExtResource( 10 )
 region = Rect2( 0, 0, 105, 36 )
 
-[sub_resource type="SpriteFrames" id=32]
+[sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
 "loop": true,
 "name": "hover",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 30 ) ],
+"frames": [ SubResource( 28 ) ],
 "loop": true,
 "name": "focused",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 31 ) ],
+"frames": [ SubResource( 29 ) ],
 "loop": true,
 "name": "unfocused",
-"speed": 30.0
+"speed": 5.0
 } ]
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 12 )
+region = Rect2( 105, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 10 )
-region = Rect2( 105, 0, 105, 36 )
+atlas = ExtResource( 12 )
+region = Rect2( 210, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 10 )
-region = Rect2( 210, 0, 105, 36 )
+atlas = ExtResource( 12 )
+region = Rect2( 315, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 10 )
-region = Rect2( 315, 0, 105, 36 )
+atlas = ExtResource( 12 )
+region = Rect2( 420, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 10 )
-region = Rect2( 420, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 12 )
 region = Rect2( 525, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 10 )
-region = Rect2( 630, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 10 )
-region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 105, 36 )
-
-[sub_resource type="SpriteFrames" id=41]
-animations = [ {
-"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
-"loop": true,
-"name": "hover",
-"speed": 30.0
-}, {
-"frames": [ SubResource( 39 ) ],
-"loop": true,
-"name": "focused",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 40 ) ],
-"loop": true,
-"name": "unfocused",
-"speed": 5.0
-} ]
-
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 12 )
-region = Rect2( 105, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 12 )
-region = Rect2( 210, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 12 )
-region = Rect2( 315, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 12 )
-region = Rect2( 420, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 12 )
-region = Rect2( 525, 0, 105, 36 )
-
-[sub_resource type="AtlasTexture" id=47]
 atlas = ExtResource( 12 )
 region = Rect2( 630, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=48]
+[sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 12 )
 region = Rect2( 735, 0, 105, 36 )
 
-[sub_resource type="AtlasTexture" id=49]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 105, 36 )
 
-[sub_resource type="SpriteFrames" id=50]
+[sub_resource type="SpriteFrames" id=39]
 animations = [ {
-"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 40 ) ],
 "loop": true,
 "name": "hover",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 48 ) ],
+"frames": [ SubResource( 37 ) ],
 "loop": true,
 "name": "focused",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 49 ) ],
+"frames": [ SubResource( 38 ) ],
 "loop": true,
 "name": "unfocused",
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=51]
+[sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 13 )
 region = Rect2( 141, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=52]
+[sub_resource type="AtlasTexture" id=73]
 atlas = ExtResource( 13 )
 region = Rect2( 282, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=53]
+[sub_resource type="AtlasTexture" id=74]
 atlas = ExtResource( 13 )
 region = Rect2( 423, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=54]
+[sub_resource type="AtlasTexture" id=75]
 atlas = ExtResource( 13 )
 region = Rect2( 564, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=55]
+[sub_resource type="AtlasTexture" id=76]
 atlas = ExtResource( 13 )
 region = Rect2( 705, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=56]
+[sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=57]
+[sub_resource type="AtlasTexture" id=78]
 atlas = ExtResource( 15 )
 region = Rect2( 141, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=58]
+[sub_resource type="AtlasTexture" id=79]
 atlas = ExtResource( 15 )
 region = Rect2( 282, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=59]
+[sub_resource type="AtlasTexture" id=80]
 atlas = ExtResource( 15 )
 region = Rect2( 423, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=60]
+[sub_resource type="AtlasTexture" id=81]
 atlas = ExtResource( 15 )
 region = Rect2( 564, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=61]
+[sub_resource type="AtlasTexture" id=82]
 atlas = ExtResource( 15 )
 region = Rect2( 705, 0, 141, 168 )
-
-[sub_resource type="AtlasTexture" id=62]
-atlas = ExtResource( 20 )
-region = Rect2( 0, 0, 141, 168 )
-
-[sub_resource type="AtlasTexture" id=63]
-atlas = ExtResource( 20 )
-region = Rect2( 141, 0, 141, 168 )
-
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 20 )
-region = Rect2( 282, 0, 141, 168 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 20 )
-region = Rect2( 423, 0, 141, 168 )
 
 [sub_resource type="AtlasTexture" id=66]
 atlas = ExtResource( 20 )
-region = Rect2( 564, 0, 141, 168 )
+region = Rect2( 0, 0, 141, 168 )
 
 [sub_resource type="AtlasTexture" id=67]
 atlas = ExtResource( 20 )
+region = Rect2( 141, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 20 )
+region = Rect2( 282, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 20 )
+region = Rect2( 423, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 20 )
+region = Rect2( 564, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 20 )
 region = Rect2( 705, 0, 141, 168 )
 
-[sub_resource type="SpriteFrames" id=68]
+[sub_resource type="SpriteFrames" id=47]
 animations = [ {
-"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ) ],
+"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ) ],
 "loop": true,
 "name": "join",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ) ],
 "loop": true,
 "name": "host",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ) ],
+"frames": [ SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
 "loop": true,
 "name": "players",
 "speed": 30.0
 } ]
 
-[sub_resource type="CubeMesh" id=69]
+[sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="SpatialMaterial" id=70]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 
-[sub_resource type="PlaneMesh" id=71]
+[sub_resource type="PlaneMesh" id=3]
 
 [node name="LobbyWorld" type="Spatial"]
 
@@ -417,7 +420,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Players/ColourSelection/SelectRight"]
-frames = SubResource( 4 )
+frames = SubResource( 61 )
 animation = "unfocused"
 centered = false
 
@@ -435,7 +438,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Players/ColourSelection/SelectLeft"]
-frames = SubResource( 4 )
+frames = SubResource( 61 )
 animation = "unfocused"
 centered = false
 
@@ -470,12 +473,12 @@ margin_right = 139.0
 margin_bottom = 209.5
 size_flags_horizontal = 2
 size_flags_vertical = 2
-custom_styles/cursor = SubResource( 5 )
-custom_styles/selected_focus = SubResource( 6 )
-custom_styles/bg_focus = SubResource( 7 )
-custom_styles/cursor_unfocused = SubResource( 8 )
-custom_styles/selected = SubResource( 9 )
-custom_styles/bg = SubResource( 10 )
+custom_styles/cursor = SubResource( 86 )
+custom_styles/selected_focus = SubResource( 87 )
+custom_styles/bg_focus = SubResource( 83 )
+custom_styles/cursor_unfocused = SubResource( 88 )
+custom_styles/selected = SubResource( 84 )
+custom_styles/bg = SubResource( 85 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -516,9 +519,9 @@ margin_left = 117.5
 margin_top = 107.5
 margin_right = 199.5
 margin_bottom = 131.5
-custom_styles/read_only = SubResource( 11 )
-custom_styles/focus = SubResource( 12 )
-custom_styles/normal = SubResource( 13 )
+custom_styles/read_only = SubResource( 64 )
+custom_styles/focus = SubResource( 63 )
+custom_styles/normal = SubResource( 56 )
 text = "127.0.0.1"
 align = 1
 max_length = 15
@@ -535,8 +538,8 @@ margin_right = 199.5
 margin_bottom = 74.5005
 size_flags_horizontal = 2
 size_flags_vertical = 2
-custom_styles/focus = SubResource( 14 )
-custom_styles/normal = SubResource( 15 )
+custom_styles/focus = SubResource( 65 )
+custom_styles/normal = SubResource( 57 )
 align = 1
 max_length = 8
 placeholder_text = "Your Name"
@@ -568,7 +571,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Connect/join"]
-frames = SubResource( 23 )
+frames = SubResource( 9 )
 animation = "unfocused"
 centered = false
 
@@ -586,7 +589,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Connect/BackButton"]
-frames = SubResource( 4 )
+frames = SubResource( 61 )
 animation = "unfocused"
 centered = false
 
@@ -639,7 +642,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/JoinButton"]
-frames = SubResource( 23 )
+frames = SubResource( 9 )
 animation = "unfocused"
 centered = false
 
@@ -656,7 +659,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/HostButton"]
-frames = SubResource( 32 )
+frames = SubResource( 21 )
 animation = "unfocused"
 centered = false
 
@@ -673,7 +676,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/OptionsButton"]
-frames = SubResource( 41 )
+frames = SubResource( 30 )
 animation = "unfocused"
 centered = false
 
@@ -690,7 +693,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/ExitButton"]
-frames = SubResource( 50 )
+frames = SubResource( 39 )
 animation = "unfocused"
 centered = false
 
@@ -719,9 +722,9 @@ margin_left = 131.0
 margin_top = -39.0
 margin_right = 213.0
 margin_bottom = -15.0
-custom_styles/read_only = SubResource( 11 )
-custom_styles/focus = SubResource( 12 )
-custom_styles/normal = SubResource( 13 )
+custom_styles/read_only = SubResource( 64 )
+custom_styles/focus = SubResource( 63 )
+custom_styles/normal = SubResource( 56 )
 text = "127.0.0.1"
 align = 1
 max_length = 15
@@ -745,7 +748,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Host/Hosting/host"]
-frames = SubResource( 32 )
+frames = SubResource( 21 )
 animation = "unfocused"
 centered = false
 
@@ -756,8 +759,8 @@ margin_right = 213.0
 margin_bottom = -72.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-custom_styles/focus = SubResource( 14 )
-custom_styles/normal = SubResource( 15 )
+custom_styles/focus = SubResource( 65 )
+custom_styles/normal = SubResource( 57 )
 align = 1
 max_length = 8
 placeholder_text = "Your Name"
@@ -788,7 +791,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Host/BackButton"]
-frames = SubResource( 4 )
+frames = SubResource( 61 )
 animation = "unfocused"
 centered = false
 
@@ -818,29 +821,321 @@ texture = ExtResource( 4 )
 [node name="TransitionAnims" type="AnimatedSprite" parent="Lobby"]
 visible = false
 position = Vector2( 386, 244 )
-frames = SubResource( 68 )
+frames = SubResource( 47 )
 animation = "players"
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 20, 0, 0, 0, 1095.71, 0, 0, 0, 7, 0, 140.603, 0.268716 )
-mesh = SubResource( 69 )
-material/0 = SubResource( 70 )
+[node name="WorldLight" parent="." instance=ExtResource( 24 )]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.615709, 0.00966417, 0.787915, -0.297, 0.929024, 0.220693, -0.729859, -0.369893, 0.574879, 0, 0, 0 )
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 7.5, 0, 0, 0, 1095.71, 0, 0, 0, 6.8, 0, 140.603, 0.268716 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 30, 0, 0, 0, 1244.7, 0, 0, 0, 30, 0, 0, 0 )
-mesh = SubResource( 71 )
+transform = Transform( 400, 0, 0, 0, 1244.7, 0, 0, 0, 400, 0, 0, 0 )
+mesh = SubResource( 3 )
 material/0 = null
 
-[node name="LobbyCamera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.248, 8.8, 27.6167 )
-environment = ExtResource( 18 )
+[node name="target_pos" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.499999, 0.866024, 0, -0.866024, 0.499999, 0, 546.966, 16 )
+
+[node name="Clouds" type="Spatial" parent="target_pos"]
+
+[node name="cloud1" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 23.6566, 9.97787, -42.8649 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud2" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, -28.0535, -3.71133, -28.4038 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud3" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, -14.9693, 31.6128, -36.9933 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud4" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, -0.552727, -13.6791, -44.3357 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud5" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, 23.7301, 7.56458, -83.011 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud6" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, -29.1003, -3.21072, -70.2323 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud7" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, -13.7997, 31.3222, -78.3651 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud8" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, -1.69926, -14.7088, -85.2808 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud9" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -29.1, -62.5274, -94.2032 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud10" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 23.7752, -46.2041, -97.0698 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud11" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 8.37748, -70.4756, -71.2517 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud12" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -3.61876, -53.4194, -114.591 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud13" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -29.1, -28.5257, -165.379 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud14" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 23.7752, -12.2024, -168.246 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud15" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 8.37748, -36.4738, -142.428 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud16" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -3.61876, -19.4177, -185.767 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud17" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 87.0067, -92.6326, -128.367 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud18" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 34.7107, -104.876, -114.741 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud19" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 48.9077, -69.9312, -123.111 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud20" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 62.1759, -115.608, -130.231 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud21" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 67.7155, -9.04347, -104.504 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud22" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 15.4196, -21.287, -90.8779 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud23" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 29.6166, 13.6578, -99.2485 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud24" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 42.8848, -32.0188, -106.369 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud25" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -65.3827, -53.0578, -79.0927 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud26" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -117.679, -65.3013, -65.4663 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud27" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -103.482, -30.3566, -73.8369 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud28" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -90.2134, -76.0332, -80.957 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud29" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -21.008, -37.3674, -216.998 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud30" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -73.304, -49.611, -203.372 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud31" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -59.107, -14.6661, -211.743 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud32" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -45.8387, -60.3427, -218.862 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud33" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -21.008, -37.3675, -216.998 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud34" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -73.304, -49.6109, -203.372 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud35" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -59.107, -14.6661, -211.743 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud36" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -45.8387, -60.3427, -218.862 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud37" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 156.727, 21.056, -42.7032 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud38" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 169.811, 56.3802, -51.2928 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud39" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 184.227, 11.0883, -58.6352 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud40" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498966, 155.68, 21.5565, -84.5318 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud41" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 155.68, -37.7602, -108.503 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud42" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 119.397, -28.2904, -93.3921 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud43" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 67.1015, -40.5341, -79.7658 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud44" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 81.2985, -5.58928, -88.1364 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud45" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 94.5667, -51.2659, -95.2565 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud46" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 111.476, -24.8437, -217.671 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud47" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 138.941, -35.5753, -233.162 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud48" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.965927, 0, -0.258819, -0.224145, 0.500001, 0.836517, 0.12941, 0.866027, -0.482963, -143.969, 16.4571, -40.048 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud49" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.965927, 0, -0.258819, -0.224145, 0.500001, 0.836517, 0.12941, 0.866027, -0.482963, -147.578, -10.5471, -12.6523 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud50" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.965927, 0, -0.258819, -0.224145, 0.500001, 0.836517, 0.12941, 0.866027, -0.482963, -170.705, 1.45975, -53.0762 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud51" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.980571, 0, -0.196169, -0.169888, 0.500001, 0.8492, 0.0980846, 0.866027, -0.490286, -137.433, -19.1533, -61.0281 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud52" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.981129, 0, 0.193362, 0.167456, 0.500001, -0.849683, -0.096681, 0.866027, 0.490565, -147.626, -11.4165, -123.712 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud53" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -112.413, 5.08643, -112.662 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud54" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -66.4067, 34.2168, -122.923 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud55" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -71.2041, 7.32959, -95.5951 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud56" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -93.3369, 19.9654, -136.382 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud57" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -87.9062, -100.569, -173.952 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud58" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -114.836, -114.82, -187.41 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="Camera" parent="." instance=ExtResource( 18 )]
+transform = Transform( -1.62921e-07, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 8.14603e-08, -1.41093e-07, -21, 8, 0 )
 script = ExtResource( 23 )
 
-[node name="target_pos" type="Spatial" parent="LobbyCamera"]
-transform = Transform( 1, 0, 0, 0, -0.173648, -0.984806, 0, 0.984806, -0.173648, 0, 130.77, 30.1303 )
+[node name="Ambiance" parent="." instance=ExtResource( 26 )]
 [connection signal="focus_entered" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_entered"]
 [connection signal="focus_exited" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_exited"]
 [connection signal="mouse_entered" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_mouse_entered"]

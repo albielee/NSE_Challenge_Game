@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Worlds/camEnv.tres" type="Environment" id=1]
+
+[node name="Camera" type="Camera" groups=[
+"Camera",
+]]
+environment = ExtResource( 1 )
+projection = 2
+current = true
+fov = 65.0
+size = 0.1
+near = 0.06
+far = 310.9
