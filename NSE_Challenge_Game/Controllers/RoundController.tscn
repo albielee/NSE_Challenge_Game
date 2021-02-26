@@ -203,19 +203,19 @@ __meta__ = {
 
 [node name="Number1" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 520, 312 )
+position = Vector2( 384, 225 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 15 )
 
 [node name="Number2" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 520, 312 )
+position = Vector2( 384, 225 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 30 )
 
 [node name="Number3" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 520, 312 )
+position = Vector2( 384, 225 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 44 )
 
