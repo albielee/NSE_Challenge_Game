@@ -177,6 +177,13 @@ func begin_game(roundSettings):
 		
 	pre_start_game(spawn_points, roundSettings)
 
+func notify_clients_start_pressed():
+	rpc("start_pressed")
+	
+remote func start_pressed():
+	#get_tree().get_root().print_tree()
+	get_tree().get_root().get_node("LobbyWorld/Camera").start_travelling()
+
 remote func send_recieve_color(index):
 	if(get_tree().is_network_server()):
 		var sender_id = get_tree().get_rpc_sender_id()

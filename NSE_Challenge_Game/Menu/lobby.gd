@@ -172,6 +172,7 @@ func _on_BackButton_pressed():
 	transition = MENU
 
 func _on_Start_pressed():
+	gamestate.notify_clients_start_pressed()
 	game_started = true
 	l_cam.start_travelling()
 	
