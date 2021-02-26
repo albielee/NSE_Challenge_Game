@@ -95,6 +95,8 @@ export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
 var last_time = 0
+var turn_speed = TURN_SPEED
+var current_rotation = Vector3.ZERO
 
 onready var UPDATE_INTERVAL = 1.0 / $"/root/Settings".tickrate
 
@@ -119,6 +121,8 @@ var buffer = []
 var prev_speed = 0.0
 var next_speed = 0.0
 
+var _delta = 1
+
 func _ready():
 	set_linear_damp(10)
 	set_mass(MASS)
@@ -142,12 +146,15 @@ func _ready():
 	if network_handler.is_current_player(): playerid = get_tree().get_network_unique_id()
 
 func _physics_process(delta):
+	_delta = delta
 	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = player_col
 	current_time += delta
 	
 	#check if dead using networkhandler death
 	if(state != FALL and state != DEATH and network_handler.remote_dead):
 		state = FALL
+	
+	current_rotation = global_transform.basis.get_euler()
 	
 	#If current player: Give controls to host
 	#If other player: Receive the controls for that player
@@ -300,8 +307,8 @@ func handle_animations(animation):
 	prevanim = animationstate.get_current_node()
 
 func _integrate_forces(s):
-	if state == MOVE:
-		rotation = rotation.linear_interpolate(mouse_angle, 1)
+	print(s.transform.get_rotation())
+	rotation = s.transform.get_rotation().linear_interpolate(mouse_angle, 1)
 
 #Takes given control input and updates actions of the player
 func update(delta):
@@ -402,7 +409,7 @@ func move_state(delta, mouse_angle):
 					push_mouse_position=mouse_position
 					state = PUSH
 				if(pushpull==-1 and push_cooldown==0):
-					pass
+					state = PULL
 				elif(pushpull==0):
 					push_cooldown=0
 					if(shovable == true):

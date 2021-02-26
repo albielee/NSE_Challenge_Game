@@ -7,8 +7,8 @@ onready var tp = $target_pos
 
 func _physics_process(_delta):
 	cursor_raycast()
-	if(travelling):
-		travel_to_locrot()
+#	if(travelling):
+#		travel_to_locrot()
 
 func cursor_raycast():
 	if (InputEventMouseMotion):
