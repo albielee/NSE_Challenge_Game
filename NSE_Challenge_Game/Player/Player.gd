@@ -174,8 +174,8 @@ func handle_sounds():
 	if(anim == "fall"):
 		#if(!$Sounds/player_fall.playing):
 			#$Sounds/player_fall.play()
-		if(!$Sounds/tempplayerfall.playing):	
-			$Sounds/tempplayerfall.play()
+		if(!$Sounds/player_fall.playing):	
+			$Sounds/player_fall.play()
 	else:
 		$Sounds/player_fall.stop()
 
