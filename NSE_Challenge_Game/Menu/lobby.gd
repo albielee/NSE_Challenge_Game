@@ -73,8 +73,8 @@ func _on_join_pressed():
 	$Menu.hide()
 	transition = PLAYERS
 	play_transition_animation("players", false)
-	$Connect/join.disabled = true
-	$Menu/Host/Hosting/host.disabled = true
+	#$Connect/join.disabled = true
+	#$Menu/Host/Hosting/host.disabled = true
 	
 	var player_name = $Connect/Name.text
 	gamestate.join_game(ip, player_name)
@@ -143,6 +143,7 @@ func _on_TransitionAnims_animation_finished():
 		pass
 	elif(transition == MENU):
 		$Menu/Main.show()
+		$Menu.show()
 	
 func play_transition_animation(anim_name, backwards):
 	if(backwards):
@@ -162,12 +163,15 @@ func _on_BackButton_pressed():
 	$Menu/Options.hide()
 	$Connect.hide()
 	$Menu/Host.hide()
+	$Players.hide()
 	if(transition == JOIN):
 		play_transition_animation("join", true)
 	elif(transition == HOST):
 		play_transition_animation("host", true)
 	elif(transition == OPTIONS):
 		play_transition_animation("options", true)
+	elif(transition == PLAYERS):
+		play_transition_animation("players", true)
 
 	transition = MENU
 
@@ -177,5 +181,5 @@ func _on_Start_pressed():
 	l_cam.start_travelling()
 	
 
-
-
+func _on_LeaveButton_pressed():
+	gamestate.player_leave_button()

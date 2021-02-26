@@ -28,10 +28,13 @@ signal game_ended()
 signal game_error(what)
 
 func _process(delta):
+	print("joined = " + str(joined))
+	print("run_once = " + str(run_once))
 	if(joined and run_once):
 		if(!get_tree().is_network_server()):
 			call_server_get_available_colour()
 			run_once = false
+			print("called")
 
 # Callback from SceneTree.
 func _player_connected(id):
@@ -41,11 +44,14 @@ func _player_connected(id):
 
 # Callback from SceneTree.
 func _player_disconnected(id):
+	print("my pdisconnecto")
 	if has_node("/root/World"): # Game is in progress.
 		if get_tree().is_network_server():
 			emit_signal("game_error", "Player " + players[id] + " disconnected")
 			print("I left")
 			end_game()
+		else:
+			unregister_player(id)
 	else: # Game is not in progress.
 		# Unregister this player.
 		unregister_player(id)
@@ -148,6 +154,8 @@ func host_game(new_player_name):
 
 
 func join_game(ip, new_player_name):
+	var joined = false
+	var run_once = true
 	player_name = new_player_name
 	var client = NetworkedMultiplayerENet.new()
 	client.create_client(ip, DEFAULT_PORT)
@@ -229,6 +237,7 @@ remote func get_available_colour():
 		var sender_id = get_tree().get_rpc_sender_id()
 		rpc_id(sender_id, "recieve_colour_index", sender_id, i)
 		players_colour[sender_id] = i
+		print(players_colour)
 	
 		
 func call_server_get_available_colour():
@@ -245,7 +254,11 @@ func end_game():
 #
 #	emit_signal("game_ended")
 #	players.clear()
-
+func player_leave_button():
+	joined = false
+	run_once = true
+	player_colour_index = 0
+	get_tree().get_network_peer().close_connection()
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
