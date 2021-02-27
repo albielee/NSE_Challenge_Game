@@ -78,17 +78,22 @@ func do_push():
 		for i in rocks:
 			var dist = i.global_transform.origin.distance_to(player_position)
 			rockdic[dist] = i
-			if dist < mini and not i.flying: mini = dist
+			if dist < mini and not (i.flying): mini = dist
 		if (rock==null and mini < 50):
 			rock=rockdic[mini]
 			rock_position = rock.global_transform.origin
-			rock.add_force(knockback_vector*PUSH_POWER)
+			if mini > rock.size+3:
+				rock.add_force(knockback_vector*((PUSH_POWER/3)+(2*PUSH_POWER/(3*mini-rock.size+2))))
+			else: rock.add_force(knockback_vector*PUSH_POWER)
 			rock.add_force(Vector3.UP*20)
 			rock.in_zone(get_parent().playerid) #This is setting the rock to "push mode"
 			rock.get_parent().last_mover = get_parent().player_name #assigns player to rock
 		for i in rocks:
 			if (rock != i):
 				i.add_force(knockback_vector*PUSH_POWER/8)
+		if rock == null:
+			return false
+		return true
 
 func update_angle(target_angle_y, player_mouse_angle, player_pos):
 	current_target_angle = target_angle_y

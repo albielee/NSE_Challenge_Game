@@ -46,7 +46,7 @@ func _on_PullBox_area_entered(area):
 	if not area in rocks:
 		rocks.append(area)
 
-func do_push():
+func do_pull():
 	if not first_push:
 		first_push = true
 		var rockdic = {}
@@ -54,7 +54,7 @@ func do_push():
 		for i in rocks:
 			var dist = i.global_transform.origin.distance_to(player_position)
 			rockdic[dist] = i
-			if dist < mini and not i.flying: mini = dist
+			if dist < mini and not (i.flying): mini = dist
 		if (rock==null and mini < 50):
 			rock=rockdic[mini]
 			rock_position = rock.global_transform.origin
@@ -66,6 +66,8 @@ func do_push():
 		for i in rocks:
 			if (rock != i):
 				i.add_force(-knockback_vector*PUSH_POWER/8)
+		if rock == null:
+			first_push = false
 
 func update_angle(target_angle_y, player_mouse_angle, player_pos):
 	current_target_angle = target_angle_y

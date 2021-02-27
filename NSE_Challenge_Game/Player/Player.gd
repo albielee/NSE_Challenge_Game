@@ -473,7 +473,7 @@ func grab_state(delta):
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED/3,0,movement.y*MAX_SPEED/3), SPEED*delta)
 	else:
-		move_velocity = Vector3.ZERO
+		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED/5*delta)
 
@@ -553,7 +553,7 @@ func summon_power_up():
 
 func push_state(delta):
 	current_turn_speed = TURN_SPEED/40
-	move_velocity = Vector3.ZERO
+	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	if pushpull == 1:
 		#update pushbox shape
 		pushbox.shape.disabled = false
@@ -584,14 +584,14 @@ func push_complete():
 func pull_state(delta):
 #	mouse_angle = get_mouse_angle(get_transform().basis.get_euler().y, pull_mouse_position)
 	current_turn_speed = TURN_SPEED/40
-	move_velocity = Vector3.ZERO
+	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	if pushpull == -1:
 		pullbox.shape.disabled = false
 		if(pullbox.shape.shape.get_height()<80*SCALE):
 			pullbox.shape.shape.set_height(pullbox.shape.shape.get_height()+5)
 			pullbox.transform.origin.z-=2.5*SCALE
 		else:
-			pullbox.do_push()
+			pullbox.do_pull()
 		if(!started_pulling):
 			anim = "push_charge"
 			started_pulling = true
