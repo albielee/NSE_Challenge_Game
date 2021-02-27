@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Controllers/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Assets/World/grass_1.obj" type="ArrayMesh" id=2]
@@ -23,8 +23,33 @@ albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 
 [sub_resource type="BoxShape" id=4]
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 1.24447, 1.36228, 1.56839 )
+
+[sub_resource type="Curve" id=8]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0.520202, 3.63635 ), 0.0, 0.0, 0, 0, Vector2( 1, 152.727 ), 469.565, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.25
+emission_shape = 2
+emission_box_extents = Vector3( 3, 1, 1 )
+spread = 19.76
+gravity = Vector3( -2, -3, 0 )
+initial_velocity = 1.0
+linear_accel = 5.0
+linear_accel_curve = SubResource( 9 )
+angle = 180.0
+angle_random = 0.4
+scale = 0.15
+scale_random = 0.01
+color = Color( 0.709804, 0.313726, 0.533333, 1 )
+
+[sub_resource type="CubeMesh" id=7]
 
 [node name="World" type="Spatial"]
 
@@ -320,11 +345,19 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="CherryBlossom"]
 transform = Transform( 0.548724, 0, 0, 0, 1, 0, 0, 0, 0.538976, 1.12202, 0.0573067, -0.365935 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="CherryBlossom"]
 transform = Transform( 0.102231, 0, 0, 0, 1, 0, 0, 0, 0.538976, 1.20247, 0.0573067, 0.556083 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
+
+[node name="Particles" type="Particles" parent="CherryBlossom"]
+transform = Transform( -0.998935, 0, 0.0461476, 0, 1, 0, -0.0461476, 0, -0.998935, 0.592323, 3.58823, -1.19209e-07 )
+amount = 5
+lifetime = 2.65
+visibility_aabb = AABB( -1.31923, -2.22514, -1.43511, 2.63846, 4.45028, 2.87021 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
 [connection signal="timeout" from="RockNetworkHandler/SendData" to="RockNetworkHandler" method="_on_Timer_timeout"]
 [connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
 
