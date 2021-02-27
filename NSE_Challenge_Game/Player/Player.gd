@@ -70,6 +70,10 @@ var push_cooldown = 0
 var push_mouse_position = mouse_position
 var started_pushing = false
 
+var pull_cooldown = 0
+var pull_mouse_position = mouse_position
+var started_pulling = false
+
 var summon_size = 0.5
 var rock_summoned = false
 var growing_rock = null
@@ -329,9 +333,15 @@ func update(delta):
 	grabbox.cf_update(global_transform.origin, GRAB_POWER, GRAB_DROPOFF_VAL)
 	pushbox.knockback_vector=current_angle
 	pushbox.update_angle(get_transform().basis.get_euler().y, mouse_angle,  global_transform.origin)
+	pullbox.knockback_vector=current_angle
+	pullbox.update_angle(get_transform().basis.get_euler().y, mouse_angle,  global_transform.origin)
+	
 	if (pushbox.rock != null): 
 #		pushbox.update_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y, mouse_angle)
 		pushbox.update(mouse_position, get_transform().looking_at(pushbox.rock_position, Vector3.UP).basis.get_euler().y)
+	
+	if (pullbox.rock != null):
+		pullbox.update(mouse_position, get_transform().looking_at(pullbox.rock_position, Vector3.UP).basis.get_euler().y)
 	
 	match state:
 		MOVE:
@@ -354,7 +364,8 @@ func update(delta):
 			pause_state(delta)
 		SHOVE:
 			shove_state(delta)
-			
+	move()
+
 func set_last_attacker():
 	var bodies = get_colliding_bodies()
 	touched = false
@@ -409,13 +420,13 @@ func move_state(delta, mouse_angle):
 					push_mouse_position=mouse_position
 					state = PUSH
 				if(pushpull==-1 and push_cooldown==0):
-					pass
+					pull_mouse_position=mouse_position
+					state = PULL
 				elif(pushpull==0):
 					push_cooldown=0
 					if(contact == true):
 						if check_shove(s_rock):
 							state = SHOVE
-	move()
 
 func pause_state(delta):
 	current_turn_speed = TURN_SPEED
@@ -431,7 +442,6 @@ func dash_state(delta):
 	anim="dash"
 	current_turn_speed = TURN_SPEED
 	move_velocity = move_velocity.move_toward(dash_angle*MAX_SPEED*DASH_INC,ACCELERATION*DASH_INC*delta)
-	move()
 	if($ActionTimer.time_left < 0.02):
 		dash_finished()
 	
@@ -466,7 +476,6 @@ func grab_state(delta):
 		move_velocity = Vector3.ZERO
 	
 	set_angular_velocity(mouse_angle*TURN_SPEED/5*delta)
-	move()
 
 func grabbed_state(delta):
 	if (check_cancel_grab()):
@@ -484,7 +493,6 @@ func grabbed_state(delta):
 		move_velocity = Vector3.ZERO
 	
 	current_turn_speed = TURN_SPEED/4
-	move()
 
 func check_cancel_grab():
 	if (grab==0):
@@ -524,7 +532,7 @@ func summoning_state(delta):
 		var offset = 2.0
 		var y_rot = -get_transform().basis.get_euler().y
 		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
-		var start_size = 4.0
+		var start_size = 2.0
 		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
 		state = MOVE
 	elif(growing_rock != null):
@@ -544,18 +552,16 @@ func summon_power_up():
 			state=SUMMONING
 
 func push_state(delta):
-	mouse_angle = get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)
-	current_turn_speed = TURN_SPEED
+	current_turn_speed = TURN_SPEED/40
 	move_velocity = Vector3.ZERO
 	if pushpull == 1:
 		#update pushbox shape
 		pushbox.shape.disabled = false
-		if(pushbox.shape.shape.get_height()<40*SCALE):
+		if(pushbox.shape.shape.get_height()<80*SCALE):
 			pushbox.shape.shape.set_height(pushbox.shape.shape.get_height()+5)
 			pushbox.transform.origin.z-=2.5*SCALE
 		else:
 			pushbox.do_push()
-			
 		if(!started_pushing):
 			anim = "push_charge"
 			started_pushing = true
@@ -564,12 +570,6 @@ func push_state(delta):
 	else: 
 		started_pushing = false
 		push_complete()
-		#pushbox.do_push()
-		#anim = "idle"
-		#state = MOVE
-
-func push_hold():
-	anim = "push_hold"
 
 func push_complete():
 	if(network_handler.is_current_player()):
@@ -582,7 +582,34 @@ func push_complete():
 		pushbox.release()
 
 func pull_state(delta):
-	pass
+#	mouse_angle = get_mouse_angle(get_transform().basis.get_euler().y, pull_mouse_position)
+	current_turn_speed = TURN_SPEED/40
+	move_velocity = Vector3.ZERO
+	if pushpull == -1:
+		pullbox.shape.disabled = false
+		if(pullbox.shape.shape.get_height()<80*SCALE):
+			pullbox.shape.shape.set_height(pullbox.shape.shape.get_height()+5)
+			pullbox.transform.origin.z-=2.5*SCALE
+		else:
+			pullbox.do_push()
+		if(!started_pulling):
+			anim = "push_charge"
+			started_pulling = true
+		else:
+			anim = "push_hold"
+	else: 
+		started_pulling = false
+		pull_complete()
+
+func pull_complete():
+	if(network_handler.is_current_player()):
+		pullbox.shape.shape.set_height(1)
+		pullbox.transform.origin.z=-1.0*SCALE
+		pullbox.shape.disabled = true
+		state = MOVE
+		anim = "idle"
+		pull_cooldown=1
+		pullbox.release()
 
 func check_shove(rock):
 	if rock == null:
@@ -639,7 +666,11 @@ func shove_state(delta):
 	
 	s_rock.add_force(40*current_angle, Vector3.ZERO)
 	
-	move()
+	if(pushpull==1):
+		push_mouse_position=mouse_position
+		state = PUSH
+	if(pushpull==-1):
+		pass
 
 func stop_shove():
 	state = MOVE

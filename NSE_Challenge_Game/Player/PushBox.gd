@@ -1,7 +1,7 @@
 extends Area
 
 export var SIDEFORCE = 20
-export var PUSH_POWER = 600
+export var PUSH_POWER = 1500
 
 var rock = null
 var rocks = []

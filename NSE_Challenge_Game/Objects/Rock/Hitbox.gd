@@ -6,7 +6,9 @@ var face = 0
 var speed = 0.0
 var flying = false
 var pushed = false
+var size = 0
 var owned_by = 0
+var linear_velocity = 0
 
 signal pushed
 signal zone

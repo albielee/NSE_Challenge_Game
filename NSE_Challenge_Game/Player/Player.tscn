@@ -16538,7 +16538,6 @@ transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0.167053, 0.00317383, -4.98615
 collision_layer = 32
 collision_mask = 0
 SIDEFORCE = 9
-PUSH_POWER = 1500
 
 [node name="CollisionShape" parent="PushBox" index="0"]
 shape = SubResource( 3 )
@@ -16546,7 +16545,10 @@ disabled = true
 
 [node name="PullBox" parent="." instance=ExtResource( 2 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 8 )
+PUSH_POWER = 1500
 
 [node name="CollisionShape" parent="PullBox" index="0"]
 shape = SubResource( 4 )
@@ -18275,6 +18277,7 @@ autostart = true
 [connection signal="start_pushing" from="RockHitBox" to="." method="_on_RockHitBox_start_pushing"]
 [connection signal="stop_pushing" from="RockHitBox" to="." method="_on_RockHitBox_stop_pushing"]
 [connection signal="area_entered" from="PushBox" to="PushBox" method="_on_PushBox_area_entered"]
+[connection signal="area_entered" from="PullBox" to="PullBox" method="_on_PullBox_area_entered"]
 [connection signal="area_entered" from="GrabBox" to="GrabBox" method="_on_GrabBox_area_entered"]
 [connection signal="area_exited" from="GrabBox" to="GrabBox" method="_on_GrabBox_area_exited"]
 [connection signal="encounter_rock" from="GrabBox" to="." method="_on_GrabBox_encounter_rock"]
