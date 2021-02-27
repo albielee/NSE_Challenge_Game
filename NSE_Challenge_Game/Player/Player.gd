@@ -95,6 +95,8 @@ export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
 var last_time = 0
+var current_turn_speed = TURN_SPEED
+var current_rotation = 0
 
 onready var UPDATE_INTERVAL = 1.0 / $"/root/Settings".tickrate
 
@@ -118,6 +120,8 @@ var packets = []
 var buffer = []
 var prev_speed = 0.0
 var next_speed = 0.0
+
+var _delta = 0.1
 
 func _ready():
 	set_linear_damp(10)
@@ -144,6 +148,8 @@ func _ready():
 func _physics_process(delta):
 	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = player_col
 	current_time += delta
+	current_rotation = rotation
+	_delta = delta
 	
 	#check if dead using networkhandler death
 	if(state != FALL and state != DEATH and network_handler.remote_dead):
@@ -300,8 +306,7 @@ func handle_animations(animation):
 	prevanim = animationstate.get_current_node()
 
 func _integrate_forces(s):
-	if state == MOVE:
-		rotation = rotation.linear_interpolate(mouse_angle, 1)
+	rotation = current_rotation + (mouse_angle*(current_turn_speed*_delta/30))
 
 #Takes given control input and updates actions of the player
 func update(delta):
@@ -381,6 +386,7 @@ func move_state(delta, mouse_angle):
 		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
 #	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	current_turn_speed = TURN_SPEED
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull
@@ -411,7 +417,7 @@ func move_state(delta, mouse_angle):
 	move()
 
 func pause_state(delta):
-	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	current_turn_speed = TURN_SPEED
 
 func move():
 	if (move_velocity!=Vector3.ZERO):
@@ -422,6 +428,7 @@ func dash_state(delta):
 		var dash_time = 0.1
 		$ActionTimer.start(dash_time)
 	anim="dash"
+	current_turn_speed = TURN_SPEED
 	move_velocity = move_velocity.move_toward(dash_angle*MAX_SPEED*DASH_INC,ACCELERATION*DASH_INC*delta)
 	move()
 	if($ActionTimer.time_left < 0.02):
@@ -441,7 +448,7 @@ func fall_state(delta):
 	anim = "fall"
 
 func grab_state(delta):
-	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
+	current_turn_speed = TURN_SPEED
 	#check if grabbing got cancelled
 	if (check_cancel_grab()):
 		return
@@ -475,7 +482,7 @@ func grabbed_state(delta):
 	else:
 		move_velocity = Vector3.ZERO
 	
-	set_angular_velocity(mouse_angle*TURN_SPEED/4*delta)
+	current_turn_speed = TURN_SPEED/4
 	move()
 
 func check_cancel_grab():
@@ -536,7 +543,8 @@ func summon_power_up():
 			state=SUMMONING
 
 func push_state(delta):
-	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
+	mouse_angle = get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)
+	current_turn_speed = TURN_SPEED
 	move_velocity = Vector3.ZERO
 	if pushpull == 1:
 		#update pushbox shape
@@ -623,10 +631,7 @@ func shove_state(delta):
 	else:
 		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
-	set_angular_velocity(rock_angle*TURN_SPEED*1000*delta)
-	if rock_angle.y < PI/8 and rock_angle.y > -PI/8: 
-		pass
-	else: pass
+	mouse_angle = rock_angle
 	
 	move()
 
@@ -652,8 +657,8 @@ func angle_update():
 func get_mouse_angle(current_angle, position):
 	var up_dir = Vector3.UP
 	var target_angle_y = get_transform().looking_at(position, up_dir).basis.get_euler().y;
-#	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
-	var rotation_angle = wrapf(target_angle_y, -PI, PI);
+	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
+#	var rotation_angle = wrapf(target_angle_y, -PI, PI);
 	
 	return up_dir * rotation_angle;
 
