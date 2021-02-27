@@ -157,3 +157,6 @@ func _on_Hitbox_zone():
 func _on_Rock_body_entered(body):
 	if(body.is_in_group("rock") and speed > 16):
 		$Hit.play()
+
+func _on_Hitbox2_pushed():
+	add_force(playerhitbox.knockback, Vector3.ZERO)
