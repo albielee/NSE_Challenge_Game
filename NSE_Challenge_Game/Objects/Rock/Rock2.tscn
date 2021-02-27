@@ -55,6 +55,7 @@ shape = SubResource( 3 )
 
 [node name="PlayerHitbox" type="KinematicBody" parent="." groups=[
 "ghost",
+"rock_hitbox",
 ]]
 collision_layer = 16
 collision_mask = 3

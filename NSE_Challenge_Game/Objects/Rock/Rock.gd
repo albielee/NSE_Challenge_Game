@@ -25,8 +25,11 @@ var next_speed = 0
 
 var buffer = []
 
+var size = 0
+
 onready var hitbox = $Hitbox
 onready var playerhitbox = $Hitbox2
+onready var p_hitbox = $PlayerHitbox
 
 var last_mover=""
 
@@ -34,6 +37,8 @@ func _ready():
 	set_gravity_scale(5)
 	set_linear_damp(5)
 	add_to_group("rocks")
+	size = scale.x
+	hitbox.size = size
 	r_stats = [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
 
 func _physics_process(delta):
@@ -110,20 +115,20 @@ func build_buffer(stats, avg):
 	buffer.push_back([stats,avg])
 
 func update(delta):
-	speed = sqrt(pow(linear_velocity.x, 2) + pow(linear_velocity.z,2))
+	speed = Vector2(linear_velocity.x, linear_velocity.z).length()
 	hitbox.face=get_transform().basis.get_euler().y
 	hitbox.speed=speed
+	hitbox.linear_velocity=linear_velocity
 	if(in_zone):
 		hitbox.flying = true
 		set_gravity_scale(1)
 		set_linear_damp(0.5)
 	else:
-		if (speed < 1):
+		if (speed < 5):
 			hitbox.flying = false
 			set_gravity_scale(5)
 			set_linear_damp(5)
 		else: hitbox.flying = true
-
 
 func destroy():
 	#the rock has fallen and should be removed from the whole game
