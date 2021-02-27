@@ -1,6 +1,23 @@
 extends Control
 
 onready var countdown_sprites = [$Number3,$Number2,$Number1]
+
+var fall_map = [
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0],
+	[0,0,0,0,0,0,0,0]
+]
+
+var fall_time = 20
+var round_timer
+
+
+
 var scores = {}
 var first_run=true
 func create_scores():
@@ -14,6 +31,9 @@ func _process(delta):
 		first_run = false
 		create_scores()
 		initialise_scoreboard()
+		round_timer = Timer.new()
+		round_timer.connect("timeout",self,"_round_timer_timeout")
+		
 	#If the host:
 	if(get_tree().is_network_server()):
 		
@@ -24,6 +44,13 @@ func _process(delta):
 			var last_player = get_last_player()
 #			scores[last_player]+=1
 			restart_round()
+
+func _round_timer_timeout():
+	pass
+	
+
+func reset_round_timer():
+	round_timer.start(fall_time)
 
 func detect_players_left():
 	var players_left = 0
