@@ -16506,6 +16506,8 @@ color = Color( 1, 1, 1, 0.0745098 )
 ]]
 collision_layer = 2147483649
 collision_mask = 2147483667
+contacts_reported = 5
+contact_monitor = true
 can_sleep = false
 axis_lock_angular_x = true
 axis_lock_angular_y = true

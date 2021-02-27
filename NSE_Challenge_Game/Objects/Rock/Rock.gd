@@ -27,6 +27,7 @@ var buffer = []
 
 onready var hitbox = $Hitbox
 onready var playerhitbox = $Hitbox2
+onready var p_hitbox = $PlayerHitbox
 
 var last_mover=""
 

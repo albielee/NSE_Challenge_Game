@@ -81,6 +81,7 @@ var last_attacker=""
 
 var shovable = false
 var s_rock = null
+var contact = false
 
 export var ACCELERATION = 100
 export var SCALE = 1.0
@@ -411,7 +412,7 @@ func move_state(delta, mouse_angle):
 					pass
 				elif(pushpull==0):
 					push_cooldown=0
-					if(shovable == true):
+					if(contact == true):
 						if check_shove(s_rock):
 							state = SHOVE
 	move()
@@ -584,6 +585,9 @@ func pull_state(delta):
 	pass
 
 func check_shove(rock):
+	if rock == null:
+		return false
+	
 	var up_dir = Vector3.UP
 	var angle_to_rock = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y
 	
@@ -612,26 +616,18 @@ func check_shove(rock):
 	return false
 
 var rock_face_angle = Vector3.ZERO
-var buff = 40
 
 func shove_state(delta):
 	#here should be the code for the new animation.
 	#how does that work? I'm gonna set up the controls without any animations
 	anim = "idle"
 	
-	print(buff)
-	
-	if not shovable:
-		buff -= 1
-		if buff <= 0:
-			print(' ah')
-			stop_shove()
-			return
+	if not contact and not s_rock.p_hitbox in get_colliding_bodies():
+		stop_shove()
+		return
 	elif not check_shove(s_rock):
 		stop_shove()
 		return
-	else: 
-		buff = 40
 	
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
@@ -641,14 +637,13 @@ func shove_state(delta):
 	
 	mouse_angle = rock_face_angle
 	
-	s_rock.add_force(30*current_angle, Vector3.ZERO)
+	s_rock.add_force(40*current_angle, Vector3.ZERO)
 	
 	move()
 
 func stop_shove():
 	state = MOVE
 	s_rock = null
-	buff = 40
 #	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
 
 func set_player_name(name):
@@ -707,9 +702,9 @@ func _on_Player_body_entered(body):
 	touched = true
 
 func _on_RockHitBox_start_pushing():
-	print(' called')
 	s_rock = $RockHitBox.rock
 	shovable = check_shove(s_rock)
+	contact = true
 
 func _on_RockHitBox_stop_pushing():
-	shovable = false
+	contact = false
