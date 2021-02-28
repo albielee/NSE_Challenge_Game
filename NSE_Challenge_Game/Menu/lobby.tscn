@@ -1469,6 +1469,7 @@ transform = Transform( -1.62921e-07, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 8.1460
 script = ExtResource( 23 )
 
 [node name="Ambiance" parent="." instance=ExtResource( 26 )]
+bus = "Sounds"
 [connection signal="focus_entered" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_focus_entered"]
 [connection signal="focus_exited" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_focus_exited"]
 [connection signal="mouse_entered" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_mouse_entered"]
