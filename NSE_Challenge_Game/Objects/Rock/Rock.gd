@@ -165,3 +165,4 @@ func _on_Rock_body_entered(body):
 
 func _on_Hitbox2_pushed():
 	add_force(playerhitbox.knockback, Vector3.ZERO)
+

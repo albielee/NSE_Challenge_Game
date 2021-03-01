@@ -52,9 +52,10 @@ func do_pull():
 		var rockdic = {}
 		var mini = 50
 		for i in rocks:
-			var dist = i.global_transform.origin.distance_to(player_position)
-			rockdic[dist] = i
-			if dist < mini and not (i.flying): mini = dist
+			if(i != null):
+				var dist = i.global_transform.origin.distance_to(player_position)
+				rockdic[dist] = i
+				if dist < mini and not (i.flying): mini = dist
 		if (rock==null and mini < 50):
 			rock=rockdic[mini]
 			rock_position = rock.global_transform.origin

@@ -91,6 +91,4 @@ collision_mask = 2
 [connection signal="pushed" from="Hitbox" to="." method="_on_Hitbox_pushed"]
 [connection signal="spun" from="Hitbox" to="." method="_on_Hitbox_spun"]
 [connection signal="zone" from="Hitbox" to="." method="_on_Hitbox_zone"]
-[connection signal="area_entered" from="Hitbox2" to="Hitbox2" method="_on_Hitbox2_area_entered"]
-[connection signal="area_exited" from="Hitbox2" to="Hitbox2" method="_on_Hitbox2_area_exited"]
 [connection signal="pushed" from="Hitbox2" to="." method="_on_Hitbox2_pushed"]

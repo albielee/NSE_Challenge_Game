@@ -26,15 +26,15 @@ albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 1.24447, 1.36228, 1.56839 )
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=6]
 min_value = -200.0
 max_value = 200.0
 _data = [ Vector2( 0.520202, 3.63635 ), 0.0, 0.0, 0, 0, Vector2( 1, 152.727 ), 469.565, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=8]
 lifetime_randomness = 0.25
 emission_shape = 2
 emission_box_extents = Vector3( 3, 1, 1 )
@@ -42,14 +42,14 @@ spread = 19.76
 gravity = Vector3( -2, -3, 0 )
 initial_velocity = 1.0
 linear_accel = 5.0
-linear_accel_curve = SubResource( 9 )
+linear_accel_curve = SubResource( 7 )
 angle = 180.0
 angle_random = 0.4
 scale = 0.15
 scale_random = 0.01
 color = Color( 0.709804, 0.313726, 0.533333, 1 )
 
-[sub_resource type="CubeMesh" id=7]
+[sub_resource type="CubeMesh" id=9]
 
 [node name="World" type="Spatial"]
 
@@ -166,6 +166,7 @@ transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -1.39856, -0.968464, -8
 transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -0.978178, -0.968464, -9.09163 )
 
 [node name="Clouds" type="Spatial" parent="Environment"]
+visible = false
 
 [node name="Cloud" parent="Environment/Clouds" instance=ExtResource( 8 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -1.51946, -8.1931, 9.4556 )
@@ -356,8 +357,8 @@ transform = Transform( -0.998935, 0, 0.0461476, 0, 1, 0, -0.0461476, 0, -0.99893
 amount = 5
 lifetime = 2.65
 visibility_aabb = AABB( -1.31923, -2.22514, -1.43511, 2.63846, 4.45028, 2.87021 )
-process_material = SubResource( 6 )
-draw_pass_1 = SubResource( 7 )
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 9 )
 [connection signal="timeout" from="RockNetworkHandler/SendData" to="RockNetworkHandler" method="_on_Timer_timeout"]
 [connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
 
