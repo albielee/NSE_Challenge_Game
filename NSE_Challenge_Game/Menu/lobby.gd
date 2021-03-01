@@ -185,3 +185,5 @@ func _on_Start_pressed():
 
 func _on_LeaveButton_pressed():
 	gamestate.player_leave_button()
+
+
