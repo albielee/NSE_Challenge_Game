@@ -116,6 +116,7 @@ onready var animationplayer = $player_animations/AnimationPlayer
 onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = Vector3.ZERO
 onready var sounds = $Sounds
+onready var grabbeam_handler = $GrabBeamHandler
 
 var _updates = 0.0
 var _packets = 0.0
@@ -736,6 +737,8 @@ func _on_RockHitBox_start_pushing():
 	s_rock = $RockHitBox.rock
 	shovable = check_shove(s_rock)
 	contact = true
+	grabbeam_handler.start_beam(rockhitbox.rock)
 
 func _on_RockHitBox_stop_pushing():
 	contact = false
+	grabbeam_handler.stop_beam()
