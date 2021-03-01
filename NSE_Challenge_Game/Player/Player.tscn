@@ -18224,6 +18224,7 @@ process_material = SubResource( 63 )
 draw_pass_1 = SubResource( 64 )
 
 [node name="animationblend" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 11 )

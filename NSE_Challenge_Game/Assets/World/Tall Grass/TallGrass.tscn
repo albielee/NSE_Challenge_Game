@@ -11,7 +11,6 @@
 [ext_resource path="res://Assets/World/Tall Grass/grass_tall3.obj" type="ArrayMesh" id=9]
 [ext_resource path="res://Assets/World/Tall Grass/TallGrass.gd" type="Script" id=10]
 
-
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 1 )
 
@@ -20,7 +19,9 @@ albedo_texture = ExtResource( 1 )
 [sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 3 )
 
-[node name="Grass" type="Area"]
+[node name="Grass" type="Area" groups=[
+"Removable",
+]]
 transform = Transform( 0.1, 0, 0, 0, 0.2, 0, 0, 0, 0.1, 0, 0, 0 )
 collision_layer = 4
 collision_mask = 5
