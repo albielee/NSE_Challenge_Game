@@ -46,7 +46,7 @@ func update(mouse_position, player_to_rock):
 		rock_position = rock.global_transform.origin
 		
 		if player_position.y+0.2-rock_position.y > 0:
-			rock.add_force(Vector3.UP*rock.gravity)
+			rock.add_force(Vector3.UP*rock.gravity/0.9)
 		else:
 			rock.add_force(Vector3.UP*rock.gravity/1.1)
 		

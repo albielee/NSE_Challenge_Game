@@ -16537,7 +16537,7 @@ shape = SubResource( 2 )
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0.167053, 0.00317383, -4.98615 )
 collision_layer = 32
 collision_mask = 0
-SIDEFORCE = 9
+SIDEFORCE = 30
 
 [node name="CollisionShape" parent="PushBox" index="0"]
 shape = SubResource( 3 )
@@ -16568,7 +16568,7 @@ disabled = true
 transform = Transform( -1, 3.25841e-07, 5.30863e-14, 0, -1.62921e-07, 1, 3.25841e-07, 1, 1.62921e-07, 0, -0.985485, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.0590931, 0.162357, 2.6077e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
+transform = Transform( 0.984961, 0.0590932, 0.162357, 2.6077e-08, 0.939693, -0.34202, -0.172777, 0.336876, 0.925561, -0.0479305, -0.0882236, -0.391702 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"

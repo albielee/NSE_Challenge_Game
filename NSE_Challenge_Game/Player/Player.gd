@@ -363,7 +363,7 @@ func update(delta):
 			pause_state(delta)
 		SHOVE:
 			shove_state(delta)
-	move()
+	if state != FALL and state != PAUSE: move()
 
 func set_last_attacker():
 	var bodies = get_colliding_bodies()
@@ -451,6 +451,7 @@ func dash_finished():
 		can_dash=DASH_COOLDOWN
 
 func set_fall_state():
+	move_velocity = Vector3.ZERO
 	state = FALL
 
 func fall_state(delta):
@@ -694,7 +695,6 @@ func get_mouse_angle(current_angle, position):
 	var up_dir = Vector3.UP
 	var target_angle_y = get_transform().looking_at(position, up_dir).basis.get_euler().y;
 	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
-#	var rotation_angle = wrapf(target_angle_y, -PI, PI);
 	
 	return up_dir * rotation_angle;
 
