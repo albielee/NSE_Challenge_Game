@@ -621,8 +621,6 @@ func check_shove(rock):
 	var diffs = []
 	var current_angle_y = get_transform().basis.get_euler().y
 	
-#	print(current_angle_y)
-	
 	for i in [-1,0,1,2]:
 		var f = rock.face + (i * (PI/2))
 		
