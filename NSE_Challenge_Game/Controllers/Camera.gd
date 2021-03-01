@@ -21,7 +21,7 @@ func cursor_raycast():
 	if (InputEventMouseMotion):
 		var mouse_position = get_tree().root.get_mouse_position()
 		var raycast_from = project_ray_origin(mouse_position)
-		var raycast_to = project_ray_normal(mouse_position)*1000
+		var raycast_to = project_ray_normal(mouse_position)*10000
 		
 		# You might need a collision mask to avoid objects like the player...
 		var space_state = get_world().direct_space_state

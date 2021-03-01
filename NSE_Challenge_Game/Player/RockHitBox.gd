@@ -9,7 +9,7 @@ func start_pushing(body):
 	rock = body
 	print("push")
 	emit_signal("start_pushing")
-	get_node("../GrabBeamHandler").start_beam(body,0)
+	get_node("../GrabBeamHandler").start_beam(body)
 
 func stop_pushing(body):
 	rock = null

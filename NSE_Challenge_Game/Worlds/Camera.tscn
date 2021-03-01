@@ -6,7 +6,6 @@
 "Camera",
 ]]
 environment = ExtResource( 1 )
-projection = 2
 current = true
 fov = 65.0
 size = 0.1
