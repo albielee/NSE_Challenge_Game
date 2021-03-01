@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Controllers/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Assets/World/grass_1.obj" type="ArrayMesh" id=2]
@@ -73,6 +73,10 @@ albedo_texture = ExtResource( 13 )
 
 [sub_resource type="SpatialMaterial" id=14]
 albedo_texture = ExtResource( 20 )
+
+[sub_resource type="SpatialMaterial" id=15]
+
+[sub_resource type="ParticlesMaterial" id=16]
 
 [node name="World" type="Spatial"]
 
@@ -636,6 +640,10 @@ material/0 = SubResource( 12 )
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.80737, -1.01205, -0.924062 )
 mesh = ExtResource( 19 )
 material/0 = SubResource( 14 )
+
+[node name="Mist" type="Particles" parent="."]
+material_override = SubResource( 15 )
+process_material = SubResource( 16 )
 [connection signal="timeout" from="RockNetworkHandler/SendData" to="RockNetworkHandler" method="_on_Timer_timeout"]
 [connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
 
