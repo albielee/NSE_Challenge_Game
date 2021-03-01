@@ -45,6 +45,8 @@ func _physics_process(delta):
 	current_rotation = rotation
 	_delta = delta
 	hitbox.pos = location
+	hitbox.size = scale.x
+	hitbox.linear_velocity = linear_velocity
 	if get_tree().get_network_unique_id() == owned_by:
 		update(delta)
 	else:
