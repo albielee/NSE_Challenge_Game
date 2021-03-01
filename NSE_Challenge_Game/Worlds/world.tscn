@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Controllers/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Assets/World/grass_1.obj" type="ArrayMesh" id=2]
@@ -12,8 +12,14 @@
 [ext_resource path="res://Worlds/Camera.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Worlds/WorldLight.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Sounds/rock_slide_off.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/World/grassFront1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/World/cherryblossom.obj" type="ArrayMesh" id=14]
 [ext_resource path="res://Assets/World/Tower.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/World/grassFront1.obj" type="ArrayMesh" id=16]
+[ext_resource path="res://Assets/World/waterSheet.obj" type="ArrayMesh" id=17]
+[ext_resource path="res://Assets/World/waterSheet.png" type="Texture" id=18]
+[ext_resource path="res://Assets/World/rockDecal1.obj" type="ArrayMesh" id=19]
+[ext_resource path="res://Assets/World/rockDecal1.png" type="Texture" id=20]
 
 [sub_resource type="BoxShape" id=4]
 
@@ -49,6 +55,24 @@ color = Color( 0.709804, 0.313726, 0.533333, 1 )
 albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 
 [sub_resource type="CubeMesh" id=11]
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_texture = ExtResource( 18 )
+metallic = 1.0
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 1.0
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.0
+refraction_enabled = true
+refraction_scale = 0.05
+refraction_texture_channel = 0
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_texture = ExtResource( 13 )
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_texture = ExtResource( 20 )
 
 [node name="World" type="Spatial"]
 
@@ -146,6 +170,69 @@ transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -9.25599, -0.968464, -4
 [node name="GrassCluster3" parent="Environment/Grass" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -7.07424, -0.968464, -4.54634 )
 
+[node name="GrassCluster22" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 9.36226, -0.968464, -3.45795 )
+
+[node name="GrassCluster23" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 7.82329, -0.968464, -2.48835 )
+
+[node name="GrassCluster24" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 10.005, -0.968464, -2.48835 )
+
+[node name="GrassCluster25" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 10.908, -0.968464, -1.71238 )
+
+[node name="GrassCluster26" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 9.36901, -0.968464, -0.742785 )
+
+[node name="GrassCluster27" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 11.5508, -0.968464, -0.742785 )
+
+[node name="GrassCluster28" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 10.908, -0.968464, -0.176536 )
+
+[node name="GrassCluster29" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 9.36901, -0.968464, 0.793064 )
+
+[node name="GrassCluster30" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 11.5508, -0.968464, 0.793064 )
+
+[node name="GrassCluster10" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 3.70817, -0.968464, -8.61662 )
+
+[node name="GrassCluster11" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 2.16919, -0.968464, -7.64702 )
+
+[node name="GrassCluster12" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 4.35094, -0.968464, -7.64702 )
+
+[node name="GrassCluster13" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 2.53021, -0.968464, -7.08355 )
+
+[node name="GrassCluster14" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 0.991238, -0.968464, -6.68208 )
+
+[node name="GrassCluster15" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, 3.17298, -0.968464, -6.40605 )
+
+[node name="GrassCluster16" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -1.31877, -0.968464, -10.3975 )
+
+[node name="GrassCluster17" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -2.85775, -0.968464, -9.42789 )
+
+[node name="GrassCluster18" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -0.676002, -0.968464, -9.42789 )
+
+[node name="GrassCluster19" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -1.31877, -0.968464, -7.76218 )
+
+[node name="GrassCluster20" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -2.85775, -0.968464, -6.79258 )
+
+[node name="GrassCluster21" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -0.676002, -0.968464, -6.79258 )
+
 [node name="GrassCluster4" parent="Environment/Grass" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -10.7699, -0.968464, -1.47562 )
 
@@ -164,18 +251,35 @@ transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -10.2986, -0.968464, -8
 [node name="GrassCluster9" parent="Environment/Grass" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.630642, 0, 0, 0, 1, -9.87818, -0.968464, -9.09163 )
 
-[node name="grass_1" type="MeshInstance" parent="Environment/Grass"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -12.4732, -1.974, -1.09526 )
+[node name="grass_1" type="MeshInstance" parent="Environment/Grass" groups=[
+"Removable",
+]]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9.67186, -1.974, 13.2241 )
+layers = 6
 mesh = ExtResource( 2 )
 material/0 = null
 
-[node name="grass_2" type="MeshInstance" parent="Environment/Grass"]
+[node name="grass_4" type="MeshInstance" parent="Environment/Grass" groups=[
+"Removable",
+]]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.38131, -1.974, -2.78126 )
+layers = 6
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="grass_2" type="MeshInstance" parent="Environment/Grass" groups=[
+"Removable",
+]]
 transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -8.31157, -1.974, -6.28845 )
+layers = 6
 mesh = ExtResource( 2 )
 material/0 = null
 
-[node name="grass_3" type="MeshInstance" parent="Environment/Grass"]
+[node name="grass_3" type="MeshInstance" parent="Environment/Grass" groups=[
+"Removable",
+]]
 transform = Transform( -8.14603e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -8.14603e-08, -9.33964, -1.974, -6.25012 )
+layers = 6
 mesh = ExtResource( 2 )
 material/0 = null
 
@@ -267,7 +371,7 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 19.748, -3.19481, -8.982
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 53.3472, -6.20691, -14.6134 )
 
 [node name="Cloud29" parent="Environment/Clouds" instance=ExtResource( 8 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 32.9616, -4.31421, -20.1234 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 32.9309, -4.31421, -20.1336 )
 
 [node name="Cloud30" parent="Environment/Clouds" instance=ExtResource( 8 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 46.9262, -5.0734, -4.07422 )
@@ -461,13 +565,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.81, -0.2, -10.868 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60902, -0.2, -7.6679 )
 
 [node name="tower70" parent="Environment/Towers" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60955, -0.2, -7.64964 )
-
-[node name="tower73" parent="Environment/Towers" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60902, -0.2, -4.4679 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60955, -0.2, -8.21777 )
 
 [node name="tower74" parent="Environment/Towers" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60955, -0.2, -4.44964 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.80955, -0.2, -1.24964 )
+
+[node name="tower78" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.79045, -0.2, 1.95036 )
 
 [node name="tower75" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60902, -0.2, -1.2679 )
@@ -517,6 +621,21 @@ transform = Transform( -1.62921e-07, 0, 9, 0, 4, 0, -1, 0, -1.46629e-06, -0.1479
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6518, 0, 3.78902 )
 
 [node name="Ambiance" parent="." instance=ExtResource( 9 )]
+
+[node name="waterSheet" type="MeshInstance" parent="."]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 1, 0, 0.5, 0, -2.18557e-08, -4.59325, -2.13124, 8.34502 )
+mesh = ExtResource( 17 )
+material/0 = SubResource( 13 )
+
+[node name="grassFront1" type="MeshInstance" parent="."]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 1, 0, 0.5, 0, -2.18557e-08, -10.0997, -6.04853, 13.1216 )
+mesh = ExtResource( 16 )
+material/0 = SubResource( 12 )
+
+[node name="rockDecal1" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.80737, -1.01205, -0.924062 )
+mesh = ExtResource( 19 )
+material/0 = SubResource( 14 )
 [connection signal="timeout" from="RockNetworkHandler/SendData" to="RockNetworkHandler" method="_on_Timer_timeout"]
 [connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
 

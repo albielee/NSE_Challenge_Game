@@ -29,7 +29,7 @@ func travel_to_locrot(spd,delta):
 	if(speed < 0.4):
 		speed += speed_accel*delta
 	if(ambiance.pitch_scale < 0.5):
-		ambiance.pitch_scale += 0.0003
+		ambiance.pitch_scale += 0.001
 	transform.origin += pos_vec*spd*delta
 	transform.basis.y += rot_vec_y*spd*delta
 	transform.basis.z += rot_vec_z*spd*delta
