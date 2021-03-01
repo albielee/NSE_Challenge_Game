@@ -126,6 +126,7 @@ var packets = []
 var buffer = []
 var prev_speed = 0.0
 var next_speed = 0.0
+var puppet_current_face = 0.0
 
 var _delta = 0.1
 
@@ -156,6 +157,7 @@ func _physics_process(delta):
 	current_time += delta
 	current_rotation = rotation
 	_delta = delta
+	puppet_current_face = get_transform().basis.get_euler().y
 	
 	#check if dead using networkhandler death
 	if(state != FALL and state != DEATH and network_handler.remote_dead):
@@ -171,6 +173,13 @@ func _physics_process(delta):
 	
 	handle_animations(anim)
 	handle_sounds()
+
+func _integrate_forces(s):
+	if(network_handler.is_current_player()):
+		rotation = current_rotation + (mouse_angle*(current_turn_speed*_delta/30))
+	else:
+		var target = Vector3.UP * wrapf(r_rotation-puppet_current_face, -PI, PI)
+		rotation = current_rotation + (target*(current_turn_speed*_delta/30))
 
 func handle_sounds():
 	if(anim == "movement"):
@@ -270,17 +279,9 @@ func puppet_update(delta):
 		set_linear_velocity(next_speed*dir*dist)
 	else: set_linear_velocity(next_speed*dir)
 	
-	#actually also interpolate this shit
-	puppet_rotation(r_rotation,delta)
-	
 	anim = r_animation
 	if time > 0:
 		time -= delta
-
-func puppet_rotation(target,delta):
-	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
-	
-	set_angular_velocity(angular_veloc*TURN_SPEED*delta)
 
 func _on_NetworkHandler_packet_received():
 #	print(len(buffer))
@@ -310,9 +311,6 @@ func handle_animations(animation):
 	if (animation!=prevanim):
 		animationstate.travel(animation)
 	prevanim = animationstate.get_current_node()
-
-func _integrate_forces(s):
-	rotation = current_rotation + (mouse_angle*(current_turn_speed*_delta/30))
 
 #Takes given control input and updates actions of the player
 func update(delta):
@@ -445,7 +443,6 @@ func dash_state(delta):
 	move_velocity = move_velocity.move_toward(dash_angle*MAX_SPEED*DASH_INC,ACCELERATION*DASH_INC*delta)
 	if($ActionTimer.time_left < 0.02):
 		dash_finished()
-	
 
 func dash_finished():
 	if(network_handler.is_current_player()):
