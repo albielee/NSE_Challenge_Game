@@ -88,6 +88,7 @@ func do_push():
 			rock.add_force(Vector3.UP*20)
 			rock.in_zone(get_parent().playerid) #This is setting the rock to "push mode"
 			rock.get_parent().last_mover = get_parent().player_name #assigns player to rock
+			get_node("../GrabBeamHandler").start_beam(rock)
 		for i in rocks:
 			if (rock != i):
 				i.add_force(knockback_vector*PUSH_POWER/8)
@@ -107,4 +108,5 @@ func release():
 	timer = 4
 	if rock != null:
 		rock.out_zone() #Set rock directly back to "normal mode"
+		get_node("../GrabBeamHandler").stop_beam()
 		rock = null
