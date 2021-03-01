@@ -68,24 +68,20 @@ shape = SubResource( 4 )
 stream = ExtResource( 3 )
 unit_db = 25.984
 unit_size = 6.1
-bus = "Sounds"
 doppler_tracking = 2
 
 [node name="Hit" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )
 unit_size = 3.6
 pitch_scale = 0.7
-bus = "Sounds"
 
 [node name="SlideOff" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 5 )
 pitch_scale = 1.56
-bus = "Sounds"
 
 [node name="InAir" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 6 )
 unit_size = 4.4
-bus = "Sounds"
 
 [node name="GroundDetector" type="RayCast" parent="."]
 enabled = true
