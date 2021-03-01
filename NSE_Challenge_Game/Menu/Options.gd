@@ -4,6 +4,8 @@ extends Panel
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var music_bus = AudioServer.get_bus_index("Music")
+var sounds_bus = AudioServer.get_bus_index("Sounds")
 
 var button_map = ["move_up","move_down","move_left","move_right","push","pull","move_dash","summon_rock"]
 
@@ -15,7 +17,9 @@ var default_controls = {
 	"push":"m"+str(BUTTON_LEFT),
 	"pull":"m"+str(BUTTON_RIGHT),
 	"move_dash":KEY_SPACE,
-	"summon_rock":KEY_E}
+	"summon_rock":KEY_E,
+	"music_volume":100,
+	"effects_volume":100}
 	
 var data = default_controls
 var input_mode = false
@@ -54,6 +58,12 @@ func _input(event):
 
 func set_all_controls(dict):
 	for key in dict.keys():
+		if key == "music_volume":
+			_on_MusicSlider_value_changed(dict[key])
+			continue
+		elif key == "effects_volume":
+			_on_EffectsSlider_value_changed(dict[key])
+			continue
 		InputMap.action_erase_events(key)
 		var event
 		if str(dict[key])=="m"+str(BUTTON_LEFT) or str(dict[key])=="m"+str(BUTTON_RIGHT):
@@ -81,3 +91,29 @@ func _on_BackButton_pressed():
 	file.store_line(to_json(data))
 	file.close()
 	set_all_controls(data)
+
+
+
+
+
+
+
+func _on_MusicSlider_value_changed(value):
+	var db = value
+	if value == 0:
+		AudioServer.set_bus_mute(music_bus,true)
+	else:
+		AudioServer.set_bus_mute(music_bus,false)
+	AudioServer.set_bus_volume_db(music_bus,(86*value/100)-80)
+	data["music_volume"] = value
+		
+
+
+func _on_EffectsSlider_value_changed(value):
+	var db = value
+	if value == 0:
+		AudioServer.set_bus_mute(sounds_bus,true)
+	else:
+		AudioServer.set_bus_mute(sounds_bus,false)
+	AudioServer.set_bus_volume_db(sounds_bus,(86*value/100)-80)
+	data["effects_volume"] = value

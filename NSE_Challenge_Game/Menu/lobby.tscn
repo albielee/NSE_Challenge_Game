@@ -36,11 +36,11 @@ region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 19 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 19 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -51,12 +51,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -98,11 +98,11 @@ region = Rect2( 504, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 27 )
-region = Rect2( 0, 0, 84, 26 )
+region = Rect2( 588, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 27 )
-region = Rect2( 588, 0, 84, 26 )
+region = Rect2( 0, 0, 84, 26 )
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
@@ -113,12 +113,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 17 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 18 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -157,11 +157,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=33]
@@ -173,12 +173,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 31 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 30.0
 }, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 30.0
 } ]
 
@@ -207,11 +207,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=42]
@@ -223,12 +223,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 40 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 41 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -258,11 +258,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 9 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=51]
 animations = [ {
@@ -273,13 +273,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 49 ) ],
 "loop": true,
-"name": "unfocused",
-"speed": 30.0
+"name": "focused",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 50 ) ],
 "loop": true,
-"name": "focused",
-"speed": 5.0
+"name": "unfocused",
+"speed": 30.0
 } ]
 
 [sub_resource type="AtlasTexture" id=52]
@@ -308,11 +308,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 10 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=60]
 animations = [ {
@@ -323,12 +323,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 58 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 59 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -358,11 +358,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=67]
 atlas = ExtResource( 12 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 12 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
@@ -373,12 +373,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 67 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 68 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -1149,6 +1149,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MusicSlider" type="HSlider" parent="Lobby/Menu/Options"]
+margin_left = 120.536
+margin_top = 248.092
+margin_right = 256.536
+margin_bottom = 273.092
+
+[node name="MusicLabel" type="Label" parent="Lobby/Menu/Options"]
+margin_left = 21.2132
+margin_top = 251.73
+margin_right = 111.213
+margin_bottom = 265.73
+text = "Music volume"
+
+[node name="EffectsLabel" type="Label" parent="Lobby/Menu/Options"]
+margin_left = 21.2132
+margin_top = 276.479
+margin_right = 109.213
+margin_bottom = 290.479
+text = "Effect Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EffectsSlider" type="HSlider" parent="Lobby/Menu/Options"]
+margin_left = 121.414
+margin_top = 272.586
+margin_right = 251.414
+margin_bottom = 293.586
+
 [node name="Title" type="Sprite" parent="Lobby"]
 position = Vector2( 379, 104 )
 texture = ExtResource( 4 )
@@ -1559,4 +1588,14 @@ collision_mask = 15
 [connection signal="pressed" from="Lobby/Menu/Host/BackButton" to="Lobby" method="_on_BackButton_pressed"]
 [connection signal="animation_finished" from="Lobby/Menu/Host/BackButton/Anim" to="Lobby/Menu/Host/BackButton" method="_on_Join_animation_finished"]
 [connection signal="pressed" from="Lobby/Menu/Options/BackButton" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button1" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button2" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button3" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button4" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button5" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 4 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button6" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 5 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button7" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 6 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Buttons/Button8" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 7 ]]
+[connection signal="value_changed" from="Lobby/Menu/Options/MusicSlider" to="Lobby/Menu/Options" method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="Lobby/Menu/Options/EffectsSlider" to="Lobby/Menu/Options" method="_on_EffectsSlider_value_changed"]
 [connection signal="animation_finished" from="Lobby/TransitionAnims" to="Lobby" method="_on_TransitionAnims_animation_finished"]
