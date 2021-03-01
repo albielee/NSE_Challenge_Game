@@ -58,15 +58,33 @@ func update(mouse_position, player_position):
 			target_angle -= SIDEFORCE*0.00075
 		else: side_velocity = 0
 
-func _on_PushBox_area_entered(area):
-	if (rock==null):
-		rock=area
-		rock_position = rock.global_transform.origin
-		rock.add_force(knockback_vector)
-		rock.add_force(Vector3.UP*20)
-		rock.in_zone() #This is setting the rock to "push mode"
-	elif (rock != area):
-		area.add_force(knockback_vector/2)
+func _on_PullBox_area_entered(area):
+	if not area in rocks:
+		rocks.append(area)
+
+func do_pull():
+	if not first_push:
+		first_push = true
+		var rockdic = {}
+		var mini = 50
+		for i in rocks:
+			if(i != null):
+				var dist = i.global_transform.origin.distance_to(player_position)
+				rockdic[dist] = i
+				if dist < mini and not (i.flying): mini = dist
+		if (rock==null and mini < 50):
+			rock=rockdic[mini]
+			rock.in_zone(get_parent().playerid) #This is setting the rock to "being owned"
+			rock_position = rock.pos
+			if mini > rock.size*1.5:
+				rock.add_force(-knockback_vector*PUSH_POWER)
+			rock.add_force(Vector3.UP*20)
+			rock.get_parent().last_mover = get_parent().player_name #assigns player to rock
+		for i in rocks:
+			if (rock != i):
+				i.add_force(-knockback_vector*PUSH_POWER/8)
+		if rock == null:
+			first_push = false
 
 func update_angle(target_angle_y, player_mouse_angle):
 	current_target_angle = target_angle_y

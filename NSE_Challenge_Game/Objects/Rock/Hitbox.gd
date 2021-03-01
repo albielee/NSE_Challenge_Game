@@ -7,6 +7,8 @@ var speed = 0.0
 var flying = false
 var pushed = false
 var owned_by = 0
+var linear_velocity = 0
+var pos = Vector3.ZERO
 
 signal pushed
 signal zone

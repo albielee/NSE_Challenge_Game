@@ -109,6 +109,8 @@ var packets = []
 var buffer = []
 var prev_speed = 0.0
 var next_speed = 0.0
+var puppet_current_face = 0.0
+var puppet_current_position = Vector3.ZERO
 
 func _ready():
 	set_linear_damp(10)
@@ -132,6 +134,9 @@ func _ready():
 
 func _physics_process(delta):
 	current_time += delta
+	current_rotation = rotation
+	_delta = delta
+	puppet_current_position = get_transform().origin
 	
 	#check if dead using networkhandler death
 	if(state != FALL and state != DEATH and network_handler.remote_dead):
@@ -143,33 +148,48 @@ func _physics_process(delta):
 		controls = get_controls(network_handler.get_cam())
 		update(delta)
 	else:
+		puppet_current_face = get_transform().basis.get_euler().y
 		puppet_update(delta)
 	
 	handle_animations(anim)
+	handle_sounds()
+
+func _integrate_forces(s):
+	if(network_handler.is_current_player()):
+		rotation = current_rotation + (mouse_angle*(current_turn_speed*_delta/30))
+	else:
+		var target = Vector3.UP * wrapf(r_rotation-puppet_current_face, -PI, PI)
+		rotation = current_rotation + (target*(current_turn_speed*_delta/30))
+		var d = puppet_next_position - puppet_current_position
+#		transform.origin = puppet_current_position + d*20*_delta
+
+func handle_sounds():
+	if(anim == "movement"):
+		play_footsteps()
+	if(anim == "summon_start"):
+		$Sounds/player_summon.play()
+	if(anim == "push_hold"):
+		if(!$Sounds/beam_push.playing):
+			$Sounds/beam_push.play()
+	else:
+		$Sounds/beam_push.stop()
+	
+	if(anim == "fall"):
+		#if(!$Sounds/player_fall.playing):
+			#$Sounds/player_fall.play()
+		if(!$Sounds/player_fall.playing):	
+			$Sounds/player_fall.play()
+	else:
+		$Sounds/player_fall.stop()
+
+func play_footsteps():
+	if(!$Sounds/footstep.playing):
+		$Sounds/footstep.play()
 
 func get_network_handler():
 	return network_handler
 
-#Required inputs: Camera location and current body location
-func get_controls(cam):
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	input_vector = input_vector.normalized()
-	
-	var _pushpull = Input.get_action_strength("push") - Input.get_action_strength("pull")
-	
-	var _summon = Input.get_action_strength("summon_rock")
-	
-	var _grab = Input.get_action_strength("temp_float")
-	
-	var _dash = Input.get_action_strength("move_dash")
-	
-	if(cam != null):
-		mouse_position = cam.raycast_position
-	
-	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
-
+#PUPPET UPDATES
 func puppet_update(delta):
 #	time = 0
 	var p = get_transform().origin
@@ -215,24 +235,14 @@ func puppet_update(delta):
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
 		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
 	
-#	transform.origin = puppet_next_position
-#	print(dist)
 	
 	if dist >= 1:
 		set_linear_velocity(next_speed*dir*dist)
 	else: set_linear_velocity(next_speed*dir)
 	
-	#actually also interpolate this shit
-	puppet_rotation(r_rotation,delta)
-	
 	anim = r_animation
 	if time > 0:
 		time -= delta
-
-func puppet_rotation(target,delta):
-	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
-	
-	set_angular_velocity(angular_veloc*TURN_SPEED*delta)
 
 func _on_NetworkHandler_packet_received():
 #	print(len(buffer))
@@ -263,7 +273,26 @@ func handle_animations(animation):
 		animationstate.travel(animation)
 	prevanim = animationstate.get_current_node()
 
-#Takes given control input and updates actions of the player
+#ACTIVE PLAYER UPDATE
+func get_controls(cam):
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	input_vector = input_vector.normalized()
+	
+	var _pushpull = Input.get_action_strength("push") - Input.get_action_strength("pull")
+	
+	var _summon = Input.get_action_strength("summon_rock")
+	
+	var _grab = Input.get_action_strength("temp_float")
+	
+	var _dash = Input.get_action_strength("move_dash")
+	
+	if(cam != null):
+		mouse_position = cam.raycast_position
+	
+	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
+
 func update(delta):
 	if(mode != MODE_RIGID):
 		set_mode(RigidBody.MODE_RIGID)
@@ -284,7 +313,6 @@ func update(delta):
 	pushbox.knockback_vector=current_angle
 	pushbox.update_angle(get_transform().basis.get_euler().y, mouse_angle,  global_transform.origin)
 	if (pushbox.rock != null): 
-#		pushbox.update_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y, mouse_angle)
 		pushbox.update(mouse_position, get_transform().looking_at(pushbox.rock_position, Vector3.UP).basis.get_euler().y)
 	
 	match state:
@@ -307,15 +335,7 @@ func update(delta):
 		PAUSE:
 			pause_state(delta)
 
-func set_last_attacker():
-	var bodies = get_colliding_bodies()
-	touched = false
-	for b in bodies:
-		if b.is_in_group("rock"):
-			if b.last_mover!="":
-				last_attacker = b.last_mover
-				break
-
+#STATE = MOVE
 func move_state(delta, mouse_angle):
 	#Handle movement, set to directional or set to 0
 	if (movement != Vector2.ZERO):
@@ -362,13 +382,11 @@ func move_state(delta, mouse_angle):
 					push_cooldown=0
 	move()
 
+#STATE = PAUSE
 func pause_state(delta):
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 
-func move():
-	if (move_velocity!=Vector3.ZERO):
-		set_linear_velocity(move_velocity)
-
+#STATE = DASH
 func dash_state(delta):
 	if(anim != "dash"):
 		var dash_time = 0.1
@@ -378,7 +396,6 @@ func dash_state(delta):
 	move()
 	if($ActionTimer.time_left < 0.02):
 		dash_finished()
-	
 
 func dash_finished():
 	if(network_handler.is_current_player()):
@@ -386,12 +403,11 @@ func dash_finished():
 		state=MOVE
 		can_dash=DASH_COOLDOWN
 
-func set_fall_state():
-	state = FALL
-
+#STATE = FALL
 func fall_state(delta):
 	anim = "fall"
 
+#STATE = GRAB/GRABBED
 func grab_state(delta):
 	set_angular_velocity(mouse_angle*TURN_SPEED*delta)
 	#check if grabbing got cancelled
@@ -456,6 +472,7 @@ func _on_GrabBox_lost_rock():
 	grabbox.transform.origin.z=-1.8
 	grabbox.shape.shape.set_height(0.5)
 
+#STATE = SUMMON
 func summoning_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
@@ -479,7 +496,6 @@ func summoning_state(delta):
 		if (summon == 0.0) or (summon_size > 3.0):
 			summon_size=0.5
 			state = MOVE
-#		print(summon)
 
 func summon_power_up():
 	if(network_handler.is_current_player()):
@@ -487,6 +503,7 @@ func summon_power_up():
 		if (summon == 0.0) or (summon_size == 3.0):
 			state=SUMMONING
 
+#STATE = PUSH
 func push_state(delta):
 	set_angular_velocity(get_mouse_angle(get_transform().basis.get_euler().y, push_mouse_position)*TURN_SPEED*delta)
 	move_velocity = Vector3.ZERO
@@ -524,28 +541,111 @@ func push_complete():
 		push_cooldown=1
 		pushbox.release()
 
+#STATE = PULL
 func pull_state(delta):
-	pass
+#	mouse_angle = get_mouse_angle(get_transform().basis.get_euler().y, pull_mouse_position)
+	current_turn_speed = TURN_SPEED/40
+	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
+	if pushpull == -1:
+		pullbox.shape.disabled = false
+		if(pullbox.shape.shape.get_height()<80*SCALE):
+			pullbox.shape.shape.set_height(pullbox.shape.shape.get_height()+5)
+			pullbox.transform.origin.z-=2.5*SCALE
+		else:
+			pullbox.do_pull()
+		if(!started_pulling):
+			anim = "push_charge"
+			started_pulling = true
+		else:
+			anim = "push_hold"
+	else: 
+		started_pulling = false
+		pull_complete()
 
+func pull_complete():
+	if(network_handler.is_current_player()):
+		pullbox.shape.shape.set_height(1)
+		pullbox.transform.origin.z=-1.0*SCALE
+		pullbox.shape.disabled = true
+		state = MOVE
+		anim = "idle"
+		pull_cooldown=1
+		pullbox.release()
+
+#STATE = SHOVE
+func check_shove(rock):
+	if rock == null:
+		return false
+	
+	var up_dir = Vector3.UP
+	var angle_to_rock = get_transform().looking_at(rock.transform.origin, up_dir).basis.get_euler().y
+	
+	var dics = {}
+	var diffs = []
+	var current_angle_y = get_transform().basis.get_euler().y
+	
+#	print(current_angle_y)
+	
+	for i in [-1,0,1,2]:
+		var f = rock.face + (i * (PI/2))
+		
+		var line = (rock.transform.origin - transform.origin).normalized()
+		var line2ang = wrapf(atan2(line.x,line.z)-PI, -PI, PI)
+		
+		var diff = wrapf(line2ang - f - 3*PI/4, -PI, PI);
+		dics[diff] = f
+		diffs.append(diff)
+	
+	var rot = wrapf(dics[diffs.min()] - current_angle_y, -PI, PI)
+	
+	if (rot < PI/8) and (rot > -PI/8):
+		var rotation_angle = wrapf(dics[diffs.min()] - current_angle_y, -PI, PI);
+		rock_face_angle = up_dir * rotation_angle
+		return true
+	return false
+
+var rock_face_angle = Vector3.ZERO
+
+func shove_state(delta):
+	#here should be the code for the new animation.
+	#how does that work? I'm gonna set up the controls without any animations
+	anim = "idle"
+	
+	if not contact and not s_rock.p_hitbox in get_colliding_bodies():
+		stop_shove()
+		return
+	elif not check_shove(s_rock):
+		stop_shove()
+		return
+	s_rock.set_owner(playerid)
+	
+	if (movement != Vector2.ZERO):
+		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
+		dash_angle = Vector3(movement.x,0,movement.y)
+	else:
+		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
+	
+	mouse_angle = rock_face_angle
+	
+	s_rock.add_force(40*current_angle, Vector3.ZERO)
+	
+	if(pushpull==1):
+		push_mouse_position=mouse_position
+		state = PUSH
+	if(pushpull==-1):
+		pass
+
+func stop_shove():
+	state = MOVE
+	s_rock = null
+
+#NETWORKS
 func set_player_name(name):
 	player_name = name
-	pass
 
-func angle_update():
-	var current_angle_y = get_transform().basis.get_euler().y;
-	var curang = wrapf(current_angle_y,-PI,PI)
-	current_angle = Vector3(-sin(curang),0,-cos(curang))
-	
-	if(mouse_position != Vector3.ZERO):
-		mouse_angle = get_mouse_angle(current_angle_y, mouse_position)
+func set_player_colour(col):
+	player_col = col
 
-func get_mouse_angle(current_angle, position):
-	var up_dir = Vector3.UP
-	var target_angle_y = get_transform().looking_at(position, up_dir).basis.get_euler().y;
-	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
-	return up_dir * rotation_angle;
-
-#On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
 	network_handler.timeout(get_transform().basis.get_euler().y, get_transform().origin, anim, linear_velocity)
 
@@ -574,5 +674,39 @@ func set_paused(yes):
 	else:
 		state = MOVE
 
+func move():
+	if (move_velocity!=Vector3.ZERO):
+		set_linear_velocity(move_velocity)
+
+func set_last_attacker():
+	var bodies = get_colliding_bodies()
+	touched = false
+	for b in bodies:
+		if b.is_in_group("rock"):
+			if b.last_mover!="":
+				last_attacker = b.last_mover
+				break
+
+func set_fall_state():
+	state = FALL
+
+
+#FINDING CURRENT ANGLES
+func angle_update():
+	var current_angle_y = get_transform().basis.get_euler().y;
+	var curang = wrapf(current_angle_y,-PI,PI)
+	current_angle = Vector3(-sin(curang),0,-cos(curang))
+	
+	if(mouse_position != Vector3.ZERO):
+		mouse_angle = get_mouse_angle(current_angle_y, mouse_position)
+
+func get_mouse_angle(current_angle, position):
+	var up_dir = Vector3.UP
+	var target_angle_y = get_transform().looking_at(position, up_dir).basis.get_euler().y;
+	var rotation_angle = wrapf(target_angle_y - current_angle, -PI, PI);
+	
+	return up_dir * rotation_angle;
+
+#PLAYER COLLISIONS
 func _on_Player_body_entered(body):
 	touched = true

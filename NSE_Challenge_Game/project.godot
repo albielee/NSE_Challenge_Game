@@ -28,13 +28,18 @@ SsGlobals="*res://SsGlobals.gd"
 
 [debug]
 
+settings/fps/force_fps=120
 gdscript/warnings/return_value_discarded=false
 
 [display]
 
+window/size/width=768
+window/size/height=450
+window/size/test_width=1024
+window/size/test_height=600
 window/vsync/use_vsync=false
-window/stretch/mode="2d"
-window/stretch/aspect="expand"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [gdnative]
 
@@ -148,4 +153,4 @@ scoreboard={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.352941, 0.411765, 0.533333, 1 )
+environment/default_clear_color=Color( 0.482353, 0.462745, 0.533333, 1 )
