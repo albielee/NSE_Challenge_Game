@@ -172,6 +172,9 @@ func _physics_process(delta):
 	handle_animations(anim)
 	handle_sounds()
 
+func _integrate_forces(s):
+	rotation = current_rotation + (mouse_angle*(current_turn_speed*_delta/30))
+
 func handle_sounds():
 	if(anim == "movement"):
 		play_footsteps()
@@ -310,9 +313,6 @@ func handle_animations(animation):
 	if (animation!=prevanim):
 		animationstate.travel(animation)
 	prevanim = animationstate.get_current_node()
-
-func _integrate_forces(s):
-	rotation = current_rotation + (mouse_angle*(current_turn_speed*_delta/30))
 
 #Takes given control input and updates actions of the player
 func update(delta):

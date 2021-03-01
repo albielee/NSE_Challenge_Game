@@ -9,6 +9,7 @@ var pushed = false
 var size = 0
 var owned_by = 0
 var linear_velocity = 0
+var pos = Vector3.ZERO
 
 signal pushed
 signal zone
