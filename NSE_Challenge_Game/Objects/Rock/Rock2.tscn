@@ -38,7 +38,9 @@ transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
-[node name="Hitbox" type="Area" parent="."]
+[node name="Hitbox" type="Area" parent="." groups=[
+"ghost",
+]]
 collision_layer = 0
 collision_mask = 32
 script = ExtResource( 2 )
@@ -47,7 +49,9 @@ script = ExtResource( 2 )
 transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
 shape = SubResource( 4 )
 
-[node name="Hitbox2" type="Area" parent="."]
+[node name="Hitbox2" type="Area" parent="." groups=[
+"ghost",
+]]
 collision_layer = 512
 collision_mask = 512
 script = ExtResource( 7 )
