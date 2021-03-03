@@ -13,12 +13,16 @@ var fall_map = [
 	[1,1,1,1,1,1,1,1]
 ]
 
-var fall_time = 20
-var round_timer
-var round_time
-var round_number
-var round_count = 0
+var fall_time = 5
+var fall_timer
 
+
+
+var round_timer
+var round_time = 20
+var round_number = 5
+var round_count = 0
+var sudden_death=false
 
 
 var scores = {}
@@ -66,7 +70,7 @@ func get_last_player():
 	pass
 
 func play_countdown():
-	round_timer.paused(true)
+	round_timer.set_paused(true)
 	pause_players(true)
 	for i in range(3,0,-1):
 		get_node("Number"+str(i)).visible = true
@@ -75,7 +79,7 @@ func play_countdown():
 		get_node("Number"+str(i)).visible = false
 		get_node("Number"+str(i)).playing = false
 	pause_players(false)
-	round_timer.paused(false)
+	round_timer.set_paused(false)
 
 func pause_players(yes):
 	for o in get_tree().get_nodes_in_group("player"):
@@ -89,7 +93,7 @@ func restart_round():
 	#all objects in resettable should have a reset function
 	
 	for o in get_tree().get_nodes_in_group("resettable"):
-		o.rpc("reset")
+		o.rpc("reset") 
 #		o.reset()
 	play_countdown()
 
@@ -126,17 +130,29 @@ func update_scoreboard():
 		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
 		i+=1
 
+func start_sudden_death():
+	pass
+
 func create_round_timer():
 	round_timer = Timer.new()
 	round_timer.set_wait_time(round_time)
+	round_timer.set_one_shot(true)
 	round_timer.connect("timeout",self,"_round_timer_timeout")
 	add_child(round_timer)
 	round_timer.start()
 
+func create_fall_timer():
+	fall_timer = Timer.new()
+	fall_timer.set_wait_time(fall_time)
+	fall_timer.connect("timeout",self,"pick_map_section")
+	add_child(fall_timer)
+	fall_timer.start()
+
 func _round_timer_timeout():
-	pass
+	sudden_death = true
+	create_fall_timer()
 	
-func drop_map_section():
+func pick_map_section():
 	var remainingPieces = []
 	for x in range(len(fall_map)):
 		for y in range(len(fall_map[0])):
@@ -144,9 +160,12 @@ func drop_map_section():
 				remainingPieces.append([x,y])
 	var r = RandomNumberGenerator.new()
 	r.randomize()
-	var pair = remainingPieces[r.randi(0,len(remainingPieces)-1)]
+	var pair = remainingPieces[r.randi_range(0,len(remainingPieces)-1)]
 	fall_map[pair[0]][pair[1]] = 0
-	get_node("../Enviroment/Towers"+str((pair[0]*8+pair[1])-1)).begin_fall()
+	print(get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)))
+	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).begin_fall()
+	####make this work for multiplayer!!!!
+
 	
 
 

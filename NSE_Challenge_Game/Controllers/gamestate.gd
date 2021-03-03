@@ -126,8 +126,8 @@ remote func pre_start_game(spawn_points, roundSettings):
 		world.get_node("Players").add_child(player)
 		print("this is lafkjndrkjgndxignsdriyfhb")
 		print(roundSettings)
-		world.get_node("RoundController").round_time = round_time
-		world.get_node("RoundController").round_number = round_number
+		world.get_node("RoundController").round_time = roundSettings[1]
+		world.get_node("RoundController").round_number = roundSettings[2]
 	
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start.
