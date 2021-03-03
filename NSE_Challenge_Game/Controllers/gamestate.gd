@@ -95,12 +95,17 @@ func unregister_player(id):
 remote func pre_start_game(spawn_points, roundSettings):
 	
 	# Change scene.
-	get_tree().change_scene("res://Worlds/world.tscn")
+	print(get_tree().get_current_scene() )
+	print_tree_pretty()
+	#print("EY")
+	#get_tree().change_scene("res://Worlds/world.tscn")
+	get_tree().get_root().get_node("LobbyWorld").queue_free() 
+
 	var map = roundSettings[0]
 	var world = load(map).instance()
 	
 	get_tree().get_root().add_child(world)
-	
+	print_tree_pretty()
 	#get_tree().get_root().get_node("LobbyWorld").get_node("Lobby").hide()
 	
 	var player_scene = load("res://Player/Player.tscn")
