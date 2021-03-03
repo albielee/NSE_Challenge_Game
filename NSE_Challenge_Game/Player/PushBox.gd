@@ -13,9 +13,11 @@ var player_rock = 0
 
 var knockback_vector = Vector3.ZERO
 var rock_push_vector = Vector3.ZERO
+var kn = Vector3.ZERO
 
 var current_target_angle = 0 
 var target_angle = 0
+var speed_from_player = 0
 
 var player_mouse = Vector3.ZERO
 
@@ -25,6 +27,8 @@ onready var shape = $CollisionShape
 
 func update(mouse_position, player_to_rock):
 	if (rock!=null):
+		speed_from_player = kn.dot(rock.linear_velocity)/kn.length()
+		
 		if !angle_set:
 			angle_set = true
 			target_angle = current_target_angle
@@ -72,6 +76,7 @@ func _on_PushBox_area_entered(area):
 
 func do_push():
 	if not first_push:
+		kn = knockback_vector.normalized()
 		first_push = true
 		var rockdic = {}
 		var mini = 50

@@ -13,11 +13,14 @@ var player_rock = 0
 
 var knockback_vector = Vector3.ZERO
 var rock_push_vector = Vector3.ZERO
+var kn = Vector3.ZERO
 
 var current_target_angle = 0 
 var target_angle = 0
 
 var player_mouse = Vector3.ZERO
+
+var speed_from_player = 0
 
 var angle_set = false
 
@@ -27,6 +30,7 @@ onready var shape = $CollisionShape
 
 func update(mouse_position, player_to_rock):
 	if (rock!=null):
+		speed_from_player = kn.dot(rock.linear_velocity)/kn.length()
 		target_angle = current_target_angle
 		
 		rock_position = rock.global_transform.origin
@@ -50,6 +54,7 @@ func _on_PullBox_area_entered(area):
 
 func do_pull():
 	if not first_push:
+		kn = knockback_vector.normalized()
 		first_push = true
 		var rockdic = {}
 		var mini = 50
