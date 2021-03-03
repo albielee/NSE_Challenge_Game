@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/World/cherryblossom.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.24447, 1.36228, 1.56839 )
+
+[sub_resource type="Curve" id=3]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0.520202, 3.63635 ), 0.0, 0.0, 0, 0, Vector2( 1, 152.727 ), 469.565, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 0.25
+emission_shape = 2
+emission_box_extents = Vector3( 3, 1, 1 )
+spread = 19.76
+gravity = Vector3( -2, -3, 0 )
+initial_velocity = 1.0
+linear_accel = 5.0
+linear_accel_curve = SubResource( 4 )
+angle = 180.0
+angle_random = 0.4
+scale = 0.15
+scale_random = 0.01
+color = Color( 0.709804, 0.313726, 0.533333, 1 )
+
+[sub_resource type="CubeMesh" id=6]
+
+[node name="CherryBlossom" type="StaticBody"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0.85, -5.1 )
+collision_layer = 2
+collision_mask = 0
+
+[node name="cherryblossom" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41728, -2.95793, 3.27542 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.548724, 0, 0, 0, 1, 0, 0, 0, 0.538976, 1.12202, 0.0573067, -0.365935 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.102231, 0, 0, 0, 1, 0, 0, 0, 0.538976, 1.20247, 0.0573067, 0.556083 )
+shape = SubResource( 2 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( -0.998935, 0, 0.0461476, 0, 1, 0, -0.0461476, 0, -0.998935, 0.592323, 3.58823, -1.19209e-07 )
+amount = 5
+lifetime = 2.65
+visibility_aabb = AABB( -1.31923, -2.22514, -1.43511, 2.63846, 4.45028, 2.87021 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )

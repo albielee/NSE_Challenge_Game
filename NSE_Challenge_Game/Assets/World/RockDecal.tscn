@@ -12,6 +12,8 @@ extents = Vector3( 0.564601, 1, 0.601196 )
 "Removable",
 ]]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
+collision_layer = 6
+collision_mask = 0
 
 [node name="rockDecal1" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
