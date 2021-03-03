@@ -68,11 +68,7 @@ func _on_join_pressed():
 		$Connect/ErrorLabel.text = "Invalid IP address!"
 		return
 	
-	$Connect/ErrorLabel.text = ""
-	$Connect.hide()
-	$Menu.hide()
-	transition = PLAYERS
-	play_transition_animation("players", false)
+	
 	#$Connect/join.disabled = true
 	#$Menu/Host/Hosting/host.disabled = true
 	
@@ -84,6 +80,11 @@ func disable_buttons():
 		button.disabled = true
 
 func _on_connection_success():
+	$Connect/ErrorLabel.text = ""
+	$Connect.hide()
+	$Menu.hide()
+	transition = PLAYERS
+	play_transition_animation("players", false)
 	$Connect.hide()
 	$Players.show()
 

@@ -158,6 +158,7 @@ func join_game(ip, new_player_name):
 	client.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(client)
 
+
 func get_player_list():
 	return players.values()
 
