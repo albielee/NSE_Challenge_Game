@@ -3,18 +3,21 @@ extends Control
 onready var countdown_sprites = [$Number3,$Number2,$Number1]
 
 var fall_map = [
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0],
-	[0,0,0,0,0,0,0,0]
+	[1,1,1,1,1,1,1,1],
+	[1,1,1,1,1,1,1,1],
+	[1,1,1,0,0,1,1,1],
+	[1,1,1,0,0,1,1,1],
+	[1,1,1,0,0,1,1,1],
+	[1,1,1,0,0,1,1,1],
+	[1,1,1,1,1,1,1,1],
+	[1,1,1,1,1,1,1,1]
 ]
 
 var fall_time = 20
 var round_timer
+var round_time
+var round_number
+var round_count = 0
 
 
 
@@ -31,8 +34,7 @@ func _process(delta):
 		first_run = false
 		create_scores()
 		initialise_scoreboard()
-		round_timer = Timer.new()
-		round_timer.connect("timeout",self,"_round_timer_timeout")
+		create_round_timer()
 		
 	#If the host:
 	if(get_tree().is_network_server()):
@@ -45,12 +47,6 @@ func _process(delta):
 #			scores[last_player]+=1
 			restart_round()
 
-func _round_timer_timeout():
-	pass
-	
-
-func reset_round_timer():
-	round_timer.start(fall_time)
 
 func detect_players_left():
 	var players_left = 0
@@ -70,6 +66,7 @@ func get_last_player():
 	pass
 
 func play_countdown():
+	round_timer.paused(true)
 	pause_players(true)
 	for i in range(3,0,-1):
 		get_node("Number"+str(i)).visible = true
@@ -78,6 +75,7 @@ func play_countdown():
 		get_node("Number"+str(i)).visible = false
 		get_node("Number"+str(i)).playing = false
 	pause_players(false)
+	round_timer.paused(false)
 
 func pause_players(yes):
 	for o in get_tree().get_nodes_in_group("player"):
@@ -128,6 +126,28 @@ func update_scoreboard():
 		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
 		i+=1
 
+func create_round_timer():
+	round_timer = Timer.new()
+	round_timer.set_wait_time(round_time)
+	round_timer.connect("timeout",self,"_round_timer_timeout")
+	add_child(round_timer)
+	round_timer.start()
+
+func _round_timer_timeout():
+	pass
+	
+func drop_map_section():
+	var remainingPieces = []
+	for x in range(len(fall_map)):
+		for y in range(len(fall_map[0])):
+			if fall_map[x][y]==1:
+				remainingPieces.append([x,y])
+	var r = RandomNumberGenerator.new()
+	r.randomize()
+	var pair = remainingPieces[r.randi(0,len(remainingPieces)-1)]
+	fall_map[pair[0]][pair[1]] = 0
+	get_node("../Enviroment/Towers"+str((pair[0]*8+pair[1])-1)).begin_fall()
+	
 
 
 """
