@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/towerSlice1.obj-13d58282de58397e66035517caac20b5.mesh"
+
+[deps]
+
+files=[ "res://.import/towerSlice1.obj-13d58282de58397e66035517caac20b5.mesh" ]
+
+source_file="res://Assets/World/Tower/towerSlice1.obj"
+dest_files=[ "res://.import/towerSlice1.obj-13d58282de58397e66035517caac20b5.mesh", "res://.import/towerSlice1.obj-13d58282de58397e66035517caac20b5.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

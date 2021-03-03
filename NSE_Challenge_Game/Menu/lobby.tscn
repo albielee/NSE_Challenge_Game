@@ -28,7 +28,7 @@
 [ext_resource path="res://Worlds/Ambiance.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Assets/Menu/StartPressed.png" type="Texture" id=27]
 [ext_resource path="res://Menu/Options.gd" type="Script" id=28]
-[ext_resource path="res://Assets/World/Tower.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/World/Tower/Tower.tscn" type="PackedScene" id=29]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 19 )

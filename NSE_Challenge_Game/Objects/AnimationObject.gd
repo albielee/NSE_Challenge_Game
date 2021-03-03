@@ -20,6 +20,7 @@ func _ready():
 	frames[start_frame].visible = true
 
 func play():
+	visible = true
 	playing = true
 
 func stop():

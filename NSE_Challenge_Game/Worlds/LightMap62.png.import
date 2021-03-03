@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path.s3tc="res://.import/LightMap62.png-b391bfce63ff133fa5d7a233eaa4e8ae.s3tc.stex"
+path.etc2="res://.import/LightMap62.png-b391bfce63ff133fa5d7a233eaa4e8ae.etc2.stex"
+metadata={
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Worlds/LightMap62.png"
+dest_files=[ "res://.import/LightMap62.png-b391bfce63ff133fa5d7a233eaa4e8ae.s3tc.stex", "res://.import/LightMap62.png-b391bfce63ff133fa5d7a233eaa4e8ae.etc2.stex" ]
+
+[params]
+
+compress/mode=2
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=false
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=true
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
