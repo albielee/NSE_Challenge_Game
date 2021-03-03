@@ -7,8 +7,11 @@ var fall_speed = 0
 var max_fall_speed = 100
 var accel = 5
 onready var model_start_pos = $tower.transform.origin
-
+var t = 0
 func _physics_process(delta):
+	#t+=1
+	if(t>400):
+		falling = true
 	if(falling):
 		fall(delta)
 
