@@ -30,23 +30,25 @@ onready var shape = $CollisionShape
 
 func update(mouse_position, player_to_rock):
 	if (rock!=null):
-		speed_from_player = kn.dot(rock.linear_velocity)/kn.length()
+		speed_from_player = kn.dot(rock.linear_velocity)
+		print(speed_from_player)
 		target_angle = current_target_angle
 		
 		rock_position = rock.global_transform.origin
 		var ideal_location = Vector3(player_position.x + rock.size*sin(-target_angle), 0, player_position.z - rock.size*cos(-target_angle))
-		rock.add_force((ideal_location-rock_position).normalized()*5)
+		rock.add_force((ideal_location-rock_position).normalized()*20)
 		
 		if rock_position.distance_to(ideal_location) < rock.size and rock.speed > 2:
 			rock.add_force(-rock.linear_velocity*10)
+			rock.add_force(Vector3.UP*rock.gravity*2)
 		
 		var rotation_angle = wrapf(target_angle - rock.face, -PI/4, PI/4);
 		rock.angular_velocity((Vector3.UP * rotation_angle)*5)
 		
 		if player_position.y+0.7-rock_position.y > 0:
-			rock.add_force(Vector3.UP*rock.gravity/0.8)
+			rock.add_force(Vector3.UP*rock.gravity/0.6)
 		else:
-			rock.add_force(Vector3.UP*rock.gravity/1.1)
+			rock.add_force(Vector3.UP*rock.gravity)
 
 func _on_PullBox_area_entered(area):
 	if not area in rocks:
@@ -92,5 +94,5 @@ func release():
 	affectedrocks = []
 	timer = 4
 	if rock != null:
-		rock.out_zone() #Set rock directly back to "normal mode"
+		rock.out_zone()
 		rock = null

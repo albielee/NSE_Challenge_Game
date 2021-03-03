@@ -582,7 +582,7 @@ func push_complete():
 
 func pull_state(delta):
 #	mouse_angle = get_mouse_angle(get_transform().basis.get_euler().y, pull_mouse_position)
-	current_turn_speed = TURN_SPEED/40
+	current_turn_speed = TURN_SPEED/30
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	if pushpull == -1:
 		pullbox.shape.disabled = false
