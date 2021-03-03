@@ -635,6 +635,9 @@ custom_styles/focus = SubResource( 20 )
 custom_styles/normal = SubResource( 20 )
 align = 1
 max_length = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RoundNumber" type="LineEdit" parent="Lobby/Players"]
 margin_left = 143.839
@@ -647,6 +650,9 @@ custom_styles/focus = SubResource( 20 )
 custom_styles/normal = SubResource( 20 )
 align = 1
 max_length = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Connect" type="Panel" parent="Lobby"]
 visible = false

@@ -27,6 +27,11 @@ signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
 
+# Data from lobby for round settings
+var round_time
+var round_number
+
+
 func _process(delta):
 	if(joined and run_once):
 		if(!get_tree().is_network_server()):

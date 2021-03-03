@@ -179,6 +179,17 @@ func _on_BackButton_pressed():
 func _on_Start_pressed():
 	$Players.visible = false
 	$Title.visible = false
+	
+	if $Players/RoundTime.text.is_valid_integer():
+		gamestate.round_time = int($Players/RoundTime.text)
+	else:
+		gamestate.round_time = 60
+	
+	if $Players/RoundNumber.text.is_valid_integer():
+		gamestate.round_number = int($Players/RoundNumber.text)
+	else:
+		gamestate.round_number = 5
+	
 	gamestate.notify_clients_start_pressed()
 	game_started = true
 	l_cam.start_travelling()
