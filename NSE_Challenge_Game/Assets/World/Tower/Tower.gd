@@ -39,6 +39,8 @@ func begin_fall():
 
 func fall(delta):
 	if(!$AnimationObject.playing):
+		if(!$fallSound.playing):
+			$fallSound.play()
 		#we like a good shake
 		shake_model()
 		
