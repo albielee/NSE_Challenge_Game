@@ -131,6 +131,7 @@ var puppet_current_face = 0.0
 var _delta = 0.1
 
 func _ready():
+	spawn_position = transform.origin
 	set_linear_damp(10)
 	set_mass(MASS)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)

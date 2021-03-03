@@ -93,7 +93,6 @@ func unregister_player(id):
 
 
 remote func pre_start_game(spawn_points, roundSettings):
-	
 	# Change scene.
 	print(get_tree().get_current_scene() )
 	print_tree_pretty()
