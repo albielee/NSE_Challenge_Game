@@ -27,6 +27,11 @@ signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
 
+# Data from lobby for round settings
+var round_time
+var round_number
+
+
 func _process(delta):
 	if(joined and run_once):
 		if(!get_tree().is_network_server()):
@@ -157,6 +162,7 @@ func join_game(ip, new_player_name):
 	var client = NetworkedMultiplayerENet.new()
 	client.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(client)
+
 
 func get_player_list():
 	return players.values()

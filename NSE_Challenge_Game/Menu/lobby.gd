@@ -68,11 +68,7 @@ func _on_join_pressed():
 		$Connect/ErrorLabel.text = "Invalid IP address!"
 		return
 	
-	$Connect/ErrorLabel.text = ""
-	$Connect.hide()
-	$Menu.hide()
-	transition = PLAYERS
-	play_transition_animation("players", false)
+	
 	#$Connect/join.disabled = true
 	#$Menu/Host/Hosting/host.disabled = true
 	
@@ -84,6 +80,11 @@ func disable_buttons():
 		button.disabled = true
 
 func _on_connection_success():
+	$Connect/ErrorLabel.text = ""
+	$Connect.hide()
+	$Menu.hide()
+	transition = PLAYERS
+	play_transition_animation("players", false)
 	$Connect.hide()
 	$Players.show()
 
@@ -178,6 +179,17 @@ func _on_BackButton_pressed():
 func _on_Start_pressed():
 	$Players.visible = false
 	$Title.visible = false
+	
+	if $Players/RoundTime.text.is_valid_integer():
+		gamestate.round_time = int($Players/RoundTime.text)
+	else:
+		gamestate.round_time = 60
+	
+	if $Players/RoundNumber.text.is_valid_integer():
+		gamestate.round_number = int($Players/RoundNumber.text)
+	else:
+		gamestate.round_number = 5
+	
 	gamestate.notify_clients_start_pressed()
 	game_started = true
 	l_cam.start_travelling()

@@ -21,6 +21,8 @@ var player_mouse = Vector3.ZERO
 
 var angle_set = false
 
+var affectedrocks = []
+
 onready var shape = $CollisionShape
 
 func update(mouse_position, player_to_rock):
@@ -55,7 +57,9 @@ func do_pull():
 			if(i != null):
 				var dist = i.global_transform.origin.distance_to(player_position)
 				rockdic[dist] = i
-				if dist < mini and not (i.flying): mini = dist
+				if dist < mini:
+					if not i.flying: mini = dist
+					elif i.owned_by == get_tree().get_network_unique_id(): mini = dist
 		if (rock==null and mini < 50):
 			rock=rockdic[mini]
 			rock_position = rock.global_transform.origin
@@ -65,7 +69,8 @@ func do_pull():
 			rock.in_zone(get_parent().playerid) #This is setting the rock to "push mode"
 			rock.get_parent().last_mover = get_parent().player_name #assigns player to rock
 		for i in rocks:
-			if (rock != i):
+			if (rock != i) and i != null and not i in affectedrocks:
+				affectedrocks.append(i)
 				i.add_force(-knockback_vector*PUSH_POWER/8)
 		if rock == null:
 			first_push = false
@@ -79,6 +84,7 @@ func release():
 	angle_set = false
 	first_push = false
 	rocks = []
+	affectedrocks = []
 	timer = 4
 	if rock != null:
 		rock.out_zone() #Set rock directly back to "normal mode"
