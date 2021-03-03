@@ -34,7 +34,7 @@ func update_position():
 	var pos = get_global_transform().origin
 	var dist_to_rock = sqrt(pow((rock_pos.x-pos.x),2)+pow((rock_pos.z-pos.z),2))
 
-	var dif = rot-get_global_transform().basis.get_euler().y
+	var dif = -(rot-get_global_transform().basis.get_euler().y)
 	if dif>PI/2:
 		dif = PI/2
 	elif dif<-PI/2:
