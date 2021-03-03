@@ -36,11 +36,9 @@ func begin_fall():
 	play_anim()
 	remove_world_props()
 	falling = true
-	print("fall beginning")
 
 func fall(delta):
 	if(!$AnimationObject.playing):
-		print("Falling")
 		#we like a good shake
 		shake_model()
 		
