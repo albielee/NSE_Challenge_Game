@@ -94,7 +94,7 @@ func unregister_player(id):
 
 remote func pre_start_game(spawn_points, roundSettings):
 	# Change scene.
-	print(get_tree().get_current_scene() )
+#	print(get_tree().get_current_scene() )
 	print_tree_pretty()
 	#print("EY")
 	#get_tree().change_scene("res://Worlds/world.tscn")
@@ -128,7 +128,7 @@ remote func pre_start_game(spawn_points, roundSettings):
 			player.set_player_name(players[p_id])
 		
 		world.get_node("Players").add_child(player)
-		print("this is lafkjndrkjgndxignsdriyfhb")
+#		print("this is lafkjndrkjgndxignsdriyfhb")
 		print(roundSettings)
 		world.get_node("RoundController").round_time = roundSettings[1]
 		world.get_node("RoundController").round_number = roundSettings[2]

@@ -1,6 +1,8 @@
 extends Area
 
 var knockback = Vector3.ZERO
+var size = 0
+var pos = Vector3.ZERO
 
 signal pushed
 

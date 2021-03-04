@@ -31,7 +31,6 @@ onready var shape = $CollisionShape
 func update(mouse_position, player_to_rock):
 	if (rock!=null):
 		speed_from_player = kn.dot(rock.linear_velocity)
-		print(speed_from_player)
 		target_angle = current_target_angle
 		
 		rock_position = rock.global_transform.origin

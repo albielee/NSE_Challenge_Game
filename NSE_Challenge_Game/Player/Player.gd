@@ -102,6 +102,7 @@ export var GRAB_DROPOFF_VAL = 1.0
 var last_time = 0
 var current_turn_speed = TURN_SPEED
 var current_rotation = 0
+var current_position = spawn_position
 
 onready var UPDATE_INTERVAL = 1.0 / $"/root/Settings".tickrate
 
@@ -156,6 +157,7 @@ func _ready():
 func _physics_process(delta):
 	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = player_col
 	current_time += delta
+	current_position = transform.origin
 	current_rotation = rotation
 	_delta = delta
 	puppet_current_face = get_transform().basis.get_euler().y
@@ -181,6 +183,16 @@ func _integrate_forces(s):
 	else:
 		var target = Vector3.UP * wrapf(r_rotation-puppet_current_face, -PI, PI)
 		rotation = current_rotation + (target*(current_turn_speed*_delta/30))
+		var next = current_position.move_toward(puppet_next_position,15*_delta)
+		if contacts_reported>0: 
+			for i in get_colliding_bodies():
+				if i.is_in_group('rock_hitbox'):
+					var size = i.get_parent().size
+					var pos = i.get_parent().location
+					if next.distance_to(pos) > size:
+						var dir = (next-pos).normalized()
+						next = pos + dir * size
+		transform.origin = next
 
 func handle_sounds():
 	if(anim == "movement"):
@@ -194,8 +206,6 @@ func handle_sounds():
 		$Sounds/beam_push.stop()
 	
 	if(anim == "fall"):
-		#if(!$Sounds/player_fall.playing):
-			#$Sounds/player_fall.play()
 		if(!$Sounds/player_fall.playing):	
 			$Sounds/player_fall.play()
 	else:
@@ -654,6 +664,8 @@ func shove_state(delta):
 		stop_shove()
 		return
 	
+	s_rock.set_owner(playerid)
+	
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
 		dash_angle = Vector3(movement.x,0,movement.y)
@@ -730,10 +742,14 @@ func _on_Player_body_entered(body):
 	touched = true
 
 func _on_RockHitBox_start_pushing():
-	s_rock = $RockHitBox.rock
-	shovable = check_shove(s_rock)
-	contact = true
-	grabbeam_handler.start_beam(rockhitbox.rock)
+	if(network_handler.is_current_player()):
+		s_rock = $RockHitBox.rock
+		shovable = check_shove(s_rock)
+		contact = true
+		grabbeam_handler.start_beam(rockhitbox.rock)
+	else:
+		pass
+#		print("im a puppet and i just got pushed :(")
 
 func _on_RockHitBox_stop_pushing():
 	contact = false

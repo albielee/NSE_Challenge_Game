@@ -32,6 +32,7 @@ var location = Vector3.ZERO
 var _delta = 0.0
 var current_rotation = Vector3.ZERO
 var face = 0
+var size = 0
 
 func _ready():
 	set_gravity_scale(5)
@@ -44,10 +45,13 @@ func _physics_process(delta):
 	location = get_transform().origin
 	current_rotation = rotation
 	_delta = delta
+	size = scale.x
 	hitbox.pos = location
-	hitbox.size = scale.x
+	hitbox.size = size
 	hitbox.linear_velocity = linear_velocity
 	hitbox.owned_by = owned_by
+	playerhitbox.size = scale.x
+	playerhitbox.pos = location
 	if get_tree().get_network_unique_id() == owned_by:
 		update(delta)
 	else:
@@ -73,14 +77,15 @@ func puppet_update(delta):
 		r_stats = statstime[0]
 		r_position = r_stats[0]
 		r_rotation = r_stats[1]
-		r_velocity = Vector2(r_stats[2].x,r_stats[2].z)
-		r_next_pos = r_position + (Vector3(r_velocity.x,0,r_velocity.y) * time)
+		r_velocity = r_stats[2]
+		r_next_pos = r_position + (r_velocity * time)
 	
 	if r_next_pos != Vector3.ZERO:
 		var d = r_next_pos-location
 		transform.origin = location + (d * 20 * _delta)
 	
 	puppet_rotation(r_rotation,delta)
+	set_linear_velocity(r_velocity)
 	
 	if time > 0: time -= delta
 
@@ -180,6 +185,8 @@ func _on_Hitbox_zone():
 func _on_Rock_body_entered(body):
 	if(body.is_in_group("rock") and speed > 16):
 		$Hit.play()
+	if body.is_in_group("rock") and body.speed > speed:
+		set_owner(body.owned_by)
 
 func _on_Hitbox2_pushed():
 	add_force(playerhitbox.knockback, Vector3.ZERO)

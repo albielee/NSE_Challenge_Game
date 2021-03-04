@@ -162,7 +162,7 @@ func pick_map_section():
 	r.randomize()
 	var pair = remainingPieces[r.randi_range(0,len(remainingPieces)-1)]
 	fall_map[pair[0]][pair[1]] = 0
-	print(get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)))
+#	print(get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)))
 	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).begin_fall()
 	####make this work for multiplayer!!!!
 

@@ -28,7 +28,7 @@ func in_zone(pusher):
 	owned_by = pusher
 	pushed = true
 	emit_signal("zone")
-	
+
 func out_zone():
 	pushed = false
 	emit_signal("nozone")
