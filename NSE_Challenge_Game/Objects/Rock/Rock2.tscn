@@ -23,8 +23,8 @@ albedo_color = Color( 0.14902, 0.168627, 0.266667, 1 )
 "resettable",
 "rock",
 ]]
-collision_layer = 4
-collision_mask = 6
+collision_layer = 1028
+collision_mask = 1030
 contacts_reported = 3
 contact_monitor = true
 can_sleep = false
@@ -65,7 +65,7 @@ shape = SubResource( 4 )
 "ghost",
 "rock_hitbox",
 ]]
-collision_layer = 16
+collision_layer = 2147483664
 collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="PlayerHitbox"]

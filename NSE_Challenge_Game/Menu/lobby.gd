@@ -46,7 +46,6 @@ func _process(delta):
 			gamestate.begin_game(roundSettings)
 			
 
-
 func _on_host_pressed():
 	if $Menu/Host/Hosting/Name.text == "":
 		$Menu/Host/Hosting/ErrorLabel.text = "Invalid name!"

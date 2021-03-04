@@ -5,8 +5,8 @@
 [sub_resource type="BoxShape" id=1]
 
 [node name="FallArea" type="Area"]
-collision_layer = 0
-collision_mask = 5
+collision_layer = 1024
+collision_mask = 1029
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

@@ -41,6 +41,14 @@ func _ready():
 	r_stats = [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
 
 func _physics_process(delta):
+	handle_stats(delta)
+	if get_tree().get_network_unique_id() == owned_by:
+		update(delta)
+	else:
+		puppet_update(delta)
+	sounds()
+
+func handle_stats(delta):
 	face = get_transform().basis.get_euler().y
 	location = get_transform().origin
 	current_rotation = rotation
@@ -52,12 +60,6 @@ func _physics_process(delta):
 	hitbox.owned_by = owned_by
 	playerhitbox.size = scale.x
 	playerhitbox.pos = location
-	if get_tree().get_network_unique_id() == owned_by:
-		update(delta)
-	else:
-		puppet_update(delta)
-	
-	sounds()
 
 func _integrate_forces(state):
 	if get_tree().get_network_unique_id() != owned_by:

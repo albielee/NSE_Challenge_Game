@@ -87,6 +87,8 @@ var shovable = false
 var s_rock = null
 var contact = false
 
+var dashes = []
+
 export var ACCELERATION = 100
 export var SCALE = 1.0
 export var MASS = 10
@@ -95,10 +97,13 @@ export var MAX_SPEED = 500
 export var SPEED = 2000
 export var TURN_SPEED = 400
 export var PUSH_POWER = 300
-export var DASH_INC = 2.0
+export var DASH_DIST = 5
 export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
 export var GRAB_DROPOFF_VAL = 1.0
+export var DASHES = 3
+export var RECHARGE_PER_CRYSTAL = 0.5
+export var RECHARGE_ALL = 4
 var last_time = 0
 var current_turn_speed = TURN_SPEED
 var current_rotation = 0
@@ -118,6 +123,7 @@ onready var animationstate = animationtree.get("parameters/playback")
 onready var spawn_position = Vector3.ZERO
 onready var sounds = $Sounds
 onready var grabbeam_handler = $GrabBeamHandler
+onready var dashhitbox = $DashHitBox
 
 var _updates = 0.0
 var _packets = 0.0
@@ -136,6 +142,7 @@ func _ready():
 	set_linear_damp(10)
 	set_mass(MASS)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
+	dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
 	
 	rockhitbox.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	
@@ -151,6 +158,9 @@ func _ready():
 	
 	animationplayer.set_speed_scale(3)
 	proj_packet_time = UPDATE_INTERVAL
+	
+	for i in range(DASHES):
+		dashes.append(1.0)
 	
 	if network_handler.is_current_player(): playerid = get_tree().get_network_unique_id()
 
@@ -183,7 +193,11 @@ func _integrate_forces(s):
 	else:
 		var target = Vector3.UP * wrapf(r_rotation-puppet_current_face, -PI, PI)
 		rotation = current_rotation + (target*(current_turn_speed*_delta/30))
-		var next = current_position.move_toward(puppet_next_position,15*_delta)
+		var next
+		if current_position.distance_to(puppet_next_position) > DASH_DIST-1:
+			next = puppet_next_position
+		else:
+			next = current_position.move_toward(puppet_next_position,15*_delta)
 		if contacts_reported>0: 
 			for i in get_colliding_bodies():
 				if i.is_in_group('rock_hitbox'):
@@ -445,19 +459,35 @@ func move():
 	if (move_velocity!=Vector3.ZERO):
 		set_linear_velocity(move_velocity)
 
+func stop_movement():
+	set_linear_velocity(Vector3.ZERO)
+
+var go = false
+var d = 0
+
 func dash_state(delta):
-	if(anim != "dash"):
-		var dash_time = 0.1
-		$ActionTimer.start(dash_time)
+	#come up with another way. Use fancy particles?
 	anim="dash"
-	current_turn_speed = TURN_SPEED
-	move_velocity = move_velocity.move_toward(dash_angle*MAX_SPEED*DASH_INC,ACCELERATION*DASH_INC*delta)
-	if($ActionTimer.time_left < 0.02):
+	stop_movement()
+	dashhitbox.scale=Vector3(SCALE*2.5,SCALE*0.8,SCALE*2.5)
+	if go != true and d < DASH_DIST+2:
+		d += 0.5
+		dashhitbox.global_transform.origin=global_transform.origin+dash_angle*d
+		if len(dashhitbox.get_overlapping_areas()) > 0:
+			go = true
+	else:
+		var dash_pos = transform.origin+(dash_angle*(d-2))
+		transform.origin = dash_pos
 		dash_finished()
 
 func dash_finished():
 	if(network_handler.is_current_player()):
+		
+		dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
 		anim="idle"
+		go = false
+		d = 0
+		dashhitbox.global_transform.origin =global_transform.origin
 		state=MOVE
 		can_dash=DASH_COOLDOWN
 
@@ -534,7 +564,6 @@ func summoning_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	
 	var rock_name = get_name()
-#	growing_rock = get_node("/root/World/RockNetworkHandler/"+String(rock_name))
 
 	if(!rock_summoned):
 		anim = "summon_start"
