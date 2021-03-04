@@ -7,12 +7,6 @@ var travelling = true
 var sound_played = false #idk why i have to do this but it calls ready twice???
 onready var tp = get_parent().get_node("target_pos")
 
-func _ready():
-	pass
-	#if(!sound_played):
-	#	sound_played = true
-	#	$CloudSwoosh.play()
-
 func _physics_process(_delta):
 	cursor_raycast()
 	travel_to_locrot(speed*_delta)

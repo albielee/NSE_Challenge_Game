@@ -469,20 +469,23 @@ func dash_state(delta):
 	#come up with another way. Use fancy particles?
 	anim="dash"
 	stop_movement()
-	dashhitbox.scale=Vector3(SCALE*2.5,SCALE*0.8,SCALE*2.5)
-	if go != true and d < DASH_DIST+2:
-		d += 0.5
-		dashhitbox.global_transform.origin=global_transform.origin+dash_angle*d
-		if len(dashhitbox.get_overlapping_areas()) > 0:
+	dashhitbox.scale=Vector3(SCALE*0.6,SCALE*0.6,SCALE*0.6)
+	if go != true and d < DASH_DIST*2:
+		d += 1.5
+		dashhitbox.global_transform.origin=global_transform.origin+(dash_angle*d)-(Vector3.UP*0.1)
+		if len(dashhitbox.get_overlapping_areas()) == 0:
 			go = true
+		for i in dashhitbox.get_overlapping_areas():
+			if i.is_in_group("rock"):
+				go = true
 	else:
-		var dash_pos = transform.origin+(dash_angle*(d-2))
+		var dash_pos = transform.origin+(dash_angle*(d-DASH_DIST))
 		transform.origin = dash_pos
 		dash_finished()
 
 func dash_finished():
 	if(network_handler.is_current_player()):
-		
+		stop_movement()
 		dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
 		anim="idle"
 		go = false
