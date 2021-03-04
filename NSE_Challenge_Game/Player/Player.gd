@@ -570,7 +570,7 @@ func summoning_state(delta):
 		rock_summoned = true
 		var offset = 2.0
 		var y_rot = -get_transform().basis.get_euler().y
-		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 0, translation.z - offset*cos(y_rot))
+		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 1, translation.z - offset*cos(y_rot))
 		var start_size = 2.0
 		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
 		state = MOVE

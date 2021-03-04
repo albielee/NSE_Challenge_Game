@@ -1,6 +1,5 @@
 extends KinematicBody
 
-
 var falling = false
 var destroy_at_y = -200
 var fall_speed = 0
@@ -8,9 +7,9 @@ var max_fall_speed = 100
 var accel = 5
 onready var model_start_pos = $tower.transform.origin
 
-func _physics_process(delta):
-	if(falling):
-		fall(delta)
+#func _physics_process(delta):
+#	if(falling):
+#		fall(delta)
 
 func play_anim():
 	$AnimationObject.play()
