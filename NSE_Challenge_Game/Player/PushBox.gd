@@ -98,7 +98,7 @@ func do_push():
 			rock.get_parent().last_mover = get_parent().player_name #assigns player to rock
 			get_node("../GrabBeamHandler").start_beam(rock)
 		for i in rocks:
-			if (rock != i):
+			if (rock != i) and i!= null:
 				i.add_force(knockback_vector*PUSH_POWER/8)
 		if rock == null:
 			return false
