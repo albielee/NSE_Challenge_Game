@@ -468,6 +468,7 @@ var d = 0
 func dash_state(delta):
 	#come up with another way. Use fancy particles?
 	anim="dash"
+	visible = false
 	stop_movement()
 	dashhitbox.scale=Vector3(SCALE*0.6,SCALE*0.6,SCALE*0.6)
 	if go != true and d < DASH_DIST*2:
@@ -485,6 +486,7 @@ func dash_state(delta):
 
 func dash_finished():
 	if(network_handler.is_current_player()):
+		visible = true
 		stop_movement()
 		dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
 		anim="idle"

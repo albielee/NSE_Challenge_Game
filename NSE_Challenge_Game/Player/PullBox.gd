@@ -37,17 +37,25 @@ func update(mouse_position, player_to_rock):
 		var ideal_location = Vector3(player_position.x + rock.size*sin(-target_angle), 0, player_position.z - rock.size*cos(-target_angle))
 		rock.add_force((ideal_location-rock_position).normalized()*20)
 		
-		if rock_position.distance_to(ideal_location) < rock.size and rock.speed > 2:
-			rock.add_force(-rock.linear_velocity*10)
-			rock.add_force(Vector3.UP*rock.gravity*2)
+		if rock_position.distance_to(ideal_location) < rock.size:
+			if rock.speed > 2:
+				rock.add_force(-rock.linear_velocity*10)
+				rock.add_force(Vector3.UP*rock.gravity*2)
+			print('ok')
+			if player_position.y+0.5-rock_position.y > 0:
+				rock.add_force(Vector3.UP*rock.gravity/0.3)
+			else:
+				rock.add_force(Vector3.UP*rock.gravity/0.4)
+		else:
+			if player_position.y+0.5-rock_position.y > 0:
+				rock.add_force(Vector3.UP*rock.gravity/0.8)
+			else:
+				rock.add_force(Vector3.UP*rock.gravity/1)
 		
 		var rotation_angle = wrapf(target_angle - rock.face, -PI/4, PI/4);
 		rock.angular_velocity((Vector3.UP * rotation_angle)*5)
 		
-		if player_position.y+0.7-rock_position.y > 0:
-			rock.add_force(Vector3.UP*rock.gravity/0.6)
-		else:
-			rock.add_force(Vector3.UP*rock.gravity)
+
 
 func _on_PullBox_area_entered(area):
 	if not area in rocks:
