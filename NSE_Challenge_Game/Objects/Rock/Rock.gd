@@ -185,7 +185,7 @@ func _on_Hitbox_zone():
 	in_zone = true
 
 func _on_Rock_body_entered(body):
-	if(body.is_in_group("rock") and speed > 16):
+	if(body.is_in_group("rock") and speed > 8):
 		$Hit.play()
 	if body.is_in_group("rock") and body.speed > speed:
 		set_owner(body.owned_by)
