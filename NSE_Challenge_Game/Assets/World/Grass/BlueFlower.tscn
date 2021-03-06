@@ -23,7 +23,7 @@ collision_mask = 5
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.757985, 0, 0, 0, 2.80195, 0, 0, 0, 0.757985, -0.481458, 2.61209, 0 )
+transform = Transform( 0.5, 0, 0, 0, 2.802, 0, 0, 0, 0.5, 0.0581643, 0.521954, -0.0869208 )
 visible = false
 shape = SubResource( 1 )
 

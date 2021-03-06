@@ -40622,7 +40622,7 @@ transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0
 visible = false
 
 [node name="metarig003" type="Spatial" parent="player_animations2"]
-transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336877, -3.72529e-09, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336877, 1.86265e-09, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations2/metarig003"]
 bones/0/name = "spine"
