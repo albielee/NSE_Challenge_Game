@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=2]
+[gd_scene load_steps=146 format=2]
 
 [ext_resource path="res://Menu/MapSelector/MapSelector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menu/ColourSelector/ColourSelection.gd" type="Script" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://Assets/Menu/JoinHover6.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Menu/Exit.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Menu/JoinPressed.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Menu/menuOutline.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Menu/OptionsMenu.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Menu/HostPressed.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Menu/HostMenu.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Menu/JoinMenu.png" type="Texture" id=17]
@@ -38,6 +38,8 @@
 [ext_resource path="res://Assets/World/Grass/BlueFlower.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Assets/World/RockDecal.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Assets/World/Petal.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Assets/Menu/OptionsPressedTrans.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Menu/tick.png" type="Texture" id=40]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 19 )
@@ -391,6 +393,28 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="StyleBoxEmpty" id=98]
+
+[sub_resource type="StyleBoxEmpty" id=97]
+
+[sub_resource type="AnimatedTexture" id=104]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="AnimatedTexture" id=105]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="AnimatedTexture" id=106]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="AnimatedTexture" id=103]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="StyleBoxEmpty" id=100]
+
+[sub_resource type="StyleBoxEmpty" id=101]
+
+[sub_resource type="StyleBoxEmpty" id=102]
+
 [sub_resource type="AtlasTexture" id=70]
 atlas = ExtResource( 13 )
 region = Rect2( 141, 0, 141, 168 )
@@ -435,6 +459,30 @@ region = Rect2( 564, 0, 141, 168 )
 atlas = ExtResource( 15 )
 region = Rect2( 705, 0, 141, 168 )
 
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 39 )
+region = Rect2( 0, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 39 )
+region = Rect2( 141, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 39 )
+region = Rect2( 282, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = ExtResource( 39 )
+region = Rect2( 423, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 39 )
+region = Rect2( 564, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 39 )
+region = Rect2( 705, 0, 141, 168 )
+
 [sub_resource type="AtlasTexture" id=81]
 atlas = ExtResource( 20 )
 region = Rect2( 0, 0, 141, 168 )
@@ -469,6 +517,11 @@ animations = [ {
 "frames": [ SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ) ],
 "loop": true,
 "name": "host",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ) ],
+"loop": true,
+"name": "options",
 "speed": 30.0
 }, {
 "frames": [ SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ) ],
@@ -983,197 +1036,213 @@ animation = "unfocused"
 centered = false
 
 [node name="Options" type="Panel" parent="Lobby/Menu"]
+visible = false
 margin_left = 384.0
 margin_top = 192.0
-margin_right = 640.0
-margin_bottom = 493.0
+margin_right = 384.0
+margin_bottom = 192.0
 script = ExtResource( 28 )
 
-[node name="MenuOutline" type="Sprite" parent="Lobby/Menu/Options"]
-position = Vector2( 148, 148 )
-texture = ExtResource( 14 )
-
-[node name="BackButton" type="Button" parent="Lobby/Menu/Options" groups=[
+[node name="BackButton2" type="TextureButton" parent="Lobby/Menu/Options" groups=[
 "button",
 ]]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 24.0
-margin_bottom = 28.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/Menu/Options"]
-margin_left = 24.0
-margin_top = 59.0
-margin_right = 150.0
-margin_bottom = 234.0
-custom_constants/separation = 10
+margin_left = 204.5
+margin_top = 83.5007
+margin_right = 224.5
+margin_bottom = 99.5007
+rect_rotation = -90.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_right = 126.0
-margin_bottom = 14.0
-text = "Move up"
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Options/BackButton2"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
 
-[node name="Label2" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_top = 24.0
-margin_right = 126.0
-margin_bottom = 38.0
-text = "Move Down"
+[node name="MenuOutline" type="Sprite" parent="Lobby/Menu/Options"]
+position = Vector2( 148.485, 147.978 )
+texture = ExtResource( 14 )
 
-[node name="Label3" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_top = 48.0
-margin_right = 126.0
-margin_bottom = 62.0
-text = "Move Left"
-
-[node name="Label4" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_top = 72.0
-margin_right = 126.0
-margin_bottom = 86.0
-text = "Move Right"
-
-[node name="Label5" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_top = 96.0
-margin_right = 126.0
-margin_bottom = 110.0
-text = "Push"
-
-[node name="Label6" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_top = 120.0
-margin_right = 126.0
-margin_bottom = 134.0
-text = "Pull"
-
-[node name="Label7" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_top = 144.0
-margin_right = 126.0
-margin_bottom = 158.0
-text = "Dash"
-
-[node name="Label8" type="Label" parent="Lobby/Menu/Options/VBoxContainer"]
-margin_top = 168.0
-margin_right = 126.0
-margin_bottom = 182.0
-text = "Summon Rock"
-
-[node name="Buttons" type="VBoxContainer" parent="Lobby/Menu/Options"]
-margin_left = 164.0
-margin_top = 59.0
-margin_right = 238.0
-margin_bottom = 230.0
-custom_constants/separation = 3
+[node name="Button1" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 111.782
+margin_top = 91.5455
+margin_right = 125.782
+margin_bottom = 105.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button1" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_right = 74.0
-margin_bottom = 20.0
-
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button1"]
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button1"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_top = 23.0
-margin_right = 74.0
-margin_bottom = 43.0
+[node name="Button2" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 112.782
+margin_top = 109.546
+margin_right = 126.782
+margin_bottom = 123.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button2"]
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button2"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button3" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_top = 46.0
-margin_right = 74.0
-margin_bottom = 66.0
+[node name="Button3" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 112.782
+margin_top = 127.546
+margin_right = 126.782
+margin_bottom = 141.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button3"]
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button3"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button4" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_top = 69.0
-margin_right = 74.0
-margin_bottom = 89.0
+[node name="Button4" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 112.782
+margin_top = 145.546
+margin_right = 126.782
+margin_bottom = 159.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button4"]
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button4"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button5" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_top = 92.0
-margin_right = 74.0
-margin_bottom = 112.0
+[node name="Button5" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 91.5455
+margin_right = 159.782
+margin_bottom = 105.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button5"]
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button5"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button6" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_top = 115.0
-margin_right = 74.0
-margin_bottom = 135.0
+[node name="Button6" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 109.546
+margin_right = 159.782
+margin_bottom = 123.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button6"]
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button6"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button7" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_top = 138.0
-margin_right = 74.0
-margin_bottom = 158.0
+[node name="Button7" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 127.546
+margin_right = 159.782
+margin_bottom = 141.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button7"]
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button7"]
+margin_right = 14.0
+margin_bottom = 14.0
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button8" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 145.546
+margin_right = 159.782
+margin_bottom = 159.546
+custom_styles/hover = SubResource( 98 )
+custom_styles/normal = SubResource( 97 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button8"]
 margin_right = 40.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button8" type="Button" parent="Lobby/Menu/Options/Buttons"]
-margin_top = 161.0
-margin_right = 74.0
-margin_bottom = 181.0
-
-[node name="Label" type="Label" parent="Lobby/Menu/Options/Buttons/Button8"]
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="EffectsSlider" type="HSlider" parent="Lobby/Menu/Options"]
+margin_left = 109.782
+margin_top = 176.546
+margin_right = 186.782
+margin_bottom = 193.546
+rect_scale = Vector2( 1, 1.226 )
+custom_icons/tick = SubResource( 104 )
+custom_icons/grabber_disabled = SubResource( 105 )
+custom_icons/grabber_highlight = SubResource( 106 )
+custom_icons/grabber = SubResource( 103 )
+custom_styles/slider = SubResource( 100 )
+custom_styles/grabber_area_highlight = SubResource( 101 )
+custom_styles/grabber_area = SubResource( 102 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MusicSlider" type="HSlider" parent="Lobby/Menu/Options"]
-margin_left = 93.0
-margin_top = 243.0
-margin_right = 255.0
-margin_bottom = 267.0
-
-[node name="EffectsSlider" type="HSlider" parent="Lobby/Menu/Options"]
-margin_left = 95.0
-margin_top = 276.0
-margin_right = 260.0
-margin_bottom = 293.0
+margin_left = 109.782
+margin_top = 206.546
+margin_right = 186.782
+margin_bottom = 223.546
+rect_scale = Vector2( 1, 1.226 )
+custom_icons/tick = SubResource( 104 )
+custom_icons/grabber_disabled = SubResource( 105 )
+custom_icons/grabber_highlight = SubResource( 106 )
+custom_icons/grabber = SubResource( 103 )
+custom_styles/slider = SubResource( 100 )
+custom_styles/grabber_area_highlight = SubResource( 101 )
+custom_styles/grabber_area = SubResource( 102 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="Sprite" parent="Lobby"]
 position = Vector2( 379, 104 )
@@ -1183,7 +1252,7 @@ texture = ExtResource( 4 )
 visible = false
 position = Vector2( 386, 244 )
 frames = SubResource( 87 )
-animation = "players"
+animation = "options"
 
 [node name="WorldLight" parent="." instance=ExtResource( 24 )]
 
@@ -1841,8 +1910,8 @@ transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -
 [connection signal="focus_exited" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_focus_exited"]
 [connection signal="mouse_entered" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_mouse_exited"]
-[connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_LeaveButton_pressed"]
 [connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_LeaveButton_pressed"]
 [connection signal="animation_finished" from="Lobby/Players/LeaveButton/Anim" to="Lobby/Players/LeaveButton" method="_on_Join_animation_finished"]
 [connection signal="focus_entered" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_entered"]
 [connection signal="focus_exited" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_exited"]
@@ -1867,8 +1936,8 @@ transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -
 [connection signal="focus_exited" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_focus_exited"]
 [connection signal="mouse_entered" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_mouse_exited"]
-[connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_LeaveButton_pressed"]
 [connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_LeaveButton_pressed"]
 [connection signal="animation_finished" from="Lobby/Connect/LeaveButton2/Anim" to="Lobby/Connect/LeaveButton2" method="_on_Join_animation_finished"]
 [connection signal="focus_entered" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_focus_entered"]
 [connection signal="focus_exited" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_focus_exited"]
@@ -1919,7 +1988,12 @@ transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -
 [connection signal="mouse_exited" from="Lobby/Menu/Host/BackButton" to="Lobby/Menu/Host/BackButton" method="_on_JoinButton_mouse_exited"]
 [connection signal="pressed" from="Lobby/Menu/Host/BackButton" to="Lobby" method="_on_BackButton_pressed"]
 [connection signal="animation_finished" from="Lobby/Menu/Host/BackButton/Anim" to="Lobby/Menu/Host/BackButton" method="_on_Join_animation_finished"]
-[connection signal="pressed" from="Lobby/Menu/Options/BackButton" to="Lobby" method="_on_BackButton_pressed"]
-[connection signal="value_changed" from="Lobby/Menu/Options/MusicSlider" to="Lobby/Menu/Options" method="_on_MusicSlider_value_changed"]
+[connection signal="focus_entered" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Options/BackButton2" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Options/BackButton2/Anim" to="Lobby/Menu/Options/BackButton2" method="_on_Join_animation_finished"]
 [connection signal="value_changed" from="Lobby/Menu/Options/EffectsSlider" to="Lobby/Menu/Options" method="_on_EffectsSlider_value_changed"]
+[connection signal="value_changed" from="Lobby/Menu/Options/MusicSlider" to="Lobby/Menu/Options" method="_on_MusicSlider_value_changed"]
 [connection signal="animation_finished" from="Lobby/TransitionAnims" to="Lobby" method="_on_TransitionAnims_animation_finished"]

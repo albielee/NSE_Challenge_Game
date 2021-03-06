@@ -150,7 +150,7 @@ func _on_TransitionAnims_animation_finished():
 	elif(transition == PLAYERS):
 		$Players.show()
 	elif(transition == OPTIONS):
-		pass
+		$Menu/Options.show()
 	elif(transition == MENU):
 		$Menu/Main.show()
 		$Menu.show()
@@ -167,7 +167,8 @@ func _on_ExitButton_pressed():
 
 func _on_OptionsButton_pressed():
 	$Menu/Main.hide()
-	$Menu/Options.show()
+	transition = OPTIONS
+	play_transition_animation("options", false)
 
 func _on_BackButton_pressed():
 	$Menu/Options.hide()

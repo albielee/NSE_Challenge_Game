@@ -82,7 +82,7 @@ func _on_Button_pressed(button_idx):
 	current_button = button_map[button_idx]
 
 func update_button(pos,text):
-	get_node("Buttons/Button"+str(button_map.find(pos)+1)+"/Label").text = str(text)
+	get_node("Button"+str(button_map.find(pos)+1)+"/Label").text = str(text)
 
 
 func _on_BackButton_pressed():
