@@ -295,7 +295,7 @@ func puppet_update(delta):
 		var inter_spd = 0.1
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
-		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
+		animationtree.set("parameters/movement/Movement/blend_position", Vector2(blend_x, blend_y))
 	
 #	transform.origin = puppet_next_position
 #	print(dist)
@@ -336,6 +336,12 @@ func handle_animations(animation):
 	if (animation!=prevanim):
 		animationstate.travel(animation)
 	prevanim = animationstate.get_current_node()
+	
+	#Blender is a bad program and I never want to use it again, anyway:
+	if(animation == "idle"):
+		$player_animations.rotation_degrees.z = 10
+	else:
+		$player_animations.rotation_degrees.z = 0
 
 #Takes given control input and updates actions of the player
 func update(delta):
@@ -414,7 +420,7 @@ func move_state(delta, mouse_angle):
 		var inter_spd = 0.1
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
-		animationtree.set("parameters/movement/blend_position", Vector2(blend_x, blend_y))
+		animationtree.set("parameters/movement/Movement/blend_position", Vector2(blend_x, blend_y))
 		
 		$animationblend.point_pos = Vector2(blend_x, blend_y)
 	else:

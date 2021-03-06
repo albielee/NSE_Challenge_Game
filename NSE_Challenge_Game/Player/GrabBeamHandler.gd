@@ -15,11 +15,40 @@ func start_beam(rock):
 	rot = get_global_transform().basis.get_euler().y
 	update_position()
 	active = true
-	visible = true
+	
+	$beam_0.emitting = true
+	$beam_1.emitting = true
+	$beam_2.emitting = true
+	$beam_3.emitting = true
+	$beam_4.emitting = true
+	$beam_5.emitting = true
+	$beam_6.emitting = true
+	$beam_7.emitting = true
+	$beam_8.emitting = true
+	$beam_9.emitting = true
+	$beam_10.emitting = true
+	$beam_11.emitting = true
+	$beam_12.emitting = true
+	$beam_13.emitting = true
+	$beam_14.emitting = true
 
 func stop_beam():
 	active = false
-	visible = false
+	$beam_0.emitting = false
+	$beam_1.emitting = false
+	$beam_2.emitting = false
+	$beam_3.emitting = false
+	$beam_4.emitting = false
+	$beam_5.emitting = false
+	$beam_6.emitting = false
+	$beam_7.emitting = false
+	$beam_8.emitting = false
+	$beam_9.emitting = false
+	$beam_10.emitting = false
+	$beam_11.emitting = false
+	$beam_12.emitting = false
+	$beam_13.emitting = false
+	$beam_14.emitting = false
 
 
 
