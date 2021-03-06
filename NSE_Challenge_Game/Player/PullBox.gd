@@ -85,7 +85,7 @@ func do_pull():
 		for i in rocks:
 			if (rock != i) and i != null and not i in affectedrocks:
 				affectedrocks.append(i)
-				i.add_force(-knockback_vector*PUSH_POWER/8)
+				i.add_force(-knockback_vector*PUSH_POWER/2)
 		if rock == null:
 			first_push = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=2]
+[gd_scene load_steps=150 format=2]
 
 [ext_resource path="res://Menu/MapSelector/MapSelector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menu/ColourSelector/ColourSelection.gd" type="Script" id=2]
@@ -40,6 +40,10 @@
 [ext_resource path="res://Assets/World/Petal.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Assets/Menu/OptionsPressedTrans.png" type="Texture" id=39]
 [ext_resource path="res://Assets/Menu/tick.png" type="Texture" id=40]
+[ext_resource path="res://Sounds/menuHover.wav" type="AudioStream" id=41]
+[ext_resource path="res://Sounds/menuPressed.wav" type="AudioStream" id=42]
+[ext_resource path="res://Sounds/menuPressedBack.wav" type="AudioStream" id=43]
+[ext_resource path="res://Sounds/startPressed.wav" type="AudioStream" id=44]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 19 )
@@ -582,6 +586,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/LeaveButton"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/LeaveButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Players/LeaveButton"]
 frames = SubResource( 4 )
 animation = "unfocused"
@@ -615,6 +629,16 @@ frames = SubResource( 4 )
 animation = "unfocused"
 centered = false
 
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectRight"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectRight"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
 [node name="SelectLeft" type="TextureButton" parent="Lobby/Players/ColourSelection" groups=[
 "button",
 ]]
@@ -632,6 +656,16 @@ __meta__ = {
 frames = SubResource( 4 )
 animation = "unfocused"
 centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectLeft"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectLeft"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
 
 [node name="DisplayColour" type="Panel" parent="Lobby/Players/ColourSelection"]
 margin_left = -9.0
@@ -685,6 +719,17 @@ __meta__ = {
 frames = SubResource( 19 )
 animation = "unfocused"
 centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/Start"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/Start"]
+stream = ExtResource( 44 )
+volume_db = -34.677
+pitch_scale = 1.36
+bus = "Sounds"
 
 [node name="RoundTime" type="LineEdit" parent="Lobby/Players"]
 margin_left = 144.547
@@ -744,6 +789,16 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Connect/LeaveButton2"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Connect/LeaveButton2"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Connect/LeaveButton2"]
 frames = SubResource( 4 )
@@ -815,6 +870,17 @@ frames = SubResource( 33 )
 animation = "unfocused"
 centered = false
 
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Connect/join"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Connect/join"]
+stream = ExtResource( 44 )
+volume_db = -34.677
+pitch_scale = 1.42
+bus = "Sounds"
+
 [node name="BackButton" type="TextureButton" parent="Lobby/Connect" groups=[
 "button",
 ]]
@@ -832,6 +898,16 @@ __meta__ = {
 frames = SubResource( 4 )
 animation = "unfocused"
 centered = false
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Connect/BackButton"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Connect/BackButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
 
 [node name="JoinMenu" type="Sprite" parent="Lobby/Connect"]
 position = Vector2( 158.5, 103 )
@@ -886,6 +962,16 @@ frames = SubResource( 42 )
 animation = "unfocused"
 centered = false
 
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/JoinButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/JoinButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
 [node name="HostButton" type="TextureButton" parent="Lobby/Menu/Main" groups=[
 "button",
 ]]
@@ -903,6 +989,16 @@ frames = SubResource( 51 )
 animation = "unfocused"
 centered = false
 
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/HostButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/HostButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
 [node name="OptionsButton" type="TextureButton" parent="Lobby/Menu/Main" groups=[
 "button",
 ]]
@@ -914,6 +1010,16 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/OptionsButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/OptionsButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/OptionsButton"]
 frames = SubResource( 60 )
@@ -936,6 +1042,16 @@ __meta__ = {
 frames = SubResource( 69 )
 animation = "unfocused"
 centered = false
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/ExitButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/ExitButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
 
 [node name="Host" type="Panel" parent="Lobby/Menu"]
 visible = false
@@ -987,6 +1103,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Host/Hosting/host"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Host/Hosting/host"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Host/Hosting/host"]
 frames = SubResource( 51 )
 animation = "unfocused"
@@ -1035,6 +1161,16 @@ frames = SubResource( 4 )
 animation = "unfocused"
 centered = false
 
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Host/BackButton"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Host/BackButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
 [node name="Options" type="Panel" parent="Lobby/Menu"]
 visible = false
 margin_left = 384.0
@@ -1055,6 +1191,16 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Options/BackButton2"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Options/BackButton2"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Options/BackButton2"]
 frames = SubResource( 4 )

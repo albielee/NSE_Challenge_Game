@@ -7,6 +7,7 @@ var mouse_entered = false
 func _on_JoinButton_focus_entered():
 	anim.frame = 0
 	anim.play("focused")
+	$pressed.play()
 
 func _on_JoinButton_focus_exited():
 	anim.frame = 0
@@ -28,6 +29,7 @@ func _on_JoinButton_mouse_entered():
 	mouse_entered = true
 	anim.frame = 0
 	anim.play("hover")
+	$focus.play()
 
 func _on_JoinButton_mouse_exited():
 	mouse_entered = false
