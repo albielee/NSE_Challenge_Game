@@ -35,7 +35,7 @@ func update(mouse_position, player_to_rock):
 		
 		rock_position = rock.global_transform.origin
 		var ideal_location = Vector3(player_position.x + rock.size*sin(-target_angle), 0, player_position.z - rock.size*cos(-target_angle))
-		rock.add_force((ideal_location-rock_position).normalized()*20)
+		rock.add_force((ideal_location-rock_position).normalized()*30)
 		
 		if rock_position.distance_to(ideal_location) < rock.size:
 			if rock.speed > 2:

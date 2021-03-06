@@ -295,6 +295,10 @@ func puppet_update(delta):
 		var inter_spd = 0.1
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
+		if(blend_y > 0):
+			$player_animations.rotation_degrees.z = 10*blend_y
+		else:
+			$player_animations.rotation_degrees.z = 0
 		animationtree.set("parameters/movement/Movement/blend_position", Vector2(blend_x, blend_y))
 	
 #	transform.origin = puppet_next_position
@@ -338,7 +342,9 @@ func handle_animations(animation):
 	prevanim = animationstate.get_current_node()
 	
 	#Blender is a bad program and I never want to use it again, anyway:
-	if(animation == "idle"):
+	if(animation == "idle" or
+		animation == "push_charge" or
+		animation == "push_hold"):
 		$player_animations.rotation_degrees.z = 10
 	else:
 		$player_animations.rotation_degrees.z = 0
@@ -421,7 +427,10 @@ func move_state(delta, mouse_angle):
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
 		animationtree.set("parameters/movement/Movement/blend_position", Vector2(blend_x, blend_y))
-		
+		if(blend_y > 0.3):
+			$player_animations.rotation_degrees.z = 10*blend_y
+		else:
+			$player_animations.rotation_degrees.z = 0
 		$animationblend.point_pos = Vector2(blend_x, blend_y)
 	else:
 		anim = "idle"
@@ -643,7 +652,7 @@ func pull_state(delta):
 		else:
 			pullbox.do_pull()
 		if(!started_pulling):
-			anim = "push_charge"
+			anim = "pull_charge"
 			started_pulling = true
 		else:
 			anim = "push_hold"
@@ -695,7 +704,7 @@ var rock_face_angle = Vector3.ZERO
 func shove_state(delta):
 	#here should be the code for the new animation.
 	#how does that work? I'm gonna set up the controls without any animations
-	anim = "idle"
+	anim = "rock_push"
 	
 	if not contact and not s_rock.p_hitbox in get_colliding_bodies():
 		stop_shove()
