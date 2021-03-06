@@ -165,7 +165,6 @@ func _ready():
 	if network_handler.is_current_player(): playerid = get_tree().get_network_unique_id()
 
 func _physics_process(delta):
-	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = player_col
 	current_time += delta
 	current_position = transform.origin
 	current_rotation = rotation
@@ -741,7 +740,7 @@ func set_player_name(name):
 
 func set_player_colour(col):
 	player_col = col
-	#$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = col
+	$player_animations/metarig003/Skeleton/ObjObject.get_surface_material(0).albedo_color = col
 
 func angle_update():
 	var current_angle_y = get_transform().basis.get_euler().y;

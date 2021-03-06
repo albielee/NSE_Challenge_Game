@@ -397,149 +397,149 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="StyleBoxEmpty" id=98]
+[sub_resource type="StyleBoxEmpty" id=70]
 
-[sub_resource type="StyleBoxEmpty" id=97]
+[sub_resource type="StyleBoxEmpty" id=71]
 
-[sub_resource type="AnimatedTexture" id=104]
+[sub_resource type="AnimatedTexture" id=72]
 frame_0/texture = ExtResource( 40 )
 
-[sub_resource type="AnimatedTexture" id=105]
+[sub_resource type="AnimatedTexture" id=73]
 frame_0/texture = ExtResource( 40 )
 
-[sub_resource type="AnimatedTexture" id=106]
+[sub_resource type="AnimatedTexture" id=74]
 frame_0/texture = ExtResource( 40 )
 
-[sub_resource type="AnimatedTexture" id=103]
+[sub_resource type="AnimatedTexture" id=75]
 frame_0/texture = ExtResource( 40 )
 
-[sub_resource type="StyleBoxEmpty" id=100]
+[sub_resource type="StyleBoxEmpty" id=76]
 
-[sub_resource type="StyleBoxEmpty" id=101]
+[sub_resource type="StyleBoxEmpty" id=77]
 
-[sub_resource type="StyleBoxEmpty" id=102]
+[sub_resource type="StyleBoxEmpty" id=78]
 
-[sub_resource type="AtlasTexture" id=70]
+[sub_resource type="AtlasTexture" id=79]
 atlas = ExtResource( 13 )
 region = Rect2( 141, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=71]
+[sub_resource type="AtlasTexture" id=80]
 atlas = ExtResource( 13 )
 region = Rect2( 282, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=72]
+[sub_resource type="AtlasTexture" id=81]
 atlas = ExtResource( 13 )
 region = Rect2( 423, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=73]
+[sub_resource type="AtlasTexture" id=82]
 atlas = ExtResource( 13 )
 region = Rect2( 564, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=74]
+[sub_resource type="AtlasTexture" id=83]
 atlas = ExtResource( 13 )
 region = Rect2( 705, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=75]
+[sub_resource type="AtlasTexture" id=84]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=76]
+[sub_resource type="AtlasTexture" id=85]
 atlas = ExtResource( 15 )
 region = Rect2( 141, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=77]
+[sub_resource type="AtlasTexture" id=86]
 atlas = ExtResource( 15 )
 region = Rect2( 282, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=78]
+[sub_resource type="AtlasTexture" id=87]
 atlas = ExtResource( 15 )
 region = Rect2( 423, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=79]
+[sub_resource type="AtlasTexture" id=88]
 atlas = ExtResource( 15 )
 region = Rect2( 564, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=80]
+[sub_resource type="AtlasTexture" id=89]
 atlas = ExtResource( 15 )
 region = Rect2( 705, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 39 )
+region = Rect2( 0, 0, 141, 168 )
 
 [sub_resource type="AtlasTexture" id=91]
 atlas = ExtResource( 39 )
-region = Rect2( 0, 0, 141, 168 )
+region = Rect2( 141, 0, 141, 168 )
 
 [sub_resource type="AtlasTexture" id=92]
 atlas = ExtResource( 39 )
-region = Rect2( 141, 0, 141, 168 )
+region = Rect2( 282, 0, 141, 168 )
 
 [sub_resource type="AtlasTexture" id=93]
 atlas = ExtResource( 39 )
-region = Rect2( 282, 0, 141, 168 )
+region = Rect2( 423, 0, 141, 168 )
 
 [sub_resource type="AtlasTexture" id=94]
 atlas = ExtResource( 39 )
-region = Rect2( 423, 0, 141, 168 )
+region = Rect2( 564, 0, 141, 168 )
 
 [sub_resource type="AtlasTexture" id=95]
 atlas = ExtResource( 39 )
-region = Rect2( 564, 0, 141, 168 )
-
-[sub_resource type="AtlasTexture" id=96]
-atlas = ExtResource( 39 )
 region = Rect2( 705, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=81]
+[sub_resource type="AtlasTexture" id=96]
 atlas = ExtResource( 20 )
 region = Rect2( 0, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=82]
+[sub_resource type="AtlasTexture" id=97]
 atlas = ExtResource( 20 )
 region = Rect2( 141, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=83]
+[sub_resource type="AtlasTexture" id=98]
 atlas = ExtResource( 20 )
 region = Rect2( 282, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=84]
+[sub_resource type="AtlasTexture" id=99]
 atlas = ExtResource( 20 )
 region = Rect2( 423, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=85]
+[sub_resource type="AtlasTexture" id=100]
 atlas = ExtResource( 20 )
 region = Rect2( 564, 0, 141, 168 )
 
-[sub_resource type="AtlasTexture" id=86]
+[sub_resource type="AtlasTexture" id=101]
 atlas = ExtResource( 20 )
 region = Rect2( 705, 0, 141, 168 )
 
-[sub_resource type="SpriteFrames" id=87]
+[sub_resource type="SpriteFrames" id=102]
 animations = [ {
-"frames": [ SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ) ],
+"frames": [ SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ) ],
 "loop": true,
 "name": "join",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ) ],
+"frames": [ SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ), SubResource( 89 ) ],
 "loop": true,
 "name": "host",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ) ],
+"frames": [ SubResource( 90 ), SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ) ],
 "loop": true,
 "name": "options",
 "speed": 30.0
 }, {
-"frames": [ SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ) ],
+"frames": [ SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ) ],
 "loop": true,
 "name": "players",
 "speed": 30.0
 } ]
 
-[sub_resource type="CubeMesh" id=88]
+[sub_resource type="CubeMesh" id=103]
 
-[sub_resource type="SpatialMaterial" id=89]
+[sub_resource type="SpatialMaterial" id=104]
 albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
 
-[sub_resource type="PlaneMesh" id=90]
+[sub_resource type="PlaneMesh" id=105]
 
 [node name="LobbyWorld" type="Spatial"]
 
@@ -667,14 +667,10 @@ stream = ExtResource( 42 )
 volume_db = -34.677
 bus = "Sounds"
 
-[node name="DisplayColour" type="Panel" parent="Lobby/Players/ColourSelection"]
-margin_left = -9.0
-margin_top = -6.0
-margin_right = 9.0
-margin_bottom = 8.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="DisplayColour" type="Sprite" parent="Lobby/Players/ColourSelection"]
+position = Vector2( -1.21823, 0.545776 )
+scale = Vector2( 8.206, 1.258 )
+texture = ExtResource( 40 )
 
 [node name="List" type="ItemList" parent="Lobby/Players"]
 margin_left = 74.0
@@ -1216,8 +1212,8 @@ margin_left = 111.782
 margin_top = 91.5455
 margin_right = 125.782
 margin_bottom = 105.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1234,8 +1230,8 @@ margin_left = 112.782
 margin_top = 109.546
 margin_right = 126.782
 margin_bottom = 123.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1252,8 +1248,8 @@ margin_left = 112.782
 margin_top = 127.546
 margin_right = 126.782
 margin_bottom = 141.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1270,8 +1266,8 @@ margin_left = 112.782
 margin_top = 145.546
 margin_right = 126.782
 margin_bottom = 159.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1288,8 +1284,8 @@ margin_left = 145.782
 margin_top = 91.5455
 margin_right = 159.782
 margin_bottom = 105.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1306,8 +1302,8 @@ margin_left = 145.782
 margin_top = 109.546
 margin_right = 159.782
 margin_bottom = 123.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1324,8 +1320,8 @@ margin_left = 145.782
 margin_top = 127.546
 margin_right = 159.782
 margin_bottom = 141.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1343,8 +1339,8 @@ margin_left = 145.782
 margin_top = 145.546
 margin_right = 159.782
 margin_bottom = 159.546
-custom_styles/hover = SubResource( 98 )
-custom_styles/normal = SubResource( 97 )
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1362,13 +1358,13 @@ margin_top = 176.546
 margin_right = 186.782
 margin_bottom = 193.546
 rect_scale = Vector2( 1, 1.226 )
-custom_icons/tick = SubResource( 104 )
-custom_icons/grabber_disabled = SubResource( 105 )
-custom_icons/grabber_highlight = SubResource( 106 )
-custom_icons/grabber = SubResource( 103 )
-custom_styles/slider = SubResource( 100 )
-custom_styles/grabber_area_highlight = SubResource( 101 )
-custom_styles/grabber_area = SubResource( 102 )
+custom_icons/tick = SubResource( 72 )
+custom_icons/grabber_disabled = SubResource( 73 )
+custom_icons/grabber_highlight = SubResource( 74 )
+custom_icons/grabber = SubResource( 75 )
+custom_styles/slider = SubResource( 76 )
+custom_styles/grabber_area_highlight = SubResource( 77 )
+custom_styles/grabber_area = SubResource( 78 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1379,13 +1375,13 @@ margin_top = 206.546
 margin_right = 186.782
 margin_bottom = 223.546
 rect_scale = Vector2( 1, 1.226 )
-custom_icons/tick = SubResource( 104 )
-custom_icons/grabber_disabled = SubResource( 105 )
-custom_icons/grabber_highlight = SubResource( 106 )
-custom_icons/grabber = SubResource( 103 )
-custom_styles/slider = SubResource( 100 )
-custom_styles/grabber_area_highlight = SubResource( 101 )
-custom_styles/grabber_area = SubResource( 102 )
+custom_icons/tick = SubResource( 72 )
+custom_icons/grabber_disabled = SubResource( 73 )
+custom_icons/grabber_highlight = SubResource( 74 )
+custom_icons/grabber = SubResource( 75 )
+custom_styles/slider = SubResource( 76 )
+custom_styles/grabber_area_highlight = SubResource( 77 )
+custom_styles/grabber_area = SubResource( 78 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1397,26 +1393,26 @@ texture = ExtResource( 4 )
 [node name="TransitionAnims" type="AnimatedSprite" parent="Lobby"]
 visible = false
 position = Vector2( 386, 244 )
-frames = SubResource( 87 )
+frames = SubResource( 102 )
 animation = "options"
 
 [node name="WorldLight" parent="." instance=ExtResource( 24 )]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 7.5, 0, 0, 0, 1095.71, 0, 0, 0, 6.8, 0, 140.603, 0.268716 )
-mesh = SubResource( 88 )
-material/0 = SubResource( 89 )
+mesh = SubResource( 103 )
+material/0 = SubResource( 104 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="."]
 transform = Transform( 3, 0, 0, 0, 1095.71, 0, 0, 0, 3, 47.5, 140.603, 65.2687 )
 cast_shadow = 0
 use_in_baked_light = true
-mesh = SubResource( 88 )
-material/0 = SubResource( 89 )
+mesh = SubResource( 103 )
+material/0 = SubResource( 104 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 400, 0, 0, 0, 1244.7, 0, 0, 0, 400, 0, 0, 0 )
-mesh = SubResource( 90 )
+mesh = SubResource( 105 )
 material/0 = null
 
 [node name="target_pos" type="Spatial" parent="."]
@@ -2056,8 +2052,8 @@ transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -
 [connection signal="focus_exited" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_focus_exited"]
 [connection signal="mouse_entered" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_mouse_exited"]
-[connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_LeaveButton_pressed"]
+[connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_BackButton_pressed"]
 [connection signal="animation_finished" from="Lobby/Players/LeaveButton/Anim" to="Lobby/Players/LeaveButton" method="_on_Join_animation_finished"]
 [connection signal="focus_entered" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_entered"]
 [connection signal="focus_exited" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_exited"]
@@ -2082,8 +2078,8 @@ transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -
 [connection signal="focus_exited" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_focus_exited"]
 [connection signal="mouse_entered" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_mouse_exited"]
-[connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_LeaveButton_pressed"]
+[connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_BackButton_pressed"]
 [connection signal="animation_finished" from="Lobby/Connect/LeaveButton2/Anim" to="Lobby/Connect/LeaveButton2" method="_on_Join_animation_finished"]
 [connection signal="focus_entered" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_focus_entered"]
 [connection signal="focus_exited" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_focus_exited"]
