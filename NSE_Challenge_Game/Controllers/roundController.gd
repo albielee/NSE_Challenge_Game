@@ -65,6 +65,8 @@ func detect_players_left():
 
 func get_last_player():
 	var players = get_tree().get_nodes_in_group("player")
+	if(len(players) > 1):
+		return players[0].player_name
 	for p in players:
 			if(p.get_network_handler().remote_dead == false):
 				return p.player_name
