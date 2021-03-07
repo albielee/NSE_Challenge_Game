@@ -46,7 +46,7 @@ func _process(delta):
 		var one_player_left = detect_players_left()
 		if(one_player_left):
 			var last_player = get_last_player()
-#			scores[last_player]+=1
+			scores[last_player]+=1
 			restart_round()
 
 func detect_players_left():
@@ -64,7 +64,10 @@ func detect_players_left():
 		return players[0].get_node("NetworkHandler").remote_dead
 
 func get_last_player():
-	pass
+	var players = get_tree().get_nodes_in_group("player")
+	for p in players:
+			if(p.get_network_handler().remote_dead == false):
+				return p.player_name
 
 func play_countdown():
 	round_timer.set_paused(true)
