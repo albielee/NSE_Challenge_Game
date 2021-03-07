@@ -4,12 +4,12 @@ onready var countdown_sprites = [$Number3,$Number2,$Number1]
 
 var fall_map = [
 	[1,1,1,1,1,1,1,1],
-	[1,1,1,1,1,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,1,1,1,1,1],
+	[1,2,2,2,2,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,2,2,2,2,1],
 	[1,1,1,1,1,1,1,1]
 ]
 
@@ -46,7 +46,7 @@ func _process(delta):
 		var one_player_left = detect_players_left()
 		if(one_player_left):
 			var last_player = get_last_player()
-#			scores[last_player]+=1
+			scores[last_player]+=1
 			restart_round()
 
 func detect_players_left():
@@ -64,7 +64,12 @@ func detect_players_left():
 		return players[0].get_node("NetworkHandler").remote_dead
 
 func get_last_player():
-	pass
+	var players = get_tree().get_nodes_in_group("player")
+	if(len(players) > 1):
+		return players[0].player_name
+	for p in players:
+			if(p.get_network_handler().remote_dead == false):
+				return p.player_name
 
 func play_countdown():
 	round_timer.set_paused(true)
@@ -151,6 +156,8 @@ func _round_timer_timeout():
 	create_fall_timer()
 	
 func pick_map_section():
+	if(!get_tree().is_network_server()):
+		return
 	var remainingPieces = []
 	for x in range(len(fall_map)):
 		for y in range(len(fall_map[0])):
@@ -161,7 +168,8 @@ func pick_map_section():
 	var pair = remainingPieces[r.randi_range(0,len(remainingPieces)-1)]
 	fall_map[pair[0]][pair[1]] = 0
 #	print(get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)))
-	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).begin_fall()
+	print("test")
+	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).rpc("begin_fall")
 	####make this work for multiplayer!!!!
 
 func _on_ResetButton_pressed():
