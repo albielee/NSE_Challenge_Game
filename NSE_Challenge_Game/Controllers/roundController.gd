@@ -164,10 +164,18 @@ func pick_map_section():
 	r.randomize()
 	var pair = remainingPieces[r.randi_range(0,len(remainingPieces)-1)]
 	fall_map[pair[0]][pair[1]] = 0
+	decrease_pos(pair[0]+1,pair[1])
+	decrease_pos(pair[0]-1,pair[1])
+	decrease_pos(pair[0],pair[1]+1)
+	decrease_pos(pair[0],pair[1]-1)
 #	print(get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)))
 	print("test")
 	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).rpc("begin_fall")
-	####make this work for multiplayer!!!!
+
+func decrease_pos(x,y):
+	if x<len(fall_map) and y < len(fall_map[0]):
+		if fall_map[x][y]==2:
+			fall_map[x][y] = 1
 
 func _on_ResetButton_pressed():
 	if(get_tree().is_network_server()):
