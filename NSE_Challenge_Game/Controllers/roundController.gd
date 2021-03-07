@@ -1,6 +1,9 @@
 extends Control
 
 onready var countdown_sprites = [$Number3,$Number2,$Number1]
+onready var win_message = get_node("WinSprite")
+onready var lose_message = get_node("LoseSprite")
+
 
 var fall_map = [
 	[1,1,1,1,1,1,1,1],
@@ -20,7 +23,7 @@ var fall_timer
 
 var round_timer
 var round_time = 20
-var round_number = 5
+var round_number = 2
 var round_count = 0
 var sudden_death=false
 
@@ -47,9 +50,34 @@ func _process(delta):
 		if(one_player_left):
 			if(len(get_tree().get_nodes_in_group("player"))>1):
 				var last_player = get_last_player()
-				scores[last_player]+=1
-			restart_round()
+				rpc("increase_score",last_player)
+			var winner = check_for_winner()
+			if(!winner):
+				restart_round()
+			else:
+				rpc("show_result_message")
 
+func show_result_message():
+	var players = get_tree().get_nodes_in_group("player")
+	for p in players:
+		if(p.network_handler.is_network_master()):
+			if(scores[p.player_name]==round_number):
+				$WinSprite.visible = true
+				break
+			else:
+				$LoseSprite.visible = false
+				break
+
+func check_for_winner():
+	for key in scores:
+		if scores[key]==round_number:
+			return true
+	return false
+
+sync func increase_score(name):
+	update_scoreboard()
+	scores[name]+=1
+	
 func detect_players_left():
 	var players_left = 0
 	var players = get_tree().get_nodes_in_group("player")
@@ -66,7 +94,7 @@ func detect_players_left():
 
 func get_last_player():
 	var players = get_tree().get_nodes_in_group("player")
-	if(len(players) > 1):
+	if(len(players) == 1):
 		return players[0].player_name
 	for p in players:
 			if(p.get_network_handler().remote_dead == false):
@@ -104,15 +132,11 @@ func restart_round():
 
 func _on_Void_player_fell(dead_player,killing_player):
 	if(get_tree().is_network_server()):
-		update_score(killing_player)
 		rpc("update_score",killing_player)
 
 remote func update_score(player):
 	if(player==""):
 		print("a player ended their own suffering")
-	else:
-		scores[player]+=1
-		print(scores)
 	update_scoreboard()
 
 func _input(event):

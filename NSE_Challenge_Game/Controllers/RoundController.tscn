@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://Controllers/RoundController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Numbers/1-anim.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Assets/Menu/scoreboardEnd.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Menu/scoreboardNumbers.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Menu/scoreboardColourSplash.png" type="Texture" id=8]
+[ext_resource path="res://Assets/World/winmessage.png" type="Texture" id=9]
+[ext_resource path="res://Assets/World/losemessage.png" type="Texture" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -215,23 +217,23 @@ region = Rect2( 45, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 7 )
-region = Rect2( 63, 0, 9, 12 )
+region = Rect2( 36, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 7 )
-region = Rect2( 36, 0, 9, 12 )
+region = Rect2( 18, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 9, 12 )
+region = Rect2( 63, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 7 )
-region = Rect2( 9, 0, 9, 12 )
+region = Rect2( 0, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 7 )
-region = Rect2( 18, 0, 9, 12 )
+region = Rect2( 9, 0, 9, 12 )
 
 [sub_resource type="SpriteFrames" id=54]
 animations = [ {
@@ -257,27 +259,27 @@ animations = [ {
 }, {
 "frames": [ SubResource( 49 ) ],
 "loop": true,
-"name": "8",
+"name": "5",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 50 ) ],
 "loop": true,
-"name": "5",
+"name": "3",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 51 ) ],
 "loop": true,
-"name": "1",
+"name": "8",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 52 ) ],
 "loop": true,
-"name": "2",
+"name": "1",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 53 ) ],
 "loop": true,
-"name": "3",
+"name": "2",
 "speed": 5.0
 } ]
 
@@ -376,6 +378,7 @@ scale = Vector2( 3, 3 )
 frames = SubResource( 44 )
 
 [node name="Scoreboard" type="Panel" parent="."]
+visible = false
 margin_left = 216.0
 margin_right = 552.0
 margin_bottom = 317.0
@@ -522,4 +525,14 @@ animation = "9"
 visible = false
 position = Vector2( 168, 160 )
 frames = SubResource( 70 )
+
+[node name="WinSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 505, 274 )
+texture = ExtResource( 9 )
+
+[node name="LoseSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 506, 274 )
+texture = ExtResource( 10 )
 [connection signal="pressed" from="Scoreboard/ResetButton" to="." method="_on_ResetButton_pressed"]
