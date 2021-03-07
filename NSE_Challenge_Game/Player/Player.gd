@@ -343,8 +343,8 @@ func handle_animations(animation):
 	#Blender is a bad program and I never want to use it again, anyway:
 	if(animation == "idle" or
 		animation == "push_charge" or
-		animation == "push_hold"):
-		$player_animations.rotation_degrees.z = 10
+		animation == "push_hold" or animation == "summon_start"):
+		$player_animations.rotation_degrees.z = 13
 	else:
 		$player_animations.rotation_degrees.z = 0
 

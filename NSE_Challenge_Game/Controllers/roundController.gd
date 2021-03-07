@@ -83,6 +83,9 @@ func play_countdown():
 	pause_players(false)
 	round_timer.set_paused(false)
 
+func get_player_count():
+	return len(get_tree().get_nodes_in_group("player"))
+
 func pause_players(yes):
 	for o in get_tree().get_nodes_in_group("player"):
 		o.set_paused(yes)
