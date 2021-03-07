@@ -7,9 +7,9 @@ var max_fall_speed = 100
 var accel = 5
 onready var model_start_pos = $tower.transform.origin
 
-#func _physics_process(delta):
-#	if(falling):
-#		fall(delta)
+func _physics_process(delta):
+	if(falling):
+		fall(delta)
 
 func play_anim():
 	$AnimationObject.play()
@@ -31,7 +31,7 @@ func remove_world_props():
 		if(b.is_in_group("Removable")):
 			b.queue_free()
 	
-func begin_fall():
+sync func begin_fall():
 	play_anim()
 	remove_world_props()
 	falling = true

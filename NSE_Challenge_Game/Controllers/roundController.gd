@@ -4,12 +4,12 @@ onready var countdown_sprites = [$Number3,$Number2,$Number1]
 
 var fall_map = [
 	[1,1,1,1,1,1,1,1],
-	[1,1,1,1,1,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,0,0,1,1,1],
-	[1,1,1,1,1,1,1,1],
+	[1,2,2,2,2,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,0,0,2,2,1],
+	[1,2,2,2,2,2,2,1],
 	[1,1,1,1,1,1,1,1]
 ]
 
@@ -153,6 +153,8 @@ func _round_timer_timeout():
 	create_fall_timer()
 	
 func pick_map_section():
+	if(!get_tree().is_network_server()):
+		return
 	var remainingPieces = []
 	for x in range(len(fall_map)):
 		for y in range(len(fall_map[0])):
@@ -163,7 +165,8 @@ func pick_map_section():
 	var pair = remainingPieces[r.randi_range(0,len(remainingPieces)-1)]
 	fall_map[pair[0]][pair[1]] = 0
 #	print(get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)))
-	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).begin_fall()
+	print("test")
+	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).rpc("begin_fall")
 	####make this work for multiplayer!!!!
 
 func _on_ResetButton_pressed():
