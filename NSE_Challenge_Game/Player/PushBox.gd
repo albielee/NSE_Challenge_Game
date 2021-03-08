@@ -84,7 +84,7 @@ func do_push():
 			if(i != null):
 				var dist = i.global_transform.origin.distance_to(player_position)
 				rockdic[dist] = i
-				if dist < mini: 
+				if dist < mini and i.real: 
 					if not (i.flying): mini = dist
 					elif i.owned_by == get_tree().get_network_unique_id(): mini = dist
 		if (rock==null and mini < 50):

@@ -7,14 +7,17 @@ var speed = 0.0
 var flying = false
 var pushed = false
 var size = 0
+var growing = 0
 var owned_by = 0
 var linear_velocity = 0
 var pos = Vector3.ZERO
+var real = false
 
 signal pushed
 signal zone
 signal nozone
 signal spun
+signal growing
 
 func add_force(knockback_vector):
 	knockback = knockback_vector
@@ -23,6 +26,10 @@ func add_force(knockback_vector):
 func angular_velocity(value):
 	angular = value
 	emit_signal("spun")
+
+func grow(value):
+	growing = value
+	emit_signal("growing")
 
 func in_zone(pusher):
 	owned_by = pusher

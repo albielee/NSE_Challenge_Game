@@ -51,19 +51,19 @@ func is_host():
 func get_cam():
 	return get_tree().get_nodes_in_group("Camera")[0]
 
-func all_summon_rock(rock_name, rock_pos, rock_size):
-	rpc("summon_rock", rock_name, rock_pos, rock_size, get_tree().get_network_unique_id())
+func all_summon_rock(rock_name, rock_pos, rock_size, orientation):
+	rpc("summon_rock", rock_name, rock_pos, rock_size, get_tree().get_network_unique_id(), orientation)
 
-sync func summon_rock(rock_name, rock_pos, rock_size, by_who):
+sync func summon_rock(rock_name, rock_pos, rock_size, by_who, rock_orientation):
 	var rock = preload("res://Objects/Rock/Rock2.tscn").instance()
 	rock.set_id(rock_network_handler.get_rock_id())
 	
 	rock.set_name(rock_name)
-	rock.translation = rock_pos
+	rock.rotation = Vector3.UP*rock_orientation
 	rock.scale = Vector3(rock_size,rock_size,rock_size)
 	rock.owned_by = by_who
 	
-	rock_network_handler.create_rock(rock)
+	rock_network_handler.create_rock(rock, rock_pos)
 
 func timeout(cur_rotation,cur_position,cur_animation,cur_velocity):
 	if(is_current_player()):

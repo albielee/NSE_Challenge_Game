@@ -197,7 +197,6 @@ func pick_map_section():
 	decrease_pos(pair[0],pair[1]+1)
 	decrease_pos(pair[0],pair[1]-1)
 #	print(get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)))
-	print("test")
 	get_node("../Environment/Towers/TowerPiece"+str((pair[0]*8+pair[1])+1)).rpc("begin_fall")
 
 func decrease_pos(x,y):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=2]
+[gd_scene load_steps=118 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
@@ -15,11 +15,15 @@
 [ext_resource path="res://Sounds/rock_slide_off.wav" type="AudioStream" id=13]
 [ext_resource path="res://Sounds/temp_player_fall.wav" type="AudioStream" id=14]
 [ext_resource path="res://Player/RockHitBox.gd" type="Script" id=15]
-
-[sub_resource type="CylinderShape" id=1]
+[ext_resource path="res://Player/SummonHitBoxes.gd" type="Script" id=16]
 
 [sub_resource type="CylinderShape" id=2]
 resource_local_to_scene = true
+
+[sub_resource type="SphereShape" id=101]
+radius = 0.7
+
+[sub_resource type="CylinderShape" id=1]
 
 [sub_resource type="CapsuleShape" id=3]
 
@@ -29,7 +33,11 @@ resource_local_to_scene = true
 radius = 2.0
 height = 0.5
 
-[sub_resource type="ArrayMesh" id=65]
+[sub_resource type="CylinderShape" id=100]
+radius = 0.05
+height = 4.0
+
+[sub_resource type="ArrayMesh" id=6]
 resource_name = "ObjObject"
 surfaces/0 = {
 "aabb": AABB( -1.07176, -0.39949, -0.0172393, 2.0504, 2.10689, 0.754022 ),
@@ -44,7 +52,7 @@ surfaces/0 = {
 "vertex_count": 2661
 }
 
-[sub_resource type="Skin" id=66]
+[sub_resource type="Skin" id=7]
 resource_name = "Skin"
 bind_count = 159
 bind/0/name = "spine"
@@ -525,10 +533,10 @@ bind/158/name = "pelvis_r"
 bind/158/bone = -1
 bind/158/pose = Transform( -0.421772, 0.464099, -0.778923, -0.536322, 0.564971, 0.62703, 0.731072, 0.682217, 0.0106171, -0.0969464, -0.531493, -0.380277 )
 
-[sub_resource type="SpatialMaterial" id=67]
+[sub_resource type="SpatialMaterial" id=8]
 albedo_texture = ExtResource( 12 )
 
-[sub_resource type="Animation" id=68]
+[sub_resource type="Animation" id=9]
 resource_name = "ObjObjectAction"
 length = 0.001
 tracks/0/type = "transform"
@@ -1652,7 +1660,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=69]
+[sub_resource type="Animation" id=10]
 resource_name = "dash"
 length = 0.875
 tracks/0/type = "transform"
@@ -2776,7 +2784,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0, 0, 0, 1, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=70]
+[sub_resource type="Animation" id=11]
 resource_name = "fall"
 length = 0.875
 tracks/0/type = "transform"
@@ -3900,8 +3908,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.173648, 0, 0, 0.984808, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.173648, 0, 0, 0.984808, 1, 1, 1 )
 
-[sub_resource type="Animation" id=6]
-resource_name = "grabbing"
+[sub_resource type="Animation" id=12]
 length = 0.875
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -5024,8 +5031,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=7]
-resource_name = "grabmax"
+[sub_resource type="Animation" id=13]
 length = 0.875
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -6148,8 +6154,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=8]
-resource_name = "idle"
+[sub_resource type="Animation" id=14]
 length = 0.875
 loop = true
 tracks/0/type = "transform"
@@ -7273,8 +7278,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=9]
-resource_name = "pull_charge"
+[sub_resource type="Animation" id=15]
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
 tracks/0/interp = 1
@@ -8396,8 +8400,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=10]
-resource_name = "push_charge"
+[sub_resource type="Animation" id=16]
 length = 0.875
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -9520,8 +9523,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=11]
-resource_name = "push_hold"
+[sub_resource type="Animation" id=17]
 length = 0.875
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -10644,8 +10646,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=12]
-resource_name = "rock_slide"
+[sub_resource type="Animation" id=18]
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
 tracks/0/interp = 1
@@ -11767,8 +11768,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=13]
-resource_name = "rock_slide_forward"
+[sub_resource type="Animation" id=19]
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
 tracks/0/interp = 1
@@ -12890,8 +12890,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=14]
-resource_name = "run_backward-loop"
+[sub_resource type="Animation" id=20]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -14007,8 +14006,7 @@ tracks/158/imported = true
 tracks/158/enabled = true
 tracks/158/keys = PoolRealArray( 0, 1, 0, 0.0434626, -0.216869, -0.130526, 0, 0, 0.991445, 1, 1, 1, 0.133333, 1, 0, -0.0213726, -0.180252, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.2, 1, 0, -0.0460007, -0.166343, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.266667, 1, 0, -0.0644721, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.333333, 1, 0, -0.0644721, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.4, 1, 0, -0.0356134, -0.17221, -0.0915016, 0, 0, 0.995805, 1, 1, 1, 0.466667, 1, 0, 0.0413427, -0.215672, -0.103082, 0, 0, 0.994673, 1, 1, 1, 0.533333, 1, 1.56243e-11, 0.0686835, -0.231113, -0.103075, -0.000535791, 0.000724287, 0.994673, 1, 1, 1, 0.6, 1, 4.68727e-11, 0.0464085, -0.218533, -0.0914808, -0.0016073, 0.00217276, 0.995803, 1, 1, 1, 0.666667, 1, 5.85909e-11, 0.00387955, -0.194514, -0.089294, -0.00161318, 0.0023047, 0.996001, 1, 1, 1, 0.733333, 1, 5.85909e-11, -0.0508018, -0.163632, -0.0927562, -0.000979766, 0.00164681, 0.995687, 1, 1, 1, 0.8, 1, 3.51545e-11, -0.064472, -0.155911, -0.0910357, -0.000492848, 0.000889408, 0.995847, 1, 1, 1, 0.866667, 1, 3.90606e-12, -0.0644718, -0.155911, -0.0875869, -5.4761e-05, 9.88233e-05, 0.996157, 1, 1, 1, 1, 1, 0, 0.0418975, -0.215985, -0.130526, 0, 0, 0.991445, 1, 1, 1 )
 
-[sub_resource type="Animation" id=15]
-resource_name = "run_forward-loop"
+[sub_resource type="Animation" id=21]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -15131,8 +15129,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113106, -0.00641361, -0.0562491, 0.991969, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.113106, -0.00641361, -0.0562491, 0.991969, 1, 1, 1 )
 
-[sub_resource type="Animation" id=16]
-resource_name = "run_left-loop"
+[sub_resource type="Animation" id=22]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -16255,8 +16252,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1 )
 
-[sub_resource type="Animation" id=17]
-resource_name = "run_right-loop"
+[sub_resource type="Animation" id=23]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -17372,8 +17368,7 @@ tracks/158/imported = true
 tracks/158/enabled = true
 tracks/158/keys = PoolRealArray( 0, 1, 0, 0.0321952, -0.210506, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.133333, 1, 0, -0.064472, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.2, 1, 0, -0.0644718, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.266667, 1, 0, -0.0569539, -0.160157, -0.0871338, 0, 0, 0.996197, 1, 1, 1, 0.333333, 1, 0, -0.0268821, -0.177141, -0.0870463, 0, 0, 0.996204, 1, 1, 1, 0.4, 1, 0, 0.00962293, -0.197757, -0.0783277, 0, 0, 0.996928, 1, 1, 1, 0.466667, 1, 0, 0.0568498, -0.22443, -0.0551967, 0, 0, 0.998476, 1, 1, 1, 0.533333, 1, 0, 0.0418137, -0.215938, -0.0560344, 0, 0, 0.998429, 1, 1, 1, 0.6, 1, 0, -0.035485, -0.172282, -0.0808366, 0, 0, 0.996727, 1, 1, 1, 0.666667, 1, 0, -0.0644721, -0.155911, -0.0891355, 0, 0, 0.99602, 1, 1, 1, 0.733333, 1, 0, -0.064472, -0.155911, -0.0875517, 0, 0, 0.99616, 1, 1, 1, 0.8, 1, 0, -0.0161583, -0.183197, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.866667, 1, 0, 0.0482599, -0.219578, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.933333, 1, 0, 0.0413051, -0.21565, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 1, 1, 0, 0.0241538, -0.205964, -0.0871557, 0, 0, 0.996195, 1, 1, 1 )
 
-[sub_resource type="Animation" id=18]
-resource_name = "summon_hold"
+[sub_resource type="Animation" id=24]
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
 tracks/0/interp = 1
@@ -18495,8 +18490,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=19]
-resource_name = "summon_start"
+[sub_resource type="Animation" id=25]
 length = 0.875
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -19619,7 +19613,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 1.04308e-07, 0, 0, 1, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 1.04308e-07, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="ArrayMesh" id=105]
+[sub_resource type="ArrayMesh" id=26]
 resource_name = "ObjObject"
 surfaces/0 = {
 "aabb": AABB( -1.07176, -0.39949, -0.0172393, 2.0504, 2.10689, 0.754022 ),
@@ -19634,7 +19628,7 @@ surfaces/0 = {
 "vertex_count": 2661
 }
 
-[sub_resource type="Skin" id=106]
+[sub_resource type="Skin" id=27]
 resource_name = "Skin"
 bind_count = 159
 bind/0/name = "spine"
@@ -20115,10 +20109,10 @@ bind/158/name = "pelvis_r"
 bind/158/bone = -1
 bind/158/pose = Transform( -0.421772, 0.464099, -0.778923, -0.536322, 0.564971, 0.62703, 0.731072, 0.682217, 0.0106171, -0.0969464, -0.531493, -0.380277 )
 
-[sub_resource type="SpatialMaterial" id=107]
+[sub_resource type="SpatialMaterial" id=28]
 albedo_texture = ExtResource( 12 )
 
-[sub_resource type="Animation" id=108]
+[sub_resource type="Animation" id=29]
 resource_name = "ObjObjectAction"
 length = 0.001
 tracks/0/type = "transform"
@@ -21242,7 +21236,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=109]
+[sub_resource type="Animation" id=30]
 resource_name = "dash"
 length = 0.875
 tracks/0/type = "transform"
@@ -22366,7 +22360,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0, 0, 0, 1, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=110]
+[sub_resource type="Animation" id=31]
 resource_name = "fall"
 length = 0.875
 tracks/0/type = "transform"
@@ -23490,7 +23484,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.173648, 0, 0, 0.984808, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.173648, 0, 0, 0.984808, 1, 1, 1 )
 
-[sub_resource type="Animation" id=111]
+[sub_resource type="Animation" id=32]
 resource_name = "grabbing"
 length = 0.875
 tracks/0/type = "transform"
@@ -24614,7 +24608,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=112]
+[sub_resource type="Animation" id=33]
 resource_name = "grabmax"
 length = 0.875
 tracks/0/type = "transform"
@@ -25738,7 +25732,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=113]
+[sub_resource type="Animation" id=34]
 resource_name = "idle"
 length = 0.875
 loop = true
@@ -26863,7 +26857,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=114]
+[sub_resource type="Animation" id=35]
 resource_name = "pull_charge"
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -27986,7 +27980,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=115]
+[sub_resource type="Animation" id=36]
 resource_name = "push_charge"
 length = 0.875
 tracks/0/type = "transform"
@@ -29110,7 +29104,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=116]
+[sub_resource type="Animation" id=37]
 resource_name = "push_hold"
 length = 0.875
 tracks/0/type = "transform"
@@ -30234,7 +30228,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 0.172994, -0.0150579, -0.0853977, 0.981098, 1, 1, 1 )
 
-[sub_resource type="Animation" id=117]
+[sub_resource type="Animation" id=38]
 resource_name = "rock_push"
 length = 0.9
 loop = true
@@ -31359,7 +31353,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=118]
+[sub_resource type="Animation" id=39]
 resource_name = "rock_slide"
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -32482,7 +32476,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=119]
+[sub_resource type="Animation" id=40]
 resource_name = "rock_slide_forward"
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -33605,7 +33599,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=120]
+[sub_resource type="Animation" id=41]
 resource_name = "run_backward-loop"
 loop = true
 tracks/0/type = "transform"
@@ -34722,7 +34716,7 @@ tracks/158/imported = true
 tracks/158/enabled = true
 tracks/158/keys = PoolRealArray( 0, 1, 0, 0.0434626, -0.216869, -0.130526, 0, 0, 0.991445, 1, 1, 1, 0.133333, 1, 0, -0.0213726, -0.180252, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.2, 1, 0, -0.0460007, -0.166343, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.266667, 1, 0, -0.0644721, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.333333, 1, 0, -0.0644721, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.4, 1, 0, -0.0356134, -0.17221, -0.0915016, 0, 0, 0.995805, 1, 1, 1, 0.466667, 1, 0, 0.0413427, -0.215672, -0.103082, 0, 0, 0.994673, 1, 1, 1, 0.533333, 1, 1.56243e-11, 0.0686835, -0.231113, -0.103075, -0.000535791, 0.000724287, 0.994673, 1, 1, 1, 0.6, 1, 4.68727e-11, 0.0464085, -0.218533, -0.0914808, -0.0016073, 0.00217276, 0.995803, 1, 1, 1, 0.666667, 1, 5.85909e-11, 0.00387955, -0.194514, -0.089294, -0.00161318, 0.0023047, 0.996001, 1, 1, 1, 0.733333, 1, 5.85909e-11, -0.0508018, -0.163632, -0.0927562, -0.000979766, 0.00164681, 0.995687, 1, 1, 1, 0.8, 1, 3.51545e-11, -0.064472, -0.155911, -0.0910357, -0.000492848, 0.000889408, 0.995847, 1, 1, 1, 0.866667, 1, 3.90606e-12, -0.0644718, -0.155911, -0.0875869, -5.4761e-05, 9.88233e-05, 0.996157, 1, 1, 1, 1, 1, 0, 0.0418975, -0.215985, -0.130526, 0, 0, 0.991445, 1, 1, 1 )
 
-[sub_resource type="Animation" id=121]
+[sub_resource type="Animation" id=42]
 resource_name = "run_forward-loop"
 loop = true
 tracks/0/type = "transform"
@@ -35846,7 +35840,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113106, -0.00641361, -0.0562491, 0.991969, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.113106, -0.00641361, -0.0562491, 0.991969, 1, 1, 1 )
 
-[sub_resource type="Animation" id=122]
+[sub_resource type="Animation" id=43]
 resource_name = "run_left-loop"
 loop = true
 tracks/0/type = "transform"
@@ -36970,7 +36964,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1 )
 
-[sub_resource type="Animation" id=123]
+[sub_resource type="Animation" id=44]
 resource_name = "run_right-loop"
 loop = true
 tracks/0/type = "transform"
@@ -38087,7 +38081,7 @@ tracks/158/imported = true
 tracks/158/enabled = true
 tracks/158/keys = PoolRealArray( 0, 1, 0, 0.0321952, -0.210506, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.133333, 1, 0, -0.064472, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.2, 1, 0, -0.0644718, -0.155911, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.266667, 1, 0, -0.0569539, -0.160157, -0.0871338, 0, 0, 0.996197, 1, 1, 1, 0.333333, 1, 0, -0.0268821, -0.177141, -0.0870463, 0, 0, 0.996204, 1, 1, 1, 0.4, 1, 0, 0.00962293, -0.197757, -0.0783277, 0, 0, 0.996928, 1, 1, 1, 0.466667, 1, 0, 0.0568498, -0.22443, -0.0551967, 0, 0, 0.998476, 1, 1, 1, 0.533333, 1, 0, 0.0418137, -0.215938, -0.0560344, 0, 0, 0.998429, 1, 1, 1, 0.6, 1, 0, -0.035485, -0.172282, -0.0808366, 0, 0, 0.996727, 1, 1, 1, 0.666667, 1, 0, -0.0644721, -0.155911, -0.0891355, 0, 0, 0.99602, 1, 1, 1, 0.733333, 1, 0, -0.064472, -0.155911, -0.0875517, 0, 0, 0.99616, 1, 1, 1, 0.8, 1, 0, -0.0161583, -0.183197, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.866667, 1, 0, 0.0482599, -0.219578, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 0.933333, 1, 0, 0.0413051, -0.21565, -0.0871557, 0, 0, 0.996195, 1, 1, 1, 1, 1, 0, 0.0241538, -0.205964, -0.0871557, 0, 0, 0.996195, 1, 1, 1 )
 
-[sub_resource type="Animation" id=124]
+[sub_resource type="Animation" id=45]
 resource_name = "summon_hold"
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -39210,8 +39204,7 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 0.113288, 0, 0, 0.993562, 1, 1, 1, 0.0666667, 1, -0.0479305, -0.391702, 0.0882236, 0.112294, 0, 0, 0.993675, 1, 1, 1, 0.133333, 1, -0.0479305, -0.391702, 0.0882236, 0.111097, 0, 0, 0.99381, 1, 1, 1, 0.266667, 1, -0.0479305, -0.391702, 0.0882236, 0.105585, 0, 0, 0.99441, 1, 1, 1, 0.866667, 1, -0.0479305, -0.391702, 0.0882236, 0.07204, 0, 0, 0.997402, 1, 1, 1, 1, 1, -0.0479305, -0.391702, 0.0882236, 0.0698412, 0, 0, 0.997558, 1, 1, 1 )
 
-[sub_resource type="Animation" id=20]
-resource_name = "summon_start"
+[sub_resource type="Animation" id=46]
 length = 0.875
 tracks/0/type = "transform"
 tracks/0/path = NodePath("metarig003/Skeleton:toe_l")
@@ -40334,206 +40327,206 @@ tracks/159/imported = true
 tracks/159/enabled = true
 tracks/159/keys = PoolRealArray( 0, 1, -0.0479305, -0.391702, 0.0882236, 1.04308e-07, 0, 0, 1, 1, 1, 1, 0.875, 1, -0.0479305, -0.391702, 0.0882236, 1.04308e-07, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=47]
 animation = "dash"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=48]
 animation = "fall"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=49]
 animation = "grabmax"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=50]
 animation = "grabmax"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=51]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=71]
+[sub_resource type="AnimationNodeAnimation" id=52]
 animation = "run_forward-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=72]
+[sub_resource type="AnimationNodeAnimation" id=53]
 animation = "run_right-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=73]
+[sub_resource type="AnimationNodeAnimation" id=54]
 animation = "run_backward-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=74]
+[sub_resource type="AnimationNodeAnimation" id=55]
 animation = "run_left-loop"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=75]
-blend_point_0/node = SubResource( 71 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=56]
+blend_point_0/node = SubResource( 52 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 72 )
+blend_point_1/node = SubResource( 53 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 73 )
+blend_point_2/node = SubResource( 54 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 74 )
+blend_point_3/node = SubResource( 55 )
 blend_point_3/pos = Vector2( -1, 0 )
 
-[sub_resource type="AnimationNodeTimeScale" id=76]
+[sub_resource type="AnimationNodeTimeScale" id=57]
 
-[sub_resource type="AnimationNodeBlendTree" id=77]
+[sub_resource type="AnimationNodeBlendTree" id=58]
 graph_offset = Vector2( 0, 74 )
-nodes/Movement/node = SubResource( 75 )
+nodes/Movement/node = SubResource( 56 )
 nodes/Movement/position = Vector2( 100, 120 )
-nodes/TimeScale/node = SubResource( 76 )
+nodes/TimeScale/node = SubResource( 57 )
 nodes/TimeScale/position = Vector2( 320, 140 )
 nodes/output/position = Vector2( 520, 160 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Movement" ]
 
-[sub_resource type="AnimationNodeAnimation" id=93]
+[sub_resource type="AnimationNodeAnimation" id=59]
 animation = "pull_charge"
 
-[sub_resource type="AnimationNodeTimeScale" id=94]
+[sub_resource type="AnimationNodeTimeScale" id=60]
 
-[sub_resource type="AnimationNodeBlendTree" id=95]
-nodes/Animation/node = SubResource( 93 )
+[sub_resource type="AnimationNodeBlendTree" id=61]
+nodes/Animation/node = SubResource( 59 )
 nodes/Animation/position = Vector2( 120, 80 )
-nodes/TimeScale/node = SubResource( 94 )
+nodes/TimeScale/node = SubResource( 60 )
 nodes/TimeScale/position = Vector2( 360, 100 )
 nodes/output/position = Vector2( 640, 140 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
-[sub_resource type="AnimationNodeAnimation" id=80]
+[sub_resource type="AnimationNodeAnimation" id=62]
 animation = "push_charge"
 
-[sub_resource type="AnimationNodeTimeScale" id=81]
+[sub_resource type="AnimationNodeTimeScale" id=63]
 
-[sub_resource type="AnimationNodeBlendTree" id=82]
-nodes/Animation/node = SubResource( 80 )
+[sub_resource type="AnimationNodeBlendTree" id=64]
+nodes/Animation/node = SubResource( 62 )
 nodes/Animation/position = Vector2( 200, 80 )
-nodes/TimeScale/node = SubResource( 81 )
+nodes/TimeScale/node = SubResource( 63 )
 nodes/TimeScale/position = Vector2( 480, 80 )
 nodes/output/position = Vector2( 720, 100 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
-[sub_resource type="AnimationNodeAnimation" id=42]
+[sub_resource type="AnimationNodeAnimation" id=65]
 animation = "push_hold"
 
-[sub_resource type="AnimationNodeAnimation" id=100]
+[sub_resource type="AnimationNodeAnimation" id=66]
 animation = "rock_push"
 
-[sub_resource type="AnimationNodeTimeScale" id=101]
+[sub_resource type="AnimationNodeTimeScale" id=67]
 
-[sub_resource type="AnimationNodeBlendTree" id=102]
-nodes/Animation/node = SubResource( 100 )
+[sub_resource type="AnimationNodeBlendTree" id=68]
+nodes/Animation/node = SubResource( 66 )
 nodes/Animation/position = Vector2( 80, 80 )
-nodes/TimeScale/node = SubResource( 101 )
+nodes/TimeScale/node = SubResource( 67 )
 nodes/TimeScale/position = Vector2( 380, 100 )
 nodes/output/position = Vector2( 620, 140 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
-[sub_resource type="AnimationNodeAnimation" id=43]
+[sub_resource type="AnimationNodeAnimation" id=69]
 animation = "summon_generic"
 
-[sub_resource type="AnimationNodeAnimation" id=87]
+[sub_resource type="AnimationNodeAnimation" id=70]
 animation = "summon_start"
 
-[sub_resource type="AnimationNodeTimeScale" id=88]
+[sub_resource type="AnimationNodeTimeScale" id=71]
 
-[sub_resource type="AnimationNodeBlendTree" id=89]
+[sub_resource type="AnimationNodeBlendTree" id=72]
 graph_offset = Vector2( -342, 0 )
-nodes/Animation/node = SubResource( 87 )
+nodes/Animation/node = SubResource( 70 )
 nodes/Animation/position = Vector2( -160, 80 )
-nodes/TimeScale/node = SubResource( 88 )
+nodes/TimeScale/node = SubResource( 71 )
 nodes/TimeScale/position = Vector2( 100, 60 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=49]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=54]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=78]
-switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=79]
-switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=84]
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=85]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
 switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=89]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=90]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=91]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=96]
-switch_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=97]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=98]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=103]
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=104]
+[sub_resource type="AnimationNodeStateMachineTransition" id=95]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id=61]
-states/dash/node = SubResource( 31 )
+[sub_resource type="AnimationNodeStateMachine" id=96]
+states/dash/node = SubResource( 47 )
 states/dash/position = Vector2( 776, 155.016 )
-states/fall/node = SubResource( 32 )
+states/fall/node = SubResource( 48 )
 states/fall/position = Vector2( 216, 180.316 )
-states/grabbing/node = SubResource( 33 )
+states/grabbing/node = SubResource( 49 )
 states/grabbing/position = Vector2( 64, 143.016 )
-states/grabmax/node = SubResource( 34 )
+states/grabmax/node = SubResource( 50 )
 states/grabmax/position = Vector2( 69, 33 )
-states/idle/node = SubResource( 35 )
+states/idle/node = SubResource( 51 )
 states/idle/position = Vector2( 358, 14 )
-states/movement/node = SubResource( 77 )
+states/movement/node = SubResource( 58 )
 states/movement/position = Vector2( 840.438, 77.688 )
-states/pull_charge/node = SubResource( 95 )
+states/pull_charge/node = SubResource( 61 )
 states/pull_charge/position = Vector2( 380, 180.316 )
-states/push_charge/node = SubResource( 82 )
+states/push_charge/node = SubResource( 64 )
 states/push_charge/position = Vector2( 506.248, -61.956 )
-states/push_hold/node = SubResource( 42 )
+states/push_hold/node = SubResource( 65 )
 states/push_hold/position = Vector2( 705, -0.984001 )
-states/rock_push/node = SubResource( 102 )
+states/rock_push/node = SubResource( 68 )
 states/rock_push/position = Vector2( 585.248, 169.528 )
-states/summon_generic/node = SubResource( 43 )
+states/summon_generic/node = SubResource( 69 )
 states/summon_generic/position = Vector2( 303, -149.984 )
-states/summon_start/node = SubResource( 89 )
+states/summon_start/node = SubResource( 72 )
 states/summon_start/position = Vector2( 124.248, -53.984 )
-transitions = [ "grabbing", "grabmax", SubResource( 48 ), "push_charge", "push_hold", SubResource( 86 ), "summon_start", "push_charge", SubResource( 92 ), "push_hold", "idle", SubResource( 45 ), "idle", "grabbing", SubResource( 46 ), "grabbing", "idle", SubResource( 47 ), "grabmax", "idle", SubResource( 49 ), "summon_generic", "idle", SubResource( 52 ), "idle", "dash", SubResource( 53 ), "dash", "idle", SubResource( 54 ), "idle", "fall", SubResource( 60 ), "idle", "movement", SubResource( 78 ), "movement", "idle", SubResource( 79 ), "idle", "push_charge", SubResource( 84 ), "push_charge", "idle", SubResource( 85 ), "summon_start", "idle", SubResource( 90 ), "idle", "summon_start", SubResource( 91 ), "pull_charge", "idle", SubResource( 96 ), "idle", "pull_charge", SubResource( 97 ), "fall", "idle", SubResource( 98 ), "pull_charge", "push_hold", SubResource( 99 ), "idle", "rock_push", SubResource( 103 ), "rock_push", "idle", SubResource( 104 ) ]
+transitions = [ "grabbing", "grabmax", SubResource( 73 ), "push_charge", "push_hold", SubResource( 74 ), "summon_start", "push_charge", SubResource( 75 ), "push_hold", "idle", SubResource( 76 ), "idle", "grabbing", SubResource( 77 ), "grabbing", "idle", SubResource( 78 ), "grabmax", "idle", SubResource( 79 ), "summon_generic", "idle", SubResource( 80 ), "idle", "dash", SubResource( 81 ), "dash", "idle", SubResource( 82 ), "idle", "fall", SubResource( 83 ), "idle", "movement", SubResource( 84 ), "movement", "idle", SubResource( 85 ), "idle", "push_charge", SubResource( 86 ), "push_charge", "idle", SubResource( 87 ), "summon_start", "idle", SubResource( 88 ), "idle", "summon_start", SubResource( 89 ), "pull_charge", "idle", SubResource( 90 ), "idle", "pull_charge", SubResource( 91 ), "fall", "idle", SubResource( 92 ), "pull_charge", "push_hold", SubResource( 93 ), "idle", "rock_push", SubResource( 94 ), "rock_push", "idle", SubResource( 95 ) ]
 start_node = "idle"
 graph_offset = Vector2( -106.752, -28.828 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=62]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=97]
 
-[sub_resource type="ParticlesMaterial" id=63]
+[sub_resource type="ParticlesMaterial" id=98]
 lifetime_randomness = 1.0
 emission_shape = 2
 emission_box_extents = Vector3( 3, 3, 3 )
@@ -40545,7 +40538,7 @@ scale = 0.04
 scale_random = 0.05
 color = Color( 1, 1, 1, 0.0745098 )
 
-[sub_resource type="CubeMesh" id=64]
+[sub_resource type="CubeMesh" id=99]
 
 [node name="Player" type="RigidBody" groups=[
 "player",
@@ -40567,6 +40560,17 @@ SPEED = 8000
 TURN_SPEED = 800
 GRAB_DROPOFF_VAL = 10.0
 
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="GrowHitBox" type="Area" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="GrowHitBox"]
+shape = SubResource( 101 )
+
 [node name="RockHitBox" type="Area" parent="."]
 collision_layer = 0
 collision_mask = 512
@@ -40581,10 +40585,6 @@ collision_mask = 1024
 
 [node name="CollisionShape" type="CollisionShape" parent="DashHitBox"]
 shape = SubResource( 1 )
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
-shape = SubResource( 2 )
 
 [node name="PushBox" parent="." instance=ExtResource( 2 )]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, 0.167053, 0.00317383, -4.98615 )
@@ -40609,6 +40609,7 @@ disabled = true
 
 [node name="GrabBox" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8 )
+visible = false
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 6 )
@@ -40617,12 +40618,43 @@ script = ExtResource( 6 )
 shape = SubResource( 5 )
 disabled = true
 
+[node name="SummonHitBoxes" type="Spatial" parent="."]
+script = ExtResource( 16 )
+
+[node name="Box1" type="Area" parent="SummonHitBoxes"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="SummonHitBoxes/Box1"]
+shape = SubResource( 100 )
+
+[node name="Box2" type="Area" parent="SummonHitBoxes"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="SummonHitBoxes/Box2"]
+shape = SubResource( 100 )
+
+[node name="Box3" type="Area" parent="SummonHitBoxes"]
+collision_layer = 0
+collision_mask = 2147483650
+
+[node name="CollisionShape" type="CollisionShape" parent="SummonHitBoxes/Box3"]
+shape = SubResource( 100 )
+
+[node name="Box4" type="Area" parent="SummonHitBoxes"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="SummonHitBoxes/Box4"]
+shape = SubResource( 100 )
+
 [node name="player_animations2" type="Spatial" parent="."]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, 0, 0, 0 )
 visible = false
 
 [node name="metarig003" type="Spatial" parent="player_animations2"]
-transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336877, 1.86265e-09, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336876, 1.49012e-08, 0.34202, 0.939693, 0, -0.392, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations2/metarig003"]
 bones/0/name = "spine"
@@ -41422,35 +41454,35 @@ bones/158/enabled = true
 bones/158/bound_children = [  ]
 
 [node name="ObjObject" type="MeshInstance" parent="player_animations2/metarig003/Skeleton"]
-transform = Transform( 1, -5.26656e-09, -3.03078e-09, -5.46017e-09, 1, 2.98023e-08, 1.62601e-10, 0, 1, 0, 0, 0 )
-mesh = SubResource( 65 )
-skin = SubResource( 66 )
-material/0 = SubResource( 67 )
+transform = Transform( 1, 5.46017e-09, -1.62601e-10, -5.46017e-09, 1, 0, 1.62601e-10, 8.87829e-19, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+skin = SubResource( 7 )
+material/0 = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player_animations2"]
-anims/ObjObjectAction = SubResource( 68 )
-anims/dash = SubResource( 69 )
-anims/fall = SubResource( 70 )
-anims/grabbing = SubResource( 6 )
-anims/grabmax = SubResource( 7 )
-anims/idle = SubResource( 8 )
-anims/pull_charge = SubResource( 9 )
-anims/push_charge = SubResource( 10 )
-anims/push_hold = SubResource( 11 )
-anims/rock_slide = SubResource( 12 )
-anims/rock_slide_forward = SubResource( 13 )
-anims/run_backward-loop = SubResource( 14 )
-anims/run_forward-loop = SubResource( 15 )
-anims/run_left-loop = SubResource( 16 )
-anims/run_right-loop = SubResource( 17 )
-anims/summon_hold = SubResource( 18 )
-anims/summon_start = SubResource( 19 )
+anims/ObjObjectAction = SubResource( 9 )
+anims/dash = SubResource( 10 )
+anims/fall = SubResource( 11 )
+anims/grabbing = SubResource( 12 )
+anims/grabmax = SubResource( 13 )
+anims/idle = SubResource( 14 )
+anims/pull_charge = SubResource( 15 )
+anims/push_charge = SubResource( 16 )
+anims/push_hold = SubResource( 17 )
+anims/rock_slide = SubResource( 18 )
+anims/rock_slide_forward = SubResource( 19 )
+anims/run_backward-loop = SubResource( 20 )
+anims/run_forward-loop = SubResource( 21 )
+anims/run_left-loop = SubResource( 22 )
+anims/run_right-loop = SubResource( 23 )
+anims/summon_hold = SubResource( 24 )
+anims/summon_start = SubResource( 25 )
 
 [node name="player_animations" type="Spatial" parent="."]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336877, 0, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590931, -0.172777, 0.925561, -0.336876, -2.6077e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
@@ -42250,35 +42282,35 @@ bones/158/enabled = true
 bones/158/bound_children = [  ]
 
 [node name="ObjObject" type="MeshInstance" parent="player_animations/metarig003/Skeleton"]
-mesh = SubResource( 105 )
-skin = SubResource( 106 )
-material/0 = SubResource( 107 )
+mesh = SubResource( 26 )
+skin = SubResource( 27 )
+material/0 = SubResource( 28 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player_animations"]
-anims/ObjObjectAction = SubResource( 108 )
-anims/dash = SubResource( 109 )
-anims/fall = SubResource( 110 )
-anims/grabbing = SubResource( 111 )
-anims/grabmax = SubResource( 112 )
-anims/idle = SubResource( 113 )
-anims/pull_charge = SubResource( 114 )
-anims/push_charge = SubResource( 115 )
-anims/push_hold = SubResource( 116 )
-anims/rock_push = SubResource( 117 )
-anims/rock_slide = SubResource( 118 )
-anims/rock_slide_forward = SubResource( 119 )
-anims/run_backward-loop = SubResource( 120 )
-anims/run_forward-loop = SubResource( 121 )
-anims/run_left-loop = SubResource( 122 )
-anims/run_right-loop = SubResource( 123 )
-anims/summon_hold = SubResource( 124 )
-anims/summon_start = SubResource( 20 )
+anims/ObjObjectAction = SubResource( 29 )
+anims/dash = SubResource( 30 )
+anims/fall = SubResource( 31 )
+anims/grabbing = SubResource( 32 )
+anims/grabmax = SubResource( 33 )
+anims/idle = SubResource( 34 )
+anims/pull_charge = SubResource( 35 )
+anims/push_charge = SubResource( 36 )
+anims/push_hold = SubResource( 37 )
+anims/rock_push = SubResource( 38 )
+anims/rock_slide = SubResource( 39 )
+anims/rock_slide_forward = SubResource( 40 )
+anims/run_backward-loop = SubResource( 41 )
+anims/run_forward-loop = SubResource( 42 )
+anims/run_left-loop = SubResource( 43 )
+anims/run_right-loop = SubResource( 44 )
+anims/summon_hold = SubResource( 45 )
+anims/summon_start = SubResource( 46 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 61 )
+tree_root = SubResource( 96 )
 anim_player = NodePath("../player_animations/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 62 )
+parameters/playback = SubResource( 97 )
 parameters/movement/Movement/blend_position = Vector2( 0, 0 )
 parameters/movement/TimeScale/scale = 1.4
 parameters/pull_charge/TimeScale/scale = 1.6
@@ -42305,8 +42337,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_1" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -3.12346 )
@@ -42316,8 +42348,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_2" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -4.56637 )
@@ -42327,8 +42359,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_3" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -6.29695 )
@@ -42338,8 +42370,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_4" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -7.80177 )
@@ -42349,8 +42381,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_5" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42360,8 +42392,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_6" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42371,8 +42403,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_7" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42382,8 +42414,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_8" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42393,8 +42425,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_9" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42404,8 +42436,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_10" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42415,8 +42447,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_11" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42426,8 +42458,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_12" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42437,8 +42469,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_13" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42448,8 +42480,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="beam_14" type="Particles" parent="GrabBeamHandler"]
 transform = Transform( -1.73536e-09, 0, 0.142892, 0, 0.118163, 0, -0.145619, 0, -2.29101e-08, 0, 0.269844, -11.8612 )
@@ -42459,8 +42491,8 @@ lifetime = 0.65
 speed_scale = 1.69
 randomness = 0.53
 local_coords = false
-process_material = SubResource( 63 )
-draw_pass_1 = SubResource( 64 )
+process_material = SubResource( 98 )
+draw_pass_1 = SubResource( 99 )
 
 [node name="animationblend" type="Control" parent="."]
 visible = false

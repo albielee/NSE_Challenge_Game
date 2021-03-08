@@ -47,10 +47,12 @@ func average_packet_time(newpacket_elapsed):
 		total += time
 	return total/len(packets)
 
-func create_rock(rock):
+func create_rock(rock, position):
+	rock.translation = position
 	rockdic[rock.id] = rock.get_stats()
 	r_rockdic[rock.id] = rock.get_stats()
 	add_child(rock)
+	rock.be_summoned()
 
 func destroy_rock(id):
 	destroylist.append(id)

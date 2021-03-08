@@ -76,7 +76,6 @@ var started_pulling = false
 
 var summon_size = 0.5
 var rock_summoned = false
-var growing_rock = null
 
 var dash_angle = current_angle
 var can_dash = 0.0
@@ -97,6 +96,7 @@ export var MAX_SPEED = 500
 export var SPEED = 2000
 export var TURN_SPEED = 400
 export var PUSH_POWER = 300
+export var MIN_SIZE = 2.0
 export var DASH_DIST = 5
 export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
@@ -124,6 +124,8 @@ onready var spawn_position = Vector3.ZERO
 onready var sounds = $Sounds
 onready var grabbeam_handler = $GrabBeamHandler
 onready var dashhitbox = $DashHitBox
+onready var summonhitboxes = $SummonHitBoxes
+onready var growhitbox = $GrowHitBox
 
 var _updates = 0.0
 var _packets = 0.0
@@ -141,16 +143,22 @@ func _ready():
 	spawn_position = transform.origin
 	set_linear_damp(10)
 	set_mass(MASS)
+	$player_animations.scale = Vector3(2*SCALE,2*SCALE,2*SCALE)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
+	
+	summonhitboxes.transform.origin.z=(-4.0*SCALE)
+	summonhitboxes.setup(MIN_SIZE)
+	
+	growhitbox.transform.origin = Vector3(0, SCALE*2, -4.0*SCALE)
 	
 	rockhitbox.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	
 	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
-	pushbox.transform.origin.z=(-1.0*SCALE)
+	pushbox.transform.origin.z=(-2.0*SCALE)
 	
 	pullbox.scale=Vector3(2*SCALE,SCALE,SCALE)
-	pullbox.transform.origin.z=(-1.0*SCALE)
+	pullbox.transform.origin.z=(-2.0*SCALE)
 	
 	grabbox.scale=Vector3(SCALE,SCALE,SCALE)
 	grabbox.transform.origin.z=(-1.8*SCALE)
@@ -312,7 +320,6 @@ func puppet_update(delta):
 		time -= delta
 
 func _on_NetworkHandler_packet_received():
-#	print(len(buffer))
 	#how long since the last packet?
 	elapsed_time = current_time - last_packet_time
 	
@@ -384,7 +391,7 @@ func update(delta):
 		DASH:
 			dash_state(delta)
 		SUMMONING:
-			summoning_state(delta)
+			summon_state(delta)
 		PUSH:
 			push_state(delta)
 		PULL:
@@ -446,8 +453,7 @@ func move_state(delta, mouse_angle):
 		rock_summoned = false
 	else:
 		can_dash -= 1.0
-		if(summon and rock_summoned == false):
-			#set_angular_velocity(Vector3.ZERO)
+		if(summon and rock_summoned == false and summonhitboxes.can_summon):
 			state = SUMMONING;
 		elif(state != SUMMONING and !summon):
 			rock_summoned = false
@@ -579,35 +585,100 @@ func _on_GrabBox_lost_rock():
 	grabbox.transform.origin.z=-1.8
 	grabbox.shape.shape.set_height(0.5)
 
+var summon_length = 15
+var post_summon_length = 25
+var has_summoned = false
+var decided = false
+var growing = false
+var growing_rock = null
+var length_det = false
+var has_growed = false
+var grow_length = 10
+var post_grow_length = 15
+
+func summon_state(delta):
+	#if no rock
+	if not decided:
+		if len(growhitbox.get_overlapping_areas()) > 0:
+			growing_rock = growhitbox.get_overlapping_areas()[0]
+			decided = true
+			growing = true
+		else:
+			growing = false
+			decided = true
+	
+	if not growing:
+		summoning_state(delta)
+	if growing:
+		growing_state(delta)
+
 func summoning_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
+	current_turn_speed = 0
 	
-	var rock_name = get_name()
-
-	if(!rock_summoned):
-		anim = "summon_start"
-		rock_summoned = true
-		var offset = 2.0
-		var y_rot = -get_transform().basis.get_euler().y
-		var rock_pos = Vector3(translation.x + offset*sin(y_rot), 1, translation.z - offset*cos(y_rot))
-		var start_size = 2.0
-		network_handler.all_summon_rock(rock_name, rock_pos, start_size)
-		state = MOVE
-	elif(growing_rock != null):
-		#anim = "summon_hold"
-		var summon_speed = 1
-		summon_size+=summon_speed*delta
-		#network_handler.all_grow_rock(growing_rock, summon_size)
-		if (summon == 0.0) or (summon_size > 3.0):
-			summon_size=0.5
+	summon_length -= 1
+	anim = "summon_start"
+	
+	if(summon_length <= 0):
+		if not has_summoned:
+			summon_rock(delta)
+			has_summoned = true
+		post_summon_length -= 1
+		if(post_summon_length <= 0):
+			summon_length = 15
+			post_summon_length = 25
+			decided = false
+			growing = false
+			has_summoned = false
 			state = MOVE
-#		print(summon)
 
-func summon_power_up():
-	if(network_handler.is_current_player()):
-		summon_size+=0.5
-		if (summon == 0.0) or (summon_size == 3.0):
-			state=SUMMONING
+func summon_rock(delta):
+	rock_summoned = true
+	var offset = MIN_SIZE-0.5
+	var y_rot = -get_transform().basis.get_euler().y
+	var rock_pos = Vector3(translation.x + offset*sin(y_rot), -1, translation.z - offset*cos(y_rot))
+	network_handler.all_summon_rock(get_name(), rock_pos, MIN_SIZE, get_transform().basis.get_euler().y)
+
+func growing_state(delta):
+	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
+	current_turn_speed = 0
+	if (not summon) or (growing_rock == null):
+		stop_growing()
+		return
+	if not length_det:
+		grow_length = 8 * growing_rock.size * growing_rock.size
+		length_det = true
+	anim = "summon_start"
+	grow_length -= 1
+	if grow_length <= 0:
+		if not has_growed:
+			growing_rock.grow(0.01)
+			var new_size = growing_rock.size + 0.5
+			var rockpos = growing_rock.global_transform.origin
+			var dist = new_size/2 - rockpos.distance_to(global_transform.origin)
+			print(dist)
+			if dist < 0: dist = 0
+			var new_position= rockpos + Vector3(dist*sin(-get_transform().basis.get_euler().y), 0, dist*-cos(-get_transform().basis.get_euler().y))
+			network_handler.all_summon_rock(growing_rock.name, new_position, new_size,growing_rock.face)
+			has_growed = true
+		post_grow_length -= 1
+		if post_grow_length <= 0:
+			if summon:
+				growing_rock = growhitbox.get_overlapping_areas()[0]
+				has_growed = false
+				length_det = false
+				post_grow_length = 15
+			else:
+				stop_growing()
+				return
+
+func stop_growing():
+	decided = false
+	growing = false
+	has_growed = false
+	length_det = false
+	post_grow_length = 15
+	state = MOVE
 
 func push_state(delta):
 	current_turn_speed = TURN_SPEED/40
@@ -632,7 +703,7 @@ func push_state(delta):
 func push_complete():
 	if(network_handler.is_current_player()):
 		pushbox.shape.shape.set_height(1)
-		pushbox.transform.origin.z=-1.0*SCALE
+		pushbox.transform.origin.z=-2.0*SCALE
 		pushbox.shape.disabled = true
 		state = MOVE
 		anim = "idle"
@@ -662,7 +733,7 @@ func pull_state(delta):
 func pull_complete():
 	if(network_handler.is_current_player()):
 		pullbox.shape.shape.set_height(1)
-		pullbox.transform.origin.z=-1.0*SCALE
+		pullbox.transform.origin.z=-2.0*SCALE
 		pullbox.shape.disabled = true
 		state = MOVE
 		anim = "idle"
@@ -733,7 +804,6 @@ func shove_state(delta):
 func stop_shove():
 	state = MOVE
 	s_rock = null
-#	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
 
 func set_player_name(name):
 	player_name = name

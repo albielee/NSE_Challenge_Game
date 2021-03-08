@@ -231,7 +231,6 @@ remote func send_recieve_color(index):
 	
 remote func recieve_colour_index(id, index):
 	player_colour_index = index
-	print("ey")
 
 remote func recieve_colours_dic(col_dic):
 	players_colour = col_dic

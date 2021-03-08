@@ -729,195 +729,259 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -14.9232, -6.09369, -71.
 
 [node name="TowerPiece1" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece2" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece3" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece4" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece5" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece6" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece7" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece8" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, -5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece9" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece10" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece11" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece12" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece13" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece14" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece15" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece16" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, -2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece17" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 4.76837e-07 )
+collision_mask = 2050
 
 [node name="TowerPiece18" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 4.76837e-07 )
+collision_mask = 2050
 
 [node name="TowerPiece19" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 4.76837e-07 )
+collision_mask = 2050
 
 [node name="TowerPiece20" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, -0.014689 )
+collision_mask = 2050
 
 [node name="TowerPiece21" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 53.2865, 0, -0.014689 )
+collision_mask = 2050
 
 [node name="TowerPiece22" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 4.76837e-07 )
+collision_mask = 2050
 
 [node name="TowerPiece23" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 4.76837e-07 )
+collision_mask = 2050
 
 [node name="TowerPiece24" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 4.76837e-07 )
+collision_mask = 2050
 
 [node name="TowerPiece25" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece26" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece27" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece28" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, 2.53531 )
+collision_mask = 2050
 
 [node name="TowerPiece29" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 53.2865, 0, 2.53531 )
+collision_mask = 2050
 
 [node name="TowerPiece30" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece31" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece32" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 2.55 )
+collision_mask = 2050
 
 [node name="TowerPiece33" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece34" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece35" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece36" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, 5.08531 )
+collision_mask = 2050
 
 [node name="TowerPiece37" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 26.775, 0, 5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece38" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece39" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece40" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 5.1 )
+collision_mask = 2050
 
 [node name="TowerPiece41" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece42" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece43" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece44" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece45" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 53.2865, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece46" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece47" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece48" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 7.65 )
+collision_mask = 2050
 
 [node name="TowerPiece49" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece50" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece51" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece52" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece53" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece54" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece55" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece56" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 10.2 )
+collision_mask = 2050
 
 [node name="TowerPiece57" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 12.75 )
+collision_mask = 2050
 
 [node name="TowerPiece58" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 12.75 )
+collision_mask = 2050
 
 [node name="TowerPiece59" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 12.75 )
+collision_mask = 2050
 
 [node name="TowerPiece60" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, 12.75 )
+collision_mask = 2050
 
 [node name="TowerPiece61" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, 12.75 )
+collision_mask = 2050
 
 [node name="TowerPiece62" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 12.75 )
+collision_mask = 2050
 
 [node name="TowerPiece63" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 12.75 )
+collision_mask = 2050
 
 [node name="TowerPiece64" parent="Environment/Towers" instance=ExtResource( 15 )]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 12.75 )
+collision_mask = 2050
 
 [node name="AestheticTower" type="MeshInstance" parent="Environment/Towers"]
 transform = Transform( 12.8, 0, 0, 0, 50, 0, 0, 0, 12.8, 0, -87.872, 0.318 )

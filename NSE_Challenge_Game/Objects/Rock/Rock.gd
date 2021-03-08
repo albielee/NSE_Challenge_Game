@@ -20,12 +20,15 @@ var time = 0
 var prev_speed = 0
 var speed = 0
 var next_speed = 0
+var real = true
+var timebeenfake = 0
 
 var buffer = []
 
 onready var hitbox = $Hitbox
 onready var playerhitbox = $Hitbox2
 onready var p_hitbox = $PlayerHitbox
+onready var ground_toucher = $GroundTouch
 
 var last_mover=""
 var location = Vector3.ZERO
@@ -33,6 +36,7 @@ var _delta = 0.0
 var current_rotation = Vector3.ZERO
 var face = 0
 var size = 0
+var resize = false
 
 func _ready():
 	set_gravity_scale(5)
@@ -58,10 +62,14 @@ func handle_stats(delta):
 	hitbox.size = size
 	hitbox.linear_velocity = linear_velocity
 	hitbox.owned_by = owned_by
+	hitbox.real = real
 	playerhitbox.size = scale.x
 	playerhitbox.pos = location
 
 func _integrate_forces(state):
+	if resize:
+		scale = Vector3(size,size,size)
+		resize = false
 	if get_tree().get_network_unique_id() != owned_by:
 		var target = Vector3.UP * wrapf(r_rotation-face, -PI, PI)
 		rotation = current_rotation + (target*(400*_delta/30))
@@ -106,7 +114,18 @@ func build_buffer(stats, avg):
 
 #OWNER UPDATE
 func update(delta):
+	if real == false:
+		if global_transform.origin.y >= -0.26 + self.size/2:
+			real = true
+			set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_X,false)
+			set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,false)
+			set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Z,false)
+			set_collision_layer_bit(1, true)
+		else: 
+			timebeenfake += 1
+			add_force(Vector3.UP*(100+(timebeenfake*timebeenfake)/10),Vector3.ZERO)
 	speed = sqrt(pow(linear_velocity.x, 2) + pow(linear_velocity.z,2))
+	resize = true
 	if buffer!=[]: buffer = []
 	speed = Vector2(linear_velocity.x, linear_velocity.z).length()
 	hitbox.face=get_transform().basis.get_euler().y
@@ -122,6 +141,7 @@ func update(delta):
 			set_linear_damp(5)
 		else: hitbox.flying = true
 	remote_update()
+
 
 func remote_update():
 	#Although currently owned, there should be preparations for when it is a puppet once more
@@ -170,6 +190,13 @@ func set_owner(pid):
 		owned_by = pid
 		get_parent().change_owner(id, owned_by)
 
+func be_summoned():
+	real = false
+	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_X,true)
+	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Y,true)
+	set_axis_lock(PhysicsServer.BODY_AXIS_ANGULAR_Z,true)
+	set_collision_mask_bit(1,false)
+
 #HITBOX SIGNALS
 func _on_Hitbox_pushed():
 	add_force(hitbox.knockback, Vector3.ZERO)
@@ -192,3 +219,6 @@ func _on_Rock_body_entered(body):
 
 func _on_Hitbox2_pushed():
 	add_force(playerhitbox.knockback, Vector3.ZERO)
+
+func _on_Hitbox_growing():
+	destroy()
