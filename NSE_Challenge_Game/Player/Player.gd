@@ -656,7 +656,6 @@ func growing_state(delta):
 			var new_size = growing_rock.size + 0.5
 			var rockpos = growing_rock.global_transform.origin
 			var dist = new_size/2 - rockpos.distance_to(global_transform.origin)
-			print(dist)
 			if dist < 0: dist = 0
 			var new_position= rockpos + Vector3(dist*sin(-get_transform().basis.get_euler().y), 0, dist*-cos(-get_transform().basis.get_euler().y))
 			network_handler.all_summon_rock(growing_rock.name, new_position, new_size,growing_rock.face)
