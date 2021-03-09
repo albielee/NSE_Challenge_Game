@@ -73,7 +73,6 @@ func set_all_controls(dict):
 		else:
 			event = InputEventKey.new()
 			event.scancode = dict[key]
-			print(str(button_map.find(key)+1))
 			update_button(key,event.as_text())
 		InputMap.action_add_event(key,event)
 

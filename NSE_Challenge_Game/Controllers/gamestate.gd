@@ -116,12 +116,10 @@ remote func pre_start_game(spawn_points, roundSettings):
 		player.set_name(str(p_id)) # Use unique ID as node name.
 		player.transform.origin = spawn_pos
 		player.set_network_master(p_id) #set unique id as master.
-		print(players_colour)
 		
 		if p_id == get_tree().get_network_unique_id():
 			# If node for this peer id, set name.
 			player.set_player_name(player_name)
-			print(player_colour_index)
 			player.set_player_colour(colours[player_colour_index])
 		else:
 			# Otherwise set name from peer.
@@ -130,7 +128,6 @@ remote func pre_start_game(spawn_points, roundSettings):
 		
 		world.get_node("Players").add_child(player)
 #		print("this is lafkjndrkjgndxignsdriyfhb")
-		print(roundSettings)
 		world.get_node("RoundController").round_time = roundSettings[1]
 		world.get_node("RoundController").round_number = roundSettings[2]
 	
@@ -207,7 +204,6 @@ remote func start_pressed():
 remote func send_recieve_color(index):
 	if(get_tree().is_network_server()):
 		var sender_id = get_tree().get_rpc_sender_id()
-		print(available_colours)
 		available_colours[index]=1
 		index = wrapi(index+1, 0, 4)
 		
@@ -227,14 +223,12 @@ remote func send_recieve_color(index):
 		players_colour[sender_id] = index
 		for p in players:
 			rpc_id(p, "recieve_colours_dic", players_colour)
-		print(players_colour)
 	
 remote func recieve_colour_index(id, index):
 	player_colour_index = index
 
 remote func recieve_colours_dic(col_dic):
 	players_colour = col_dic
-	print(players_colour)
 
 remote func get_available_colour():
 	if(get_tree().is_network_server()):
@@ -256,7 +250,6 @@ remote func get_available_colour():
 		players_colour[sender_id] = i
 		for p in players:
 			rpc_id(p, "recieve_colours_dic", players_colour)
-		print(players_colour)
 	
 		
 func call_server_get_available_colour():

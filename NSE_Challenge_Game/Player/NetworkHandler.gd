@@ -19,8 +19,7 @@ remote var remote_rotation = Vector3.ZERO
 remote var remote_animation = "idle"
 remote var remote_velocity = Vector3.ZERO
 
-remote var remote_stats = [remote_position, remote_rotation, 
-remote_animation, remote_velocity] setget received_packet
+remote var remote_stats = [remote_position, remote_rotation, remote_animation, remote_velocity] setget received_packet
 
 #dead data
 remote var remote_dead = false
@@ -65,10 +64,10 @@ sync func summon_rock(rock_name, rock_pos, rock_size, by_who, rock_orientation):
 	
 	rock_network_handler.create_rock(rock, rock_pos)
 
-func timeout(cur_rotation,cur_position,cur_animation,cur_velocity):
-	if(is_current_player()):
+func timeout(cur_positionals):
+	if(is_host()):
 		#Send off players movement
-		rset_unreliable("remote_stats", [cur_rotation, cur_position, cur_animation, cur_velocity])
+		rset_unreliable("remote_stats", cur_positionals)
 	$SendData.start(1.0/Settings.tickrate)
 
 func reset():

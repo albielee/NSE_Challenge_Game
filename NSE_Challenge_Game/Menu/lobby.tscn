@@ -51,11 +51,11 @@ region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 19 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 19 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -66,12 +66,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -113,11 +113,11 @@ region = Rect2( 504, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 27 )
-region = Rect2( 0, 0, 84, 26 )
+region = Rect2( 588, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 27 )
-region = Rect2( 588, 0, 84, 26 )
+region = Rect2( 0, 0, 84, 26 )
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
@@ -128,12 +128,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 17 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 18 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -172,11 +172,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=33]
@@ -188,12 +188,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 31 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 30.0
 }, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 30.0
 } ]
 
@@ -222,11 +222,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=42]
@@ -238,12 +238,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 40 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 41 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -273,11 +273,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 9 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=51]
 animations = [ {
@@ -288,13 +288,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 49 ) ],
 "loop": true,
-"name": "unfocused",
-"speed": 30.0
+"name": "focused",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 50 ) ],
 "loop": true,
-"name": "focused",
-"speed": 5.0
+"name": "unfocused",
+"speed": 30.0
 } ]
 
 [sub_resource type="AtlasTexture" id=52]
@@ -323,11 +323,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 10 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=60]
 animations = [ {
@@ -338,12 +338,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 58 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 59 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -373,11 +373,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=67]
 atlas = ExtResource( 12 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 12 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
@@ -388,12 +388,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 67 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 68 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 

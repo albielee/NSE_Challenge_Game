@@ -1,92 +1,4 @@
-extends RigidBody
-
-#this is set to the tree's unique ID
-var playerid = 0
-
-var movement = Vector2.ZERO
-var pushpull = 0.0
-var summon = 0.0
-var grab = 0.0
-var dash = 0.0
-var mouse_position = Vector3.ZERO
-
-var controls = [movement, pushpull, summon, grab, dash, mouse_position]
-
-var player_name = ""
-var player_col = Color("")
-
-var touched = false
-
-var mouse_angle = Vector3.ZERO
-var current_angle = Vector3.ZERO
-var current_dir = Vector3.ZERO
-var move_velocity = Vector3.ZERO
-
-var puppet_last_position = transform.origin
-var puppet_next_position = transform.origin
-var puppet_speed = 0.0
-var r_rotation = 0.0
-var r_position = transform.origin
-var r_animation = "idle"
-var r_velocity = Vector3.ZERO
-var r_stats = [r_rotation,r_position,r_animation,r_velocity]
-
-var lp = Vector3.ZERO
-var lptime = 1.0
-
-var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
-
-enum {
-	MOVE,
-	DASH,
-	SUMMON,
-	SUMMONING,
-	PUSH,
-	PULL,
-	GRAB,
-	GRABBED,
-	FALL,
-	DEATH,
-	PAUSE,
-	SHOVE
-}
-var state = MOVE
-
-var current_time = 0.0
-var last_packet_time = 0.0
-var packet_time = 0.0
-var elapsed_time = 0.0
-var proj_packet_time = 0.0
-var ideal_updates_per_packet = 0.0
-var updates_per_packet = 0.0
-
-var anim = "idle"
-var prevanim = "idle"
-#movement animation blend space
-var blend_x = 0
-var blend_y = 0
-
-var push_cooldown = 0
-var push_mouse_position = mouse_position
-var started_pushing = false
-
-var pull_cooldown = 0
-var pull_mouse_position = mouse_position
-var started_pulling = false
-
-var summon_size = 0.5
-var rock_summoned = false
-
-var dash_angle = current_angle
-var can_dash = 0.0
-
-var last_attacker=""
-
-var shovable = false
-var s_rock = null
-var contact = false
-
-var dashes = []
+extends "res://Character.gd"
 
 export var ACCELERATION = 100
 export var SCALE = 1.0
@@ -104,10 +16,6 @@ export var GRAB_DROPOFF_VAL = 1.0
 export var DASHES = 3
 export var RECHARGE_PER_CRYSTAL = 0.5
 export var RECHARGE_ALL = 4
-var last_time = 0
-var current_turn_speed = TURN_SPEED
-var current_rotation = 0
-var current_position = spawn_position
 
 onready var UPDATE_INTERVAL = 1.0 / $"/root/Settings".tickrate
 
@@ -120,29 +28,33 @@ onready var network_handler = $NetworkHandler
 onready var animationtree = $AnimationTree
 onready var animationplayer = $player_animations/AnimationPlayer
 onready var animationstate = animationtree.get("parameters/playback")
-onready var spawn_position = Vector3.ZERO
 onready var sounds = $Sounds
 onready var grabbeam_handler = $GrabBeamHandler
 onready var dashhitbox = $DashHitBox
 onready var summonhitboxes = $SummonHitBoxes
 onready var growhitbox = $GrowHitBox
 
-var _updates = 0.0
-var _packets = 0.0
-var avg = 1.0
-var time = 0.0
-var packets = []
-var buffer = []
-var prev_speed = 0.0
-var next_speed = 0.0
-var puppet_current_face = 0.0
-
 var _delta = 0.1
+
+var players = {}
 
 func _ready():
 	spawn_position = transform.origin
 	set_linear_damp(10)
 	set_mass(MASS)
+	scale_setup()
+	dash_setup(DASHES)
+	animationplayer.set_speed_scale(3)
+	
+	current_turn_speed = TURN_SPEED
+	current_position = spawn_position
+	
+	if network_handler.is_current_player(): 
+		playerid = get_tree().get_network_unique_id()
+	
+	players[player_name] = controls
+
+func scale_setup():
 	$player_animations.scale = Vector3(2*SCALE,2*SCALE,2*SCALE)
 	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
@@ -163,48 +75,63 @@ func _ready():
 	grabbox.scale=Vector3(SCALE,SCALE,SCALE)
 	grabbox.transform.origin.z=(-1.8*SCALE)
 	grabbox.shape.shape.set_height(0.5*SCALE)
-	
-	animationplayer.set_speed_scale(3)
-	proj_packet_time = UPDATE_INTERVAL
-	
-	for i in range(DASHES):
-		dashes.append(1.0)
-	
-	if network_handler.is_current_player(): playerid = get_tree().get_network_unique_id()
 
 func _physics_process(delta):
-	current_time += delta
+	#INTEGRATE PHYSICS STUFF
+	_delta = delta
 	current_position = transform.origin
 	current_rotation = rotation
-	_delta = delta
-	puppet_current_face = get_transform().basis.get_euler().y
+	current_face = 0
+	get_transform().basis.get_euler().y
 	
-	#check if dead using networkhandler death
+	#PACKET RECEIVING STUFF
+	current_time += delta
+	
+	#IS THIS STILL NECESSARY? 
 	if(state != FALL and state != DEATH and network_handler.remote_dead):
 		state = FALL
 	
-	#If current player: Give controls to host
-	#If other player: Receive the controls for that player
-	if(network_handler.is_current_player()):
-		controls = get_controls(network_handler.get_cam())
+	#IF WE ARE THE CURRENT PLAYER, PUT SHIT ONTO THE 'NET
+	if (network_handler.is_current_player()):
+		server_controls_update(player_name, get_controls(network_handler.get_cam()))
+	
+	#IF WE ARE THE HOST, UPDATE THE CURRENT PLAYER FOR REAL
+	#IF WE ARE A CLIENT, TAKE REMOTE DATA & UPDATE
+	if(network_handler.is_host()):
 		update(delta)
 	else:
 		puppet_update(delta)
 	
+	#ANIMATION STUFF
 	handle_animations(anim)
+	
+	#SOUND STUFF
 	handle_sounds()
 
+func server_controls_update(player_name, controllist):
+	#reminder: [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
+	if not network_handler.is_host():
+		rpc_unreliable_id(1, "manage_clients", player_name, controllist)
+	else:
+		manage_clients(player_name, controllist)
+
+sync func manage_clients(player_name, controls):
+	players[player_name] = controls
+	rset_unreliable("players", players)
+
 func _integrate_forces(s):
-	if(network_handler.is_current_player()):
+	if(network_handler.is_host()):
 		rotation = current_rotation + (mouse_angle*(current_turn_speed*_delta/30))
 	else:
-		var target = Vector3.UP * wrapf(r_rotation-puppet_current_face, -PI, PI)
+		var target = Vector3.UP * wrapf(r_rotation-current_face, -PI, PI)
 		rotation = current_rotation + (target*(current_turn_speed*_delta/30))
+		
 		var next
 		if current_position.distance_to(puppet_next_position) > DASH_DIST-1:
 			next = puppet_next_position
 		else:
 			next = current_position.move_toward(puppet_next_position,15*_delta)
+		
 		if contacts_reported>0: 
 			for i in get_colliding_bodies():
 				if i.is_in_group('rock_hitbox'):
@@ -239,7 +166,6 @@ func play_footsteps():
 func get_network_handler():
 	return network_handler
 
-#Required inputs: Camera location and current body location
 func get_controls(cam):
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -260,7 +186,6 @@ func get_controls(cam):
 	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
 
 func puppet_update(delta):
-#	time = 0
 	var p = get_transform().origin
 	var dir = (puppet_next_position-p).normalized()
 	var dist = p.distance_to(puppet_next_position)
@@ -308,9 +233,6 @@ func puppet_update(delta):
 			$player_animations.rotation_degrees.z = 0
 		animationtree.set("parameters/movement/Movement/blend_position", Vector2(blend_x, blend_y))
 	
-#	transform.origin = puppet_next_position
-#	print(dist)
-	
 	if dist >= 1:
 		set_linear_velocity(next_speed*dir*dist)
 	else: set_linear_velocity(next_speed*dir)
@@ -357,11 +279,9 @@ func handle_animations(animation):
 
 #Takes given control input and updates actions of the player
 func update(delta):
-	if(mode != MODE_RIGID):
-		set_mode(RigidBody.MODE_RIGID)
-	
 	if touched: set_last_attacker()
 	
+	controls = players[player_name]
 	movement = controls[0] 
 	pushpull = controls[1] 
 	summon = controls[2]
@@ -482,8 +402,9 @@ func move():
 func stop_movement():
 	set_linear_velocity(Vector3.ZERO)
 
-var go = false
-var d = 0
+func dash_setup(numdashes):
+	for i in range(numdashes):
+		dashes.append(1.0)
 
 func dash_state(delta):
 	#come up with another way. Use fancy particles?
@@ -505,7 +426,7 @@ func dash_state(delta):
 		dash_finished()
 
 func dash_finished():
-	if(network_handler.is_current_player()):
+	if(network_handler.is_host()):
 		visible = true
 		stop_movement()
 		dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
@@ -570,7 +491,7 @@ func check_cancel_grab():
 	return false
 
 func max_grab():
-	if(network_handler.is_current_player()):
+	if(network_handler.is_host()):
 		state=GRABBED
 		anim = "grabmax"
 
@@ -584,17 +505,6 @@ func _on_GrabBox_lost_rock():
 	grabbox.drop_rock()
 	grabbox.transform.origin.z=-1.8
 	grabbox.shape.shape.set_height(0.5)
-
-var summon_length = 15
-var post_summon_length = 25
-var has_summoned = false
-var decided = false
-var growing = false
-var growing_rock = null
-var length_det = false
-var has_growed = false
-var grow_length = 10
-var post_grow_length = 15
 
 func summon_state(delta):
 	#if no rock
@@ -700,7 +610,7 @@ func push_state(delta):
 		push_complete()
 
 func push_complete():
-	if(network_handler.is_current_player()):
+	if(network_handler.is_host()):
 		pushbox.shape.shape.set_height(1)
 		pushbox.transform.origin.z=-2.0*SCALE
 		pushbox.shape.disabled = true
@@ -730,7 +640,7 @@ func pull_state(delta):
 		pull_complete()
 
 func pull_complete():
-	if(network_handler.is_current_player()):
+	if(network_handler.is_host()):
 		pullbox.shape.shape.set_height(1)
 		pullbox.transform.origin.z=-2.0*SCALE
 		pullbox.shape.disabled = true
@@ -826,9 +736,12 @@ func get_mouse_angle(current_angle, position):
 	
 	return up_dir * rotation_angle;
 
+func get_positionals():
+	return [get_transform().basis.get_euler().y, get_transform().origin, anim, linear_velocity]
+
 #On timeout, update data back to server: Position, rotation, animation
 func _on_SendData_timeout():
-	network_handler.timeout(get_transform().basis.get_euler().y, get_transform().origin, anim, linear_velocity)
+	network_handler.timeout(get_positionals())
 
 sync func reset():
 	last_attacker = ""
@@ -838,7 +751,7 @@ sync func reset():
 	transform.origin = spawn_position
 	anim = "idle"
 	animationstate.travel(anim)
-	if(not network_handler.is_current_player()):
+	if network_handler.is_host():
 		puppet_last_position = transform.origin
 		puppet_next_position = transform.origin
 		puppet_speed = 0.0
@@ -859,7 +772,7 @@ func _on_Player_body_entered(body):
 	touched = true
 
 func _on_RockHitBox_start_pushing():
-	if(network_handler.is_current_player()):
+	if(network_handler.is_host()):
 		s_rock = $RockHitBox.rock
 		shovable = check_shove(s_rock)
 		contact = true
