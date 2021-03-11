@@ -80,6 +80,7 @@ func show_scoreboard():
 		rpc("show_scoreboard")
 		
 	open_scoreboard()
+	restart_round()
 
 func open_scoreboard():
 	scoreboard_sliding = true
@@ -94,10 +95,10 @@ func slide(delta):
 	var mul = 1
 	if(scoreboard_open):
 		mul = -1
-		slide_y = 100
+		slide_y = 50
 	else:
 		mul = 1
-		slide_y = -100
+		slide_y = -150
 	if(slide_speed < slide_max_speed):
 		slide_speed += slide_accel*delta 
 	$Scoreboard.rect_global_position.y -= slide_speed*mul
