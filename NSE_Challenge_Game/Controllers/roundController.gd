@@ -19,7 +19,7 @@ var fall_map = [
 var fall_time = 5
 var fall_timer
 
-
+var shake = 0
 
 var round_timer
 var round_time = 20
@@ -31,6 +31,9 @@ var player_to_add_score = null
 var player_pos_indexes = {}
 var scores = {}
 var first_run=true
+
+onready var scoreboard_start_pos = $Scoreboard.rect_global_position
+
 func create_scores():
 	var players = get_tree().get_nodes_in_group("player")
 	for p in players:
@@ -43,7 +46,11 @@ func _process(delta):
 		create_scores()
 		initialise_scoreboard()
 		create_round_timer()
-		
+	
+	if(shake > 0):
+		shake -= 1
+		shake_scoreboard()
+	
 	#If the host:
 	if(get_tree().is_network_server()):
 		#Check if one player is left
@@ -78,6 +85,7 @@ func check_for_winner():
 sync func increase_score(name):
 	update_scoreboard()
 	scores[name]+=1
+	shake = 100
 	player_to_add_score = name
 	$Scoreboard/scoreboardEnd/colourSplash.playing = true
 	$Scoreboard/scoreboardEnd/colourSplash.visible = true 
@@ -190,6 +198,12 @@ func add_to_scoreboard(player):
 	get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
 	print(index)
 	score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],Color("0099db")) 
+
+func shake_scoreboard():
+	var random_dir = rand_range(0,2*PI)
+	var dist = 0.6
+	var new_vector = scoreboard_start_pos + Vector2(cos(random_dir)*dist,sin(random_dir)*dist)
+	$Scoreboard._set_global_position(new_vector)
 
 func start_sudden_death():
 	pass
