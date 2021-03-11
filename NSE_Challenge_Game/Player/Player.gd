@@ -36,7 +36,7 @@ onready var growhitbox = $GrowHitBox
 
 var _delta = 0.1
 
-var players = {}
+sync var players = {}
 
 func _ready():
 	spawn_position = transform.origin
@@ -52,7 +52,7 @@ func _ready():
 	if network_handler.is_current_player(): 
 		playerid = get_tree().get_network_unique_id()
 	
-	players[player_name] = controls
+	players[player_name] = [controls,r_stats]
 
 func scale_setup():
 	$player_animations.scale = Vector3(2*SCALE,2*SCALE,2*SCALE)
@@ -81,8 +81,7 @@ func _physics_process(delta):
 	_delta = delta
 	current_position = transform.origin
 	current_rotation = rotation
-	current_face = 0
-	get_transform().basis.get_euler().y
+	current_face = get_transform().basis.get_euler().y
 	
 	#PACKET RECEIVING STUFF
 	current_time += delta
@@ -116,7 +115,7 @@ func server_controls_update(player_name, controllist):
 		manage_clients(player_name, controllist)
 
 sync func manage_clients(player_name, controls):
-	players[player_name] = controls
+	players[player_name] = [controls, get_positionals()]
 	rset_unreliable("players", players)
 
 func _integrate_forces(s):
@@ -130,7 +129,8 @@ func _integrate_forces(s):
 		if current_position.distance_to(puppet_next_position) > DASH_DIST-1:
 			next = puppet_next_position
 		else:
-			next = current_position.move_toward(puppet_next_position,15*_delta)
+#			next = current_position.move_toward(puppet_next_position,_d)
+			next = puppet_next_position
 		
 		if contacts_reported>0: 
 			for i in get_colliding_bodies():
@@ -186,44 +186,20 @@ func get_controls(cam):
 	return [input_vector, _pushpull, _summon, _grab, _dash, mouse_position]
 
 func puppet_update(delta):
-	var p = get_transform().origin
-	var dir = (puppet_next_position-p).normalized()
-	var dist = p.distance_to(puppet_next_position)
+	if player_name in players.keys():
+		r_stats = players[player_name][1]
+	r_rotation = r_stats[0]
+	r_position = r_stats[1]
+	r_animation = r_stats[2]
+	r_velocity = r_stats[3]
+	puppet_next_position = r_position + (r_velocity * delta)
 	
-	if len(buffer) > 0 and time <= 0:
-		prev_speed = r_velocity.length()
-		var statstime = buffer.pop_front()
-		time += statstime[1]
-		
-		r_stats = statstime[0]
-		r_rotation = r_stats[0]
-		r_position = r_stats[1]
-		r_animation = r_stats[2]
-		r_velocity = r_stats[3]
-		
-		puppet_next_position = r_position + (r_velocity * time)
-		
-		var interp = 1/1.5
-		var speed = r_velocity.length()
-		if speed == 10:
-			next_speed = 10
-		if speed < prev_speed:
-			if dist > 0.05:
-				next_speed = dist + next_speed + (((prev_speed - speed)-next_speed) * interp)
-			else: next_speed += ((prev_speed - speed)-next_speed) * interp
-		if speed > prev_speed:
-			if speed+prev_speed<10:
-				next_speed = prev_speed + speed
-			else:
-				next_speed = 10
-	
-	#If other player is running about, do same blend point code as player athough with velocity not movement now
 	if(r_animation == "movement"):
 		var vel_norm = r_velocity.normalized()
 		var	angle_to_movement = - abs(get_transform().basis.get_euler().y+(2*PI) - atan2(-vel_norm.z, vel_norm.x))
 		var blend_to_x = cos(angle_to_movement)
 		var blend_to_y = sin(angle_to_movement)
-		#Now interpolate the blend points so the transition is gradual
+#		#Now interpolate the blend points so the transition is gradual
 		var inter_spd = 0.1
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
 		blend_y = lerp(blend_y, blend_to_y, inter_spd)
@@ -233,13 +209,7 @@ func puppet_update(delta):
 			$player_animations.rotation_degrees.z = 0
 		animationtree.set("parameters/movement/Movement/blend_position", Vector2(blend_x, blend_y))
 	
-	if dist >= 1:
-		set_linear_velocity(next_speed*dir*dist)
-	else: set_linear_velocity(next_speed*dir)
-	
 	anim = r_animation
-	if time > 0:
-		time -= delta
 
 func _on_NetworkHandler_packet_received():
 	#how long since the last packet?
@@ -262,7 +232,7 @@ func average_packet_time(newpacket_elapsed):
 	var total = 0.0
 	for time in packets:
 		total += time
-	return total/(len(packets)+len(buffer))
+	return total/(len(packets)+5*len(buffer))
 
 func handle_animations(animation):
 	if (animation!=prevanim):
@@ -281,7 +251,7 @@ func handle_animations(animation):
 func update(delta):
 	if touched: set_last_attacker()
 	
-	controls = players[player_name]
+	controls = players[player_name][0]
 	movement = controls[0] 
 	pushpull = controls[1] 
 	summon = controls[2]
@@ -777,9 +747,6 @@ func _on_RockHitBox_start_pushing():
 		shovable = check_shove(s_rock)
 		contact = true
 		grabbeam_handler.start_beam(rockhitbox.rock)
-	else:
-		pass
-#		print("im a puppet and i just got pushed :(")
 
 func _on_RockHitBox_stop_pushing():
 	contact = false
