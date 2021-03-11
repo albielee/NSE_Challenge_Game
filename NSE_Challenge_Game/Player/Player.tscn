@@ -21,7 +21,7 @@
 resource_local_to_scene = true
 
 [sub_resource type="SphereShape" id=2]
-radius = 0.7
+radius = 0.3
 
 [sub_resource type="CylinderShape" id=3]
 
