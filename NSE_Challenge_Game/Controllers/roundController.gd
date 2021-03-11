@@ -19,6 +19,12 @@ var fall_map = [
 var fall_time = 5
 var fall_timer
 
+
+var slide_max_speed = 20
+var slide_speed = 0
+var slide_accel = 10
+var scoreboard_sliding = false
+var scoreboard_open = false
 var shake = 0
 
 var round_timer
@@ -47,6 +53,9 @@ func _process(delta):
 		initialise_scoreboard()
 		create_round_timer()
 	
+	if(scoreboard_sliding):
+		slide(delta)
+	
 	if(shake > 0):
 		shake -= 1
 		shake_scoreboard()
@@ -61,9 +70,50 @@ func _process(delta):
 				rpc("increase_score",last_player)
 			var winner = check_for_winner()
 			if(!winner):
-				restart_round()
+				show_scoreboard()
+				#restart_round()
 			else:
 				rpc("show_result_message")
+
+func show_scoreboard():
+	if get_tree().is_network_server():
+		rpc("show_scoreboard")
+		
+	open_scoreboard()
+
+func open_scoreboard():
+	scoreboard_sliding = true
+	scoreboard_open = true
+
+func close_scoreboard():
+	scoreboard_sliding = true
+	scoreboard_open = false
+
+func slide(delta):
+	var slide_y = 0
+	var mul = 1
+	if(scoreboard_open):
+		mul = -1
+		slide_y = 100
+	else:
+		mul = 1
+		slide_y = -100
+	if(slide_speed < slide_max_speed):
+		slide_speed += slide_accel*delta 
+	$Scoreboard.rect_global_position.y -= slide_speed*mul
+	#stop when arrived
+	if(scoreboard_open):
+		if(($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.1) and
+			$Scoreboard.rect_global_position.y > (slide_y-$Scoreboard.rect_global_position.y*0.1))):#:
+			$Scoreboard.rect_global_position.y = slide_y
+			print("OH")
+			slide_speed = 0
+			scoreboard_sliding = false
+	elif($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.1)):
+		print("AH")
+		slide_speed = 0
+		scoreboard_sliding = false
+		
 
 func show_result_message():
 	var players = get_tree().get_nodes_in_group("player")
@@ -153,9 +203,11 @@ remote func update_score(player):
 
 func _input(event):
 	if event.is_action_pressed("scoreboard"):
-		$Scoreboard.visible = true
+		#$Scoreboard.visible = true
+		open_scoreboard()
 	elif event.is_action_released("scoreboard"):
-		$Scoreboard.visible = false
+		#$Scoreboard.visible = false
+		close_scoreboard()
 
 func initialise_scoreboard():
 	var play_num = get_player_count()
