@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Menu/square.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Menu/filledsquare.png" type="Texture" id=2]
+[ext_resource path="res://Menu/scoreSquare.gd" type="Script" id=3]
+
+[node name="scoreSquare" type="Sprite"]
+position = Vector2( 132, 170 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="filledSquare" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )

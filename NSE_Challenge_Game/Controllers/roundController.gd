@@ -27,7 +27,8 @@ var round_number = 2
 var round_count = 0
 var sudden_death=false
 
-
+var player_to_add_score = null
+var player_pos_indexes = {}
 var scores = {}
 var first_run=true
 func create_scores():
@@ -77,6 +78,9 @@ func check_for_winner():
 sync func increase_score(name):
 	update_scoreboard()
 	scores[name]+=1
+	player_to_add_score = name
+	$Scoreboard/scoreboardEnd/colourSplash.playing = true
+	$Scoreboard/scoreboardEnd/colourSplash.visible = true 
 	
 func detect_players_left():
 	var players_left = 0
@@ -146,17 +150,46 @@ func _input(event):
 		$Scoreboard.visible = false
 
 func initialise_scoreboard():
+	var play_num = get_player_count()
+	var endMaxYValues = [36, 72, 108, 144]
+	$Scoreboard/scoreboardEnd.transform.origin.y = endMaxYValues[play_num-1]
+	
+	print(play_num)
+	#Add the player rects for names
+	if(play_num > 1):
+		var j = 2
+		while j <= play_num:
+			print("Scoreboard/playerRect"+str(j))
+			get_node("Scoreboard/playerRect"+str(j)).visible = true
+			j+=1
 	var i = 1
 	for player in scores.keys():
+		player_pos_indexes[player] = i
 		get_node("Scoreboard/PlayerNames/Player"+str(i)).text = player
 		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
 		i+=1
+		
+	#Set up to where the best of numbers show
+	var best_of = 6
+	for b in range(best_of):
+		get_node("Scoreboard/" + str(b+1)).visible = true
 
 func update_scoreboard():
 	var i = 1
 	for player in scores.keys():
 		get_node("Scoreboard/PlayerScores/Player"+str(i)).text = str(scores[player])
 		i+=1
+
+func add_to_scoreboard(player):
+	var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
+	var score_square_positions = [3, 15, 27, 39, 51, 63, 75, 87, 99]
+	var y_values = [18, 36, 54, 67]
+	var index = player_pos_indexes[player]
+	
+	var score_box = load("res://scoreBox.tscn").instance()
+	get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
+	print(index)
+	score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],Color("0099db")) 
 
 func start_sudden_death():
 	pass
@@ -208,3 +241,10 @@ func _on_ResetButton_pressed():
 	if(get_tree().is_network_server()):
 		$Scoreboard.visible = false
 		restart_round()
+
+
+func _on_colourSplash_animation_finished():
+	add_to_scoreboard(player_to_add_score)
+	$Scoreboard/scoreboardEnd/colourSplash.visible = false
+	$Scoreboard/scoreboardEnd/colourSplash.playing = false
+	$Scoreboard/scoreboardEnd/colourSplash.frame = 0

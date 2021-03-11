@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Controllers/RoundController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Numbers/1-anim.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Menu/scoreboardColourSplash.png" type="Texture" id=8]
 [ext_resource path="res://Assets/World/winmessage.png" type="Texture" id=9]
 [ext_resource path="res://Assets/World/losemessage.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Menu/scoreboardPlayerRect.png" type="Texture" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -199,90 +200,6 @@ animations = [ {
 "speed": 13.0
 } ]
 
-[sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 7 )
-region = Rect2( 54, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 7 )
-region = Rect2( 45, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 7 )
-region = Rect2( 36, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 7 )
-region = Rect2( 63, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=49]
-atlas = ExtResource( 7 )
-region = Rect2( 9, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=50]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=51]
-atlas = ExtResource( 7 )
-region = Rect2( 27, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=52]
-atlas = ExtResource( 7 )
-region = Rect2( 18, 0, 9, 12 )
-
-[sub_resource type="AtlasTexture" id=53]
-atlas = ExtResource( 7 )
-region = Rect2( 72, 0, 9, 12 )
-
-[sub_resource type="SpriteFrames" id=54]
-animations = [ {
-"frames": [ SubResource( 45 ) ],
-"loop": true,
-"name": "7",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 46 ) ],
-"loop": true,
-"name": "6",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 47 ) ],
-"loop": true,
-"name": "5",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 48 ) ],
-"loop": true,
-"name": "8",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 49 ) ],
-"loop": true,
-"name": "2",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 50 ) ],
-"loop": true,
-"name": "1",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 51 ) ],
-"loop": true,
-"name": "4",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 52 ) ],
-"loop": true,
-"name": "3",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 53 ) ],
-"loop": true,
-"name": "9",
-"speed": 5.0
-} ]
-
 [sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 165, 300 )
@@ -351,6 +268,90 @@ animations = [ {
 "speed": 30.0
 } ]
 
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 7 )
+region = Rect2( 54, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 7 )
+region = Rect2( 9, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 7 )
+region = Rect2( 27, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 7 )
+region = Rect2( 18, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 7 )
+region = Rect2( 72, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 7 )
+region = Rect2( 36, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 7 )
+region = Rect2( 45, 0, 9, 12 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 7 )
+region = Rect2( 63, 0, 9, 12 )
+
+[sub_resource type="SpriteFrames" id=54]
+animations = [ {
+"frames": [ SubResource( 45 ) ],
+"loop": true,
+"name": "7",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 46 ) ],
+"loop": true,
+"name": "2",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 47 ) ],
+"loop": true,
+"name": "4",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 48 ) ],
+"loop": true,
+"name": "1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 49 ) ],
+"loop": true,
+"name": "3",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 50 ) ],
+"loop": true,
+"name": "9",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 51 ) ],
+"loop": true,
+"name": "5",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 52 ) ],
+"loop": true,
+"name": "6",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 53 ) ],
+"loop": true,
+"name": "8",
+"speed": 5.0
+} ]
+
 [node name="RoundController" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -378,19 +379,18 @@ scale = Vector2( 3, 3 )
 frames = SubResource( 44 )
 
 [node name="Scoreboard" type="Panel" parent="."]
-visible = false
 margin_left = 216.0
-margin_right = 552.0
-margin_bottom = 317.0
+margin_right = 216.0
+rect_scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayerScores" type="VBoxContainer" parent="Scoreboard"]
-margin_left = 230.0
-margin_top = 67.0
-margin_right = 318.0
-margin_bottom = 230.0
+margin_left = 141.0
+margin_top = 65.0
+margin_right = 229.0
+margin_bottom = 228.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -415,10 +415,10 @@ margin_right = 88.0
 margin_bottom = 68.0
 
 [node name="PlayerNames" type="VBoxContainer" parent="Scoreboard"]
-margin_left = 38.0
-margin_top = 70.0
-margin_right = 174.0
-margin_bottom = 241.0
+margin_left = 9.0
+margin_top = 24.0
+margin_right = 145.0
+margin_bottom = 195.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -442,22 +442,11 @@ margin_top = 54.0
 margin_right = 136.0
 margin_bottom = 68.0
 
-[node name="Label" type="Label" parent="Scoreboard"]
-margin_left = 138.0
-margin_top = 12.0
-margin_right = 180.0
-margin_bottom = 43.0
-text = "Scores
-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ResetButton" type="Button" parent="Scoreboard"]
-margin_left = 38.0
-margin_top = 237.0
-margin_right = 132.0
-margin_bottom = 282.0
+margin_left = -51.0
+margin_top = 235.0
+margin_right = 43.0
+margin_bottom = 280.0
 
 [node name="Label" type="Label" parent="Scoreboard/ResetButton"]
 margin_right = 40.0
@@ -469,62 +458,86 @@ __meta__ = {
 }
 
 [node name="scoreboard" type="Sprite" parent="Scoreboard"]
-position = Vector2( 168, 152 )
+position = Vector2( 79, 150 )
 texture = ExtResource( 5 )
 
 [node name="scoreboardEnd" type="Sprite" parent="Scoreboard"]
-position = Vector2( 168, 80 )
+position = Vector2( 79, 78 )
 texture = ExtResource( 6 )
 
+[node name="colourSplash" type="AnimatedSprite" parent="Scoreboard/scoreboardEnd"]
+visible = false
+position = Vector2( -0.5, 80 )
+frames = SubResource( 70 )
+
 [node name="1" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 139.5, 18 )
+visible = false
+position = Vector2( 49.5, 15 )
 frames = SubResource( 54 )
 animation = "1"
 
 [node name="2" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 151.5, 18 )
+visible = false
+position = Vector2( 61.5, 15 )
 frames = SubResource( 54 )
 animation = "2"
 
 [node name="3" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 163.5, 18 )
+visible = false
+position = Vector2( 73.5, 15 )
 frames = SubResource( 54 )
 animation = "3"
 
 [node name="4" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 175.5, 18 )
+visible = false
+position = Vector2( 85.5, 15 )
 frames = SubResource( 54 )
 animation = "4"
 
 [node name="5" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 187.5, 18 )
+visible = false
+position = Vector2( 97.5, 15 )
 frames = SubResource( 54 )
 animation = "5"
 
 [node name="6" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 199.5, 18 )
+visible = false
+position = Vector2( 109.5, 15 )
 frames = SubResource( 54 )
 animation = "6"
 
 [node name="7" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 211.5, 18 )
+visible = false
+position = Vector2( 121.5, 15 )
 frames = SubResource( 54 )
 animation = "7"
 
 [node name="8" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 223.5, 18 )
+visible = false
+position = Vector2( 133.5, 15 )
 frames = SubResource( 54 )
 animation = "8"
 
 [node name="9" type="AnimatedSprite" parent="Scoreboard"]
-position = Vector2( 235.5, 18 )
+visible = false
+position = Vector2( 145.5, 15 )
 frames = SubResource( 54 )
 animation = "9"
 
-[node name="colourSplash" type="AnimatedSprite" parent="Scoreboard"]
+[node name="playerRect2" type="Sprite" parent="Scoreboard"]
 visible = false
-position = Vector2( 168, 160 )
-frames = SubResource( 70 )
+position = Vector2( 26.5, 48.5 )
+texture = ExtResource( 11 )
+
+[node name="playerRect3" type="Sprite" parent="Scoreboard"]
+visible = false
+position = Vector2( 26.5, 66.5 )
+texture = ExtResource( 11 )
+
+[node name="playerRect4" type="Sprite" parent="Scoreboard"]
+visible = false
+position = Vector2( 26.5, 84.5 )
+texture = ExtResource( 11 )
 
 [node name="WinSprite" type="Sprite" parent="."]
 visible = false
@@ -536,3 +549,4 @@ visible = false
 position = Vector2( 506, 274 )
 texture = ExtResource( 10 )
 [connection signal="pressed" from="Scoreboard/ResetButton" to="." method="_on_ResetButton_pressed"]
+[connection signal="animation_finished" from="Scoreboard/scoreboardEnd/colourSplash" to="." method="_on_colourSplash_animation_finished"]
