@@ -200,6 +200,7 @@ func notify_clients_start_pressed():
 remote func start_pressed():
 	#get_tree().get_root().print_tree()
 	get_tree().get_root().get_node("LobbyWorld/Camera").start_travelling()
+	get_tree().get_root().get_node("LobbyWorld/Lobby").visible = false
 
 remote func send_recieve_color(index):
 	if(get_tree().is_network_server()):
