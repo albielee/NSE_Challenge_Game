@@ -482,7 +482,8 @@ func summoning_state(delta):
 			decided = false
 			growing = false
 			has_summoned = false
-			state = MOVE
+			if summon == 0:
+				state = MOVE
 
 func summon_rock(delta):
 	rock_summoned = true
@@ -494,7 +495,7 @@ func summon_rock(delta):
 func growing_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	current_turn_speed = 0
-	if (not summon) or (growing_rock == null):
+	if (not summon and post_grow_length == 0):
 		stop_growing()
 		return
 	if not length_det:
@@ -510,15 +511,15 @@ func growing_state(delta):
 			var dist = new_size/2 - rockpos.distance_to(global_transform.origin)
 			if dist < 0: dist = 0
 			var new_position= rockpos + Vector3(dist*sin(-get_transform().basis.get_euler().y), 0, dist*-cos(-get_transform().basis.get_euler().y))
-			network_handler.all_summon_rock(growing_rock.name, new_position, new_size,growing_rock.face)
+			network_handler.all_summon_rock(growing_rock.name, new_position,growing_rock.face, new_size)
 			has_growed = true
+			post_grow_length = 15
 		post_grow_length -= 1
 		if post_grow_length <= 0:
 			if summon:
 				growing_rock = growhitbox.get_overlapping_areas()[0]
 				has_growed = false
 				length_det = false
-				post_grow_length = 15
 			else:
 				stop_growing()
 				return
@@ -528,7 +529,6 @@ func stop_growing():
 	growing = false
 	has_growed = false
 	length_det = false
-	post_grow_length = 15
 	state = MOVE
 
 func push_state(delta):

@@ -100,7 +100,7 @@ func get_last_player():
 			if(p.get_network_handler().remote_dead == false):
 				return p.player_name
 
-func play_countdown():
+sync func play_countdown():
 	round_timer.set_paused(true)
 	pause_players(true)
 	for i in range(3,0,-1):
@@ -125,10 +125,10 @@ func restart_round():
 	
 	#All objects that can be reset will be put in the resettable group
 	#all objects in resettable should have a reset function
-	
-	for o in get_tree().get_nodes_in_group("resettable"):
-		o.rpc("reset") 
-	play_countdown()
+	if get_tree().is_network_server():
+		for o in get_tree().get_nodes_in_group("resettable"):
+			o.rpc("reset") 
+		rpc("play_countdown")
 
 func _on_Void_player_fell(dead_player,killing_player):
 	if(get_tree().is_network_server()):

@@ -14,16 +14,16 @@ func is_host():
 func get_cam():
 	return get_tree().get_nodes_in_group("Camera")[0]
 
-func all_summon_rock(rock_name, rock_pos, orientation):
-	rpc("summon_rock", rock_name, rock_pos, get_tree().get_network_unique_id(), orientation)
+func all_summon_rock(rock_name, rock_pos, orientation, size = 2.0):
+	rpc("summon_rock", rock_name, rock_pos, get_tree().get_network_unique_id(), orientation, size)
 
-sync func summon_rock(rock_name, rock_pos, by_who, rock_orientation):
+sync func summon_rock(rock_name, rock_pos, by_who, rock_orientation, size):
 	var rock = preload("res://Objects/Rock/Rock2.tscn").instance()
 	
 	rock.set_name(rock_name)
 	rock.owned_by = by_who
 	
-	rock_network_handler.create_rock(rock, rock_pos, rock_orientation)
+	rock_network_handler.create_rock(rock, rock_pos, rock_orientation, size)
 
 func reset():
 	#bring player back to life

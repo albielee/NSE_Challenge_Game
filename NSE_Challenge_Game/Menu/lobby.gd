@@ -76,8 +76,6 @@ func _on_join_pressed():
 	if not ip.is_valid_ip_address():
 		$Connect/ErrorLabel.text = "Invalid IP address!"
 		return
-	
-	
 	#$Connect/join.disabled = true
 	#$Menu/Host/Hosting/host.disabled = true
 	

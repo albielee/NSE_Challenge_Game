@@ -69,7 +69,7 @@ var growing_rock = null
 var length_det = false
 var has_growed = false
 var grow_length = 10
-var post_grow_length = 15
+var post_grow_length = 0
 var rock_summoned = false
 
 #STATE ENUM

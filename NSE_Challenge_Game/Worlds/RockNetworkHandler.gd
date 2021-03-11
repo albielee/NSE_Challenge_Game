@@ -23,10 +23,12 @@ func rock_exists(id):
 func get_rock_stats(id):
 	return rockdic[id]
 
-func create_rock(rock, position, orientation):
+func create_rock(rock, position, orientation, size = ROCK_SIZE):
 	rock.set_id(get_rock_id())
 	rock.rotation = Vector3.UP*orientation
-	rock.scale = Vector3(ROCK_SIZE,ROCK_SIZE,ROCK_SIZE)
+	if size == ROCK_SIZE:
+		rock.scale = Vector3(ROCK_SIZE,ROCK_SIZE,ROCK_SIZE)
+	else: rock.scale = Vector3(size,size,size)
 	rock.translation = position
 	
 	rockdic[rock.id] = rock.get_positionals()
