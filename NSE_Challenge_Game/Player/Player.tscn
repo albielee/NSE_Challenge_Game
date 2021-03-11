@@ -41458,7 +41458,7 @@ anims/summon_start = SubResource( 27 )
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336876, -2.79397e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590931, -0.172777, 0.925561, -0.336876, -2.79397e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
@@ -42297,11 +42297,6 @@ parameters/summon_start/TimeScale/scale = 1.6
 [node name="NetworkHandler" type="Spatial" parent="."]
 script = ExtResource( 1 )
 
-[node name="SendData" type="Timer" parent="NetworkHandler"]
-process_mode = 0
-wait_time = 0.01
-autostart = true
-
 [node name="GrabBeamHandler" type="Spatial" parent="."]
 script = ExtResource( 10 )
 
@@ -42532,8 +42527,6 @@ autostart = true
 [connection signal="area_exited" from="GrabBox" to="GrabBox" method="_on_GrabBox_area_exited"]
 [connection signal="encounter_rock" from="GrabBox" to="." method="_on_GrabBox_encounter_rock"]
 [connection signal="lost_rock" from="GrabBox" to="." method="_on_GrabBox_lost_rock"]
-[connection signal="packet_received" from="NetworkHandler" to="." method="_on_NetworkHandler_packet_received"]
-[connection signal="timeout" from="NetworkHandler/SendData" to="." method="_on_SendData_timeout"]
 
 [editable path="PushBox"]
 

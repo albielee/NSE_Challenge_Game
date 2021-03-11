@@ -1,16 +1,8 @@
 extends Node
 
-var ownerdic = {}
-var destroylist = []
+export var ROCK_SIZE = 2.0
+
 var num = 0
-var to_add_to_rockdic = {}
-
-var current_time = 0.0
-var last_packet_time = 0.0
-var elapsed_time = 0.0
-var avg = 0.0
-
-var packets = []
 
 sync var rockdic = {}
 
@@ -31,8 +23,12 @@ func rock_exists(id):
 func get_rock_stats(id):
 	return rockdic[id]
 
-func create_rock(rock, position):
+func create_rock(rock, position, orientation):
+	rock.set_id(get_rock_id())
+	rock.rotation = Vector3.UP*orientation
+	rock.scale = Vector3(ROCK_SIZE,ROCK_SIZE,ROCK_SIZE)
 	rock.translation = position
+	
 	rockdic[rock.id] = rock.get_positionals()
 	add_child(rock)
 	if is_host():

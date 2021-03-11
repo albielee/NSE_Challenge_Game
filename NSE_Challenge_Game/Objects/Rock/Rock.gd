@@ -36,20 +36,27 @@ var current_rotation = Vector3.ZERO
 var face = 0
 var size = 0
 var resize = false
+var still = true
 
 func _ready():
 	set_gravity_scale(5)
 	set_linear_damp(5)
+	set_mass(80)
 	add_to_group("rocks")
 	r_stats = [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
 
 func _physics_process(delta):
-	handle_stats(delta)
 	if get_parent().is_host():
 		update(delta)
 	else:
 		puppet_update(delta)
 	sounds()
+
+func handle_pstats(delta):
+	face = get_transform().basis.get_euler().y
+	location = get_transform().origin
+	current_rotation = rotation
+	_delta = delta
 
 func handle_stats(delta):
 	face = get_transform().basis.get_euler().y
@@ -72,30 +79,24 @@ func _integrate_forces(state):
 	if not get_tree().is_network_server():
 		var target = Vector3.UP * wrapf(r_rotation-face, -PI, PI)
 		rotation = current_rotation + (target*(400*_delta/30))
+		if r_next_pos != Vector3.ZERO:
+			var d = r_next_pos-location
+			transform.origin = location + (d * 20 * _delta)
 
 #PUPPET UPDATE
 func puppet_update(delta):
+	handle_pstats(delta)
 	if get_parent().rock_exists(id):
 		r_stats = get_parent().get_rock_stats(id)
+	else: destroy()
 	r_position = r_stats[0]
 	r_rotation = r_stats[1]
 	r_velocity = r_stats[2]
 	r_next_pos = r_position + (r_velocity * delta)
-	
-	if r_next_pos != Vector3.ZERO:
-		var d = r_next_pos-location
-		
-		transform.origin = location + (d * 20 * delta)
-	
-#	puppet_rotation(r_rotation,delta)
-
-func puppet_rotation(target, delta):
-	var angular_veloc =  Vector3.UP * wrapf(target-get_transform().basis.get_euler().y, -PI, PI);
-	
-	set_angular_velocity(angular_veloc*800*delta)
 
 #OWNER UPDATE
 func update(delta):
+	handle_stats(delta)
 	if real == false:
 		if global_transform.origin.y >= -0.26 + self.size/2:
 			real = true
@@ -105,11 +106,11 @@ func update(delta):
 			set_collision_layer_bit(1, true)
 		else: 
 			timebeenfake += 1
-			add_force(Vector3.UP*(100+(timebeenfake*timebeenfake)/10),Vector3.ZERO)
-	speed = sqrt(pow(linear_velocity.x, 2) + pow(linear_velocity.z,2))
-	resize = true
+			add_force(Vector3.UP*(100+(timebeenfake*timebeenfake)/10)*get_mass(),Vector3.ZERO)
 	if buffer!=[]: buffer = []
 	speed = Vector2(linear_velocity.x, linear_velocity.z).length()
+	if speed > 0: still = false
+	else: still = true
 	hitbox.face=get_transform().basis.get_euler().y
 	hitbox.speed=speed
 	if(in_zone):
@@ -165,7 +166,7 @@ func be_summoned():
 
 #HITBOX SIGNALS
 func _on_Hitbox_pushed():
-	add_force(hitbox.knockback, Vector3.ZERO)
+	add_force(hitbox.knockback*get_mass(), Vector3.ZERO)
 
 func _on_Hitbox_spun():
 	set_angular_velocity(hitbox.angular)
@@ -179,8 +180,6 @@ func _on_Hitbox_zone():
 func _on_Rock_body_entered(body):
 	if(body.is_in_group("rock") and speed > 8):
 		$Hit.play()
-	if body.is_in_group("rock") and body.speed > speed:
-		set_owner(body.owned_by)
 
 func _on_Hitbox2_pushed():
 	add_force(playerhitbox.knockback, Vector3.ZERO)

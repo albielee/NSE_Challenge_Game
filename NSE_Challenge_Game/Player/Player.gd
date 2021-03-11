@@ -8,7 +8,6 @@ export var MAX_SPEED = 500
 export var SPEED = 2000
 export var TURN_SPEED = 400
 export var PUSH_POWER = 300
-export var MIN_SIZE = 2.0
 export var DASH_DIST = 5
 export var DASH_COOLDOWN = 40.0
 export var GRAB_POWER = 10
@@ -60,7 +59,7 @@ func scale_setup():
 	dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
 	
 	summonhitboxes.transform.origin.z=(-4.0*SCALE)
-	summonhitboxes.setup(MIN_SIZE)
+	summonhitboxes.setup(2.0)
 	
 	growhitbox.transform.origin = Vector3(0, SCALE*2, -4.0*SCALE)
 	
@@ -129,17 +128,17 @@ func _integrate_forces(s):
 		if current_position.distance_to(puppet_next_position) > DASH_DIST-1:
 			next = puppet_next_position
 		else:
-#			next = current_position.move_toward(puppet_next_position,_d)
+#			next = current_position.move_toward(puppet_next_position,_delta)
 			next = puppet_next_position
-		
-		if contacts_reported>0: 
-			for i in get_colliding_bodies():
-				if i.is_in_group('rock_hitbox'):
-					var size = i.get_parent().size
-					var pos = i.get_parent().location
-					if next.distance_to(pos) > size:
-						var dir = (next-pos).normalized()
-						next = pos + dir * size
+#
+#		if contacts_reported>0: 
+#			for i in get_colliding_bodies():
+#				if i.is_in_group('rock_hitbox'):
+#					var size = i.get_parent().size
+#					var pos = i.get_parent().location
+#					if next.distance_to(pos) > size:
+#						var dir = (next-pos).normalized()
+#						next = pos + dir * size
 		transform.origin = next
 
 func handle_sounds():
@@ -173,13 +172,9 @@ func get_controls(cam):
 	input_vector = input_vector.normalized()
 	
 	var _pushpull = Input.get_action_strength("push") - Input.get_action_strength("pull")
-	
 	var _summon = Input.get_action_strength("summon_rock")
-	
 	var _grab = Input.get_action_strength("temp_float")
-	
 	var _dash = Input.get_action_strength("move_dash")
-	
 	if(cam != null):
 		mouse_position = cam.raycast_position
 	
@@ -199,6 +194,7 @@ func puppet_update(delta):
 		var	angle_to_movement = - abs(get_transform().basis.get_euler().y+(2*PI) - atan2(-vel_norm.z, vel_norm.x))
 		var blend_to_x = cos(angle_to_movement)
 		var blend_to_y = sin(angle_to_movement)
+		
 #		#Now interpolate the blend points so the transition is gradual
 		var inter_spd = 0.1
 		blend_x = lerp(blend_x, blend_to_x, inter_spd)
@@ -210,29 +206,6 @@ func puppet_update(delta):
 		animationtree.set("parameters/movement/Movement/blend_position", Vector2(blend_x, blend_y))
 	
 	anim = r_animation
-
-func _on_NetworkHandler_packet_received():
-	#how long since the last packet?
-	elapsed_time = current_time - last_packet_time
-	
-	avg = average_packet_time(elapsed_time)
-	
-	#set this time to be the time the last packet arrived
-	last_packet_time = current_time
-	
-	build_buffer(network_handler.update_stats(), avg)
-
-func build_buffer(newstats, average):
-	buffer.push_back([newstats,average])
-
-func average_packet_time(newpacket_elapsed):
-	packets.push_back(newpacket_elapsed)
-	if len(packets) > 50:
-		packets.pop_front()
-	var total = 0.0
-	for time in packets:
-		total += time
-	return total/(len(packets)+5*len(buffer))
 
 func handle_animations(animation):
 	if (animation!=prevanim):
@@ -269,7 +242,6 @@ func update(delta):
 	pullbox.update_angle(get_transform().basis.get_euler().y, mouse_angle,  global_transform.origin)
 	
 	if (pushbox.rock != null): 
-#		pushbox.update_angle(get_transform().looking_at(mouse_position, Vector3.UP).basis.get_euler().y, mouse_angle)
 		pushbox.update(mouse_position, get_transform().looking_at(pushbox.rock_position, Vector3.UP).basis.get_euler().y)
 	
 	if (pullbox.rock != null):
@@ -514,10 +486,10 @@ func summoning_state(delta):
 
 func summon_rock(delta):
 	rock_summoned = true
-	var offset = MIN_SIZE-0.5
+	var offset = 1.5
 	var y_rot = -get_transform().basis.get_euler().y
 	var rock_pos = Vector3(translation.x + offset*sin(y_rot), -1, translation.z - offset*cos(y_rot))
-	network_handler.all_summon_rock(get_name(), rock_pos, MIN_SIZE, get_transform().basis.get_euler().y)
+	network_handler.all_summon_rock(get_name(), rock_pos, get_transform().basis.get_euler().y)
 
 func growing_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
@@ -620,7 +592,7 @@ func pull_complete():
 		pullbox.release()
 
 func check_shove(rock):
-	if rock == null:
+	if rock == null or not rock.still:
 		return false
 	
 	var up_dir = Vector3.UP
@@ -661,8 +633,6 @@ func shove_state(delta):
 	elif not check_shove(s_rock):
 		stop_shove()
 		return
-	
-	s_rock.set_owner(playerid)
 	
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
@@ -718,6 +688,8 @@ sync func reset():
 	state = MOVE
 	set_linear_velocity(Vector3.ZERO)
 	set_angular_velocity(Vector3.ZERO)
+	set_linear_damp(10)
+	set_gravity_scale(1)
 	transform.origin = spawn_position
 	anim = "idle"
 	animationstate.travel(anim)
