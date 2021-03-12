@@ -42534,20 +42534,22 @@ process_mode = 0
 wait_time = 0.002
 autostart = true
 
-[node name="summonParticles" type="Particles" parent="."]
+[node name="growParticles" type="Spatial" parent="."]
+
+[node name="summonParticles" type="Particles" parent="growParticles"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.69203, -2.83904 )
 lifetime = 0.5
 local_coords = false
 process_material = SubResource( 104 )
 draw_pass_1 = SubResource( 105 )
 
-[node name="summonParticles2" type="Particles" parent="."]
+[node name="summonParticles2" type="Particles" parent="growParticles"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, -0.69203, -1.771 )
 local_coords = false
 process_material = SubResource( 104 )
 draw_pass_1 = SubResource( 105 )
 
-[node name="summonParticles3" type="Particles" parent="."]
+[node name="summonParticles3" type="Particles" parent="growParticles"]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2, -0.69203, -1.771 )
 local_coords = false
 process_material = SubResource( 104 )

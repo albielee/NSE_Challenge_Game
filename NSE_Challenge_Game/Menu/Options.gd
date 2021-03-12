@@ -95,8 +95,6 @@ func _on_BackButton_pressed():
 
 
 
-
-
 func _on_MusicSlider_value_changed(value):
 	var db = value
 	if value == 0:
@@ -116,3 +114,15 @@ func _on_EffectsSlider_value_changed(value):
 		AudioServer.set_bus_mute(sounds_bus,false)
 	AudioServer.set_bus_volume_db(sounds_bus,(86*value/100)-80)
 	data["effects_volume"] = value
+
+
+func _on_BackButton2_pressed():
+	pass # Replace with function body.
+
+
+func _on_Button4_pressed(extra_arg_0):
+	pass # Replace with function body.
+
+
+func _on_Button6_pressed(extra_arg_0):
+	pass # Replace with function body.

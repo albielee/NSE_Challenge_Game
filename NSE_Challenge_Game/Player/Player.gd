@@ -33,6 +33,10 @@ onready var dashhitbox = $DashHitBox
 onready var summonhitboxes = $SummonHitBoxes
 onready var growhitbox = $GrowHitBox
 
+onready var grow_part_1 = $growParticles/summonParticles
+onready var grow_part_2 = $growParticles/summonParticles
+onready var grow_part_3 = $growParticles/summonParticles
+
 var _delta = 0.1
 
 sync var players = {}
@@ -319,6 +323,9 @@ func move_state(delta, mouse_angle):
 			state = SUMMONING;
 		elif(state != SUMMONING and !summon):
 			rock_summoned = false
+			#At this point there is no care about code cleanliness
+			#if(grow_part_1 != null and grow_part_2 != null and grow_part_3 != null):
+			$growParticles.visible = false
 			if(grab==1):
 				state = GRAB
 			else:
@@ -461,9 +468,11 @@ func summon_state(delta):
 	
 	if not growing:
 		summoning_state(delta)
+		
 	if growing:
 		growing_state(delta)
 		#summon particles here
+		$growParticles.visible = true
 		
 
 func summoning_state(delta):
