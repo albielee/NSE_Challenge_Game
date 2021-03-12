@@ -219,10 +219,16 @@ func handle_animations(animation):
 	#Blender is a bad program and I never want to use it again, anyway:
 	if(animation == "idle" or
 		animation == "push_charge" or
-		animation == "push_hold" or animation == "summon_start"):
+		animation == "push_hold"):
 		$player_animations.rotation_degrees.z = 13
 	else:
 		$player_animations.rotation_degrees.z = 0
+	
+	if(animation == "summon_hold"):
+		$growParticles.visible = true
+	else:
+		$growParticles.visible = false
+		
 
 #Takes given control input and updates actions of the player
 func update(delta):
@@ -456,6 +462,7 @@ func _on_GrabBox_lost_rock():
 	grabbox.shape.shape.set_height(0.5)
 
 func summon_state(delta):
+	print(anim)
 	#if no rock
 	if not decided:
 		if len(growhitbox.get_overlapping_areas()) > 0:
@@ -471,8 +478,6 @@ func summon_state(delta):
 		
 	if growing:
 		growing_state(delta)
-		#summon particles here
-		$growParticles.visible = true
 		
 
 func summoning_state(delta):
@@ -504,6 +509,7 @@ func summon_rock(delta):
 	network_handler.all_summon_rock(get_name(), rock_pos, get_transform().basis.get_euler().y)
 
 func growing_state(delta):
+	anim = "summon_hold"
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
 	current_turn_speed = 0
 	if (not summon and post_grow_length == 0):
@@ -512,7 +518,6 @@ func growing_state(delta):
 	if not length_det:
 		grow_length = 8 * growing_rock.size * growing_rock.size
 		length_det = true
-	anim = "summon_start"
 	grow_length -= 1
 	if grow_length <= 0:
 		if not has_growed:
