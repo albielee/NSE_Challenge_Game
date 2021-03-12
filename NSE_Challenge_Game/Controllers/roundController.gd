@@ -248,15 +248,16 @@ func update_scoreboard():
 		i+=1
 
 func add_to_scoreboard(player):
-	var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
-	var score_square_positions = [3, 15, 27, 39, 51, 63, 75, 87, 99]
-	var y_values = [24, 30, 48, 66, 84]
-	var index = player_pos_indexes[player]
-	
-	var score_box = load("res://scoreBox.tscn").instance()
-	get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
-	print(y_values[index])
-	score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],Color("0099db")) 
+	if(player != null):
+		var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
+		var score_square_positions = [3, 15, 27, 39, 51, 63, 75, 87, 99]
+		var y_values = [24, 30, 48, 66, 84]
+		var index = player_pos_indexes[player]
+		
+		var score_box = load("res://scoreBox.tscn").instance()
+		get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
+		print(y_values[index])
+		score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],Color("0099db")) 
 
 func shake_scoreboard():
 	var random_dir = rand_range(0,2*PI)

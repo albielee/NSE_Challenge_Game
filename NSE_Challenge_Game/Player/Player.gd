@@ -463,6 +463,8 @@ func summon_state(delta):
 		summoning_state(delta)
 	if growing:
 		growing_state(delta)
+		#summon particles here
+		
 
 func summoning_state(delta):
 	move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
