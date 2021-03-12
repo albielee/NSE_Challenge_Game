@@ -420,7 +420,9 @@ frames = SubResource( 44 )
 
 [node name="Scoreboard" type="Panel" parent="."]
 margin_left = 216.0
+margin_top = -250.0
 margin_right = 216.0
+margin_bottom = -250.0
 rect_scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -483,6 +485,7 @@ margin_right = 136.0
 margin_bottom = 68.0
 
 [node name="ResetButton" type="Button" parent="Scoreboard"]
+visible = false
 margin_left = -51.0
 margin_top = 235.0
 margin_right = 43.0
@@ -511,55 +514,46 @@ position = Vector2( -0.5, 80 )
 frames = SubResource( 60 )
 
 [node name="1" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 49.5, 15 )
 frames = SubResource( 70 )
 animation = "1"
 
 [node name="2" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 61.5, 15 )
 frames = SubResource( 70 )
 animation = "2"
 
 [node name="3" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 73.5, 15 )
 frames = SubResource( 70 )
 animation = "3"
 
 [node name="4" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 85.5, 15 )
 frames = SubResource( 70 )
 animation = "4"
 
 [node name="5" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 97.5, 15 )
 frames = SubResource( 70 )
 animation = "5"
 
 [node name="6" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 109.5, 15 )
 frames = SubResource( 70 )
 animation = "6"
 
 [node name="7" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 121.5, 15 )
 frames = SubResource( 70 )
 animation = "7"
 
 [node name="8" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 133.5, 15 )
 frames = SubResource( 70 )
 animation = "8"
 
 [node name="9" type="AnimatedSprite" parent="Scoreboard"]
-visible = false
 position = Vector2( 145.5, 15 )
 frames = SubResource( 70 )
 animation = "9"

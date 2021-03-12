@@ -21,7 +21,7 @@ var fall_timer
 
 
 var slide_max_speed = 50
-var slide_speed = 0
+var slide_speed = 20
 var slide_accel = 30
 var scoreboard_sliding = false
 var scoreboard_open = false
@@ -105,7 +105,7 @@ func slide(delta):
 	var mul = 1
 	if(scoreboard_open):
 		mul = -1
-		slide_y = 100
+		slide_y = 150
 	else:
 		mul = 1
 		slide_y = -220
@@ -238,8 +238,8 @@ func initialise_scoreboard():
 		
 	#Set up to where the best of numbers show
 	var best_of = 6
-	for b in range(best_of):
-		get_node("Scoreboard/" + str(b+1)).visible = true
+	for b in range(best_of, 9):
+		get_node("Scoreboard/" + str(b+1)).modulate = Color("262b44")
 
 func update_scoreboard():
 	var i = 1
