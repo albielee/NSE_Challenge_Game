@@ -20,9 +20,9 @@ var fall_time = 5
 var fall_timer
 
 
-var slide_max_speed = 20
+var slide_max_speed = 50
 var slide_speed = 0
-var slide_accel = 10
+var slide_accel = 30
 var scoreboard_sliding = false
 var scoreboard_open = false
 var shake = 0
@@ -33,6 +33,7 @@ var round_number = 2
 var round_count = 0
 var sudden_death=false
 
+var winner_ran_once = false
 var player_to_add_score = null
 var player_pos_indexes = {}
 var scores = {}
@@ -56,31 +57,40 @@ func _process(delta):
 	if(scoreboard_sliding):
 		slide(delta)
 	
-	if(shake > 0):
+	if(shake > 0 and !scoreboard_sliding):
 		shake -= 1
 		shake_scoreboard()
+	else:
+		scoreboard_start_pos = $Scoreboard.rect_global_position
 	
 	#If the host:
 	if(get_tree().is_network_server()):
 		#Check if one player is left
 		var one_player_left = detect_players_left()
 		if(one_player_left):
-			if(len(get_tree().get_nodes_in_group("player"))>1):
-				var last_player = get_last_player()
-				rpc("increase_score",last_player)
-			var winner = check_for_winner()
-			if(!winner):
-				show_scoreboard()
-				#restart_round()
-			else:
-				rpc("show_result_message")
+			if(!winner_ran_once):
+				if(len(get_tree().get_nodes_in_group("player"))>1):
+					var last_player = get_last_player()
+					rpc("increase_score",last_player)
+				var winner = check_for_winner()
+				if(!winner):
+					show_scoreboard()
+					#restart_round()
+					rpc("show_scoreboard")
+				else:
+					rpc("show_result_message")
+				winner_ran_once = true	
+				
 
-func show_scoreboard():
-	if get_tree().is_network_server():
-		rpc("show_scoreboard")
-		
+sync func show_scoreboard():
+
+	print("OK")
 	open_scoreboard()
-	restart_round()
+	update_scoreboard()
+	$Scoreboard/scoreboardEnd/colourSplash.playing = true
+	$Scoreboard/scoreboardEnd/colourSplash.visible = true 
+	shake = 100
+	$RestartRoundTimer.start(5)
 
 func open_scoreboard():
 	scoreboard_sliding = true
@@ -95,22 +105,22 @@ func slide(delta):
 	var mul = 1
 	if(scoreboard_open):
 		mul = -1
-		slide_y = 50
+		slide_y = 100
 	else:
 		mul = 1
-		slide_y = -150
+		slide_y = -220
 	if(slide_speed < slide_max_speed):
 		slide_speed += slide_accel*delta 
 	$Scoreboard.rect_global_position.y -= slide_speed*mul
 	#stop when arrived
 	if(scoreboard_open):
-		if(($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.1) and
-			$Scoreboard.rect_global_position.y > (slide_y-$Scoreboard.rect_global_position.y*0.1))):#:
+		if(($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.5) and
+			$Scoreboard.rect_global_position.y > (slide_y-$Scoreboard.rect_global_position.y*0.5))):#:
 			$Scoreboard.rect_global_position.y = slide_y
 			print("OH")
 			slide_speed = 0
 			scoreboard_sliding = false
-	elif($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.1)):
+	elif($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.5)):
 		print("AH")
 		slide_speed = 0
 		scoreboard_sliding = false
@@ -134,12 +144,8 @@ func check_for_winner():
 	return false
 
 sync func increase_score(name):
-	update_scoreboard()
 	scores[name]+=1
-	shake = 100
 	player_to_add_score = name
-	$Scoreboard/scoreboardEnd/colourSplash.playing = true
-	$Scoreboard/scoreboardEnd/colourSplash.visible = true 
 	
 func detect_players_left():
 	var players_left = 0
@@ -244,12 +250,12 @@ func update_scoreboard():
 func add_to_scoreboard(player):
 	var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
 	var score_square_positions = [3, 15, 27, 39, 51, 63, 75, 87, 99]
-	var y_values = [18, 36, 54, 67]
+	var y_values = [24, 30, 48, 66, 84]
 	var index = player_pos_indexes[player]
 	
 	var score_box = load("res://scoreBox.tscn").instance()
 	get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
-	print(index)
+	print(y_values[index])
 	score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],Color("0099db")) 
 
 func shake_scoreboard():
@@ -315,3 +321,12 @@ func _on_colourSplash_animation_finished():
 	$Scoreboard/scoreboardEnd/colourSplash.visible = false
 	$Scoreboard/scoreboardEnd/colourSplash.playing = false
 	$Scoreboard/scoreboardEnd/colourSplash.frame = 0
+
+
+func _on_RestartRoundTimer_timeout():
+	print("OH YEAH THE TIMER IS DONE")
+	close_scoreboard()
+	$RestartRoundTimer.stop()
+	if(get_tree().is_network_server()):
+		restart_round()
+	winner_ran_once = false

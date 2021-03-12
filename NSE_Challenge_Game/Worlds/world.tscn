@@ -1248,16 +1248,16 @@ transform = Transform( -0.75, 0, -2.44381e-07, 0, 0.5, 0, 2.44381e-07, 0, -0.75,
 transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1.26928, 0 )
 
 [node name="FallArea2" parent="FallAreas" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 4, 0, 0, 0, 15.9114, -11.6154, 2.7873, 0.395683 )
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 80, -11.6154, 2.7873, 0.395683 )
 
 [node name="FallArea3" parent="FallAreas" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 4, 0, 0, 0, 13, 11.657, 2.7873, 5.22727 )
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 80, 11.657, 2.7873, 5.22727 )
 
 [node name="FallArea4" parent="FallAreas" instance=ExtResource( 6 )]
-transform = Transform( -2.21566e-07, 0, 12.2396, 0, 4, 0, -1, 0, -1.46629e-06, -0.14799, 2.7873, -7.97738 )
+transform = Transform( -1.62921e-07, 0, 80, 0, 20, 0, -1, 0, -1.30337e-05, -0.14799, 2.7873, -7.97738 )
 
 [node name="FallArea5" parent="FallAreas" instance=ExtResource( 6 )]
-transform = Transform( -2.24892e-07, 0, 12.4234, 0, 4, 0, -1, 0, -1.46629e-06, -0.181132, 2.7873, 15.5289 )
+transform = Transform( -2.8213e-07, 0, 80, 0, 20, 0, -1, 0, -2.25704e-05, -0.181132, 2.7873, 15.5289 )
 
 [node name="FallArea6" parent="FallAreas" instance=ExtResource( 6 )]
 transform = Transform( -1.96701e-07, 0, 2, 0, 4, 0, -4.5, 0, -8.74228e-08, 0.0335744, 2.7873, 3.76154 )
