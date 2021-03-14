@@ -18,6 +18,8 @@ _global_script_class_icons={
 config/name="NSE_CHALLENGE_GAME"
 config/description="Innovative competitive multiplayer brawler"
 run/main_scene="res://Menu/lobby.tscn"
+boot_splash/image="res://Assets/splash.png"
+boot_splash/use_filter=false
 config/icon="res://Assets/icon.png"
 
 [autoload]
