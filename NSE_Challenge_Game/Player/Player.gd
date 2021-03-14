@@ -38,6 +38,7 @@ onready var grow_part_2 = $growParticles/summonParticles
 onready var grow_part_3 = $growParticles/summonParticles
 
 var _delta = 0.1
+var quickfix = false #yes this variable is called quickfix
 
 sync var players = {}
 
@@ -149,7 +150,11 @@ func handle_sounds():
 	if(anim == "movement"):
 		play_footsteps()
 	if(anim == "summon_start"):
-		$Sounds/player_summon.play()
+		if(!quickfix):
+			quickfix = true
+			$Sounds/player_summon.play()
+	else:
+		quickfix = false
 	if(anim == "push_hold"):
 		if(!$Sounds/beam_push.playing):
 			$Sounds/beam_push.play()

@@ -40457,33 +40457,33 @@ switch_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=90]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=92]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=93]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=94]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=95]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=96]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=97]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=98]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=109]
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
 
 [sub_resource type="AnimationNodeStateMachine" id=102]
 states/dash/node = SubResource( 49 )
@@ -40512,7 +40512,7 @@ states/summon_hold/node = SubResource( 73 )
 states/summon_hold/position = Vector2( 265.248, -128.968 )
 states/summon_start/node = SubResource( 76 )
 states/summon_start/position = Vector2( 16.248, -80.984 )
-transitions = [ "grabbing", "grabmax", SubResource( 77 ), "push_charge", "push_hold", SubResource( 78 ), "push_hold", "idle", SubResource( 79 ), "idle", "grabbing", SubResource( 80 ), "grabbing", "idle", SubResource( 81 ), "grabmax", "idle", SubResource( 82 ), "summon_generic", "idle", SubResource( 83 ), "idle", "dash", SubResource( 84 ), "dash", "idle", SubResource( 85 ), "idle", "fall", SubResource( 86 ), "idle", "movement", SubResource( 87 ), "movement", "idle", SubResource( 88 ), "idle", "push_charge", SubResource( 89 ), "push_charge", "idle", SubResource( 90 ), "idle", "summon_start", SubResource( 92 ), "pull_charge", "idle", SubResource( 93 ), "idle", "pull_charge", SubResource( 94 ), "fall", "idle", SubResource( 95 ), "pull_charge", "push_hold", SubResource( 96 ), "idle", "rock_push", SubResource( 97 ), "rock_push", "idle", SubResource( 98 ), "summon_hold", "push_charge", SubResource( 99 ), "summon_start", "summon_hold", SubResource( 100 ), "summon_hold", "idle", SubResource( 101 ), "idle", "summon_hold", SubResource( 109 ) ]
+transitions = [ "grabbing", "grabmax", SubResource( 77 ), "push_charge", "push_hold", SubResource( 78 ), "push_hold", "idle", SubResource( 79 ), "idle", "grabbing", SubResource( 80 ), "grabbing", "idle", SubResource( 81 ), "grabmax", "idle", SubResource( 82 ), "summon_generic", "idle", SubResource( 83 ), "idle", "dash", SubResource( 84 ), "dash", "idle", SubResource( 85 ), "idle", "fall", SubResource( 86 ), "idle", "movement", SubResource( 87 ), "movement", "idle", SubResource( 88 ), "idle", "push_charge", SubResource( 89 ), "push_charge", "idle", SubResource( 90 ), "idle", "summon_start", SubResource( 91 ), "pull_charge", "idle", SubResource( 92 ), "idle", "pull_charge", SubResource( 93 ), "fall", "idle", SubResource( 94 ), "pull_charge", "push_hold", SubResource( 95 ), "idle", "rock_push", SubResource( 96 ), "rock_push", "idle", SubResource( 97 ), "summon_hold", "push_charge", SubResource( 98 ), "summon_start", "summon_hold", SubResource( 99 ), "summon_hold", "idle", SubResource( 100 ), "idle", "summon_hold", SubResource( 101 ) ]
 start_node = "idle"
 graph_offset = Vector2( -106.752, -148.7 )
 
@@ -41491,7 +41491,7 @@ anims/summon_start = SubResource( 27 )
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 1, 0, 0, 0, 0.98317, -0.182693, 0, 0.182693, 0.98317, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336876, -2.98023e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
