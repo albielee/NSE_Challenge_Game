@@ -117,6 +117,7 @@ remote func pre_start_game(spawn_points, roundSettings):
 		player.spawn_position = spawn_pos
 
 		player.set_name(str(p_id)) # Use unique ID as node name.
+		player.set_player_id(p_id)
 		player.transform.origin = spawn_pos
 		player.set_network_master(p_id) #set unique id as master.
 		

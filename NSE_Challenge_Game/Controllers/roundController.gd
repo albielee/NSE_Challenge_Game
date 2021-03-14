@@ -26,6 +26,7 @@ var slide_accel = 30
 var scoreboard_sliding = false
 var scoreboard_open = false
 var shake = 0
+var colour_splash_modulate = Color()
 
 var round_timer
 var round_time = 20
@@ -91,6 +92,7 @@ sync func show_scoreboard():
 	update_scoreboard()
 	$Scoreboard/scoreboardEnd/colourSplash.playing = true
 	$Scoreboard/scoreboardEnd/colourSplash.visible = true 
+
 	shake = 100
 	$RestartRoundTimer.start(5)
 
@@ -110,7 +112,7 @@ func slide(delta):
 		slide_y = 150
 	else:
 		mul = 1
-		slide_y = -220
+		slide_y = -300
 	if(slide_speed < slide_max_speed):
 		slide_speed += slide_accel*delta 
 	$Scoreboard.rect_global_position.y -= slide_speed*mul
@@ -146,6 +148,10 @@ func check_for_winner():
 	return false
 
 sync func increase_score(name):
+	var players = get_tree().get_nodes_in_group("player")
+	for p in players:
+		if(p.player_name == name):
+			$Scoreboard/scoreboardEnd/colourSplash.modulate = gamestate.colours[gamestate.players_colour[p.my_id]]
 	scores[name]+=1
 	player_to_add_score = name
 	
@@ -252,15 +258,20 @@ func update_scoreboard():
 
 func add_to_scoreboard(player):
 	if(player != null):
-		var colours = [Color("0099db"),Color("68386c"),Color("feae34"),Color("3e8948")]
+		var colour = 0
+		var players = get_tree().get_nodes_in_group("player")
+		for p in players:
+			if(p.player_name == player):
+				colour = gamestate.colours[gamestate.players_colour[p.my_id]]
+
 		var score_square_positions = [3, 15, 27, 39, 51, 63, 75, 87, 99]
 		var y_values = [24, 30, 48, 66, 84]
 		var index = player_pos_indexes[player]
-		
+		print("SCORE! with player id of ?" + str(player))
 		var score_box = load("res://scoreBox.tscn").instance()
 		get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
 		print(y_values[index])
-		score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],Color("0099db")) 
+		score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],colour) 
 
 func shake_scoreboard():
 	var random_dir = rand_range(0,2*PI)

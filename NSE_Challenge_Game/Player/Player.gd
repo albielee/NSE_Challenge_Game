@@ -39,6 +39,7 @@ onready var grow_part_3 = $growParticles/summonParticles
 
 var _delta = 0.1
 var quickfix = false #yes this variable is called quickfix
+var my_id = 0
 
 sync var players = {}
 
@@ -538,9 +539,10 @@ func growing_state(delta):
 		post_grow_length -= 1
 		if post_grow_length <= 0:
 			if summon:
-				growing_rock = growhitbox.get_overlapping_areas()[0]
-				has_growed = false
-				length_det = false
+				if(len(growhitbox.get_overlapping_areas())>0):
+					growing_rock = growhitbox.get_overlapping_areas()[0]
+					has_growed = false
+					length_det = false
 			else:
 				stop_growing()
 				return
@@ -677,6 +679,9 @@ func stop_shove():
 
 func set_player_name(name):
 	player_name = name
+
+func set_player_id(id):
+	my_id = id
 
 func set_player_colour(col):
 	player_col = col
