@@ -19622,7 +19622,7 @@ surfaces/0 = {
 "vertex_count": 2661
 }
 
-[sub_resource type="Skin" id=29]
+[sub_resource type="Skin" id=110]
 bind_count = 159
 bind/0/name = "spine"
 bind/0/bone = -1
@@ -20102,7 +20102,8 @@ bind/158/name = "pelvis_r"
 bind/158/bone = -1
 bind/158/pose = Transform( -0.421772, 0.464099, -0.778923, -0.536322, 0.564971, 0.62703, 0.731072, 0.682217, 0.0106171, -0.0969464, -0.531493, -0.380277 )
 
-[sub_resource type="SpatialMaterial" id=30]
+[sub_resource type="SpatialMaterial" id=109]
+resource_local_to_scene = true
 albedo_texture = ExtResource( 12 )
 
 [sub_resource type="Animation" id=31]
@@ -41491,7 +41492,7 @@ anims/summon_start = SubResource( 27 )
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336876, -2.98023e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590931, -0.172777, 0.925561, -0.336876, -2.42144e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
@@ -42292,8 +42293,8 @@ bones/158/bound_children = [  ]
 
 [node name="ObjObject" type="MeshInstance" parent="player_animations/metarig003/Skeleton"]
 mesh = SubResource( 28 )
-skin = SubResource( 29 )
-material/0 = SubResource( 30 )
+skin = SubResource( 110 )
+material/0 = SubResource( 109 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player_animations"]
 anims/ObjObjectAction = SubResource( 31 )
