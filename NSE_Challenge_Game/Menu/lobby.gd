@@ -34,15 +34,15 @@ func _process(delta):
 			#Setup round settings for starting the game
 			var roundSettings = []
 			roundSettings.append($Players/MapSelector/Label.text)
-			if $Players/RoundTime.text.is_valid_integer():
-				roundSettings.append(int($Players/RoundTime.text))
+			if $Players/BestOf.text.is_valid_integer():
+				roundSettings.append(int($Players/BestOf.text))
 			else:
 				roundSettings.append(5)
 	
-			if $Players/RoundNumber.text.is_valid_integer():
-				roundSettings.append(int($Players/RoundNumber.text))
-			else:
-				roundSettings.append(5)
+			#if $Players/RoundNumber.text.is_valid_integer():
+			#	roundSettings.append(int($Players/RoundNumber.text))
+			#else:
+			#	roundSettings.append(5)
 			gamestate.begin_game(roundSettings)
 			
 

@@ -33,6 +33,7 @@ var round_time = 20
 var round_number = 2
 var round_count = 0
 var sudden_death=false
+var best_of = 5
 #
 var winner_ran_once = false
 var player_to_add_score = null
@@ -246,7 +247,6 @@ func initialise_scoreboard():
 		i+=1
 		
 	#Set up to where the best of numbers show
-	var best_of = 6
 	for b in range(best_of, 9):
 		get_node("Scoreboard/" + str(b+1)).modulate = Color("262b44")
 

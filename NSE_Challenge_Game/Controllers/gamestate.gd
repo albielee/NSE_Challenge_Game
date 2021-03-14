@@ -100,7 +100,7 @@ remote func pre_start_game(spawn_points, roundSettings):
 	#print("EY")
 	#get_tree().change_scene("res://Worlds/world.tscn")
 	get_tree().get_root().get_node("LobbyWorld").queue_free() 
-
+	print(roundSettings)
 	var map = roundSettings[0]
 	var world = load(map).instance()
 	
@@ -136,8 +136,8 @@ remote func pre_start_game(spawn_points, roundSettings):
 		
 		world.get_node("Players").add_child(player)
 #		print("this is lafkjndrkjgndxignsdriyfhb")
-		world.get_node("RoundController").round_time = roundSettings[1]
-		world.get_node("RoundController").round_number = roundSettings[2]
+		world.get_node("RoundController").best_of = roundSettings[1]
+		#world.get_node("RoundController").round_number = roundSettings[2]
 	
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start.
