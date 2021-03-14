@@ -1346,7 +1346,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button8"]
-margin_right = 40.0
+margin_right = 12.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
