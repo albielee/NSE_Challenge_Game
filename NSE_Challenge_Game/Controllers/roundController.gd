@@ -41,6 +41,8 @@ var first_run=true
 
 onready var scoreboard_start_pos = $Scoreboard.rect_global_position
 
+var map_folder="res://Assets/World/Maps/"
+
 func create_scores():
 	var players = get_tree().get_nodes_in_group("player")
 	for p in players:
@@ -189,6 +191,7 @@ func pause_players(yes):
 		o.set_paused(yes)
 
 func restart_round():
+	load_world("hole")
 	#Because we dont want to restart the scene, we need to call all reset functions
 	#in objects that may have changed.
 	
@@ -331,3 +334,60 @@ func _on_RestartRoundTimer_timeout():
 	if(get_tree().is_network_server()):
 		restart_round()
 	winner_ran_once = false
+
+
+func load_world(map_name):
+	#delete old world
+	for o in get_node("../Environment/Towers").get_children():
+		if o.is_in_group("faketower"):
+			continue
+		o.set_name("dead_tower")
+		o.remove_world_props()
+		o.queue_free()
+	#create new world
+	var map_file = File.new()
+	assert(map_file.file_exists(map_folder+map_name+".json"),"MAP FILE "+map_folder+map_name+".json"+" NOT FOUND")
+	map_file.open(map_folder+map_name+".json",File.READ)
+	var map_data = parse_json(map_file.get_line())
+	var start_x = map_data["start_x"]
+	var start_y = map_data["start_y"]
+	fall_map = map_data["fall_map"]
+	var tower_scene = load("res://Assets/World/Tower/Tower.tscn")
+	for x in range(len(fall_map)):
+		for y in range(len(fall_map[0])):
+			var new_tower = tower_scene.instance()
+			if fall_map[x][y]==0:
+				continue
+			#NOTE THAT DESPITE THE USE OF Y IN THE CODE WE 
+			#ACTUALLY ARE CHANGING THE Z COORDINATE
+			new_tower.transform.origin.z = start_y+x*2.55
+			new_tower.transform.origin.x = start_x+y*2.55
+			new_tower.scale.x = 0.8
+			new_tower.scale.z = 0.8
+			get_node("../Environment/Towers").add_child(new_tower)
+			new_tower.set_name("TowerPiece"+str(x*len(fall_map[0])+y+1))
+	#grass loading
+	var grass_path = "res://Assets/World/Grass/"
+	for grass_data in map_data["grass"]:
+		var grass = load(grass_path+grass_data["type"]+".tscn").instance()
+		match grass_data["type"]:
+			"GrassFront1","GrassFront2":
+				pass
+			"FlatGrass1","FlatGrass2","FlatGrass3":
+				print("this worked")
+				if grass_data["type"]=="FlatGrass1":
+					grass.transform.origin.y = -0.85
+				elif grass_data["type"]=="FlatGrass2":
+					grass.transform.origin.y = 0.15
+				else:
+					grass.transform.origin.y = 0.1
+				grass.transform.origin.z = start_y+grass_data["pos_x"]*2.55
+				grass.transform.origin.x = start_x+grass_data["pos_y"]*2.55
+				grass.scale.x = 0.5
+				grass.scale.y = 0.5
+				grass.scale.z = 0.5
+		print("grassAdded")
+		get_node("../Environment/FlatGrass").add_child(grass)
+		for node in get_node("../Environment/FlatGrass").get_children():
+			#print(node.get_name(),node.transform.origin.x)
+			pass
