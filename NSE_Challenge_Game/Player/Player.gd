@@ -527,6 +527,8 @@ func growing_state(delta):
 	grow_length -= 1
 	if grow_length <= 0:
 		if not has_growed:
+			#PLay sound
+			$Sounds/player_summon.play()
 			growing_rock.grow(0.01)
 			var new_size = growing_rock.size + 0.5
 			var rockpos = growing_rock.global_transform.origin
