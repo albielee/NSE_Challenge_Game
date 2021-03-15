@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://Controllers/RoundController.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Numbers/1-anim.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/World/winmessage.png" type="Texture" id=9]
 [ext_resource path="res://Assets/World/losemessage.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Menu/scoreboardPlayerRect.png" type="Texture" id=11]
+[ext_resource path="res://Menu/font.tres" type="DynamicFont" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -314,7 +315,7 @@ region = Rect2( 72, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 7 )
-region = Rect2( 9, 0, 9, 12 )
+region = Rect2( 45, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=73]
 atlas = ExtResource( 7 )
@@ -330,19 +331,19 @@ region = Rect2( 18, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=76]
 atlas = ExtResource( 7 )
-region = Rect2( 45, 0, 9, 12 )
+region = Rect2( 0, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 9, 12 )
+region = Rect2( 27, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=78]
 atlas = ExtResource( 7 )
-region = Rect2( 27, 0, 9, 12 )
+region = Rect2( 63, 0, 9, 12 )
 
 [sub_resource type="AtlasTexture" id=79]
 atlas = ExtResource( 7 )
-region = Rect2( 63, 0, 9, 12 )
+region = Rect2( 9, 0, 9, 12 )
 
 [sub_resource type="SpriteFrames" id=80]
 animations = [ {
@@ -353,7 +354,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 72 ) ],
 "loop": true,
-"name": "2",
+"name": "6",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 73 ) ],
@@ -373,22 +374,22 @@ animations = [ {
 }, {
 "frames": [ SubResource( 76 ) ],
 "loop": true,
-"name": "6",
+"name": "1",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 77 ) ],
 "loop": true,
-"name": "1",
+"name": "4",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 78 ) ],
 "loop": true,
-"name": "4",
+"name": "8",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 79 ) ],
 "loop": true,
-"name": "8",
+"name": "2",
 "speed": 5.0
 } ]
 
@@ -429,6 +430,7 @@ __meta__ = {
 }
 
 [node name="PlayerScores" type="VBoxContainer" parent="Scoreboard"]
+visible = false
 margin_left = 141.0
 margin_top = 65.0
 margin_right = 229.0
@@ -457,32 +459,38 @@ margin_right = 88.0
 margin_bottom = 68.0
 
 [node name="PlayerNames" type="VBoxContainer" parent="Scoreboard"]
-margin_left = 9.0
-margin_top = 24.0
-margin_right = 145.0
-margin_bottom = 195.0
+margin_left = 12.0
+margin_top = 22.5
+margin_right = 148.0
+margin_bottom = 193.5
+rect_scale = Vector2( 0.7, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Player1" type="Label" parent="Scoreboard/PlayerNames"]
 margin_right = 136.0
-margin_bottom = 14.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 12 )
+text = "testt"
 
 [node name="Player2" type="Label" parent="Scoreboard/PlayerNames"]
-margin_top = 18.0
+margin_top = 17.0
 margin_right = 136.0
-margin_bottom = 32.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 12 )
 
 [node name="Player3" type="Label" parent="Scoreboard/PlayerNames"]
-margin_top = 36.0
+margin_top = 34.0
 margin_right = 136.0
-margin_bottom = 50.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 12 )
 
 [node name="Player4" type="Label" parent="Scoreboard/PlayerNames"]
-margin_top = 54.0
+margin_top = 51.0
 margin_right = 136.0
-margin_bottom = 68.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 12 )
 
 [node name="ResetButton" type="Button" parent="Scoreboard"]
 visible = false

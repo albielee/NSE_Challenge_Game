@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=2]
+[gd_scene load_steps=151 format=2]
 
 [ext_resource path="res://Menu/MapSelector/MapSelector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menu/ColourSelector/ColourSelection.gd" type="Script" id=2]
@@ -44,6 +44,7 @@
 [ext_resource path="res://Sounds/menuPressed.wav" type="AudioStream" id=42]
 [ext_resource path="res://Sounds/menuPressedBack.wav" type="AudioStream" id=43]
 [ext_resource path="res://Sounds/startPressed.wav" type="AudioStream" id=44]
+[ext_resource path="res://Menu/font.tres" type="DynamicFont" id=45]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 19 )
@@ -51,11 +52,11 @@ region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 19 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 19 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -66,12 +67,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -113,11 +114,11 @@ region = Rect2( 504, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 27 )
-region = Rect2( 0, 0, 84, 26 )
+region = Rect2( 588, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 27 )
-region = Rect2( 588, 0, 84, 26 )
+region = Rect2( 0, 0, 84, 26 )
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
@@ -128,12 +129,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 17 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 18 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -172,11 +173,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=33]
@@ -188,12 +189,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 31 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 30.0
 }, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 30.0
 } ]
 
@@ -222,11 +223,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=42]
@@ -238,12 +239,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 40 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 41 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -273,11 +274,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 9 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=51]
 animations = [ {
@@ -288,13 +289,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 49 ) ],
 "loop": true,
-"name": "unfocused",
-"speed": 30.0
+"name": "focused",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 50 ) ],
 "loop": true,
-"name": "focused",
-"speed": 5.0
+"name": "unfocused",
+"speed": 30.0
 } ]
 
 [sub_resource type="AtlasTexture" id=52]
@@ -323,11 +324,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 10 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=60]
 animations = [ {
@@ -338,12 +339,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 58 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 59 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -373,11 +374,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=67]
 atlas = ExtResource( 12 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 12 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
@@ -388,12 +389,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 67 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 68 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 } ]
 
@@ -685,6 +686,7 @@ custom_styles/bg_focus = SubResource( 7 )
 custom_styles/cursor_unfocused = SubResource( 8 )
 custom_styles/selected = SubResource( 9 )
 custom_styles/bg = SubResource( 10 )
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -727,15 +729,17 @@ volume_db = -34.677
 pitch_scale = 1.36
 bus = "Sounds"
 
-[node name="RoundTime" type="LineEdit" parent="Lobby/Players"]
-margin_left = 144.547
-margin_top = 144.963
-margin_right = 192.547
-margin_bottom = 158.963
+[node name="BestOf" type="LineEdit" parent="Lobby/Players"]
+margin_left = 138.782
+margin_top = 174.046
+margin_right = 198.782
+margin_bottom = 188.046
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_styles/focus = SubResource( 20 )
 custom_styles/normal = SubResource( 20 )
+custom_fonts/font = ExtResource( 45 )
+text = "5"
 align = 1
 max_length = 2
 __meta__ = {
@@ -743,10 +747,10 @@ __meta__ = {
 }
 
 [node name="RoundNumber" type="LineEdit" parent="Lobby/Players"]
-margin_left = 143.839
-margin_top = 185.268
-margin_right = 191.839
-margin_bottom = 199.268
+margin_left = 221.782
+margin_top = 190.046
+margin_right = 269.782
+margin_bottom = 204.046
 size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_styles/focus = SubResource( 20 )
@@ -813,6 +817,7 @@ margin_bottom = 131.5
 custom_styles/read_only = SubResource( 21 )
 custom_styles/focus = SubResource( 22 )
 custom_styles/normal = SubResource( 23 )
+custom_fonts/font = ExtResource( 45 )
 text = "127.0.0.1"
 align = 1
 max_length = 15
@@ -831,6 +836,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_styles/focus = SubResource( 20 )
 custom_styles/normal = SubResource( 24 )
+custom_fonts/font = ExtResource( 45 )
 align = 1
 max_length = 8
 placeholder_text = "Your Name"
@@ -929,6 +935,7 @@ position = Vector2( 453, 340 )
 texture = ExtResource( 22 )
 
 [node name="Main" type="Panel" parent="Lobby/Menu"]
+visible = false
 margin_left = 472.0
 margin_top = 240.0
 margin_right = 472.0
@@ -981,6 +988,7 @@ __meta__ = {
 }
 
 [node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/HostButton"]
+position = Vector2( -0.218201, -0.454498 )
 frames = SubResource( 51 )
 animation = "unfocused"
 centered = false
@@ -1077,6 +1085,7 @@ margin_bottom = -15.0
 custom_styles/read_only = SubResource( 21 )
 custom_styles/focus = SubResource( 22 )
 custom_styles/normal = SubResource( 23 )
+custom_fonts/font = ExtResource( 45 )
 text = "127.0.0.1"
 align = 1
 max_length = 15
@@ -1123,6 +1132,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 custom_styles/focus = SubResource( 20 )
 custom_styles/normal = SubResource( 24 )
+custom_fonts/font = ExtResource( 45 )
 align = 1
 max_length = 8
 placeholder_text = "Your Name"
@@ -1168,7 +1178,6 @@ volume_db = -34.677
 bus = "Sounds"
 
 [node name="Options" type="Panel" parent="Lobby/Menu"]
-visible = false
 margin_left = 384.0
 margin_top = 192.0
 margin_right = 384.0
@@ -1219,8 +1228,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button1"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 1.99982
+margin_top = -1.0
+margin_right = 41.9998
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1237,8 +1249,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button2"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 0.999817
+margin_top = -1.00049
+margin_right = 40.9998
+margin_bottom = 12.9995
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1255,8 +1270,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button3"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 0.999817
+margin_top = -1.00049
+margin_right = 40.9998
+margin_bottom = 12.9995
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1273,8 +1291,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button4"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 0.999817
+margin_top = -1.0005
+margin_right = 40.9998
+margin_bottom = 12.9995
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1291,8 +1312,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button5"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 0.999817
+margin_top = -1.0
+margin_right = 40.9998
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1309,8 +1333,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button6"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 0.999817
+margin_top = -1.00049
+margin_right = 40.9998
+margin_bottom = 12.9995
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1327,8 +1354,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button7"]
-margin_right = 14.0
-margin_bottom = 14.0
+margin_left = 0.999817
+margin_top = -1.00049
+margin_right = 14.9998
+margin_bottom = 12.9995
+custom_fonts/font = ExtResource( 45 )
 clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1346,8 +1376,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button8"]
-margin_right = 12.0
-margin_bottom = 14.0
+margin_left = 0.999817
+margin_top = -1.0005
+margin_right = 12.9998
+margin_bottom = 12.9995
+custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
