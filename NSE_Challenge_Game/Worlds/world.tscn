@@ -368,6 +368,7 @@ collision_mask = 5
 [node name="Environment" type="Spatial" parent="."]
 
 [node name="CherryBlossom" parent="Environment" instance=ExtResource( 14 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.416985, -5.1 )
 
 [node name="Grass" type="Spatial" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, -5.1, 0, 2.55 )

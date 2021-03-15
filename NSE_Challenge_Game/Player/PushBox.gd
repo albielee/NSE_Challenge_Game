@@ -53,7 +53,7 @@ func update(mouse_position, player_to_rock):
 			rock.add_force(Vector3.UP*rock.gravity/0.7)
 		else:
 			rock.add_force(Vector3.UP*rock.gravity/1.1)
-		
+
 		#mouse adjustment time. This won't be easy.
 		#What we want, SPECIFICALLY, is the angle between the line from:
 		#playerface to rock (rpv?)

@@ -40,6 +40,7 @@ func _process(delta):
 
 # Callback from SceneTree.
 func _player_connected(id):
+	#print(players)
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
 
@@ -79,7 +80,7 @@ func _connected_fail():
 
 # Lobby management functions.
 remote func register_player(new_player_name):
-	var id = get_tree().get_rpc_sender_id()
+	var id = get_tree().get_rpc_sender_id()	
 	players[id] = new_player_name
 	print("My player id is: " + str(id))
 	emit_signal("player_list_changed")

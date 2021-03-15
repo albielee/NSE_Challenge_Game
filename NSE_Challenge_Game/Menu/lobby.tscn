@@ -52,11 +52,11 @@ region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 19 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 19 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -67,12 +67,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 } ]
 
@@ -114,11 +114,11 @@ region = Rect2( 504, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 27 )
-region = Rect2( 588, 0, 84, 26 )
+region = Rect2( 0, 0, 84, 26 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 27 )
-region = Rect2( 0, 0, 84, 26 )
+region = Rect2( 588, 0, 84, 26 )
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
@@ -129,12 +129,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 17 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 18 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 } ]
 
@@ -173,11 +173,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=33]
@@ -189,12 +189,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 31 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 30.0
 }, {
 "frames": [ SubResource( 32 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 30.0
 } ]
 
@@ -223,11 +223,11 @@ atlas = ExtResource( 11 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 8 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=42]
@@ -239,12 +239,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 40 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 41 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 } ]
 
@@ -274,11 +274,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 9 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=51]
 animations = [ {
@@ -289,13 +289,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 49 ) ],
 "loop": true,
-"name": "focused",
-"speed": 5.0
+"name": "unfocused",
+"speed": 30.0
 }, {
 "frames": [ SubResource( 50 ) ],
 "loop": true,
-"name": "unfocused",
-"speed": 30.0
+"name": "focused",
+"speed": 5.0
 } ]
 
 [sub_resource type="AtlasTexture" id=52]
@@ -324,11 +324,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 10 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=60]
 animations = [ {
@@ -339,12 +339,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 58 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 59 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 } ]
 
@@ -374,11 +374,11 @@ region = Rect2( 630, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=67]
 atlas = ExtResource( 12 )
-region = Rect2( 735, 0, 105, 36 )
+region = Rect2( 0, 0, 105, 36 )
 
 [sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 12 )
-region = Rect2( 0, 0, 105, 36 )
+region = Rect2( 735, 0, 105, 36 )
 
 [sub_resource type="SpriteFrames" id=69]
 animations = [ {
@@ -389,12 +389,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 67 ) ],
 "loop": true,
-"name": "focused",
+"name": "unfocused",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 68 ) ],
 "loop": true,
-"name": "unfocused",
+"name": "focused",
 "speed": 5.0
 } ]
 
@@ -741,7 +741,7 @@ custom_styles/normal = SubResource( 20 )
 custom_fonts/font = ExtResource( 45 )
 text = "5"
 align = 1
-max_length = 2
+max_length = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1398,6 +1398,7 @@ custom_icons/grabber = SubResource( 75 )
 custom_styles/slider = SubResource( 76 )
 custom_styles/grabber_area_highlight = SubResource( 77 )
 custom_styles/grabber_area = SubResource( 78 )
+value = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1415,6 +1416,7 @@ custom_icons/grabber = SubResource( 75 )
 custom_styles/slider = SubResource( 76 )
 custom_styles/grabber_area_highlight = SubResource( 77 )
 custom_styles/grabber_area = SubResource( 78 )
+value = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1936,13 +1938,13 @@ transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -2.
 transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -3.22541, 0.748, -7.5 )
 
 [node name="CherryBlossom" parent="Environment" instance=ExtResource( 31 )]
-transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -0.974999, 2.224, 4.5 )
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -0.974999, 0.0940208, 4.5 )
 
 [node name="CherryBlossom2" parent="Environment" instance=ExtResource( 31 )]
-transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, 2.275, 2.224, -11.25 )
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, 2.275, 0.0940208, -11.25 )
 
 [node name="CherryBlossom3" parent="Environment" instance=ExtResource( 31 )]
-transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, 9.525, 1.974, -15.25 )
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, 9.525, -0.155979, -15.25 )
 
 [node name="FlatGrass5" parent="Environment" instance=ExtResource( 30 )]
 transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -2.45079, 0.0053159, 2.50339 )
@@ -2167,8 +2169,8 @@ transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -
 [connection signal="focus_exited" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_focus_exited"]
 [connection signal="mouse_entered" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_mouse_exited"]
-[connection signal="pressed" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options" method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Lobby/Menu/Options/BackButton2" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options" method="_on_BackButton_pressed"]
 [connection signal="animation_finished" from="Lobby/Menu/Options/BackButton2/Anim" to="Lobby/Menu/Options/BackButton2" method="_on_Join_animation_finished"]
 [connection signal="pressed" from="Lobby/Menu/Options/Button1" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="Lobby/Menu/Options/Button2" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 1 ]]

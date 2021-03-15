@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=2]
+[gd_scene load_steps=106 format=2]
 
 [ext_resource path="res://Player/NetworkHandler.gd" type="Script" id=1]
 [ext_resource path="res://Player/PushBox.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Sounds/temp_player_fall.wav" type="AudioStream" id=14]
 [ext_resource path="res://Player/RockHitBox.gd" type="Script" id=15]
 [ext_resource path="res://Player/SummonHitBoxes.gd" type="Script" id=16]
+[ext_resource path="res://Sounds/beam_pull.wav" type="AudioStream" id=17]
 
 [sub_resource type="CylinderShape" id=1]
 resource_local_to_scene = true
@@ -21092,7 +21093,7 @@ shape = SubResource( 7 )
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336876, -2.98023e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336876, -2.6077e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
@@ -22129,9 +22130,16 @@ pitch_scale = 1.79
 
 [node name="beam_push" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource( 7 )
-unit_size = 10.4
+unit_size = 1.9
 max_db = 6.0
 pitch_scale = 0.86
+area_mask = 4
+
+[node name="beam_pull" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource( 17 )
+unit_size = 1.9
+max_db = 6.0
+pitch_scale = 0.87
 area_mask = 4
 
 [node name="player_fall" type="AudioStreamPlayer3D" parent="Sounds"]

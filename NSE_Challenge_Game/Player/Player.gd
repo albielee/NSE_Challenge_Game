@@ -39,6 +39,7 @@ onready var grow_part_3 = $growParticles/summonParticles
 
 var _delta = 0.1
 var quickfix = false #yes this variable is called quickfix
+var quickfix_2 = false #hell yes we have another one
 var my_id = 0
 
 sync var players = {}
@@ -156,16 +157,29 @@ func handle_sounds():
 			$Sounds/player_summon.play()
 	else:
 		quickfix = false
+	print(anim)
 	if(anim == "push_hold"):
-		if(!$Sounds/beam_push.playing):
-			$Sounds/beam_push.play()
+		
+		if(pushpull==1):
+			if(!$Sounds/beam_push.playing):
+				$Sounds/beam_push.play()
+				print(pushpull)
+		if(pushpull==-1):
+			if(!$Sounds/beam_pull.playing):
+				$Sounds/beam_pull.play()
+				print(pushpull)
 	else:
 		$Sounds/beam_push.stop()
+		$Sounds/beam_pull.stop()
+
 	
 	if(anim == "fall"):
-		if(!$Sounds/player_fall.playing):	
-			$Sounds/player_fall.play()
+		if(!quickfix_2):
+			quickfix_2=true
+			if(!$Sounds/player_fall.playing):	
+				$Sounds/player_fall.play()
 	else:
+		quickfix_2 = false
 		$Sounds/player_fall.stop()
 
 func play_footsteps():
@@ -575,6 +589,7 @@ func push_state(delta):
 	else: 
 		started_pushing = false
 		push_complete()
+		
 
 func push_complete():
 	if(network_handler.is_host()):
@@ -712,6 +727,7 @@ func _on_SendData_timeout():
 	network_handler.timeout(get_positionals())
 
 sync func reset():
+	visible = true
 	last_attacker = ""
 	state = MOVE
 	set_linear_velocity(Vector3.ZERO)
