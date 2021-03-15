@@ -935,7 +935,6 @@ position = Vector2( 453, 340 )
 texture = ExtResource( 22 )
 
 [node name="Main" type="Panel" parent="Lobby/Menu"]
-visible = false
 margin_left = 472.0
 margin_top = 240.0
 margin_right = 472.0
@@ -1178,6 +1177,7 @@ volume_db = -34.677
 bus = "Sounds"
 
 [node name="Options" type="Panel" parent="Lobby/Menu"]
+visible = false
 margin_left = 384.0
 margin_top = 192.0
 margin_right = 384.0
@@ -1228,9 +1228,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button1"]
-margin_left = 1.99982
+margin_left = 2.0
 margin_top = -1.0
-margin_right = 41.9998
+margin_right = 13.0
 margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 __meta__ = {
@@ -1249,10 +1249,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button2"]
-margin_left = 0.999817
-margin_top = -1.00049
-margin_right = 40.9998
-margin_bottom = 12.9995
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1270,10 +1270,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button3"]
-margin_left = 0.999817
-margin_top = -1.00049
-margin_right = 40.9998
-margin_bottom = 12.9995
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1291,10 +1291,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button4"]
-margin_left = 0.999817
-margin_top = -1.0005
-margin_right = 40.9998
-margin_bottom = 12.9995
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1312,9 +1312,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button5"]
-margin_left = 0.999817
+margin_left = 1.0
 margin_top = -1.0
-margin_right = 40.9998
+margin_right = 12.0
 margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 __meta__ = {
@@ -1333,10 +1333,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button6"]
-margin_left = 0.999817
-margin_top = -1.00049
-margin_right = 40.9998
-margin_bottom = 12.9995
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1354,10 +1354,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button7"]
-margin_left = 0.999817
-margin_top = -1.00049
-margin_right = 14.9998
-margin_bottom = 12.9995
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 14.0
+margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 clip_text = true
 __meta__ = {
@@ -1376,10 +1376,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Lobby/Menu/Options/Button8"]
-margin_left = 0.999817
-margin_top = -1.0005
-margin_right = 12.9998
-margin_bottom = 12.9995
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
 custom_fonts/font = ExtResource( 45 )
 __meta__ = {
 "_edit_use_anchors_": false
