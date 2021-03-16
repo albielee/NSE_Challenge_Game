@@ -663,12 +663,13 @@ func shove_state(delta):
 	#how does that work? I'm gonna set up the controls without any animations
 	anim = "rock_push"
 	
-	if not contact and not s_rock.p_hitbox in get_colliding_bodies():
-		stop_shove()
-		return
-	elif not check_shove(s_rock):
-		stop_shove()
-		return
+	if(s_rock != null):
+		if not contact and not s_rock.p_hitbox in get_colliding_bodies():
+			stop_shove()
+			return
+		elif not check_shove(s_rock):
+			stop_shove()
+			return
 	
 	if (movement != Vector2.ZERO):
 		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
