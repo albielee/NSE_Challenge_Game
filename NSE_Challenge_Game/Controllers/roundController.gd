@@ -200,7 +200,7 @@ func pause_players(yes):
 		o.set_paused(yes)
 
 func restart_round():
-	load_world("hole")
+	rpc("load_world","hole")
 	#Because we dont want to restart the scene, we need to call all reset functions
 	#in objects that may have changed.
 	
@@ -363,7 +363,15 @@ func _on_RestartRoundTimer_timeout():
 	winner_ran_once = false
 
 
-func load_world(map_name):
+func print_world():
+	var fstr = '{"type":{type},},'
+	for o in get_tree().get_nodes_in_group("Removable"):
+		pass
+
+#-------------
+#I would like to apologise to Donald Knuth and God for this abomination of a function.
+#-------------
+sync func load_world(map_name):
 	#delete old world
 	for o in get_node("../Environment/Towers").get_children():
 		if o.is_in_group("faketower"):
@@ -395,13 +403,13 @@ func load_world(map_name):
 			new_tower.set_name("TowerPiece"+str(x*len(fall_map[0])+y+1))
 	#grass loading
 	var grass_path = "res://Assets/World/Grass/"
-	for grass_data in map_data["grass"]:
+	for grass_data in map_data["grass_flat"]:
 		var grass = load(grass_path+grass_data["type"]+".tscn").instance()
 		match grass_data["type"]:
 			"GrassFront1","GrassFront2":
 				pass
 			"FlatGrass1","FlatGrass2","FlatGrass3":
-				print("this worked")
+				#print("this worked")
 				if grass_data["type"]=="FlatGrass1":
 					grass.transform.origin.y = -0.85
 				elif grass_data["type"]=="FlatGrass2":
@@ -413,15 +421,48 @@ func load_world(map_name):
 				grass.scale.x = 0.5
 				grass.scale.y = 0.5
 				grass.scale.z = 0.5
-		print("grassAdded")
+				grass.rotation_degrees.y = grass_data["rot"]
 		get_node("../Environment/FlatGrass").add_child(grass)
 		for node in get_node("../Environment/FlatGrass").get_children():
 			#print(node.get_name(),node.transform.origin.x)
 			pass
 
+	for obj_data in map_data["pink_flowers"]:
+		var new_obj = load(grass_path+"PinkFlower.tscn").instance()
+		get_node("../Environment/Grass").add_child(new_obj)
+		new_obj.global_transform.origin.x = obj_data["pos_x"]
+		new_obj.global_transform.origin.y = obj_data["pos_y"]
+		new_obj.global_transform.origin.z = obj_data["pos_z"]
+		new_obj.scale.x = obj_data["sc_x"]
+		new_obj.scale.y = obj_data["sc_y"]
+		new_obj.scale.z = obj_data["sc_x"]
+		new_obj.rotation_degrees.y = obj_data["rot"]
+	
+	for obj_data in map_data["blue_flowers"]:
+		var new_obj = load(grass_path+"BlueFlower.tscn").instance()
+		get_node("../Environment/Grass").add_child(new_obj)
+		new_obj.global_transform.origin.x = obj_data["pos_x"]
+		new_obj.global_transform.origin.y = obj_data["pos_y"]
+		new_obj.global_transform.origin.z = obj_data["pos_z"]
+		new_obj.scale.x = obj_data["sc_x"]
+		new_obj.scale.y = obj_data["sc_y"]
+		new_obj.scale.z = obj_data["sc_x"]
+		new_obj.rotation_degrees.y = obj_data["rot"]
+	
+	for obj_data in map_data["grass_blades"]:
+		var new_obj = load("res://Assets/World/Tall Grass/TallGrass.tscn").instance()
+		get_node("../Environment/Grass").add_child(new_obj)
+		new_obj.global_transform.origin.x = obj_data["pos_x"]
+		new_obj.global_transform.origin.y = obj_data["pos_y"]
+		new_obj.global_transform.origin.z = obj_data["pos_z"]
+		new_obj.scale.x = obj_data["sc_x"]
+		new_obj.scale.y = obj_data["sc_y"]
+		new_obj.scale.z = obj_data["sc_x"]
+		new_obj.rotation_degrees.y = obj_data["rot"]
 
 func _on_EndGameTimer_timeout():
 	get_tree().get_root().get_node("World").queue_free() 
 	var world = load("res://Menu/lobby.tscn").instance()
 	get_tree().get_root().add_child(world)
 	world.get_node("Lobby").trans_to_players()
+	
