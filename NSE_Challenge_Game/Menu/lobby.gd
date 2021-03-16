@@ -67,6 +67,13 @@ func _on_host_pressed():
 	gamestate.host_game(player_name)
 	refresh_lobby()
 
+func trans_to_players():
+	#$Menu/Host.hide()
+	$Menu.hide()
+	$Players.show()
+	transition = PLAYERS
+	refresh_lobby()
+
 func _on_join_pressed():
 	if $Connect/Name.text == "":
 		$Connect/ErrorLabel.text = "Invalid name!"

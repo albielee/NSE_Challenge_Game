@@ -27,6 +27,7 @@ var scoreboard_sliding = false
 var scoreboard_open = false
 var shake = 0
 var colour_splash_modulate = Color()
+var player_scoreboxes = {}
 
 var round_timer
 var round_time = 20
@@ -40,6 +41,7 @@ var player_to_add_score = null
 var player_pos_indexes = {}
 var scores = {}
 var first_run=true
+
 
 onready var scoreboard_start_pos = $Scoreboard.rect_global_position
 
@@ -129,22 +131,22 @@ func slide(delta):
 		print("AH")
 		slide_speed = 0
 		scoreboard_sliding = false
-		
 
-func show_result_message():
+
+sync func show_result_message():
 	var players = get_tree().get_nodes_in_group("player")
 	for p in players:
 		if(p.network_handler.is_network_master()):
-			if(scores[p.player_name]==round_number):
-				$WinSprite.visible = true
-				break
-			else:
-				$LoseSprite.visible = false
-				break
+			show_scoreboard()
+			$EndGameTimer.start()
+			break
+			#else:
+			#	$LoseSprite.visible = true
+			#	break
 
 func check_for_winner():
 	for key in scores:
-		if scores[key]==round_number:
+		if scores[key]==best_of:
 			return true
 	return false
 
@@ -269,6 +271,20 @@ func add_to_scoreboard(player):
 		var index = player_pos_indexes[player]
 		print("SCORE! with player id of ?" + str(player))
 		var score_box = load("res://scoreBox.tscn").instance()
+		if(!player_scoreboxes.has(player)):
+			player_scoreboxes[player] = []
+		player_scoreboxes[player].append(score_box)
+		for p in players:
+			if(scores[p.player_name]==best_of):
+				var winner_index = player_pos_indexes[player]
+				$Scoreboard/aWinner.visible = true
+				if(best_of < 4):
+					$Scoreboard/aWinner.rect_position = Vector2(rect_position.x+80,y_values[winner_index]-8)
+				else:
+					$Scoreboard/aWinner.rect_position = Vector2(rect_position.x+40,y_values[winner_index]-8)
+				for sb in player_scoreboxes[p.player_name]:
+					sb.modulate = gamestate.colours[gamestate.players_colour[p.my_id]]
+		score_box.z_index = -100
 		get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
 		print(y_values[index])
 		score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],colour) 
@@ -402,3 +418,10 @@ func load_world(map_name):
 		for node in get_node("../Environment/FlatGrass").get_children():
 			#print(node.get_name(),node.transform.origin.x)
 			pass
+
+
+func _on_EndGameTimer_timeout():
+	get_tree().get_root().get_node("World").queue_free() 
+	var world = load("res://Menu/lobby.tscn").instance()
+	get_tree().get_root().add_child(world)
+	world.get_node("Lobby").trans_to_players()
