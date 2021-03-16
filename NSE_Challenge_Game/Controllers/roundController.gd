@@ -60,6 +60,9 @@ func _process(delta):
 		initialise_scoreboard()
 		create_round_timer()
 	
+	if(!$Theme.is_playing() and !$StartTheme.is_playing()):
+		$Theme.play()
+	
 	if(scoreboard_sliding):
 		slide(delta)
 	

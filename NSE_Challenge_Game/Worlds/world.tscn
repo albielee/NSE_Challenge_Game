@@ -1,4 +1,4 @@
-[gd_scene load_steps=301 format=2]
+[gd_scene load_steps=304 format=2]
 
 [ext_resource path="res://Controllers/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Worlds/LightMap28.png" type="Texture" id=2]
@@ -294,6 +294,9 @@
 [ext_resource path="res://Worlds/LightMap266.png" type="Texture" id=292]
 [ext_resource path="res://Assets/World/Grass/PinkFlower.tscn" type="PackedScene" id=293]
 [ext_resource path="res://Assets/World/Grass/BlueFlower.tscn" type="PackedScene" id=294]
+[ext_resource path="res://Theme.tscn" type="PackedScene" id=295]
+[ext_resource path="res://AZenStart.wav" type="AudioStream" id=296]
+[ext_resource path="res://A Zen KO Final-loop.wav" type="AudioStream" id=297]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -336,6 +339,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.09689, 0.399537, -2.32923 )
 [node name="Players" type="Spatial" parent="."]
 
 [node name="RoundController" parent="." instance=ExtResource( 4 )]
+
+[node name="Theme" parent="RoundController" instance=ExtResource( 295 )]
+stream = ExtResource( 297 )
+volume_db = -10.715
+autoplay = false
+bus = "Music"
+
+[node name="StartTheme" type="AudioStreamPlayer" parent="RoundController"]
+stream = ExtResource( 296 )
+volume_db = -10.085
+autoplay = true
+bus = "Music"
 
 [node name="target_pos" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 11.5, 19.0901 )
