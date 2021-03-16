@@ -47,7 +47,7 @@ func update(mouse_position, player_to_rock):
 				rock.add_force(Vector3.UP*rock.gravity/0.4)
 		else:
 			if player_position.y+(rock.size/4)-rock_position.y > 0:
-				rock.add_force(Vector3.UP*rock.gravity/0.8)
+				rock.add_force(Vector3.UP*rock.gravity/0.7)
 			else:
 				rock.add_force(Vector3.UP*rock.gravity/1)
 		
@@ -72,7 +72,7 @@ func do_pull():
 				rockdic[dist] = i
 				if dist < mini and i.real:
 					if not i.flying: mini = dist
-					elif i.owned_by == get_tree().get_network_unique_id(): mini = dist
+					if i.last_mover == get_parent().player_name: mini = dist
 		if (rock==null and mini < 50):
 			rock=rockdic[mini]
 			rock_position = rock.global_transform.origin
@@ -84,7 +84,9 @@ func do_pull():
 		for i in rocks:
 			if (rock != i) and i != null and not i in affectedrocks:
 				affectedrocks.append(i)
-				if i.real: i.add_force(-knockback_vector*PUSH_POWER/2)
+				if i.real: 
+					if i.last_mover == get_parent().player_name or i.last_mover == '' or i.still:
+						i.add_force(-knockback_vector*PUSH_POWER/3)
 		if rock == null:
 			first_push = false
 

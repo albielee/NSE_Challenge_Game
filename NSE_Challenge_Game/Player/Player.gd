@@ -157,17 +157,14 @@ func handle_sounds():
 			$Sounds/player_summon.play()
 	else:
 		quickfix = false
-	print(anim)
 	if(anim == "push_hold"):
 		
 		if(pushpull==1):
 			if(!$Sounds/beam_push.playing):
 				$Sounds/beam_push.play()
-				print(pushpull)
 		if(pushpull==-1):
 			if(!$Sounds/beam_pull.playing):
 				$Sounds/beam_pull.play()
-				print(pushpull)
 	else:
 		$Sounds/beam_push.stop()
 		$Sounds/beam_pull.stop()
@@ -482,7 +479,6 @@ func _on_GrabBox_lost_rock():
 	grabbox.shape.shape.set_height(0.5)
 
 func summon_state(delta):
-	print(anim)
 	#if no rock
 	if not decided:
 		if len(growhitbox.get_overlapping_areas()) > 0:
@@ -682,7 +678,7 @@ func shove_state(delta):
 	
 	mouse_angle = rock_face_angle
 	
-	s_rock.add_force(40*current_angle, Vector3.ZERO)
+	s_rock.add_force(2500*current_angle, Vector3.ZERO)
 	
 	if(pushpull==1):
 		push_mouse_position=mouse_position
@@ -692,6 +688,7 @@ func shove_state(delta):
 
 func stop_shove():
 	state = MOVE
+	anim = 'movement'
 	s_rock = null
 
 func set_player_name(name):
@@ -762,7 +759,7 @@ func _on_RockHitBox_start_pushing():
 		s_rock = $RockHitBox.rock
 		shovable = check_shove(s_rock)
 		contact = true
-		grabbeam_handler.start_beam(rockhitbox.rock)
+#		grabbeam_handler.start_beam(rockhitbox.rock)
 
 func _on_RockHitBox_stop_pushing():
 	contact = false

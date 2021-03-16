@@ -69,6 +69,8 @@ func handle_stats(delta):
 	hitbox.linear_velocity = linear_velocity
 	hitbox.owned_by = owned_by
 	hitbox.real = real
+	hitbox.last_mover = last_mover
+	hitbox.still = still
 	playerhitbox.size = scale.x
 	playerhitbox.pos = location
 
@@ -109,8 +111,10 @@ func update(delta):
 			add_force(Vector3.UP*(100+(timebeenfake*timebeenfake)/10)*get_mass(),Vector3.ZERO)
 	if buffer!=[]: buffer = []
 	speed = Vector2(linear_velocity.x, linear_velocity.z).length()
-	if speed > 0: still = false
-	else: still = true
+	if in_zone: still = false
+	if still == false: 
+		if speed < 0.1: still = true
+	
 	hitbox.face=get_transform().basis.get_euler().y
 	hitbox.speed=speed
 	if(in_zone):
@@ -175,6 +179,7 @@ func _on_Hitbox_nozone():
 	in_zone = false
 
 func _on_Hitbox_zone():
+	still = false
 	in_zone = true
 
 func _on_Rock_body_entered(body):

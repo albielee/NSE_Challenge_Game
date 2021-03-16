@@ -12,6 +12,8 @@ var owned_by = 0
 var linear_velocity = 0
 var pos = Vector3.ZERO
 var real = false
+var last_mover = ''
+var still = true
 
 signal pushed
 signal zone
