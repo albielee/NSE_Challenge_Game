@@ -670,22 +670,22 @@ func shove_state(delta):
 		elif not check_shove(s_rock):
 			stop_shove()
 			return
-	
-	if (movement != Vector2.ZERO):
-		move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
-		dash_angle = Vector3(movement.x,0,movement.y)
-	else:
-		move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
-	
-	mouse_angle = rock_face_angle
-	
-	s_rock.add_force(2500*current_angle, Vector3.ZERO)
-	
-	if(pushpull==1):
-		push_mouse_position=mouse_position
-		state = PUSH
-	if(pushpull==-1):
-		pass
+		
+		if (movement != Vector2.ZERO):
+			move_velocity = move_velocity.move_toward(Vector3(movement.x*MAX_SPEED,0,movement.y*MAX_SPEED), ACCELERATION*delta)
+			dash_angle = Vector3(movement.x,0,movement.y)
+		else:
+			move_velocity = move_velocity.move_toward(Vector3.ZERO, FRICTION*delta)
+		
+		mouse_angle = rock_face_angle
+		
+		s_rock.add_force(2500*current_angle, Vector3.ZERO)
+		
+		if(pushpull==1):
+			push_mouse_position=mouse_position
+			state = PUSH
+		if(pushpull==-1):
+			pass
 
 func stop_shove():
 	state = MOVE
