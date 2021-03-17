@@ -21001,7 +21001,7 @@ TURN_SPEED = 800
 GRAB_DROPOFF_VAL = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.7, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.53342, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.0165251, 0 )
 shape = SubResource( 1 )
 
 [node name="GrowHitBox" type="Area" parent="."]
@@ -21093,7 +21093,7 @@ shape = SubResource( 7 )
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="metarig003" type="Spatial" parent="player_animations"]
-transform = Transform( 0.984961, 0.162357, -0.0590931, -0.172777, 0.925561, -0.336876, -2.79397e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
+transform = Transform( 0.984961, 0.162357, -0.0590932, -0.172777, 0.925561, -0.336876, -3.1665e-08, 0.34202, 0.939693, -0.0479305, -0.391702, 0.0882236 )
 
 [node name="Skeleton" type="Skeleton" parent="player_animations/metarig003"]
 bones/0/name = "spine"
