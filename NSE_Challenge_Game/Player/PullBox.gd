@@ -85,6 +85,7 @@ func do_pull():
 				if i.real: 
 					if i.last_mover == get_parent().player_name or i.last_mover == '' or i.still:
 						i.add_force(-knockback_vector*PUSH_POWER/3)
+		get_node("../GrabBeamHandler").start_beam(rock)
 		if rock == null:
 			first_push = false
 
@@ -94,6 +95,7 @@ func update_angle(target_angle_y, player_mouse_angle, player_pos):
 	player_position = player_pos
 
 func release():
+	get_node("../GrabBeamHandler").stop_beam()
 	angle_set = false
 	first_push = false
 	rocks = []
