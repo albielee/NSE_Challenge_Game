@@ -95,6 +95,7 @@ func _process(delta):
 				winner_ran_once = true	
 				
 	if loading:
+		print(load_stage)
 		match load_stage:
 			0:
 				load_world0()
@@ -421,16 +422,17 @@ sync func load_world(map_file_name):
 	loading=true
 	map_name= map_file_name
 
-sync func load_world0():
+var i = 0
+
+func load_world0():
 	#delete old world
-	for o in get_node("../Environment/Towers").get_children():
-		if o.is_in_group("faketower"):
-			continue
-		o.set_name("dead_tower")
+	var o = get_node("../Environment/Towers").get_children()[i]
+	if not o.is_in_group("faketower"):
 		o.remove_world_props()
 		o.queue_free()
+	i += 1
 
-sync func load_world1():
+func load_world1():
 	#create new world
 	var map_file = File.new()
 	assert(map_file.file_exists(map_folder+map_name+".json"),"MAP FILE "+map_folder+map_name+".json"+" NOT FOUND")
@@ -476,7 +478,7 @@ sync func load_world1():
 				grass.rotation_degrees.y = grass_data["rot"]
 		get_node("../Environment/FlatGrass").add_child(grass)
 	
-sync func load_world2():
+func load_world2():
 	#flower loading
 	var grass_path = "res://Assets/World/Grass/"
 	for obj_data in map_data["pink_flowers"]:
@@ -501,7 +503,7 @@ sync func load_world2():
 		new_obj.scale.z = obj_data["sc_x"]
 		new_obj.rotation_degrees.y = obj_data["rot"]
 
-sync func load_world3():
+func load_world3():
 	#grass blades loading
 #	print(len(map_data["grass_blades"]))
 	for obj_data in map_data["grass_blades"]:
