@@ -10,6 +10,7 @@ enum {
 }
 var transition = null
 var game_started = false
+var mtheme = true
 onready var l_cam = get_parent().get_node("Camera")
 
 func _ready():
@@ -29,7 +30,7 @@ func _ready():
 		$Menu/Host/Hosting/Name.text = desktop_path[desktop_path.size() - 2]
 
 func _process(delta):
-	if(!get_tree().get_root().get_node("LobbyWorld/MenuTheme").is_playing()):
+	if(!get_tree().get_root().get_node("LobbyWorld/MenuTheme").is_playing() and mtheme):
 		get_tree().get_root().get_node("LobbyWorld/MenuTheme").play()
 	if(game_started):
 		if(!l_cam.travelling):

@@ -111,6 +111,7 @@ func _process(delta):
 			_:
 				load_stage=0
 				loading=false
+				reset_round_timer()
 
 sync func show_scoreboard():
 
@@ -330,12 +331,22 @@ func create_round_timer():
 	add_child(round_timer)
 	round_timer.start()
 
+func reset_round_timer():
+	stop_fall_timer()
+	round_timer.set_wait_time(round_time)
+	round_timer.set_one_shot(true)
+	round_timer.start()
+
 func create_fall_timer():
 	fall_timer = Timer.new()
 	fall_timer.set_wait_time(fall_time)
 	fall_timer.connect("timeout",self,"pick_map_section")
 	add_child(fall_timer)
 	fall_timer.start()
+
+func stop_fall_timer():
+	if fall_timer != null:
+		fall_timer.stop()
 
 func _round_timer_timeout():
 	sudden_death = true

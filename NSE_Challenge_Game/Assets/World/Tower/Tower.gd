@@ -8,9 +8,8 @@ var accel = 5
 onready var model_start_pos = $tower.transform.origin
 
 func _physics_process(delta):
-#	if(falling):
-#		fall(delta)
-	pass
+	if(falling):
+		fall(delta)
 
 func play_anim():
 	$AnimationObject.play()

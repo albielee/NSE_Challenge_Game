@@ -34,7 +34,7 @@ func update(mouse_position, player_to_rock):
 		target_angle = current_target_angle
 		
 		rock_position = rock.global_transform.origin
-		var rs = (rock.size/4)+1.2
+		var rs = (rock.size/2)+1.0
 		var ideal_location = Vector3(player_position.x + rs*sin(-target_angle), 0, player_position.z - rs*cos(-target_angle))
 		rock.add_force((ideal_location-rock_position).normalized()*30)
 		

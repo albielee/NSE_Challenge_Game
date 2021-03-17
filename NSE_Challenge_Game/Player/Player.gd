@@ -283,10 +283,6 @@ func update(delta):
 			push_state(delta)
 		PULL:
 			pull_state(delta)
-		GRAB:
-			grab_state(delta)
-		GRABBED:
-			grabbed_state(delta)
 		FALL:
 			fall_state(delta)
 		PAUSE:
@@ -341,20 +337,17 @@ func move_state(delta, mouse_angle):
 		#At this point there is no care about code cleanliness
 		#if(grow_part_1 != null and grow_part_2 != null and grow_part_3 != null):
 		$growParticles.visible = false
-		if(grab==1):
-			state = GRAB
-		else:
-			if(pushpull==1 and push_cooldown==0):
-				push_mouse_position=mouse_position
-				state = PUSH
-			if(pushpull==-1 and push_cooldown==0):
-				pull_mouse_position=mouse_position
-				state = PULL
-			elif(pushpull==0):
-				push_cooldown=0
-				if(contact == true):
-					if check_shove(s_rock):
-						state = SHOVE
+		if(pushpull==1 and push_cooldown==0):
+			push_mouse_position=mouse_position
+			state = PUSH
+		if(pushpull==-1 and push_cooldown==0):
+			pull_mouse_position=mouse_position
+			state = PULL
+		elif(pushpull==0):
+			push_cooldown=0
+			if(contact == true):
+				if check_shove(s_rock):
+					state = SHOVE
 
 func pause_state(delta):
 	current_turn_speed = TURN_SPEED
@@ -748,6 +741,7 @@ func _on_Player_body_entered(body):
 	touched = true
 
 func _on_RockHitBox_start_pushing():
+	set_linear_velocity($RockHitBox.rock.get_linear_velocity())
 	if(network_handler.is_host()):
 		s_rock = $RockHitBox.rock
 		shovable = check_shove(s_rock)

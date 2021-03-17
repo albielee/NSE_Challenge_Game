@@ -118,6 +118,11 @@ func update(delta):
 	if still == false: 
 		if speed < 0.1: still = true
 	
+#	if abs(get_linear_velocity().x) > 30 or abs(get_linear_velocity().y) > 30:
+#		var new_speed = get_linear_velocity().normalized()
+#		new_speed *= 30
+#		set_linear_velocity(new_speed)
+	
 	hitbox.face=get_transform().basis.get_euler().y
 	hitbox.speed=speed
 	if(in_zone):
