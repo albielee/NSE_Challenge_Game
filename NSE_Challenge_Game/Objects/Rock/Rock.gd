@@ -39,6 +39,7 @@ var resize = false
 var still = true
 
 func _ready():
+	set_use_continuous_collision_detection(true)
 	set_gravity_scale(5)
 	set_linear_damp(5)
 	handle_stats(0.01)

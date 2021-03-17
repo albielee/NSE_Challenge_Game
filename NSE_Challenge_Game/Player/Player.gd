@@ -54,6 +54,8 @@ func _ready():
 	
 	current_turn_speed = TURN_SPEED
 	current_position = spawn_position
+	if network_handler.is_host():
+		set_use_continuous_collision_detection(true)
 	
 	if network_handler.is_current_player(): 
 		playerid = get_tree().get_network_unique_id()
@@ -136,7 +138,7 @@ func _integrate_forces(s):
 			next = puppet_next_position
 		else:
 #			next = current_position.move_toward(puppet_next_position,_delta)
-			next = puppet_next_position
+			next = current_position + (current_position-puppet_next_position)*0.5
 #
 #		if contacts_reported>0: 
 #			for i in get_colliding_bodies():
