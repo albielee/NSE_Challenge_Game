@@ -64,7 +64,7 @@ func _ready():
 
 func scale_setup():
 	$player_animations.scale = Vector3(2*SCALE,2*SCALE,2*SCALE)
-	$CollisionShape.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
+	$CollisionShape.scale=Vector3(SCALE*1,SCALE*0.5,SCALE*1)
 	dashhitbox.scale=Vector3(SCALE*0.8,SCALE*0.8,SCALE*0.8)
 	
 	summonhitboxes.transform.origin.z=(-4.0*SCALE)
