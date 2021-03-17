@@ -98,7 +98,9 @@ func _process(delta):
 		print(load_stage)
 		match load_stage:
 			0:
+				print(len(get_node("../Environment/Towers").get_children()))
 				load_world0()
+				
 			1:
 				load_world1()
 				load_stage+=1
@@ -422,17 +424,18 @@ sync func load_world(map_file_name):
 	loading=true
 	map_name= map_file_name
 
-var i = 0
 
 func load_world0():
-	#delete old world
-	if i < len(get_node("../Environment/Towers").get_children()):
-		var o = get_node("../Environment/Towers").get_children()[i]
-		if not o.is_in_group("faketower"):
-			o.remove_world_props()
-			o.queue_free()
+	var i = 0
+	for o in get_node("../Environment/Towers").get_children():
+		if o.is_in_group("faketower"):
+			continue
+		o.remove_world_props()
+		o.queue_free()
 		i += 1
-	else: load_stage = 1
+		if i==5:
+			return
+	load_stage=1
 
 func load_world1():
 	#create new world
