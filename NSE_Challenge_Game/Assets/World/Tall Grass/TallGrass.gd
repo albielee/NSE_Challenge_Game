@@ -18,7 +18,8 @@ func _on_Grass_body_entered(body):
 sync func flatten(angle):
 	$flat.rotation = Vector3(0.0,angle,0.0)
 	$Anim.paused = true
-	objs[frame].hide()
+	if frame != 8:
+		objs[frame].hide()
 	frame = 8
 	$flat.show()
 
