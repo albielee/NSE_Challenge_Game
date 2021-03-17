@@ -138,7 +138,7 @@ func _integrate_forces(s):
 			next = puppet_next_position
 		else:
 #			next = current_position.move_toward(puppet_next_position,_delta)
-			next = current_position + (current_position-puppet_next_position)*0.5
+			next = current_position + (puppet_next_position-current_position)*0.5
 #
 #		if contacts_reported>0: 
 #			for i in get_colliding_bodies():
