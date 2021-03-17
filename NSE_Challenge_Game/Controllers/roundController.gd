@@ -99,7 +99,6 @@ func _process(delta):
 		match load_stage:
 			0:
 				load_world0()
-				load_stage+=1
 			1:
 				load_world1()
 				load_stage+=1
@@ -426,11 +425,13 @@ var i = 0
 
 func load_world0():
 	#delete old world
-	var o = get_node("../Environment/Towers").get_children()[i]
-	if not o.is_in_group("faketower"):
-		o.remove_world_props()
-		o.queue_free()
-	i += 1
+	if i < len(get_node("../Environment/Towers").get_children()):
+		var o = get_node("../Environment/Towers").get_children()[i]
+		if not o.is_in_group("faketower"):
+			o.remove_world_props()
+			o.queue_free()
+		i += 1
+	else: load_stage = 1
 
 func load_world1():
 	#create new world
