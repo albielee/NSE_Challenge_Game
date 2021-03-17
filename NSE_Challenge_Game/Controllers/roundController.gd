@@ -509,7 +509,7 @@ func load_world3():
 	#grass blades loading
 #	print(len(map_data["grass_blades"]))
 	for obj_data in map_data["grass_blades"]:
-		var new_obj = load("res://Assets/World/Tall Grass/GrassCluster.tscn").instance()
+		var new_obj = load("res://Assets/World/Tall Grass/TallGrass.tscn").instance()
 		get_node("../Environment/Grass").add_child(new_obj)
 		new_obj.global_transform.origin.x = obj_data["pos_x"]
 		new_obj.global_transform.origin.y = obj_data["pos_y"]
