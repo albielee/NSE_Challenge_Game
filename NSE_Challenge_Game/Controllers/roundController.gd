@@ -42,6 +42,10 @@ var player_pos_indexes = {}
 var scores = {}
 var first_run=true
 
+var load_stage=0
+var loading=false
+var map_data
+var map_name
 
 onready var scoreboard_start_pos = $Scoreboard.rect_global_position
 
@@ -90,6 +94,23 @@ func _process(delta):
 					rpc("show_result_message")
 				winner_ran_once = true	
 				
+	if loading:
+		match load_stage:
+			0:
+				load_world0()
+				load_stage+=1
+			1:
+				load_world1()
+				load_stage+=1
+			2:
+				load_world2()
+				load_stage+=1
+			3:
+				load_world3()
+				load_stage+=1
+			_:
+				load_stage=0
+				loading=false
 
 sync func show_scoreboard():
 
@@ -367,14 +388,28 @@ func _on_RestartRoundTimer_timeout():
 
 
 func print_world():
-	var fstr = '{"type":{type},},'
-	for o in get_tree().get_nodes_in_group("Removable"):
+	var fstr = '{"type":"{type}","pos_x":{pos_x},"pos_y":{pos_y},"pos_z":{pos_z},"sc_x":{sc_x},"sc_y":{sc_y},"rot":{rot}},'
+	for o in get_node("../Environment/Grass").get_children():
+		if o.get_name().substr(0,6)=="GrassC":
+			print(fstr.format({
+				"type":o.get_name().rstrip("0123456789"),
+				"pos_x":o.global_transform.origin.x,
+				"pos_y":o.global_transform.origin.y,
+				"pos_z":o.global_transform.origin.z,
+				"sc_x":o.scale.x,
+				"sc_y":o.scale.y,
+				"rot":o.rotation_degrees.y
+			}))
 		pass
 
 #-------------
 #I would like to apologise to Donald Knuth and God for this abomination of a function.
 #-------------
-sync func load_world(map_name):
+sync func load_world(map_file_name):
+	print_world()
+	loading=true
+	map_name= map_file_name
+sync func load_world0():
 	#delete old world
 	for o in get_node("../Environment/Towers").get_children():
 		if o.is_in_group("faketower"):
@@ -382,11 +417,12 @@ sync func load_world(map_name):
 		o.set_name("dead_tower")
 		o.remove_world_props()
 		o.queue_free()
+sync func load_world1():
 	#create new world
 	var map_file = File.new()
 	assert(map_file.file_exists(map_folder+map_name+".json"),"MAP FILE "+map_folder+map_name+".json"+" NOT FOUND")
 	map_file.open(map_folder+map_name+".json",File.READ)
-	var map_data = parse_json(map_file.get_line())
+	map_data = parse_json(map_file.get_line())
 	var start_x = map_data["start_x"]
 	var start_y = map_data["start_y"]
 	fall_map = map_data["fall_map"]
@@ -426,10 +462,10 @@ sync func load_world(map_name):
 				grass.scale.z = 0.5
 				grass.rotation_degrees.y = grass_data["rot"]
 		get_node("../Environment/FlatGrass").add_child(grass)
-		for node in get_node("../Environment/FlatGrass").get_children():
-			#print(node.get_name(),node.transform.origin.x)
-			pass
-
+	
+sync func load_world2():
+	#flower loading
+	var grass_path = "res://Assets/World/Grass/"
 	for obj_data in map_data["pink_flowers"]:
 		var new_obj = load(grass_path+"PinkFlower.tscn").instance()
 		get_node("../Environment/Grass").add_child(new_obj)
@@ -451,9 +487,12 @@ sync func load_world(map_name):
 		new_obj.scale.y = obj_data["sc_y"]
 		new_obj.scale.z = obj_data["sc_x"]
 		new_obj.rotation_degrees.y = obj_data["rot"]
-	
+
+sync func load_world3():
+	#grass blades loading
+	print(len(map_data["grass_blades"]))
 	for obj_data in map_data["grass_blades"]:
-		var new_obj = load("res://Assets/World/Tall Grass/TallGrass.tscn").instance()
+		var new_obj = load("res://Assets/World/Tall Grass/GrassCluster.tscn").instance()
 		get_node("../Environment/Grass").add_child(new_obj)
 		new_obj.global_transform.origin.x = obj_data["pos_x"]
 		new_obj.global_transform.origin.y = obj_data["pos_y"]
@@ -462,6 +501,9 @@ sync func load_world(map_name):
 		new_obj.scale.y = obj_data["sc_y"]
 		new_obj.scale.z = obj_data["sc_x"]
 		new_obj.rotation_degrees.y = obj_data["rot"]
+
+
+	
 
 func _on_EndGameTimer_timeout():
 	get_tree().get_root().get_node("World").queue_free() 
