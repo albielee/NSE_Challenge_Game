@@ -26,12 +26,12 @@ func _on_SelectRight_pressed():
 			if(gamestate.available_colours[gamestate.player_colour_index]):
 				found = true
 				gamestate.available_colours[gamestate.player_colour_index] = 0
-				print("From Server: Found hosts next colour: " + str(gamestate.player_colour_index))
+#				print("From Server: Found hosts next colour: " + str(gamestate.player_colour_index))
 			else:
 				gamestate.player_colour_index = wrapi(gamestate.player_colour_index+1, 0, 4)
 		gamestate.players_colour[1] = gamestate.player_colour_index
-		print("Available colours = " + str(gamestate.available_colours))
-		print("Players colour dictionary = " + str(gamestate.players_colour))
+#		print("Available colours = " + str(gamestate.available_colours))
+#		print("Players colour dictionary = " + str(gamestate.players_colour))
 	else:
 		gamestate.call_server_next_colour()
 

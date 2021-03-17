@@ -61,7 +61,7 @@ var next_speed = 0.0
 
 #SUMMONING STUFF
 var summon_length = 15
-var post_summon_length = 25
+var post_summon_length = 35
 var has_summoned = false
 var decided = false
 var growing = false

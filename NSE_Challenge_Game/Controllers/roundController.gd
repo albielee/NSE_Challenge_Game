@@ -114,7 +114,7 @@ func _process(delta):
 
 sync func show_scoreboard():
 
-	print("OK")
+#	print("OK")
 	open_scoreboard()
 	update_scoreboard()
 	$Scoreboard/scoreboardEnd/colourSplash.playing = true
@@ -148,11 +148,11 @@ func slide(delta):
 		if(($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.5) and
 			$Scoreboard.rect_global_position.y > (slide_y-$Scoreboard.rect_global_position.y*0.5))):#:
 			$Scoreboard.rect_global_position.y = slide_y
-			print("OH")
+#			print("OH")
 			slide_speed = 0
 			scoreboard_sliding = false
 	elif($Scoreboard.rect_global_position.y < (slide_y+$Scoreboard.rect_global_position.y*0.5)):
-		print("AH")
+#		print("AH")
 		slide_speed = 0
 		scoreboard_sliding = false
 
@@ -257,12 +257,12 @@ func initialise_scoreboard():
 	var endMaxYValues = [36, 72, 108, 144]
 	$Scoreboard/scoreboardEnd.transform.origin.y = endMaxYValues[play_num-1]
 	
-	print(play_num)
+#	print(play_num)
 	#Add the player rects for names
 	if(play_num > 1):
 		var j = 2
 		while j <= play_num:
-			print("Scoreboard/playerRect"+str(j))
+#			print("Scoreboard/playerRect"+str(j))
 			get_node("Scoreboard/playerRect"+str(j)).visible = true
 			j+=1
 	var i = 1
@@ -310,7 +310,7 @@ func add_to_scoreboard(player):
 					sb.modulate = gamestate.colours[gamestate.players_colour[p.my_id]]
 		score_box.z_index = -100
 		get_tree().get_root().get_node("World/RoundController/Scoreboard").add_child(score_box)
-		print(y_values[index])
+#		print(y_values[index])
 		score_box.init(100, y_values[index], score_square_positions[scores[player]-1],y_values[index],colour) 
 
 func shake_scoreboard():
@@ -379,7 +379,7 @@ func _on_colourSplash_animation_finished():
 
 
 func _on_RestartRoundTimer_timeout():
-	print("OH YEAH THE TIMER IS DONE")
+#	print("OH YEAH THE TIMER IS DONE")
 	close_scoreboard()
 	$RestartRoundTimer.stop()
 	if(get_tree().is_network_server()):
@@ -406,9 +406,10 @@ func print_world():
 #I would like to apologise to Donald Knuth and God for this abomination of a function.
 #-------------
 sync func load_world(map_file_name):
-	print_world()
+#	print_world()
 	loading=true
 	map_name= map_file_name
+
 sync func load_world0():
 	#delete old world
 	for o in get_node("../Environment/Towers").get_children():
@@ -417,6 +418,7 @@ sync func load_world0():
 		o.set_name("dead_tower")
 		o.remove_world_props()
 		o.queue_free()
+
 sync func load_world1():
 	#create new world
 	var map_file = File.new()
@@ -490,7 +492,7 @@ sync func load_world2():
 
 sync func load_world3():
 	#grass blades loading
-	print(len(map_data["grass_blades"]))
+#	print(len(map_data["grass_blades"]))
 	for obj_data in map_data["grass_blades"]:
 		var new_obj = load("res://Assets/World/Tall Grass/GrassCluster.tscn").instance()
 		get_node("../Environment/Grass").add_child(new_obj)

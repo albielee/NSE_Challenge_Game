@@ -49,10 +49,9 @@ func update(mouse_position, player_to_rock):
 		rock.angular_velocity((Vector3.UP * rotation_angle)*5)
 		rock_position = rock.global_transform.origin
 		
-		if player_position.y+0.2-rock_position.y > 0:
-			rock.add_force(Vector3.UP*rock.gravity/0.6)
-		else:
-			rock.add_force(Vector3.UP*rock.gravity/1.1)
+		var heighttoolow = player_position.y+0.9+(rock.size/4)-rock_position.y
+		if heighttoolow > 0:
+			rock.add_force(heighttoolow*15*Vector3.UP)
 
 		#mouse adjustment time. This won't be easy.
 		#What we want, SPECIFICALLY, is the angle between the line from:

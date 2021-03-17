@@ -101,7 +101,7 @@ remote func pre_start_game(spawn_points, roundSettings):
 	#print("EY")
 	#get_tree().change_scene("res://Worlds/world.tscn")
 	get_tree().get_root().get_node("LobbyWorld").queue_free() 
-	print(roundSettings)
+#	print(roundSettings)
 	var map = roundSettings[0]
 	var world = load(map).instance()
 	
@@ -122,15 +122,15 @@ remote func pre_start_game(spawn_points, roundSettings):
 		player.transform.origin = spawn_pos
 		player.set_network_master(p_id) #set unique id as master.
 		
-		print("My player id is: " + str(id))
-		print("My player_colour_dict = " + str(players_colour))
+#		print("My player id is: " + str(id))
+#		print("My player_colour_dict = " + str(players_colour))
 		if p_id == get_tree().get_network_unique_id():
-			print("This is me, setting my colour to: " + str(player_colour_index))
+#			print("This is me, setting my colour to: " + str(player_colour_index))
 			# If node for this peer id, set name.
 			player.set_player_name(player_name)
 			player.set_player_colour(colours[player_colour_index])
 		else:
-			print("This is "+str(p_id)+", setting their colour to: " + str(players_colour[p_id]))
+#			print("This is "+str(p_id)+", setting their colour to: " + str(players_colour[p_id]))
 			# Otherwise set name from peer.
 			player.set_player_colour(colours[players_colour[p_id]])
 			player.set_player_name(players[p_id])
@@ -233,15 +233,15 @@ remote func send_recieve_color(index):
 				assert("OH GOD TOO MANY PLAYERS")
 				return
 		rpc_id(sender_id, "recieve_colour_index", sender_id, index)
-		print("From Server: Sent next colour index to " + str(sender_id) + " of " + str(index))
+#		print("From Server: Sent next colour index to " + str(sender_id) + " of " + str(index))
 		players_colour[sender_id] = index
 	
 remote func recieve_colour_index(id, index):
-	print("To Client: Recieved colour index: " + str(index))
+#	print("To Client: Recieved colour index: " + str(index))
 	player_colour_index = index
 
 remote func recieve_colours_dic(col_dic):
-	print("To Client: Recieved colour dictionary: " + str(col_dic))
+#	print("To Client: Recieved colour dictionary: " + str(col_dic))
 	players_colour = col_dic
 
 remote func get_available_colour():
@@ -251,7 +251,7 @@ remote func get_available_colour():
 		var found = false
 		while(!found):
 			if(a > 10):
-				print("INFINITE LOOP SOMETHING IS GOING WRONG, TOO MANY PLAYERS?")
+#				print("INFINITE LOOP SOMETHING IS GOING WRONG, TOO MANY PLAYERS?")
 				break
 			a+=1
 			if(available_colours[i]):
@@ -260,17 +260,17 @@ remote func get_available_colour():
 			else:
 				i = wrapi(i+1, 0, 4)
 		var sender_id = get_tree().get_rpc_sender_id()
-		print("From Server: Sent an available colour index to " + str(sender_id) + " of " + str(i))
+#		print("From Server: Sent an available colour index to " + str(sender_id) + " of " + str(i))
 		rpc_id(sender_id, "recieve_colour_index", sender_id, i)
 		players_colour[sender_id] = i
 	
 		
 func call_server_get_available_colour():
-	print("From Client: Sent request for available colour")
+#	print("From Client: Sent request for available colour")
 	rpc("get_available_colour")
 
 func call_server_next_colour():
-	print("From Client: Sent request for next colour")
+#	print("From Client: Sent request for next colour")
 	rpc("send_recieve_color", player_colour_index)
 
 func end_game():

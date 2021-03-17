@@ -82,7 +82,7 @@ albedo_texture = ExtResource( 20 )
 [node name="TowerPiece" type="KinematicBody"]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0 )
 collision_layer = 2
-collision_mask = 6
+collision_mask = 2050
 script = ExtResource( 16 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

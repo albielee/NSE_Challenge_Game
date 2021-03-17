@@ -41,9 +41,12 @@ var still = true
 func _ready():
 	set_gravity_scale(5)
 	set_linear_damp(5)
-	set_mass(80)
+	handle_stats(0.01)
+	set_mass(10*(size*size*size))
 	add_to_group("rocks")
 	r_stats = [get_transform().origin, get_transform().basis.get_euler().y, linear_velocity]
+	be_summoned()
+	print(get_mass())
 
 func _physics_process(delta):
 	if get_parent().is_host():

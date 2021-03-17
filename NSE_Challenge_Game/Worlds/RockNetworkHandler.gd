@@ -33,8 +33,8 @@ func create_rock(rock, position, orientation, size = ROCK_SIZE):
 	
 	rockdic[rock.id] = rock.get_positionals()
 	add_child(rock)
-	if is_host():
-		rock.be_summoned()
+#	if is_host():
+#		rock.be_summoned()
 
 func destroy_rock(id):
 	rockdic.erase(id)

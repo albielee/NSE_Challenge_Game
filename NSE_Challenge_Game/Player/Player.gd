@@ -73,10 +73,10 @@ func scale_setup():
 	rockhitbox.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
 	
 	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
-	pushbox.transform.origin.z=(-2.0*SCALE)
+	pushbox.transform.origin.z=(-2.5*SCALE)
 	
 	pullbox.scale=Vector3(2*SCALE,SCALE,SCALE)
-	pullbox.transform.origin.z=(-2.0*SCALE)
+	pullbox.transform.origin.z=(-2.5*SCALE)
 	
 	grabbox.scale=Vector3(SCALE,SCALE,SCALE)
 	grabbox.transform.origin.z=(-1.8*SCALE)
@@ -277,8 +277,6 @@ func update(delta):
 	match state:
 		MOVE:
 			move_state(delta, mouse_angle)
-		DASH:
-			dash_state(delta)
 		SUMMONING:
 			summon_state(delta)
 		PUSH:
@@ -336,33 +334,27 @@ func move_state(delta, mouse_angle):
 	
 	#Handle summoning rocks, for which a player cannot have been doing other shit
 	# Priority order: dash,summon, Grab, Push/pull
-	if(dash and can_dash <= 0.0):
-		set_angular_velocity(Vector3.ZERO)
-		state = DASH
+	if(summon and rock_summoned == false and summonhitboxes.can_summon):
+		state = SUMMONING;
+	elif(state != SUMMONING and !summon):
 		rock_summoned = false
-	else:
-		can_dash -= 1.0
-		if(summon and rock_summoned == false and summonhitboxes.can_summon):
-			state = SUMMONING;
-		elif(state != SUMMONING and !summon):
-			rock_summoned = false
-			#At this point there is no care about code cleanliness
-			#if(grow_part_1 != null and grow_part_2 != null and grow_part_3 != null):
-			$growParticles.visible = false
-			if(grab==1):
-				state = GRAB
-			else:
-				if(pushpull==1 and push_cooldown==0):
-					push_mouse_position=mouse_position
-					state = PUSH
-				if(pushpull==-1 and push_cooldown==0):
-					pull_mouse_position=mouse_position
-					state = PULL
-				elif(pushpull==0):
-					push_cooldown=0
-					if(contact == true):
-						if check_shove(s_rock):
-							state = SHOVE
+		#At this point there is no care about code cleanliness
+		#if(grow_part_1 != null and grow_part_2 != null and grow_part_3 != null):
+		$growParticles.visible = false
+		if(grab==1):
+			state = GRAB
+		else:
+			if(pushpull==1 and push_cooldown==0):
+				push_mouse_position=mouse_position
+				state = PUSH
+			if(pushpull==-1 and push_cooldown==0):
+				pull_mouse_position=mouse_position
+				state = PULL
+			elif(pushpull==0):
+				push_cooldown=0
+				if(contact == true):
+					if check_shove(s_rock):
+						state = SHOVE
 
 func pause_state(delta):
 	current_turn_speed = TURN_SPEED
@@ -510,7 +502,7 @@ func summoning_state(delta):
 		post_summon_length -= 1
 		if(post_summon_length <= 0):
 			summon_length = 15
-			post_summon_length = 25
+			post_summon_length = 34
 			decided = false
 			growing = false
 			has_summoned = false
@@ -532,7 +524,7 @@ func growing_state(delta):
 		stop_growing()
 		return
 	if not length_det:
-		grow_length = 8 * growing_rock.size * growing_rock.size
+		grow_length = 8 + 4 * (growing_rock.size * growing_rock.size)
 		length_det = true
 	grow_length -= 1
 	if grow_length <= 0:
@@ -590,7 +582,7 @@ func push_state(delta):
 func push_complete():
 	if(network_handler.is_host()):
 		pushbox.shape.shape.set_height(1)
-		pushbox.transform.origin.z=-2.0*SCALE
+		pushbox.transform.origin.z=-2.5*SCALE
 		pushbox.shape.disabled = true
 		state = MOVE
 		anim = "idle"
@@ -620,7 +612,7 @@ func pull_state(delta):
 func pull_complete():
 	if(network_handler.is_host()):
 		pullbox.shape.shape.set_height(1)
-		pullbox.transform.origin.z=-2.0*SCALE
+		pullbox.transform.origin.z=-2.5*SCALE
 		pullbox.shape.disabled = true
 		state = MOVE
 		anim = "idle"
