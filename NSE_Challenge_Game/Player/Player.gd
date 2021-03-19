@@ -72,7 +72,7 @@ func scale_setup():
 	
 	growhitbox.transform.origin = Vector3(0, SCALE*2, -4.0*SCALE)
 	
-	rockhitbox.scale=Vector3(SCALE*0.5,SCALE*0.5,SCALE*0.5)
+	rockhitbox.scale=Vector3(SCALE*1,SCALE*0.5,SCALE*1)
 	
 	pushbox.scale=Vector3(2*SCALE,SCALE,SCALE)
 	pushbox.transform.origin.z=(-2.5*SCALE)
@@ -497,7 +497,7 @@ func summoning_state(delta):
 		post_summon_length -= 1
 		if(post_summon_length <= 0):
 			summon_length = 15
-			post_summon_length = 34
+			post_summon_length = 25
 			decided = false
 			growing = false
 			has_summoned = false

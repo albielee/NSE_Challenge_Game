@@ -44,7 +44,7 @@ func update(mouse_position, player_to_rock):
 				
 		var heighttoolow = player_position.y+0.9+(rock.size/4)-rock_position.y
 		if heighttoolow > 0:
-			rock.add_force(heighttoolow*50*Vector3.UP)
+			rock.add_force(heighttoolow*30*Vector3.UP)
 		
 #		if  heighttoolow > -2:
 #			rock.add_force(Vector3.UP*rock.gravity/0.1)
