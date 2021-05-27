@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/flower2.obj-9564ab4fcbde80ae7262145effb31e4a.mesh"
+
+[deps]
+
+files=[ "res://.import/flower2.obj-9564ab4fcbde80ae7262145effb31e4a.mesh" ]
+
+source_file="res://Assets/World/Grass/flower2.obj"
+dest_files=[ "res://.import/flower2.obj-9564ab4fcbde80ae7262145effb31e4a.mesh", "res://.import/flower2.obj-9564ab4fcbde80ae7262145effb31e4a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

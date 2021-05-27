@@ -1,0 +1,1242 @@
+[gd_scene load_steps=304 format=2]
+
+[ext_resource path="res://Controllers/Camera.gd" type="Script" id=1]
+[ext_resource path="res://Worlds/LightMap28.png" type="Texture" id=2]
+[ext_resource path="res://Objects/Scene/Void.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Controllers/RoundController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Worlds/RockNetworkHandler.gd" type="Script" id=5]
+[ext_resource path="res://Objects/Scene/FallArea.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/World/Tall Grass/GrassCluster.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/World/Clouds/Cloud.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Worlds/Ambiance.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Worlds/Camera.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Worlds/WorldLight.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Sounds/rock_slide_off.wav" type="AudioStream" id=12]
+[ext_resource path="res://Worlds/LightMap29.png" type="Texture" id=13]
+[ext_resource path="res://Assets/World/CherryBlossom.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/World/Tower/Tower.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Worlds/LightMap26.png" type="Texture" id=16]
+[ext_resource path="res://Worlds/LightMap27.png" type="Texture" id=17]
+[ext_resource path="res://Worlds/LightMap25.png" type="Texture" id=18]
+[ext_resource path="res://Worlds/LightMap12.png" type="Texture" id=19]
+[ext_resource path="res://Worlds/LightMap19.png" type="Texture" id=20]
+[ext_resource path="res://Worlds/LightMap20.png" type="Texture" id=21]
+[ext_resource path="res://Worlds/LightMap5.png" type="Texture" id=22]
+[ext_resource path="res://Worlds/LightMap13.png" type="Texture" id=23]
+[ext_resource path="res://Worlds/LightMap8.png" type="Texture" id=24]
+[ext_resource path="res://Worlds/LightMap14.png" type="Texture" id=25]
+[ext_resource path="res://Worlds/LightMap16.png" type="Texture" id=26]
+[ext_resource path="res://Worlds/LightMap21.png" type="Texture" id=27]
+[ext_resource path="res://Worlds/LightMap11.png" type="Texture" id=28]
+[ext_resource path="res://Worlds/LightMap.png" type="Texture" id=29]
+[ext_resource path="res://Worlds/LightMap2.png" type="Texture" id=30]
+[ext_resource path="res://Worlds/LightMap3.png" type="Texture" id=31]
+[ext_resource path="res://Worlds/LightMap4.png" type="Texture" id=32]
+[ext_resource path="res://Worlds/LightMap6.png" type="Texture" id=33]
+[ext_resource path="res://Worlds/LightMap7.png" type="Texture" id=34]
+[ext_resource path="res://Worlds/LightMap9.png" type="Texture" id=35]
+[ext_resource path="res://Worlds/LightMap10.png" type="Texture" id=36]
+[ext_resource path="res://Worlds/LightMap15.png" type="Texture" id=37]
+[ext_resource path="res://Worlds/LightMap17.png" type="Texture" id=38]
+[ext_resource path="res://Worlds/LightMap18.png" type="Texture" id=39]
+[ext_resource path="res://Worlds/LightMap22.png" type="Texture" id=40]
+[ext_resource path="res://Worlds/LightMap23.png" type="Texture" id=41]
+[ext_resource path="res://Worlds/LightMap24.png" type="Texture" id=42]
+[ext_resource path="res://Worlds/LightMap31.png" type="Texture" id=43]
+[ext_resource path="res://Worlds/LightMap32.png" type="Texture" id=44]
+[ext_resource path="res://Worlds/LightMap30.png" type="Texture" id=45]
+[ext_resource path="res://Worlds/LightMap37.png" type="Texture" id=46]
+[ext_resource path="res://Worlds/LightMap33.png" type="Texture" id=47]
+[ext_resource path="res://Worlds/LightMap34.png" type="Texture" id=48]
+[ext_resource path="res://Worlds/LightMap36.png" type="Texture" id=49]
+[ext_resource path="res://Worlds/LightMap38.png" type="Texture" id=50]
+[ext_resource path="res://Worlds/LightMap35.png" type="Texture" id=51]
+[ext_resource path="res://Worlds/LightMap46.png" type="Texture" id=52]
+[ext_resource path="res://Worlds/LightMap56.png" type="Texture" id=53]
+[ext_resource path="res://Worlds/LightMap41.png" type="Texture" id=54]
+[ext_resource path="res://Worlds/LightMap51.png" type="Texture" id=55]
+[ext_resource path="res://Worlds/LightMap45.png" type="Texture" id=56]
+[ext_resource path="res://Worlds/LightMap39.png" type="Texture" id=57]
+[ext_resource path="res://Worlds/LightMap53.png" type="Texture" id=58]
+[ext_resource path="res://Worlds/LightMap54.png" type="Texture" id=59]
+[ext_resource path="res://Worlds/LightMap64.png" type="Texture" id=60]
+[ext_resource path="res://Worlds/LightMap44.png" type="Texture" id=61]
+[ext_resource path="res://Worlds/LightMap52.png" type="Texture" id=62]
+[ext_resource path="res://Worlds/LightMap59.png" type="Texture" id=63]
+[ext_resource path="res://Worlds/LightMap40.png" type="Texture" id=64]
+[ext_resource path="res://Worlds/LightMap60.png" type="Texture" id=65]
+[ext_resource path="res://Worlds/LightMap48.png" type="Texture" id=66]
+[ext_resource path="res://Worlds/LightMap57.png" type="Texture" id=67]
+[ext_resource path="res://Worlds/LightMap47.png" type="Texture" id=68]
+[ext_resource path="res://Worlds/LightMap63.png" type="Texture" id=69]
+[ext_resource path="res://Worlds/LightMap42.png" type="Texture" id=70]
+[ext_resource path="res://Worlds/LightMap43.png" type="Texture" id=71]
+[ext_resource path="res://Worlds/LightMap61.png" type="Texture" id=72]
+[ext_resource path="res://Worlds/LightMap55.png" type="Texture" id=73]
+[ext_resource path="res://Worlds/LightMap62.png" type="Texture" id=74]
+[ext_resource path="res://Worlds/LightMap49.png" type="Texture" id=75]
+[ext_resource path="res://Worlds/LightMap50.png" type="Texture" id=76]
+[ext_resource path="res://Worlds/LightMap58.png" type="Texture" id=77]
+[ext_resource path="res://Assets/World/Grass/FlatGrass1.tscn" type="PackedScene" id=78]
+[ext_resource path="res://Assets/World/Grass/FlatGrass3.tscn" type="PackedScene" id=79]
+[ext_resource path="res://Assets/World/Grass/FlatGrass2.tscn" type="PackedScene" id=80]
+[ext_resource path="res://Assets/World/Grass/GrassFront2.tscn" type="PackedScene" id=81]
+[ext_resource path="res://Assets/World/Grass/GrassFront1.tscn" type="PackedScene" id=82]
+[ext_resource path="res://Assets/World/RockDecal.tscn" type="PackedScene" id=83]
+[ext_resource path="res://Assets/World/Petal.tscn" type="PackedScene" id=84]
+[ext_resource path="res://Worlds/LightMap179.png" type="Texture" id=85]
+[ext_resource path="res://Worlds/LightMap178.png" type="Texture" id=86]
+[ext_resource path="res://Worlds/LightMap92.png" type="Texture" id=87]
+[ext_resource path="res://Worlds/LightMap93.png" type="Texture" id=88]
+[ext_resource path="res://Worlds/LightMap94.png" type="Texture" id=89]
+[ext_resource path="res://Worlds/LightMap86.png" type="Texture" id=90]
+[ext_resource path="res://Worlds/LightMap96.png" type="Texture" id=91]
+[ext_resource path="res://Worlds/LightMap98.png" type="Texture" id=92]
+[ext_resource path="res://Worlds/LightMap99.png" type="Texture" id=93]
+[ext_resource path="res://Worlds/LightMap91.png" type="Texture" id=94]
+[ext_resource path="res://Worlds/LightMap97.png" type="Texture" id=95]
+[ext_resource path="res://Worlds/LightMap100.png" type="Texture" id=96]
+[ext_resource path="res://Worlds/LightMap81.png" type="Texture" id=97]
+[ext_resource path="res://Worlds/LightMap84.png" type="Texture" id=98]
+[ext_resource path="res://Worlds/LightMap87.png" type="Texture" id=99]
+[ext_resource path="res://Worlds/LightMap67.png" type="Texture" id=100]
+[ext_resource path="res://Worlds/LightMap68.png" type="Texture" id=101]
+[ext_resource path="res://Worlds/LightMap66.png" type="Texture" id=102]
+[ext_resource path="res://Worlds/LightMap72.png" type="Texture" id=103]
+[ext_resource path="res://Worlds/LightMap74.png" type="Texture" id=104]
+[ext_resource path="res://Worlds/LightMap75.png" type="Texture" id=105]
+[ext_resource path="res://Worlds/LightMap76.png" type="Texture" id=106]
+[ext_resource path="res://Worlds/LightMap78.png" type="Texture" id=107]
+[ext_resource path="res://Worlds/LightMap71.png" type="Texture" id=108]
+[ext_resource path="res://Worlds/LightMap79.png" type="Texture" id=109]
+[ext_resource path="res://Worlds/LightMap85.png" type="Texture" id=110]
+[ext_resource path="res://Worlds/LightMap95.png" type="Texture" id=111]
+[ext_resource path="res://Worlds/LightMap77.png" type="Texture" id=112]
+[ext_resource path="res://Worlds/LightMap83.png" type="Texture" id=113]
+[ext_resource path="res://Worlds/LightMap73.png" type="Texture" id=114]
+[ext_resource path="res://Worlds/LightMap82.png" type="Texture" id=115]
+[ext_resource path="res://Worlds/LightMap88.png" type="Texture" id=116]
+[ext_resource path="res://Worlds/LightMap69.png" type="Texture" id=117]
+[ext_resource path="res://Worlds/LightMap90.png" type="Texture" id=118]
+[ext_resource path="res://Worlds/LightMap80.png" type="Texture" id=119]
+[ext_resource path="res://Worlds/LightMap65.png" type="Texture" id=120]
+[ext_resource path="res://Worlds/LightMap89.png" type="Texture" id=121]
+[ext_resource path="res://Worlds/LightMap70.png" type="Texture" id=122]
+[ext_resource path="res://Worlds/LightMap150.png" type="Texture" id=123]
+[ext_resource path="res://Worlds/LightMap111.png" type="Texture" id=124]
+[ext_resource path="res://Worlds/LightMap127.png" type="Texture" id=125]
+[ext_resource path="res://Worlds/LightMap153.png" type="Texture" id=126]
+[ext_resource path="res://Worlds/LightMap154.png" type="Texture" id=127]
+[ext_resource path="res://Worlds/LightMap128.png" type="Texture" id=128]
+[ext_resource path="res://Worlds/LightMap157.png" type="Texture" id=129]
+[ext_resource path="res://Worlds/LightMap116.png" type="Texture" id=130]
+[ext_resource path="res://Worlds/LightMap124.png" type="Texture" id=131]
+[ext_resource path="res://Worlds/LightMap137.png" type="Texture" id=132]
+[ext_resource path="res://Worlds/LightMap161.png" type="Texture" id=133]
+[ext_resource path="res://Worlds/LightMap141.png" type="Texture" id=134]
+[ext_resource path="res://Worlds/LightMap106.png" type="Texture" id=135]
+[ext_resource path="res://Worlds/LightMap135.png" type="Texture" id=136]
+[ext_resource path="res://Worlds/LightMap144.png" type="Texture" id=137]
+[ext_resource path="res://Worlds/LightMap146.png" type="Texture" id=138]
+[ext_resource path="res://Worlds/LightMap149.png" type="Texture" id=139]
+[ext_resource path="res://Worlds/LightMap118.png" type="Texture" id=140]
+[ext_resource path="res://Worlds/LightMap136.png" type="Texture" id=141]
+[ext_resource path="res://Worlds/LightMap131.png" type="Texture" id=142]
+[ext_resource path="res://Worlds/LightMap133.png" type="Texture" id=143]
+[ext_resource path="res://Worlds/LightMap140.png" type="Texture" id=144]
+[ext_resource path="res://Worlds/LightMap101.png" type="Texture" id=145]
+[ext_resource path="res://Worlds/LightMap117.png" type="Texture" id=146]
+[ext_resource path="res://Worlds/LightMap151.png" type="Texture" id=147]
+[ext_resource path="res://Worlds/LightMap162.png" type="Texture" id=148]
+[ext_resource path="res://Worlds/LightMap108.png" type="Texture" id=149]
+[ext_resource path="res://Worlds/LightMap115.png" type="Texture" id=150]
+[ext_resource path="res://Worlds/LightMap163.png" type="Texture" id=151]
+[ext_resource path="res://Worlds/LightMap110.png" type="Texture" id=152]
+[ext_resource path="res://Worlds/LightMap120.png" type="Texture" id=153]
+[ext_resource path="res://Worlds/LightMap164.png" type="Texture" id=154]
+[ext_resource path="res://Worlds/LightMap119.png" type="Texture" id=155]
+[ext_resource path="res://Worlds/LightMap126.png" type="Texture" id=156]
+[ext_resource path="res://Worlds/LightMap107.png" type="Texture" id=157]
+[ext_resource path="res://Worlds/LightMap113.png" type="Texture" id=158]
+[ext_resource path="res://Worlds/LightMap132.png" type="Texture" id=159]
+[ext_resource path="res://Worlds/LightMap152.png" type="Texture" id=160]
+[ext_resource path="res://Worlds/LightMap134.png" type="Texture" id=161]
+[ext_resource path="res://Worlds/LightMap155.png" type="Texture" id=162]
+[ext_resource path="res://Worlds/LightMap105.png" type="Texture" id=163]
+[ext_resource path="res://Worlds/LightMap156.png" type="Texture" id=164]
+[ext_resource path="res://Worlds/LightMap102.png" type="Texture" id=165]
+[ext_resource path="res://Worlds/LightMap103.png" type="Texture" id=166]
+[ext_resource path="res://Worlds/LightMap158.png" type="Texture" id=167]
+[ext_resource path="res://Worlds/LightMap139.png" type="Texture" id=168]
+[ext_resource path="res://Worlds/LightMap125.png" type="Texture" id=169]
+[ext_resource path="res://Worlds/LightMap145.png" type="Texture" id=170]
+[ext_resource path="res://Worlds/LightMap109.png" type="Texture" id=171]
+[ext_resource path="res://Worlds/LightMap142.png" type="Texture" id=172]
+[ext_resource path="res://Worlds/LightMap159.png" type="Texture" id=173]
+[ext_resource path="res://Worlds/LightMap160.png" type="Texture" id=174]
+[ext_resource path="res://Worlds/LightMap121.png" type="Texture" id=175]
+[ext_resource path="res://Worlds/LightMap123.png" type="Texture" id=176]
+[ext_resource path="res://Worlds/LightMap143.png" type="Texture" id=177]
+[ext_resource path="res://Worlds/LightMap104.png" type="Texture" id=178]
+[ext_resource path="res://Worlds/LightMap112.png" type="Texture" id=179]
+[ext_resource path="res://Worlds/LightMap129.png" type="Texture" id=180]
+[ext_resource path="res://Worlds/LightMap130.png" type="Texture" id=181]
+[ext_resource path="res://Worlds/LightMap138.png" type="Texture" id=182]
+[ext_resource path="res://Worlds/LightMap147.png" type="Texture" id=183]
+[ext_resource path="res://Worlds/LightMap122.png" type="Texture" id=184]
+[ext_resource path="res://Worlds/LightMap114.png" type="Texture" id=185]
+[ext_resource path="res://Worlds/LightMap148.png" type="Texture" id=186]
+[ext_resource path="res://Worlds/LightMap174.png" type="Texture" id=187]
+[ext_resource path="res://Worlds/LightMap165.png" type="Texture" id=188]
+[ext_resource path="res://Worlds/LightMap166.png" type="Texture" id=189]
+[ext_resource path="res://Worlds/LightMap170.png" type="Texture" id=190]
+[ext_resource path="res://Worlds/LightMap168.png" type="Texture" id=191]
+[ext_resource path="res://Worlds/LightMap175.png" type="Texture" id=192]
+[ext_resource path="res://Worlds/LightMap176.png" type="Texture" id=193]
+[ext_resource path="res://Worlds/LightMap167.png" type="Texture" id=194]
+[ext_resource path="res://Worlds/LightMap171.png" type="Texture" id=195]
+[ext_resource path="res://Worlds/LightMap177.png" type="Texture" id=196]
+[ext_resource path="res://Worlds/LightMap169.png" type="Texture" id=197]
+[ext_resource path="res://Worlds/LightMap172.png" type="Texture" id=198]
+[ext_resource path="res://Worlds/LightMap173.png" type="Texture" id=199]
+[ext_resource path="res://Worlds/LightMap184.png" type="Texture" id=200]
+[ext_resource path="res://Worlds/LightMap207.png" type="Texture" id=201]
+[ext_resource path="res://Worlds/LightMap230.png" type="Texture" id=202]
+[ext_resource path="res://Worlds/LightMap242.png" type="Texture" id=203]
+[ext_resource path="res://Worlds/LightMap243.png" type="Texture" id=204]
+[ext_resource path="res://Worlds/LightMap204.png" type="Texture" id=205]
+[ext_resource path="res://Worlds/LightMap213.png" type="Texture" id=206]
+[ext_resource path="res://Worlds/LightMap237.png" type="Texture" id=207]
+[ext_resource path="res://Worlds/LightMap182.png" type="Texture" id=208]
+[ext_resource path="res://Worlds/LightMap210.png" type="Texture" id=209]
+[ext_resource path="res://Worlds/LightMap190.png" type="Texture" id=210]
+[ext_resource path="res://Worlds/LightMap185.png" type="Texture" id=211]
+[ext_resource path="res://Worlds/LightMap206.png" type="Texture" id=212]
+[ext_resource path="res://Worlds/LightMap211.png" type="Texture" id=213]
+[ext_resource path="res://Worlds/LightMap181.png" type="Texture" id=214]
+[ext_resource path="res://Worlds/LightMap187.png" type="Texture" id=215]
+[ext_resource path="res://Worlds/LightMap183.png" type="Texture" id=216]
+[ext_resource path="res://Worlds/LightMap189.png" type="Texture" id=217]
+[ext_resource path="res://Worlds/LightMap193.png" type="Texture" id=218]
+[ext_resource path="res://Worlds/LightMap194.png" type="Texture" id=219]
+[ext_resource path="res://Worlds/LightMap195.png" type="Texture" id=220]
+[ext_resource path="res://Worlds/LightMap196.png" type="Texture" id=221]
+[ext_resource path="res://Worlds/LightMap219.png" type="Texture" id=222]
+[ext_resource path="res://Worlds/LightMap199.png" type="Texture" id=223]
+[ext_resource path="res://Worlds/LightMap192.png" type="Texture" id=224]
+[ext_resource path="res://Worlds/LightMap215.png" type="Texture" id=225]
+[ext_resource path="res://Worlds/LightMap218.png" type="Texture" id=226]
+[ext_resource path="res://Worlds/LightMap212.png" type="Texture" id=227]
+[ext_resource path="res://Worlds/LightMap216.png" type="Texture" id=228]
+[ext_resource path="res://Worlds/LightMap208.png" type="Texture" id=229]
+[ext_resource path="res://Worlds/LightMap200.png" type="Texture" id=230]
+[ext_resource path="res://Worlds/LightMap217.png" type="Texture" id=231]
+[ext_resource path="res://Worlds/LightMap198.png" type="Texture" id=232]
+[ext_resource path="res://Worlds/LightMap223.png" type="Texture" id=233]
+[ext_resource path="res://Worlds/LightMap226.png" type="Texture" id=234]
+[ext_resource path="res://Worlds/LightMap186.png" type="Texture" id=235]
+[ext_resource path="res://Worlds/LightMap209.png" type="Texture" id=236]
+[ext_resource path="res://Worlds/LightMap227.png" type="Texture" id=237]
+[ext_resource path="res://Worlds/LightMap228.png" type="Texture" id=238]
+[ext_resource path="res://Worlds/LightMap229.png" type="Texture" id=239]
+[ext_resource path="res://Worlds/LightMap197.png" type="Texture" id=240]
+[ext_resource path="res://Worlds/LightMap220.png" type="Texture" id=241]
+[ext_resource path="res://Worlds/LightMap191.png" type="Texture" id=242]
+[ext_resource path="res://Worlds/LightMap225.png" type="Texture" id=243]
+[ext_resource path="res://Worlds/LightMap231.png" type="Texture" id=244]
+[ext_resource path="res://Worlds/LightMap234.png" type="Texture" id=245]
+[ext_resource path="res://Worlds/LightMap235.png" type="Texture" id=246]
+[ext_resource path="res://Worlds/LightMap233.png" type="Texture" id=247]
+[ext_resource path="res://Worlds/LightMap236.png" type="Texture" id=248]
+[ext_resource path="res://Worlds/LightMap238.png" type="Texture" id=249]
+[ext_resource path="res://Worlds/LightMap239.png" type="Texture" id=250]
+[ext_resource path="res://Worlds/LightMap202.png" type="Texture" id=251]
+[ext_resource path="res://Worlds/LightMap188.png" type="Texture" id=252]
+[ext_resource path="res://Worlds/LightMap203.png" type="Texture" id=253]
+[ext_resource path="res://Worlds/LightMap205.png" type="Texture" id=254]
+[ext_resource path="res://Worlds/LightMap214.png" type="Texture" id=255]
+[ext_resource path="res://Worlds/LightMap221.png" type="Texture" id=256]
+[ext_resource path="res://Worlds/LightMap222.png" type="Texture" id=257]
+[ext_resource path="res://Worlds/LightMap180.png" type="Texture" id=258]
+[ext_resource path="res://Worlds/LightMap201.png" type="Texture" id=259]
+[ext_resource path="res://Worlds/LightMap232.png" type="Texture" id=260]
+[ext_resource path="res://Worlds/LightMap224.png" type="Texture" id=261]
+[ext_resource path="res://Worlds/LightMap240.png" type="Texture" id=262]
+[ext_resource path="res://Worlds/LightMap241.png" type="Texture" id=263]
+[ext_resource path="res://Worlds/LightMap268.png" type="Texture" id=264]
+[ext_resource path="res://Worlds/LightMap270.png" type="Texture" id=265]
+[ext_resource path="res://Worlds/LightMap262.png" type="Texture" id=266]
+[ext_resource path="res://Worlds/LightMap246.png" type="Texture" id=267]
+[ext_resource path="res://Worlds/LightMap269.png" type="Texture" id=268]
+[ext_resource path="res://Worlds/LightMap259.png" type="Texture" id=269]
+[ext_resource path="res://Worlds/LightMap271.png" type="Texture" id=270]
+[ext_resource path="res://Worlds/LightMap250.png" type="Texture" id=271]
+[ext_resource path="res://Worlds/LightMap256.png" type="Texture" id=272]
+[ext_resource path="res://Worlds/LightMap247.png" type="Texture" id=273]
+[ext_resource path="res://Worlds/LightMap264.png" type="Texture" id=274]
+[ext_resource path="res://Worlds/LightMap263.png" type="Texture" id=275]
+[ext_resource path="res://Worlds/LightMap249.png" type="Texture" id=276]
+[ext_resource path="res://Worlds/LightMap244.png" type="Texture" id=277]
+[ext_resource path="res://Worlds/LightMap251.png" type="Texture" id=278]
+[ext_resource path="res://Worlds/LightMap252.png" type="Texture" id=279]
+[ext_resource path="res://Worlds/LightMap258.png" type="Texture" id=280]
+[ext_resource path="res://Worlds/LightMap260.png" type="Texture" id=281]
+[ext_resource path="res://Worlds/LightMap267.png" type="Texture" id=282]
+[ext_resource path="res://Worlds/LightMap272.png" type="Texture" id=283]
+[ext_resource path="res://Worlds/LightMap253.png" type="Texture" id=284]
+[ext_resource path="res://Worlds/LightMap254.png" type="Texture" id=285]
+[ext_resource path="res://Worlds/LightMap261.png" type="Texture" id=286]
+[ext_resource path="res://Worlds/LightMap257.png" type="Texture" id=287]
+[ext_resource path="res://Worlds/LightMap255.png" type="Texture" id=288]
+[ext_resource path="res://Worlds/LightMap245.png" type="Texture" id=289]
+[ext_resource path="res://Worlds/LightMap248.png" type="Texture" id=290]
+[ext_resource path="res://Worlds/LightMap265.png" type="Texture" id=291]
+[ext_resource path="res://Worlds/LightMap266.png" type="Texture" id=292]
+[ext_resource path="res://Assets/World/Grass/PinkFlower.tscn" type="PackedScene" id=293]
+[ext_resource path="res://Assets/World/Grass/BlueFlower.tscn" type="PackedScene" id=294]
+[ext_resource path="res://Theme.tscn" type="PackedScene" id=295]
+[ext_resource path="res://AZenStart.wav" type="AudioStream" id=296]
+[ext_resource path="res://A Zen KO Final-loop.wav" type="AudioStream" id=297]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+
+[sub_resource type="ParticlesMaterial" id=5]
+
+[sub_resource type="BakedLightmapData" id=6]
+bounds = AABB( -12.75, -10, -12.75, 25.5, 20, 25.5 )
+cell_space_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.75, 10, 12.75 )
+cell_subdiv = 6
+octree = PoolByteArray( 33, 0, 31, 0, 33, 0, 22, 0, 21, 0, 22, 0, 125, 0, 117, 0, 123, 0, 61, 0, 57, 0, 61, 0, 32, 0, 30, 0, 32, 0, 21, 0, 19, 0, 20, 0, 0, 0, 160, 59, 7, 0, 0, 0, 1, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 70, 0, 0, 0, 19, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 54, 0, 50, 0, 53, 0, 13, 0, 12, 0, 12, 0, 119, 0, 112, 0, 118, 0, 63, 0, 58, 0, 62, 0, 33, 0, 31, 0, 33, 0, 42, 0, 39, 0, 41, 0, 0, 0, 16, 60, 255, 255, 255, 255, 255, 255, 255, 255, 197, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 2, 0, 0, 0, 255, 255, 255, 255, 2, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1, 0, 144, 0, 134, 0, 142, 0, 56, 0, 52, 0, 55, 0, 8, 0, 8, 0, 8, 0, 10, 0, 9, 0, 10, 0, 0, 0, 96, 61, 217, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 3, 0, 0, 0, 39, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 8, 0, 7, 0, 8, 0, 5, 0, 5, 0, 5, 0, 148, 0, 138, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 62, 255, 255, 255, 255, 255, 255, 255, 255, 27, 0, 0, 0, 32, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 4, 0, 0, 0, 255, 255, 255, 255, 24, 0, 23, 0, 24, 0, 16, 0, 15, 0, 16, 0, 139, 0, 130, 0, 137, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 13, 0, 0, 0, 25, 0, 0, 0, 14, 0, 0, 0, 26, 0, 0, 0, 5, 0, 0, 0, 17, 0, 0, 0, 6, 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 4, 0, 4, 0, 4, 0, 13, 0, 12, 0, 13, 0, 133, 0, 125, 0, 132, 0, 48, 0, 45, 0, 47, 0, 17, 0, 16, 0, 17, 0, 28, 0, 26, 0, 28, 0, 0, 0, 144, 60, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 157, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 110, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 16, 0, 17, 0, 145, 0, 135, 0, 143, 0, 76, 0, 71, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 160, 60, 181, 0, 0, 0, 209, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 9, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 53, 0, 50, 0, 53, 0, 130, 0, 121, 0, 128, 0, 76, 0, 71, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 53, 0, 50, 0, 53, 0, 130, 0, 121, 0, 128, 0, 76, 0, 71, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 255, 11, 0, 0, 0, 255, 255, 255, 255, 12, 0, 0, 0, 255, 255, 255, 255, 15, 0, 0, 0, 255, 255, 255, 255, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 215, 0, 201, 0, 212, 0, 215, 0, 201, 0, 212, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 131, 0, 122, 0, 129, 0, 19, 1, 1, 1, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 71, 0, 66, 0, 70, 0, 49, 0, 46, 0, 49, 0, 113, 0, 106, 0, 112, 0, 39, 0, 37, 0, 39, 0, 45, 0, 42, 0, 44, 0, 8, 0, 7, 0, 7, 0, 0, 0, 192, 59, 255, 255, 255, 255, 255, 255, 255, 255, 20, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 71, 0, 66, 0, 70, 0, 49, 0, 46, 0, 49, 0, 113, 0, 106, 0, 112, 0, 39, 0, 37, 0, 39, 0, 45, 0, 42, 0, 44, 0, 8, 0, 7, 0, 7, 0, 0, 0, 64, 61, 21, 0, 0, 0, 35, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 71, 0, 66, 0, 70, 0, 121, 0, 113, 0, 120, 0, 18, 0, 17, 0, 18, 0, 65, 0, 61, 0, 64, 0, 10, 0, 10, 0, 10, 0, 0, 0, 0, 62, 255, 255, 255, 255, 255, 255, 255, 255, 22, 0, 0, 0, 51, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 23, 0, 0, 0, 255, 255, 255, 255, 24, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 198, 0, 185, 0, 196, 0, 0, 0, 0, 0, 0, 0, 231, 0, 216, 0, 228, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 255, 30, 0, 0, 0, 255, 255, 255, 255, 31, 0, 0, 0, 255, 255, 255, 255, 28, 0, 0, 0, 255, 255, 255, 255, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 33, 0, 0, 0, 255, 255, 255, 255, 34, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 142, 0, 133, 0, 140, 0, 28, 0, 26, 0, 27, 0, 105, 0, 98, 0, 103, 0, 61, 0, 57, 0, 60, 0, 24, 0, 22, 0, 24, 0, 5, 0, 4, 0, 4, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 36, 0, 0, 0, 65, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 56, 0, 0, 0, 62, 0, 0, 0, 28, 0, 27, 0, 28, 0, 14, 0, 13, 0, 14, 0, 133, 0, 124, 0, 131, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 18, 0, 19, 0, 0, 0, 128, 63, 37, 0, 0, 0, 43, 0, 0, 0, 38, 0, 0, 0, 44, 0, 0, 0, 47, 0, 0, 0, 49, 0, 0, 0, 48, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 107, 0, 100, 0, 105, 0, 29, 1, 10, 1, 26, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 76, 0, 71, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 40, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 76, 0, 71, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 41, 0, 0, 0, 45, 0, 0, 0, 42, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 215, 0, 201, 0, 212, 0, 0, 0, 0, 0, 0, 0, 215, 0, 201, 0, 212, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 12, 0, 11, 0, 12, 0, 48, 1, 28, 1, 44, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 16, 0, 15, 0, 15, 0, 0, 0, 0, 0, 0, 0, 2, 1, 241, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 161, 0, 150, 0, 159, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 19, 0, 18, 0, 19, 0, 142, 0, 132, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 30, 0, 32, 0, 0, 0, 0, 63, 255, 255, 255, 255, 54, 0, 0, 0, 255, 255, 255, 255, 55, 0, 0, 0, 255, 255, 255, 255, 52, 0, 0, 0, 255, 255, 255, 255, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 79, 0, 73, 0, 78, 0, 7, 1, 246, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 131, 0, 123, 0, 130, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 137, 0, 128, 0, 136, 0, 97, 0, 91, 0, 96, 0, 72, 0, 67, 0, 71, 0, 55, 0, 51, 0, 54, 0, 98, 0, 91, 0, 97, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 57, 0, 0, 0, 68, 0, 0, 0, 58, 0, 0, 0, 69, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 28, 1, 10, 1, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 109, 0, 102, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 10, 1, 249, 0, 7, 1, 0, 0, 0, 0, 0, 0, 148, 0, 138, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 194, 0, 182, 0, 192, 0, 70, 0, 65, 0, 69, 0, 56, 0, 52, 0, 55, 0, 196, 0, 183, 0, 194, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 60, 0, 0, 0, 255, 255, 255, 255, 61, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 208, 0, 194, 0, 205, 0, 0, 0, 0, 0, 0, 0, 112, 0, 104, 0, 110, 0, 192, 0, 179, 0, 189, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 181, 0, 169, 0, 178, 0, 140, 0, 131, 0, 139, 0, 0, 0, 0, 0, 0, 0, 201, 0, 187, 0, 198, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 19, 1, 1, 1, 16, 1, 0, 0, 0, 0, 0, 0, 74, 0, 69, 0, 73, 0, 54, 0, 51, 0, 54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 63, 0, 0, 0, 255, 255, 255, 255, 64, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 28, 1, 10, 1, 25, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 109, 0, 102, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 10, 1, 249, 0, 7, 1, 0, 0, 0, 0, 0, 0, 148, 0, 138, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 128, 0, 120, 0, 126, 0, 0, 0, 0, 0, 0, 0, 141, 0, 132, 0, 139, 0, 134, 0, 125, 0, 132, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 66, 0, 0, 0, 255, 255, 255, 255, 67, 0, 0, 0, 255, 255, 255, 255, 143, 0, 134, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, 251, 0, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 113, 0, 105, 0, 111, 0, 0, 0, 0, 0, 0, 0, 27, 1, 8, 1, 23, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 208, 0, 194, 0, 205, 0, 0, 0, 0, 0, 0, 0, 112, 0, 104, 0, 110, 0, 192, 0, 179, 0, 189, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 181, 0, 169, 0, 178, 0, 140, 0, 131, 0, 139, 0, 0, 0, 0, 0, 0, 0, 201, 0, 187, 0, 198, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 3, 0, 3, 0, 3, 0, 13, 0, 12, 0, 13, 0, 134, 0, 125, 0, 132, 0, 96, 0, 89, 0, 94, 0, 35, 0, 33, 0, 35, 0, 5, 0, 4, 0, 5, 0, 0, 0, 224, 59, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 71, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 3, 0, 3, 0, 3, 0, 13, 0, 12, 0, 13, 0, 134, 0, 125, 0, 132, 0, 96, 0, 89, 0, 94, 0, 35, 0, 33, 0, 35, 0, 5, 0, 4, 0, 5, 0, 0, 0, 96, 61, 255, 255, 255, 255, 76, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 97, 0, 0, 0, 72, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 11, 0, 11, 0, 11, 0, 40, 0, 38, 0, 40, 0, 98, 0, 92, 0, 97, 0, 59, 0, 55, 0, 58, 0, 106, 0, 99, 0, 105, 0, 15, 0, 14, 0, 15, 0, 0, 0, 160, 62, 255, 255, 255, 255, 255, 255, 255, 255, 84, 0, 0, 0, 73, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 94, 0, 0, 0, 89, 0, 0, 0, 47, 0, 44, 0, 46, 0, 17, 0, 15, 0, 16, 0, 136, 0, 127, 0, 134, 0, 69, 0, 64, 0, 68, 0, 21, 0, 19, 0, 20, 0, 28, 0, 26, 0, 27, 0, 0, 0, 128, 63, 80, 0, 0, 0, 74, 0, 0, 0, 81, 0, 0, 0, 75, 0, 0, 0, 82, 0, 0, 0, 87, 0, 0, 0, 83, 0, 0, 0, 88, 0, 0, 0, 150, 0, 140, 0, 148, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 0, 237, 0, 251, 0, 0, 0, 0, 0, 0, 0, 75, 0, 70, 0, 74, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 105, 0, 98, 0, 104, 0, 0, 0, 0, 0, 0, 0, 28, 1, 9, 1, 24, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 29, 0, 31, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 77, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 78, 0, 0, 0, 255, 255, 255, 255, 79, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 136, 0, 127, 0, 135, 0, 4, 1, 242, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 76, 0, 81, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 253, 0, 237, 0, 250, 0, 0, 0, 0, 0, 0, 0, 169, 0, 158, 0, 167, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 146, 0, 136, 0, 144, 0, 93, 0, 86, 0, 91, 0, 18, 0, 17, 0, 18, 0, 0, 0, 0, 0, 0, 0, 32, 0, 30, 0, 32, 0, 0, 0, 0, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 92, 0, 0, 0, 85, 0, 0, 0, 93, 0, 0, 0, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 1, 20, 1, 36, 1, 0, 0, 0, 0, 0, 0, 74, 0, 69, 0, 73, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 33, 1, 14, 1, 29, 1, 96, 0, 90, 0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 50, 0, 46, 0, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 1, 25, 1, 41, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 73, 0, 68, 0, 72, 0, 0, 0, 0, 0, 0, 0, 37, 1, 18, 1, 34, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 34, 0, 36, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 0, 45, 0, 47, 0, 37, 0, 34, 0, 36, 0, 36, 1, 17, 1, 32, 1, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 90, 0, 0, 0, 255, 255, 255, 255, 91, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 0, 69, 0, 73, 0, 40, 1, 20, 1, 36, 1, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 0, 90, 0, 95, 0, 0, 0, 0, 0, 0, 0, 33, 1, 14, 1, 29, 1, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 1, 1, 1, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 131, 0, 122, 0, 129, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0, 109, 0, 115, 0, 113, 0, 105, 0, 111, 0, 113, 0, 106, 0, 112, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 63, 95, 0, 0, 0, 103, 0, 0, 0, 96, 0, 0, 0, 104, 0, 0, 0, 101, 0, 0, 0, 255, 255, 255, 255, 102, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 1, 25, 1, 41, 1, 48, 0, 45, 0, 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 1, 25, 1, 41, 1, 0, 0, 0, 0, 0, 0, 48, 0, 45, 0, 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 76, 0, 71, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 192, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 98, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 108, 0, 0, 0, 99, 0, 0, 0, 109, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 0, 69, 0, 73, 0, 40, 1, 20, 1, 36, 1, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 0, 90, 0, 95, 0, 0, 0, 0, 0, 0, 0, 33, 1, 14, 1, 29, 1, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 106, 0, 0, 0, 255, 255, 255, 255, 107, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 1, 0, 1, 0, 1, 0, 4, 0, 4, 0, 4, 0, 117, 0, 109, 0, 115, 0, 29, 0, 27, 0, 29, 0, 26, 0, 24, 0, 26, 0, 71, 0, 66, 0, 70, 0, 0, 0, 136, 61, 142, 0, 0, 0, 138, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 128, 0, 0, 0, 111, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 146, 0, 136, 0, 144, 0, 87, 0, 82, 0, 86, 0, 18, 0, 17, 0, 18, 0, 12, 0, 11, 0, 12, 0, 0, 0, 160, 62, 255, 255, 255, 255, 255, 255, 255, 255, 112, 0, 0, 0, 118, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 114, 0, 0, 0, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 139, 0, 129, 0, 137, 0, 0, 0, 0, 0, 0, 0, 15, 0, 14, 0, 15, 0, 31, 0, 29, 0, 31, 0, 0, 0, 64, 63, 153, 0, 0, 0, 155, 0, 0, 0, 154, 0, 0, 0, 156, 0, 0, 0, 255, 255, 255, 255, 113, 0, 0, 0, 255, 255, 255, 255, 117, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 146, 0, 137, 0, 144, 0, 101, 0, 95, 0, 100, 0, 23, 0, 21, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 63, 134, 0, 0, 0, 115, 0, 0, 0, 135, 0, 0, 0, 116, 0, 0, 0, 136, 0, 0, 0, 255, 255, 255, 255, 137, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 1, 252, 0, 11, 1, 0, 0, 0, 0, 0, 0, 141, 0, 131, 0, 139, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 238, 0, 222, 0, 235, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 190, 0, 178, 0, 188, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 119, 0, 0, 0, 255, 255, 255, 255, 120, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 146, 0, 137, 0, 144, 0, 97, 0, 90, 0, 96, 0, 36, 0, 34, 0, 36, 0, 17, 0, 16, 0, 17, 0, 0, 0, 64, 63, 124, 0, 0, 0, 255, 255, 255, 255, 125, 0, 0, 0, 255, 255, 255, 255, 122, 0, 0, 0, 126, 0, 0, 0, 123, 0, 0, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 1, 4, 1, 19, 1, 123, 0, 115, 0, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 1, 14, 1, 29, 1, 0, 0, 0, 0, 0, 0, 96, 0, 90, 0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 1, 10, 1, 26, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 100, 0, 105, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 6, 0, 6, 0, 6, 0, 18, 0, 17, 0, 18, 0, 114, 0, 106, 0, 112, 0, 12, 0, 11, 0, 11, 0, 87, 0, 81, 0, 85, 0, 19, 0, 18, 0, 19, 0, 0, 0, 0, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 148, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 87, 0, 92, 0, 24, 0, 22, 0, 23, 0, 143, 0, 133, 0, 141, 0, 38, 0, 36, 0, 38, 0, 0, 0, 0, 63, 255, 255, 255, 255, 130, 0, 0, 0, 255, 255, 255, 255, 131, 0, 0, 0, 255, 255, 255, 255, 132, 0, 0, 0, 255, 255, 255, 255, 133, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 245, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 154, 0, 144, 0, 152, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 0, 90, 0, 95, 0, 33, 1, 14, 1, 29, 1, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 113, 0, 105, 0, 111, 0, 0, 0, 0, 0, 0, 0, 27, 1, 8, 1, 23, 1, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 93, 0, 99, 0, 18, 0, 17, 0, 18, 0, 0, 0, 0, 0, 0, 0, 146, 0, 136, 0, 144, 0, 0, 0, 128, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 139, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 93, 0, 99, 0, 18, 0, 17, 0, 18, 0, 0, 0, 0, 0, 0, 0, 146, 0, 136, 0, 144, 0, 0, 0, 0, 63, 146, 0, 0, 0, 255, 255, 255, 255, 147, 0, 0, 0, 255, 255, 255, 255, 140, 0, 0, 0, 255, 255, 255, 255, 141, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 100, 0, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 100, 0, 106, 0, 0, 0, 0, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 143, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 100, 0, 106, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 100, 0, 106, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 144, 0, 0, 0, 255, 255, 255, 255, 145, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 215, 0, 201, 0, 212, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 215, 0, 201, 0, 212, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 0, 69, 0, 73, 0, 0, 0, 0, 0, 0, 0, 40, 1, 20, 1, 36, 1, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 0, 90, 0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 1, 14, 1, 29, 1, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 13, 0, 12, 0, 13, 0, 37, 0, 35, 0, 37, 0, 134, 0, 125, 0, 132, 0, 0, 0, 0, 0, 0, 0, 30, 0, 28, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 151, 0, 0, 0, 149, 0, 0, 0, 152, 0, 0, 0, 150, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 54, 0, 51, 0, 54, 0, 0, 0, 0, 0, 0, 0, 17, 1, 255, 0, 14, 1, 0, 0, 0, 0, 0, 0, 123, 0, 115, 0, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 151, 0, 141, 0, 149, 0, 8, 1, 247, 0, 5, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 1, 15, 1, 31, 1, 0, 0, 0, 0, 0, 0, 91, 0, 85, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 12, 0, 11, 0, 12, 0, 18, 0, 17, 0, 18, 0, 139, 0, 130, 0, 137, 0, 38, 0, 36, 0, 38, 0, 26, 0, 24, 0, 25, 0, 15, 0, 14, 0, 14, 0, 0, 0, 96, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 162, 0, 0, 0, 158, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 25, 0, 23, 0, 25, 0, 149, 0, 139, 0, 147, 0, 31, 0, 29, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 62, 255, 255, 255, 255, 255, 255, 255, 255, 166, 0, 0, 0, 187, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 159, 0, 0, 0, 194, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 160, 0, 0, 0, 255, 255, 255, 255, 161, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 25, 0, 23, 0, 24, 0, 11, 0, 10, 0, 11, 0, 129, 0, 120, 0, 127, 0, 45, 0, 42, 0, 45, 0, 52, 0, 49, 0, 51, 0, 30, 0, 28, 0, 29, 0, 0, 0, 96, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 169, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 176, 0, 0, 0, 163, 0, 0, 0, 75, 0, 70, 0, 74, 0, 34, 0, 32, 0, 34, 0, 123, 0, 115, 0, 121, 0, 71, 0, 66, 0, 70, 0, 90, 0, 84, 0, 88, 0, 27, 0, 25, 0, 27, 0, 0, 0, 128, 63, 172, 0, 0, 0, 164, 0, 0, 0, 173, 0, 0, 0, 165, 0, 0, 0, 174, 0, 0, 0, 185, 0, 0, 0, 175, 0, 0, 0, 186, 0, 0, 0, 143, 0, 134, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 0, 237, 0, 250, 0, 0, 0, 0, 0, 0, 0, 88, 0, 82, 0, 87, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 108, 0, 100, 0, 106, 0, 0, 0, 0, 0, 0, 0, 20, 1, 2, 1, 16, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 67, 0, 71, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 167, 0, 0, 0, 255, 255, 255, 255, 168, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 170, 0, 0, 0, 255, 255, 255, 255, 171, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 88, 0, 82, 0, 87, 0, 29, 1, 11, 1, 26, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, 0, 55, 0, 58, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 114, 0, 106, 0, 112, 0, 0, 0, 0, 0, 0, 0, 213, 0, 199, 0, 211, 0, 185, 0, 173, 0, 182, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 73, 0, 68, 0, 72, 0, 19, 1, 0, 1, 15, 1, 0, 0, 0, 0, 0, 0, 110, 0, 102, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 112, 0, 105, 0, 110, 0, 66, 0, 61, 0, 65, 0, 67, 0, 63, 0, 67, 0, 63, 0, 59, 0, 62, 0, 0, 0, 0, 63, 255, 255, 255, 255, 177, 0, 0, 0, 255, 255, 255, 255, 178, 0, 0, 0, 255, 255, 255, 255, 179, 0, 0, 0, 255, 255, 255, 255, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 169, 0, 158, 0, 167, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 253, 0, 237, 0, 250, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1, 247, 0, 5, 1, 151, 0, 141, 0, 149, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 1, 6, 1, 20, 1, 0, 0, 0, 0, 0, 0, 120, 0, 112, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61, 255, 255, 255, 255, 255, 255, 255, 255, 182, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 183, 0, 0, 0, 255, 255, 255, 255, 184, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 203, 0, 190, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 95, 0, 100, 0, 203, 0, 190, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 148, 0, 138, 0, 146, 0, 0, 0, 0, 0, 0, 0, 148, 0, 138, 0, 146, 0, 0, 0, 0, 0, 0, 0, 222, 0, 207, 0, 219, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 63, 255, 255, 255, 255, 190, 0, 0, 0, 255, 255, 255, 255, 191, 0, 0, 0, 192, 0, 0, 0, 188, 0, 0, 0, 193, 0, 0, 0, 189, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 101, 0, 95, 0, 100, 0, 138, 0, 129, 0, 136, 0, 126, 0, 118, 0, 124, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 255, 195, 0, 0, 0, 255, 255, 255, 255, 196, 0, 0, 0, 255, 255, 255, 255, 213, 0, 0, 0, 255, 255, 255, 255, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 229, 0, 214, 0, 226, 0, 0, 0, 0, 0, 0, 0, 200, 0, 187, 0, 198, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 177, 0, 165, 0, 175, 0, 248, 0, 232, 0, 245, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 106, 0, 99, 0, 104, 0, 24, 0, 22, 0, 24, 0, 95, 0, 89, 0, 94, 0, 69, 0, 64, 0, 68, 0, 58, 0, 54, 0, 57, 0, 74, 0, 69, 0, 73, 0, 0, 0, 128, 60, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 198, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 106, 0, 99, 0, 104, 0, 24, 0, 22, 0, 24, 0, 95, 0, 89, 0, 94, 0, 69, 0, 64, 0, 68, 0, 58, 0, 54, 0, 57, 0, 74, 0, 69, 0, 73, 0, 0, 0, 0, 62, 255, 255, 255, 255, 255, 255, 255, 255, 202, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 199, 0, 0, 0, 255, 255, 255, 255, 112, 0, 105, 0, 111, 0, 0, 0, 0, 0, 0, 0, 126, 0, 118, 0, 125, 0, 113, 0, 106, 0, 112, 0, 116, 0, 109, 0, 115, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 200, 0, 0, 0, 205, 0, 0, 0, 201, 0, 0, 0, 206, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 45, 0, 42, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 1, 1, 1, 16, 1, 122, 0, 114, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 16, 0, 15, 0, 15, 0, 0, 0, 0, 0, 0, 0, 33, 1, 14, 1, 29, 1, 0, 0, 0, 0, 0, 0, 96, 0, 90, 0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 99, 0, 93, 0, 98, 0, 48, 0, 45, 0, 48, 0, 65, 0, 60, 0, 64, 0, 25, 0, 23, 0, 25, 0, 0, 0, 0, 0, 0, 0, 148, 0, 138, 0, 146, 0, 0, 0, 0, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 203, 0, 0, 0, 207, 0, 0, 0, 204, 0, 0, 0, 208, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 195, 0, 182, 0, 192, 0, 130, 0, 121, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 195, 0, 182, 0, 192, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 210, 0, 196, 0, 208, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 178, 0, 166, 0, 176, 0, 129, 0, 121, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 178, 0, 166, 0, 175, 0, 0, 0, 0, 0, 0, 0, 217, 0, 203, 0, 214, 0, 0, 0, 0, 0, 0, 0, 118, 0, 110, 0, 117, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 203, 0, 190, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 95, 0, 100, 0, 0, 0, 0, 0, 0, 0, 203, 0, 190, 0, 200, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 195, 0, 182, 0, 192, 0, 0, 0, 0, 0, 0, 0, 130, 0, 121, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 195, 0, 182, 0, 192, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 61, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 210, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 215, 0, 0, 0, 211, 0, 0, 0, 216, 0, 0, 0, 212, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 131, 0, 122, 0, 129, 0, 93, 0, 87, 0, 92, 0, 25, 0, 24, 0, 25, 0, 31, 0, 29, 0, 30, 0, 0, 0, 32, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 218, 0, 0, 0, 227, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 110, 0, 102, 0, 108, 0, 34, 0, 32, 0, 34, 0, 51, 0, 48, 0, 50, 0, 62, 0, 58, 0, 61, 0, 0, 0, 128, 63, 221, 0, 0, 0, 225, 0, 0, 0, 222, 0, 0, 0, 226, 0, 0, 0, 219, 0, 0, 0, 223, 0, 0, 0, 220, 0, 0, 0, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 238, 0, 222, 0, 235, 0, 0, 0, 0, 0, 0, 0, 190, 0, 178, 0, 188, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 183, 0, 171, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 244, 0, 228, 0, 240, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 1, 4, 1, 19, 1, 123, 0, 115, 0, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 1, 14, 1, 29, 1, 0, 0, 0, 0, 0, 0, 96, 0, 90, 0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 169, 0, 158, 0, 167, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 253, 0, 237, 0, 250, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 152, 0, 142, 0, 150, 0, 152, 0, 142, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 62, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 228, 0, 0, 0, 255, 255, 255, 255, 229, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 1, 29, 1, 45, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255 )
+user_data = [ NodePath("../Environment/Grass/GrassCluster/Grass/grass_tall1"), ExtResource( 29 ), -1, NodePath("../Environment/Grass/GrassCluster/Grass2/grass_tall1"), ExtResource( 30 ), -1, NodePath("../Environment/Grass/GrassCluster/Grass4/grass_tall1"), ExtResource( 31 ), -1, NodePath("../Environment/Grass/GrassCluster/Grass5/grass_tall1"), ExtResource( 32 ), -1, NodePath("../Environment/Grass/GrassCluster/Grass6/grass_tall1"), ExtResource( 22 ), -1, NodePath("../Environment/Grass/GrassCluster/Grass7/grass_tall1"), ExtResource( 33 ), -1, NodePath("../Environment/Grass/GrassCluster/Grass8/grass_tall1"), ExtResource( 34 ), -1, NodePath("../Environment/Grass/GrassCluster/Grass3/grass_tall1"), ExtResource( 24 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass/grass_tall1"), ExtResource( 35 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass2/grass_tall1"), ExtResource( 36 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass4/grass_tall1"), ExtResource( 28 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass5/grass_tall1"), ExtResource( 19 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass6/grass_tall1"), ExtResource( 23 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass7/grass_tall1"), ExtResource( 25 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass8/grass_tall1"), ExtResource( 37 ), -1, NodePath("../Environment/Grass/GrassCluster2/Grass3/grass_tall1"), ExtResource( 26 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass/grass_tall1"), ExtResource( 38 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass2/grass_tall1"), ExtResource( 39 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass4/grass_tall1"), ExtResource( 20 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass5/grass_tall1"), ExtResource( 21 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass6/grass_tall1"), ExtResource( 27 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass7/grass_tall1"), ExtResource( 40 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass8/grass_tall1"), ExtResource( 41 ), -1, NodePath("../Environment/Grass/GrassCluster3/Grass3/grass_tall1"), ExtResource( 42 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass/grass_tall1"), ExtResource( 18 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass2/grass_tall1"), ExtResource( 16 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass4/grass_tall1"), ExtResource( 17 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass5/grass_tall1"), ExtResource( 2 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass6/grass_tall1"), ExtResource( 13 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass7/grass_tall1"), ExtResource( 45 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass8/grass_tall1"), ExtResource( 43 ), -1, NodePath("../Environment/Grass/GrassCluster4/Grass3/grass_tall1"), ExtResource( 44 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass/grass_tall1"), ExtResource( 47 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass2/grass_tall1"), ExtResource( 48 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass4/grass_tall1"), ExtResource( 51 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass5/grass_tall1"), ExtResource( 49 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass6/grass_tall1"), ExtResource( 46 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass7/grass_tall1"), ExtResource( 50 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass8/grass_tall1"), ExtResource( 57 ), -1, NodePath("../Environment/Grass/GrassCluster5/Grass3/grass_tall1"), ExtResource( 64 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass/grass_tall1"), ExtResource( 54 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass2/grass_tall1"), ExtResource( 70 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass4/grass_tall1"), ExtResource( 71 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass5/grass_tall1"), ExtResource( 61 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass6/grass_tall1"), ExtResource( 56 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass7/grass_tall1"), ExtResource( 52 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass8/grass_tall1"), ExtResource( 68 ), -1, NodePath("../Environment/Grass/GrassCluster6/Grass3/grass_tall1"), ExtResource( 66 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass/grass_tall1"), ExtResource( 75 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass2/grass_tall1"), ExtResource( 76 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass4/grass_tall1"), ExtResource( 55 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass5/grass_tall1"), ExtResource( 62 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass6/grass_tall1"), ExtResource( 58 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass7/grass_tall1"), ExtResource( 59 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass8/grass_tall1"), ExtResource( 73 ), -1, NodePath("../Environment/Grass/GrassCluster7/Grass3/grass_tall1"), ExtResource( 53 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass/grass_tall1"), ExtResource( 67 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass2/grass_tall1"), ExtResource( 77 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass4/grass_tall1"), ExtResource( 63 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass5/grass_tall1"), ExtResource( 65 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass6/grass_tall1"), ExtResource( 72 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass7/grass_tall1"), ExtResource( 74 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass8/grass_tall1"), ExtResource( 69 ), -1, NodePath("../Environment/Grass/GrassCluster8/Grass3/grass_tall1"), ExtResource( 60 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass/grass_tall1"), ExtResource( 120 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass2/grass_tall1"), ExtResource( 102 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass4/grass_tall1"), ExtResource( 100 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass5/grass_tall1"), ExtResource( 101 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass6/grass_tall1"), ExtResource( 117 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass7/grass_tall1"), ExtResource( 122 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass8/grass_tall1"), ExtResource( 108 ), -1, NodePath("../Environment/Grass/GrassCluster9/Grass3/grass_tall1"), ExtResource( 103 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass/grass_tall1"), ExtResource( 114 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass2/grass_tall1"), ExtResource( 104 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass4/grass_tall1"), ExtResource( 105 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass5/grass_tall1"), ExtResource( 106 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass6/grass_tall1"), ExtResource( 112 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass7/grass_tall1"), ExtResource( 107 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass8/grass_tall1"), ExtResource( 109 ), -1, NodePath("../Environment/Grass/GrassCluster10/Grass3/grass_tall1"), ExtResource( 119 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass/grass_tall1"), ExtResource( 97 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass2/grass_tall1"), ExtResource( 115 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass4/grass_tall1"), ExtResource( 113 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass5/grass_tall1"), ExtResource( 98 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass6/grass_tall1"), ExtResource( 110 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass7/grass_tall1"), ExtResource( 90 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass8/grass_tall1"), ExtResource( 99 ), -1, NodePath("../Environment/Grass/GrassCluster11/Grass3/grass_tall1"), ExtResource( 116 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass/grass_tall1"), ExtResource( 121 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass2/grass_tall1"), ExtResource( 118 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass4/grass_tall1"), ExtResource( 94 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass5/grass_tall1"), ExtResource( 87 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass6/grass_tall1"), ExtResource( 88 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass7/grass_tall1"), ExtResource( 89 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass8/grass_tall1"), ExtResource( 111 ), -1, NodePath("../Environment/Grass/GrassCluster12/Grass3/grass_tall1"), ExtResource( 91 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass/grass_tall1"), ExtResource( 95 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass2/grass_tall1"), ExtResource( 92 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass4/grass_tall1"), ExtResource( 93 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass5/grass_tall1"), ExtResource( 96 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass6/grass_tall1"), ExtResource( 145 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass7/grass_tall1"), ExtResource( 165 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass8/grass_tall1"), ExtResource( 166 ), -1, NodePath("../Environment/Grass/GrassCluster13/Grass3/grass_tall1"), ExtResource( 178 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass/grass_tall1"), ExtResource( 163 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass2/grass_tall1"), ExtResource( 135 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass4/grass_tall1"), ExtResource( 157 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass5/grass_tall1"), ExtResource( 149 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass6/grass_tall1"), ExtResource( 171 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass7/grass_tall1"), ExtResource( 152 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass8/grass_tall1"), ExtResource( 124 ), -1, NodePath("../Environment/Grass/GrassCluster14/Grass3/grass_tall1"), ExtResource( 179 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass/grass_tall1"), ExtResource( 158 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass2/grass_tall1"), ExtResource( 185 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass4/grass_tall1"), ExtResource( 150 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass5/grass_tall1"), ExtResource( 130 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass6/grass_tall1"), ExtResource( 146 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass7/grass_tall1"), ExtResource( 140 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass8/grass_tall1"), ExtResource( 155 ), -1, NodePath("../Environment/Grass/GrassCluster15/Grass3/grass_tall1"), ExtResource( 153 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass/grass_tall1"), ExtResource( 175 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass2/grass_tall1"), ExtResource( 184 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass4/grass_tall1"), ExtResource( 176 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass5/grass_tall1"), ExtResource( 131 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass6/grass_tall1"), ExtResource( 169 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass7/grass_tall1"), ExtResource( 156 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass8/grass_tall1"), ExtResource( 125 ), -1, NodePath("../Environment/Grass/GrassCluster16/Grass3/grass_tall1"), ExtResource( 128 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass/grass_tall1"), ExtResource( 180 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass2/grass_tall1"), ExtResource( 181 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass4/grass_tall1"), ExtResource( 142 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass5/grass_tall1"), ExtResource( 159 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass6/grass_tall1"), ExtResource( 143 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass7/grass_tall1"), ExtResource( 161 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass8/grass_tall1"), ExtResource( 136 ), -1, NodePath("../Environment/Grass/GrassCluster17/Grass3/grass_tall1"), ExtResource( 141 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass/grass_tall1"), ExtResource( 132 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass2/grass_tall1"), ExtResource( 182 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass4/grass_tall1"), ExtResource( 168 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass5/grass_tall1"), ExtResource( 144 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass6/grass_tall1"), ExtResource( 134 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass7/grass_tall1"), ExtResource( 172 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass8/grass_tall1"), ExtResource( 177 ), -1, NodePath("../Environment/Grass/GrassCluster18/Grass3/grass_tall1"), ExtResource( 137 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass/grass_tall1"), ExtResource( 170 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass2/grass_tall1"), ExtResource( 138 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass4/grass_tall1"), ExtResource( 183 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass5/grass_tall1"), ExtResource( 186 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass6/grass_tall1"), ExtResource( 139 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass7/grass_tall1"), ExtResource( 123 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass8/grass_tall1"), ExtResource( 147 ), -1, NodePath("../Environment/Grass/GrassCluster19/Grass3/grass_tall1"), ExtResource( 160 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass/grass_tall1"), ExtResource( 126 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass2/grass_tall1"), ExtResource( 127 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass4/grass_tall1"), ExtResource( 162 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass5/grass_tall1"), ExtResource( 164 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass6/grass_tall1"), ExtResource( 129 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass7/grass_tall1"), ExtResource( 167 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass8/grass_tall1"), ExtResource( 173 ), -1, NodePath("../Environment/Grass/GrassCluster20/Grass3/grass_tall1"), ExtResource( 174 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass/grass_tall1"), ExtResource( 133 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass2/grass_tall1"), ExtResource( 148 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass4/grass_tall1"), ExtResource( 151 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass5/grass_tall1"), ExtResource( 154 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass6/grass_tall1"), ExtResource( 188 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass7/grass_tall1"), ExtResource( 189 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass8/grass_tall1"), ExtResource( 194 ), -1, NodePath("../Environment/Grass/GrassCluster21/Grass3/grass_tall1"), ExtResource( 191 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass/grass_tall1"), ExtResource( 197 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass2/grass_tall1"), ExtResource( 190 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass4/grass_tall1"), ExtResource( 195 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass5/grass_tall1"), ExtResource( 198 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass6/grass_tall1"), ExtResource( 199 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass7/grass_tall1"), ExtResource( 187 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass8/grass_tall1"), ExtResource( 192 ), -1, NodePath("../Environment/Grass/GrassCluster22/Grass3/grass_tall1"), ExtResource( 193 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass/grass_tall1"), ExtResource( 196 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass2/grass_tall1"), ExtResource( 86 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass4/grass_tall1"), ExtResource( 85 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass5/grass_tall1"), ExtResource( 258 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass6/grass_tall1"), ExtResource( 214 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass7/grass_tall1"), ExtResource( 208 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass8/grass_tall1"), ExtResource( 216 ), -1, NodePath("../Environment/Grass/GrassCluster23/Grass3/grass_tall1"), ExtResource( 200 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass/grass_tall1"), ExtResource( 211 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass2/grass_tall1"), ExtResource( 235 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass4/grass_tall1"), ExtResource( 215 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass5/grass_tall1"), ExtResource( 252 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass6/grass_tall1"), ExtResource( 217 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass7/grass_tall1"), ExtResource( 210 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass8/grass_tall1"), ExtResource( 242 ), -1, NodePath("../Environment/Grass/GrassCluster24/Grass3/grass_tall1"), ExtResource( 224 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass/grass_tall1"), ExtResource( 218 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass2/grass_tall1"), ExtResource( 219 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass4/grass_tall1"), ExtResource( 220 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass5/grass_tall1"), ExtResource( 221 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass6/grass_tall1"), ExtResource( 240 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass7/grass_tall1"), ExtResource( 232 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass8/grass_tall1"), ExtResource( 223 ), -1, NodePath("../Environment/Grass/GrassCluster25/Grass3/grass_tall1"), ExtResource( 230 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass/grass_tall1"), ExtResource( 259 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass2/grass_tall1"), ExtResource( 251 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass4/grass_tall1"), ExtResource( 253 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass5/grass_tall1"), ExtResource( 205 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass6/grass_tall1"), ExtResource( 254 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass7/grass_tall1"), ExtResource( 212 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass8/grass_tall1"), ExtResource( 201 ), -1, NodePath("../Environment/Grass/GrassCluster26/Grass3/grass_tall1"), ExtResource( 229 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass/grass_tall1"), ExtResource( 236 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass2/grass_tall1"), ExtResource( 209 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass4/grass_tall1"), ExtResource( 213 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass5/grass_tall1"), ExtResource( 227 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass6/grass_tall1"), ExtResource( 206 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass7/grass_tall1"), ExtResource( 255 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass8/grass_tall1"), ExtResource( 225 ), -1, NodePath("../Environment/Grass/GrassCluster27/Grass3/grass_tall1"), ExtResource( 228 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass/grass_tall1"), ExtResource( 231 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass2/grass_tall1"), ExtResource( 226 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass4/grass_tall1"), ExtResource( 222 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass5/grass_tall1"), ExtResource( 241 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass6/grass_tall1"), ExtResource( 256 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass7/grass_tall1"), ExtResource( 257 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass8/grass_tall1"), ExtResource( 233 ), -1, NodePath("../Environment/Grass/GrassCluster28/Grass3/grass_tall1"), ExtResource( 261 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass/grass_tall1"), ExtResource( 243 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass2/grass_tall1"), ExtResource( 234 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass4/grass_tall1"), ExtResource( 237 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass5/grass_tall1"), ExtResource( 238 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass6/grass_tall1"), ExtResource( 239 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass7/grass_tall1"), ExtResource( 202 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass8/grass_tall1"), ExtResource( 244 ), -1, NodePath("../Environment/Grass/GrassCluster29/Grass3/grass_tall1"), ExtResource( 260 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass/grass_tall1"), ExtResource( 247 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass2/grass_tall1"), ExtResource( 245 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass4/grass_tall1"), ExtResource( 246 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass5/grass_tall1"), ExtResource( 248 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass6/grass_tall1"), ExtResource( 207 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass7/grass_tall1"), ExtResource( 249 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass8/grass_tall1"), ExtResource( 250 ), -1, NodePath("../Environment/Grass/GrassCluster30/Grass3/grass_tall1"), ExtResource( 262 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass/grass_tall1"), ExtResource( 263 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass2/grass_tall1"), ExtResource( 203 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass4/grass_tall1"), ExtResource( 204 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass5/grass_tall1"), ExtResource( 277 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass6/grass_tall1"), ExtResource( 289 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass7/grass_tall1"), ExtResource( 267 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass8/grass_tall1"), ExtResource( 273 ), -1, NodePath("../Environment/Grass/GrassCluster31/Grass3/grass_tall1"), ExtResource( 290 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass/grass_tall1"), ExtResource( 276 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass2/grass_tall1"), ExtResource( 271 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass4/grass_tall1"), ExtResource( 278 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass5/grass_tall1"), ExtResource( 279 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass6/grass_tall1"), ExtResource( 284 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass7/grass_tall1"), ExtResource( 285 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass8/grass_tall1"), ExtResource( 288 ), -1, NodePath("../Environment/Grass/GrassCluster32/Grass3/grass_tall1"), ExtResource( 272 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass/grass_tall1"), ExtResource( 287 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass2/grass_tall1"), ExtResource( 280 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass4/grass_tall1"), ExtResource( 269 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass5/grass_tall1"), ExtResource( 281 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass6/grass_tall1"), ExtResource( 286 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass7/grass_tall1"), ExtResource( 266 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass8/grass_tall1"), ExtResource( 275 ), -1, NodePath("../Environment/Grass/GrassCluster33/Grass3/grass_tall1"), ExtResource( 274 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass/grass_tall1"), ExtResource( 291 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass2/grass_tall1"), ExtResource( 292 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass4/grass_tall1"), ExtResource( 282 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass5/grass_tall1"), ExtResource( 264 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass6/grass_tall1"), ExtResource( 268 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass7/grass_tall1"), ExtResource( 265 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass8/grass_tall1"), ExtResource( 270 ), -1, NodePath("../Environment/Grass/GrassCluster34/Grass3/grass_tall1"), ExtResource( 283 ), -1 ]
+
+[node name="World" type="Spatial"]
+
+[node name="RockNetworkHandler" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="SpawnPoints" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="0" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.39076, 0.54299, 11.4245 )
+
+[node name="1" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9964, 0, -3.35001 )
+
+[node name="2" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.325, 0.65441, 11.0682 )
+
+[node name="3" type="Position3D" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.09689, 0.399537, -2.32923 )
+
+[node name="Players" type="Spatial" parent="."]
+
+[node name="RoundController" parent="." instance=ExtResource( 4 )]
+
+[node name="Theme" parent="RoundController" instance=ExtResource( 295 )]
+stream = ExtResource( 297 )
+volume_db = -10.715
+autoplay = false
+bus = "Music"
+
+[node name="StartTheme" type="AudioStreamPlayer" parent="RoundController"]
+stream = ExtResource( 296 )
+volume_db = -10.085
+autoplay = true
+bus = "Music"
+
+[node name="target_pos" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 11.5, 19.0901 )
+
+[node name="Camera" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, -9.05983, 16 )
+near = 0.05
+script = ExtResource( 1 )
+
+[node name="CloudSwoosh" type="AudioStreamPlayer" parent="Camera"]
+stream = ExtResource( 12 )
+pitch_scale = 4.0
+
+[node name="CameraRaycastPlane" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15194, 0 )
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="CameraRaycastPlane"]
+transform = Transform( 200, 0, 0, 0, 0.1, 0, 0, 0, 200, 0, -0.1, 0 )
+shape = SubResource( 1 )
+
+[node name="WorldLight" parent="." instance=ExtResource( 11 )]
+light_bake_mode = 2
+
+[node name="Void" parent="." instance=ExtResource( 3 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, -5, 0 )
+collision_mask = 5
+
+[node name="Environment" type="Spatial" parent="."]
+
+[node name="CherryBlossom" parent="Environment" instance=ExtResource( 14 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.416985, -5.1 )
+
+[node name="Grass" type="Spatial" parent="Environment"]
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, -5.1, 0, 2.55 )
+
+[node name="GrassCluster" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.6898, 0.25689, 2.55 )
+
+[node name="GrassCluster2" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 9.87845, 0.25689, 3.124 )
+
+[node name="GrassCluster3" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 9.54424, 0.25689, 1.96818 )
+
+[node name="GrassCluster4" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 10.1041, 0.25689, 0.853312 )
+
+[node name="GrassCluster5" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 13.1439, 0.25689, 3.43401 )
+
+[node name="GrassCluster6" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 13.3527, 0.25689, 4.46054 )
+
+[node name="GrassCluster7" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 12.0318, 0.25689, 4.46054 )
+
+[node name="GrassCluster8" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 12.4917, 0.25689, 5.29043 )
+
+[node name="GrassCluster9" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 14.493, 0.25689, 5.29043 )
+
+[node name="GrassCluster10" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7.75367, 0.25689, 7.88011 )
+
+[node name="GrassCluster11" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.96803, 0.25689, 8.37677 )
+
+[node name="GrassCluster12" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7.82392, 0.25689, 9.07579 )
+
+[node name="GrassCluster13" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 4.78796, 0.25689, 9.07579 )
+
+[node name="GrassCluster14" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 5.23809, 0.25689, 10.0258 )
+
+[node name="GrassCluster15" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.28166, 0.25689, 9.3402 )
+
+[node name="GrassCluster16" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.93721, 0.25689, 1.24935 )
+
+[node name="GrassCluster17" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -0.761931, 0.25689, 2.907 )
+
+[node name="GrassCluster18" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.34318, 0.25689, 1.87297 )
+
+[node name="GrassCluster19" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.70739, 0.25689, 2.06321 )
+
+[node name="GrassCluster20" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -2.71876, 0.25689, 2.18027 )
+
+[node name="GrassCluster21" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.37735, 0.25689, -1.07106 )
+
+[node name="GrassCluster22" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -4.28525, 0.25689, -0.179678 )
+
+[node name="GrassCluster23" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -2.89465, 0.25689, -0.0394063 )
+
+[node name="GrassCluster24" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 4.58608, 0.25689, -6.12177 )
+
+[node name="GrassCluster25" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.74386, 0.25689, -6.67961 )
+
+[node name="GrassCluster26" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 2.58974, 0.25689, -5.77159 )
+
+[node name="GrassCluster27" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 2.14956, 0.25689, -4.91884 )
+
+[node name="GrassCluster28" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.38812, 0.25689, -5.61083 )
+
+[node name="GrassCluster29" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7.90841, 0.25689, -7.13303 )
+
+[node name="GrassCluster30" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.34429, 0.25689, -6.20302 )
+
+[node name="GrassCluster31" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 9.52594, 0.25689, -6.20302 )
+
+[node name="GrassCluster32" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 7.81465, 0.25689, -4.52188 )
+
+[node name="GrassCluster33" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 9.14174, 0.25689, -1.40511 )
+
+[node name="GrassCluster34" parent="Environment/Grass" instance=ExtResource( 7 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 10.1984, 0.25689, -1.07581 )
+
+[node name="PinkFlower" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, -3.5175, 0.221958, 2.97592 )
+
+[node name="PinkFlower3" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 0.575511, 0.221958, 0.88932 )
+
+[node name="PinkFlower10" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, -0.842301, 0.221958, -7.06517 )
+
+[node name="PinkFlower11" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 4.41273, 0.221958, -5.55512 )
+
+[node name="PinkFlower12" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 5.26218, 0.221958, -6.13455 )
+
+[node name="PinkFlower13" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 4.18989, 0.221958, -8.00379 )
+
+[node name="PinkFlower14" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 1.49212, 0.221958, -4.57836 )
+
+[node name="PinkFlower15" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42304, 0.221958, -5.13609 )
+
+[node name="PinkFlower5" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.965656, 0.221959, 1.29226 )
+
+[node name="PinkFlower7" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 7.41025, 0.221958, 9.40104 )
+
+[node name="PinkFlower9" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 9.50639, 0.221958, 7.9637 )
+
+[node name="PinkFlower8" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8004, 0.221959, 9.80398 )
+
+[node name="PinkFlower6" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.3, 0, 0, 0, 1, -0.611031, 0.221959, 2.16744 )
+
+[node name="PinkFlower4" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, -1.48111, 0.221958, 0.88932 )
+
+[node name="BlueFlower" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, -1.8268, 0.208857, 7.26728 )
+
+[node name="BlueFlower2" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55062, 0.208857, 7.73965 )
+
+[node name="BlueFlower3" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, -1.11181, 0.208857, 6.83802 )
+
+[node name="BlueFlower4" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 0.666865, 0.208857, 5.47059 )
+
+[node name="BlueFlower5" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.108, 0.213457, 5.22912 )
+
+[node name="BlueFlower6" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 11.5497, 0.208857, 4.77232 )
+
+[node name="BlueFlower8" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 13.9163, 0.208857, 7.06389 )
+
+[node name="BlueFlower9" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 8.62001, 0.208857, -0.716909 )
+
+[node name="BlueFlower10" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 9.38071, 0.208857, -2.59077 )
+
+[node name="BlueFlower11" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 8.93396, 0.208857, -2.93981 )
+
+[node name="BlueFlower14" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 7.35937, 0.208857, -6.55011 )
+
+[node name="BlueFlower18" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 7.06574, 0.208857, -5.07042 )
+
+[node name="BlueFlower15" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 6.91263, 0.208857, -6.89915 )
+
+[node name="BlueFlower16" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 9.64987, 0.208857, -7.4461 )
+
+[node name="BlueFlower17" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 8.62109, 0.208857, -7.79513 )
+
+[node name="BlueFlower12" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 8.92193, 0.208857, 2.72762 )
+
+[node name="BlueFlower13" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 10.2396, 0.208857, 1.12943 )
+
+[node name="BlueFlower7" parent="Environment/Grass" instance=ExtResource( 294 )]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 14.3334, 0.208857, 2.93701 )
+
+[node name="PinkFlower2" parent="Environment/Grass" instance=ExtResource( 293 )]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 3.91165, 0.238221, 8.15197 )
+
+[node name="Clouds" type="Spatial" parent="Environment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23.4 )
+
+[node name="Cloud" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -1.51946, -8.1931, 9.4556 )
+
+[node name="Cloud2" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -14.9314, -5.54419, 6.87022 )
+
+[node name="Cloud3" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -18.2532, -3.19481, -9.57531 )
+
+[node name="Cloud4" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 15.346, -6.20691, -15.2062 )
+
+[node name="Cloud5" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -5.03954, -4.31421, -20.7162 )
+
+[node name="Cloud6" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 8.92496, -5.0734, -4.66698 )
+
+[node name="Cloud7" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -21.6615, -6.72179, 9.4556 )
+
+[node name="Cloud8" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -47.8447, -5.54419, 6.87022 )
+
+[node name="Cloud9" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -51.1665, -3.19481, -9.57531 )
+
+[node name="Cloud10" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -17.5673, -6.20691, -15.2062 )
+
+[node name="Cloud11" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -37.9528, -4.31421, -20.7162 )
+
+[node name="Cloud12" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -23.9883, -5.0734, -4.66698 )
+
+[node name="Cloud13" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -21.6615, -6.72179, -23.7661 )
+
+[node name="Cloud14" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -47.8447, -5.54419, -26.3514 )
+
+[node name="Cloud15" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -51.1665, -3.19481, -42.797 )
+
+[node name="Cloud16" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -17.5673, -6.20691, -48.4278 )
+
+[node name="Cloud17" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -37.9528, -4.31421, -53.9378 )
+
+[node name="Cloud18" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -23.9883, -5.0734, -37.8886 )
+
+[node name="Cloud19" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 24.2448, -6.72179, -23.7661 )
+
+[node name="Cloud20" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -1.93846, -5.54419, -26.3514 )
+
+[node name="Cloud21" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -5.26023, -3.19481, -42.797 )
+
+[node name="Cloud22" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 28.339, -6.20691, -48.4278 )
+
+[node name="Cloud23" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 7.95344, -4.31421, -53.9378 )
+
+[node name="Cloud24" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 21.918, -5.0734, -37.8886 )
+
+[node name="Cloud25" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 49.253, -6.72179, 10.0484 )
+
+[node name="Cloud26" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 23.0697, -5.54419, 7.46298 )
+
+[node name="Cloud27" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 19.748, -3.19481, -8.98256 )
+
+[node name="Cloud28" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 53.3472, -6.20691, -14.6134 )
+
+[node name="Cloud29" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 32.9309, -4.31421, -20.1336 )
+
+[node name="Cloud30" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 46.9262, -5.0734, -4.07422 )
+
+[node name="Cloud31" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 66.2936, -6.72179, -29.8558 )
+
+[node name="Cloud32" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 40.1104, -5.54419, -32.4412 )
+
+[node name="Cloud33" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 36.7886, -3.19481, -48.8867 )
+
+[node name="Cloud34" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 70.3879, -6.20691, -54.5176 )
+
+[node name="Cloud35" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 50.0023, -4.31421, -60.0276 )
+
+[node name="Cloud36" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 63.9668, -5.0734, -43.9784 )
+
+[node name="Cloud37" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 36.3262, -6.72179, -61.2895 )
+
+[node name="Cloud38" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 10.143, -5.54419, -63.8749 )
+
+[node name="Cloud39" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 6.82123, -3.19481, -80.3205 )
+
+[node name="Cloud40" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 40.4204, -6.20691, -85.9513 )
+
+[node name="Cloud41" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 20.0349, -4.31421, -91.4613 )
+
+[node name="Cloud42" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, 33.9994, -5.0734, -75.4121 )
+
+[node name="Cloud43" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -12.5964, -7.74208, -57.6851 )
+
+[node name="Cloud44" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -38.7796, -6.56448, -60.2704 )
+
+[node name="Cloud45" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -42.1014, -4.21511, -76.716 )
+
+[node name="Cloud46" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -8.50217, -7.2272, -82.3468 )
+
+[node name="Cloud47" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -28.8877, -5.3345, -87.8568 )
+
+[node name="Cloud48" parent="Environment/Clouds" instance=ExtResource( 8 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.7, -14.9232, -6.09369, -71.8076 )
+
+[node name="Towers" type="Spatial" parent="Environment"]
+
+[node name="TowerPiece1" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, -5.1 )
+
+[node name="TowerPiece2" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, -5.1 )
+
+[node name="TowerPiece3" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, -5.1 )
+
+[node name="TowerPiece4" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, -5.1 )
+
+[node name="TowerPiece5" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, -5.1 )
+
+[node name="TowerPiece6" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, -5.1 )
+
+[node name="TowerPiece7" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, -5.1 )
+
+[node name="TowerPiece8" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, -5.1 )
+
+[node name="TowerPiece9" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, -2.55 )
+
+[node name="TowerPiece10" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, -2.55 )
+
+[node name="TowerPiece11" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, -2.55 )
+
+[node name="TowerPiece12" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, -2.55 )
+
+[node name="TowerPiece13" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, -2.55 )
+
+[node name="TowerPiece14" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, -2.55 )
+
+[node name="TowerPiece15" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, -2.55 )
+
+[node name="TowerPiece16" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, -2.55 )
+
+[node name="TowerPiece17" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 4.76837e-07 )
+
+[node name="TowerPiece18" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 4.76837e-07 )
+
+[node name="TowerPiece19" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 4.76837e-07 )
+
+[node name="TowerPiece20" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, -0.014689 )
+
+[node name="TowerPiece21" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 53.2865, 0, -0.014689 )
+
+[node name="TowerPiece22" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 4.76837e-07 )
+
+[node name="TowerPiece23" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 4.76837e-07 )
+
+[node name="TowerPiece24" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 4.76837e-07 )
+
+[node name="TowerPiece25" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 2.55 )
+
+[node name="TowerPiece26" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 2.55 )
+
+[node name="TowerPiece27" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 2.55 )
+
+[node name="TowerPiece28" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, 2.53531 )
+
+[node name="TowerPiece29" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 53.2865, 0, 2.53531 )
+
+[node name="TowerPiece30" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 2.55 )
+
+[node name="TowerPiece31" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 2.55 )
+
+[node name="TowerPiece32" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 2.55 )
+
+[node name="TowerPiece33" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 5.1 )
+
+[node name="TowerPiece34" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 5.1 )
+
+[node name="TowerPiece35" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 5.1 )
+
+[node name="TowerPiece36" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, 5.08531 )
+
+[node name="TowerPiece37" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 26.775, 0, 5.1 )
+
+[node name="TowerPiece38" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 5.1 )
+
+[node name="TowerPiece39" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 5.1 )
+
+[node name="TowerPiece40" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 5.1 )
+
+[node name="TowerPiece41" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 7.65 )
+
+[node name="TowerPiece42" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 7.65 )
+
+[node name="TowerPiece43" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 7.65 )
+
+[node name="TowerPiece44" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 50.7365, 0, 7.65 )
+
+[node name="TowerPiece45" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 53.2865, 0, 7.65 )
+
+[node name="TowerPiece46" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 7.65 )
+
+[node name="TowerPiece47" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 7.65 )
+
+[node name="TowerPiece48" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 7.65 )
+
+[node name="TowerPiece49" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 10.2 )
+
+[node name="TowerPiece50" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 10.2 )
+
+[node name="TowerPiece51" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 10.2 )
+
+[node name="TowerPiece52" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, 10.2 )
+
+[node name="TowerPiece53" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, 10.2 )
+
+[node name="TowerPiece54" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 10.2 )
+
+[node name="TowerPiece55" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 10.2 )
+
+[node name="TowerPiece56" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 10.2 )
+
+[node name="TowerPiece57" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -8.925, 0, 12.75 )
+
+[node name="TowerPiece58" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -6.375, 0, 12.75 )
+
+[node name="TowerPiece59" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -3.825, 0, 12.75 )
+
+[node name="TowerPiece60" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, -1.275, 0, 12.75 )
+
+[node name="TowerPiece61" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 1.275, 0, 12.75 )
+
+[node name="TowerPiece62" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 3.825, 0, 12.75 )
+
+[node name="TowerPiece63" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 6.375, 0, 12.75 )
+
+[node name="TowerPiece64" parent="Environment/Towers" instance=ExtResource( 15 )]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 8.925, 0, 12.75 )
+
+[node name="AestheticTower" type="MeshInstance" parent="Environment/Towers" groups=[
+"faketower",
+]]
+transform = Transform( 12.8, 0, 0, 0, 50, 0, 0, 0, 12.8, 0, -87.872, 0.318 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="AestheticTower2" type="MeshInstance" parent="Environment/Towers" groups=[
+"faketower",
+]]
+transform = Transform( 12.8, 0, 0, 0, 50, 0, 0, 0, 12.8, 45.0729, -33.4662, -43.679 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="AestheticTower3" type="MeshInstance" parent="Environment/Towers" groups=[
+"faketower",
+]]
+transform = Transform( 12.8, 0, 0, 0, 50, 0, 0, 0, 12.8, -41.5153, -60.3355, -44.6514 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="FlatGrass" type="Spatial" parent="Environment"]
+
+[node name="GrassFront2" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, 2.2299, 0.143255, -1.24414 )
+
+[node name="GrassFront8" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 2.46126, 0.143255, 1.43855 )
+
+[node name="GrassFront9" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 2.46126, 0.143255, 3.45279 )
+
+[node name="GrassFront10" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 2.46126, 0.143255, 4.4495 )
+
+[node name="GrassFront11" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 1, 0, 1.62921e-07, 0, -0.5, -2.46297, 0.143255, 5.54608 )
+
+[node name="GrassFront12" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 1, 0, 1.62921e-07, 0, -0.5, -2.46297, 0.143255, 3.27309 )
+
+[node name="GrassFront13" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 1, 0, 1.62921e-07, 0, -0.5, -2.46297, 0.143255, 1.62745 )
+
+[node name="GrassFront14" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 1, 0, 1.62921e-07, 0, -0.5, -2.46297, 0.143255, 0.517647 )
+
+[node name="GrassFront3" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, -1.86355, 0.143255, -1.24414 )
+
+[node name="GrassFront4" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, -1.11885, 0.143255, 14.1319 )
+
+[node name="GrassFront5" parent="Environment/FlatGrass" instance=ExtResource( 81 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, 4.5842, 0.143255, 14.1319 )
+
+[node name="FlatGrass6" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, 3.825, 0.1, -5.1 )
+
+[node name="FlatGrass24" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 3.825, 0.1, 0 )
+
+[node name="FlatGrass13" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, 8.925, 0.1, 5.1 )
+
+[node name="FlatGrass15" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( 5.96244e-09, 0, -0.5, 0, 1, 0, 0.5, 0, 5.96244e-09, 6.375, 0.1, 7.65 )
+
+[node name="FlatGrass20" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( 5.96244e-09, 0, -0.5, 0, 1, 0, 0.5, 0, 5.96244e-09, 3.825, 0.1, 10.2 )
+
+[node name="FlatGrass28" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( 5.96244e-09, 0, -0.5, 0, 1, 0, 0.5, 0, 5.96244e-09, -8.925, 0.1, 5.1 )
+
+[node name="FlatGrass29" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( 5.96244e-09, 0, -0.5, 0, 1, 0, 0.5, 0, 5.96244e-09, -3.825, 0.1, 7.65 )
+
+[node name="FlatGrass33" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( 5.96244e-09, 0, -0.5, 0, 1, 0, 0.5, 0, 5.96244e-09, -3.825, 0.1, 9.53674e-07 )
+
+[node name="FlatGrass34" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -3.825, 0.1, -2.55 )
+
+[node name="FlatGrass35" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, -6.375, 0.1, -5.1 )
+
+[node name="FlatGrass21" parent="Environment/FlatGrass" instance=ExtResource( 79 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, 6.375, 0.1, 12.75 )
+
+[node name="FlatGrass5" parent="Environment/FlatGrass" instance=ExtResource( 80 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 6.375, 0.15, -5.1 )
+
+[node name="FlatGrass7" parent="Environment/FlatGrass" instance=ExtResource( 80 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, 6.375, 0.15, 0 )
+
+[node name="FlatGrass32" parent="Environment/FlatGrass" instance=ExtResource( 80 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, -8.925, 0.15, 0 )
+
+[node name="FlatGrass12" parent="Environment/FlatGrass" instance=ExtResource( 80 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, 8.925, 0.15, 10.2 )
+
+[node name="FlatGrass14" parent="Environment/FlatGrass" instance=ExtResource( 80 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, -1.275, 0.15, 12.75 )
+
+[node name="FlatGrass37" parent="Environment/FlatGrass" instance=ExtResource( 80 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1, 0, -0.5, 0, -8.14603e-08, -6.375, 0.15, 10.2 )
+
+[node name="FlatGrass" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.225, -0.85, -2.55 )
+
+[node name="FlatGrass36" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.775, -0.85, -5.1 )
+
+[node name="FlatGrass8" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.425, -0.85, 2.55 )
+
+[node name="FlatGrass9" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 3.875, -0.85, 2.55 )
+
+[node name="FlatGrass23" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 3.875, -0.85, -2.55 )
+
+[node name="FlatGrass10" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 6.425, -0.85, 5.1 )
+
+[node name="FlatGrass16" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.975, -0.85, 7.65 )
+
+[node name="FlatGrass11" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 3.875, -0.85, 5.1 )
+
+[node name="FlatGrass17" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -1.225, -0.85, 10.2 )
+
+[node name="FlatGrass25" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -8.875, -0.85, 2.55 )
+
+[node name="FlatGrass27" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -6.325, -0.85, 2.55 )
+
+[node name="FlatGrass30" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -3.775, -0.85, 2.55 )
+
+[node name="FlatGrass26" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.325, -0.85, 5.1 )
+
+[node name="FlatGrass31" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.775, -0.85, 5.1 )
+
+[node name="FlatGrass18" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 1.325, -0.85, 10.2 )
+
+[node name="FlatGrass19" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 1.325, -0.85, 12.75 )
+
+[node name="FlatGrass22" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 3.875, -0.85, 12.75 )
+
+[node name="FlatGrass2" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 1.325, -0.85, -5.1 )
+
+[node name="FlatGrass3" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -1.225, -0.85, -5.1 )
+
+[node name="FlatGrass4" parent="Environment/FlatGrass" instance=ExtResource( 78 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 1.325, -0.85, -2.55 )
+
+[node name="GrassFront1" parent="Environment/FlatGrass" instance=ExtResource( 82 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.76296, 0.121426, -1.20904 )
+
+[node name="GrassFront6" parent="Environment/FlatGrass" instance=ExtResource( 82 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.346229, 0.147254, 14.1121 )
+
+[node name="GrassFront7" parent="Environment/FlatGrass" instance=ExtResource( 82 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 3.13057, 0.147254, 14.1121 )
+
+[node name="Petals" type="Spatial" parent="Environment"]
+
+[node name="Petal" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -3.86781, 0.212851, -2.80968 )
+
+[node name="Petal2" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -5.17382, 0.159036, -3.76836 )
+
+[node name="Petal3" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -4.50676, 0.210651, -4.98406 )
+
+[node name="Petal4" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -3.28538, 0.210651, -3.57304 )
+
+[node name="Petal5" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -7.28649, 0.210651, 2.0014 )
+
+[node name="Petal10" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.6321, 0.210651, 9.5839 )
+
+[node name="Petal11" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3.33838, 0.300845, 10.6827 )
+
+[node name="Petal12" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3.85752, 0.160683, 11.2482 )
+
+[node name="Petal13" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.91908, 0.160683, 11.5344 )
+
+[node name="Petal14" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3.23377, 0.160683, 11.2551 )
+
+[node name="Petal15" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.345357, 0.245857, 11.2551 )
+
+[node name="Petal16" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.69159, 0.245857, 11.7796 )
+
+[node name="Petal17" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.454914, 0.174436, 12.5863 )
+
+[node name="Petal18" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.58884, 0.174436, 11.0497 )
+
+[node name="Petal19" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 4.46423, 0.174436, 12.9422 )
+
+[node name="Petal20" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 5.39879, 0.174436, 4.24085 )
+
+[node name="Petal21" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 4.95093, 0.174436, 5.43361 )
+
+[node name="Petal22" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.03154, 0.174436, 4.8917 )
+
+[node name="Petal6" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -6.02278, 0.210651, 3.11347 )
+
+[node name="Petal7" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -8.29566, 0.210651, 3.11347 )
+
+[node name="Petal8" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -9.40739, 0.210651, 2.5786 )
+
+[node name="Petal9" parent="Environment/Petals" instance=ExtResource( 84 )]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -6.49542, 0.210651, 3.67198 )
+
+[node name="Rocks" type="Spatial" parent="Environment"]
+
+[node name="rockDecal" parent="Environment/Rocks" instance=ExtResource( 83 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.72967, -1, 6.4479 )
+
+[node name="rockDecal2" parent="Environment/Rocks" instance=ExtResource( 83 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -6.80182, -1, 9.33898 )
+
+[node name="rockDecal5" parent="Environment/Rocks" instance=ExtResource( 83 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 8.16409, -1, 9.53005 )
+
+[node name="rockDecal3" parent="Environment/Rocks" instance=ExtResource( 83 )]
+transform = Transform( 0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, -8.10982, -1, 10.8106 )
+
+[node name="rockDecal4" parent="Environment/Rocks" instance=ExtResource( 83 )]
+transform = Transform( 0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 4.67102, -1, 10.331 )
+
+[node name="rockDecal6" parent="Environment/Rocks" instance=ExtResource( 83 )]
+transform = Transform( -0.75, 0, -2.44381e-07, 0, 0.5, 0, 2.44381e-07, 0, -0.75, 5.16049, -1, 6.14877 )
+
+[node name="rockDecal7" parent="Environment/Rocks" instance=ExtResource( 83 )]
+transform = Transform( -0.75, 0, -2.44381e-07, 0, 0.5, 0, 2.44381e-07, 0, -0.75, 5.83518, -1, -0.429003 )
+
+[node name="FallAreas" type="Spatial" parent="."]
+
+[node name="FallArea" parent="FallAreas" instance=ExtResource( 6 )]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1.26928, 0 )
+
+[node name="FallArea2" parent="FallAreas" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 80, -11.6154, 2.7873, 0.395683 )
+
+[node name="FallArea3" parent="FallAreas" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 20, 0, 0, 0, 80, 11.657, 2.7873, 5.22727 )
+
+[node name="FallArea4" parent="FallAreas" instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, 80, 0, 20, 0, -1, 0, -1.30337e-05, -0.14799, 2.7873, -7.97738 )
+
+[node name="FallArea5" parent="FallAreas" instance=ExtResource( 6 )]
+transform = Transform( -2.8213e-07, 0, 80, 0, 20, 0, -1, 0, -2.25704e-05, -0.181132, 2.7873, 15.5289 )
+
+[node name="FallArea6" parent="FallAreas" instance=ExtResource( 6 )]
+transform = Transform( -1.96701e-07, 0, 2, 0, 4, 0, -4.5, 0, -8.74228e-08, 0.0335744, 2.7873, 3.76154 )
+
+[node name="TEMP" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6518, 0, 3.78902 )
+
+[node name="Ambiance" parent="." instance=ExtResource( 9 )]
+
+[node name="Mist" type="Particles" parent="."]
+material_override = SubResource( 4 )
+process_material = SubResource( 5 )
+
+[node name="BakedLightmap" type="BakedLightmap" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.55 )
+bake_cell_size = 2.0
+bake_quality = 2
+bake_mode = 1
+bake_hdr = true
+bake_extents = Vector3( 12.75, 10, 12.75 )
+light_data = SubResource( 6 )
+[connection signal="player_fell" from="Void" to="RoundController" method="_on_Void_player_fell"]
+
+[editable path="Camera"]

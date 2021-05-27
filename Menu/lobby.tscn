@@ -1,0 +1,2198 @@
+[gd_scene load_steps=153 format=2]
+
+[ext_resource path="res://Menu/MapSelector/MapSelector.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Menu/ColourSelector/ColourSelection.gd" type="Script" id=2]
+[ext_resource path="res://Menu/lobby.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Menu/Title.png" type="Texture" id=4]
+[ext_resource path="res://Menu/JoinButton.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Menu/JoinHover.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Menu/Join.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Menu/JoinHover7.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Menu/Host.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Menu/Options.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Menu/JoinHover6.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Menu/Exit.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Menu/JoinPressed.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Menu/OptionsMenu.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Menu/HostPressed.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Menu/HostMenu.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Menu/JoinMenu.png" type="Texture" id=17]
+[ext_resource path="res://Worlds/camEnv.tres" type="Environment" id=18]
+[ext_resource path="res://Assets/Menu/backbutton.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Menu/playersMenuTrans.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Menu/playersMenu.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Menu/TitlePillar.png" type="Texture" id=22]
+[ext_resource path="res://Menu/LobbyCamera.gd" type="Script" id=23]
+[ext_resource path="res://Worlds/WorldLight.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/World/Clouds/cloud1.obj" type="ArrayMesh" id=25]
+[ext_resource path="res://Worlds/Ambiance.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/Menu/StartPressed.png" type="Texture" id=27]
+[ext_resource path="res://Menu/Options.gd" type="Script" id=28]
+[ext_resource path="res://Assets/World/Tower/Tower.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/World/Grass/FlatGrass1.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Assets/World/CherryBlossom.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Assets/World/Tall Grass/GrassCluster.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Assets/World/Grass/PinkFlower.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Assets/World/Grass/FlatGrass2.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Assets/World/Grass/FlatGrass3.tscn" type="PackedScene" id=35]
+[ext_resource path="res://Assets/World/Grass/BlueFlower.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Assets/World/RockDecal.tscn" type="PackedScene" id=37]
+[ext_resource path="res://Assets/World/Petal.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Assets/Menu/OptionsPressedTrans.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Menu/tick.png" type="Texture" id=40]
+[ext_resource path="res://Sounds/menuHover.wav" type="AudioStream" id=41]
+[ext_resource path="res://Sounds/menuPressed.wav" type="AudioStream" id=42]
+[ext_resource path="res://Sounds/menuPressedBack.wav" type="AudioStream" id=43]
+[ext_resource path="res://Sounds/startPressed.wav" type="AudioStream" id=44]
+[ext_resource path="res://Menu/font.tres" type="DynamicFont" id=45]
+[ext_resource path="res://Main Zenu Music.wav" type="AudioStream" id=46]
+[ext_resource path="res://Theme.tscn" type="PackedScene" id=47]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 19 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 19 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "hover",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "focused",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 27 )
+region = Rect2( 84, 0, 84, 26 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 27 )
+region = Rect2( 168, 0, 84, 26 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 27 )
+region = Rect2( 252, 0, 84, 26 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 27 )
+region = Rect2( 336, 0, 84, 26 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 27 )
+region = Rect2( 420, 0, 84, 26 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 27 )
+region = Rect2( 504, 0, 84, 26 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 27 )
+region = Rect2( 588, 0, 84, 26 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 27 )
+region = Rect2( 0, 0, 84, 26 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "hover",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "focused",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[sub_resource type="StyleBoxFlat" id=21]
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 6 )
+region = Rect2( 105, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 6 )
+region = Rect2( 210, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 6 )
+region = Rect2( 315, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 6 )
+region = Rect2( 420, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "hover",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 31 ) ],
+"loop": true,
+"name": "focused",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 32 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 30.0
+} ]
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 6 )
+region = Rect2( 105, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 6 )
+region = Rect2( 210, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 6 )
+region = Rect2( 315, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 6 )
+region = Rect2( 420, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="SpriteFrames" id=42]
+animations = [ {
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"loop": true,
+"name": "hover",
+"speed": 60.0
+}, {
+"frames": [ SubResource( 40 ) ],
+"loop": true,
+"name": "focused",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 41 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 9 )
+region = Rect2( 105, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 9 )
+region = Rect2( 210, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 9 )
+region = Rect2( 315, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 9 )
+region = Rect2( 420, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 9 )
+region = Rect2( 525, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 9 )
+region = Rect2( 630, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 9 )
+region = Rect2( 735, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="SpriteFrames" id=51]
+animations = [ {
+"frames": [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ) ],
+"loop": true,
+"name": "hover",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 49 ) ],
+"loop": true,
+"name": "focused",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 50 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 30.0
+} ]
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 10 )
+region = Rect2( 105, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 10 )
+region = Rect2( 210, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 10 )
+region = Rect2( 315, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 10 )
+region = Rect2( 420, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 10 )
+region = Rect2( 525, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 10 )
+region = Rect2( 630, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 10 )
+region = Rect2( 735, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="SpriteFrames" id=60]
+animations = [ {
+"frames": [ SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ) ],
+"loop": true,
+"name": "hover",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 58 ) ],
+"loop": true,
+"name": "focused",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 59 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 12 )
+region = Rect2( 105, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 12 )
+region = Rect2( 210, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 12 )
+region = Rect2( 315, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 12 )
+region = Rect2( 420, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 12 )
+region = Rect2( 525, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 12 )
+region = Rect2( 630, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 12 )
+region = Rect2( 735, 0, 105, 36 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 105, 36 )
+
+[sub_resource type="SpriteFrames" id=69]
+animations = [ {
+"frames": [ SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ) ],
+"loop": true,
+"name": "hover",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 67 ) ],
+"loop": true,
+"name": "focused",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 68 ) ],
+"loop": true,
+"name": "unfocused",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxEmpty" id=70]
+
+[sub_resource type="StyleBoxEmpty" id=71]
+
+[sub_resource type="AnimatedTexture" id=72]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="AnimatedTexture" id=73]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="AnimatedTexture" id=74]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="AnimatedTexture" id=75]
+frame_0/texture = ExtResource( 40 )
+
+[sub_resource type="StyleBoxEmpty" id=76]
+
+[sub_resource type="StyleBoxEmpty" id=77]
+
+[sub_resource type="StyleBoxEmpty" id=78]
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 13 )
+region = Rect2( 141, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 13 )
+region = Rect2( 282, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 13 )
+region = Rect2( 423, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 13 )
+region = Rect2( 564, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 13 )
+region = Rect2( 705, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 15 )
+region = Rect2( 141, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 15 )
+region = Rect2( 282, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 15 )
+region = Rect2( 423, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 15 )
+region = Rect2( 564, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 15 )
+region = Rect2( 705, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 39 )
+region = Rect2( 0, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 39 )
+region = Rect2( 141, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 39 )
+region = Rect2( 282, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 39 )
+region = Rect2( 423, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = ExtResource( 39 )
+region = Rect2( 564, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 39 )
+region = Rect2( 705, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=97]
+atlas = ExtResource( 20 )
+region = Rect2( 141, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = ExtResource( 20 )
+region = Rect2( 282, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = ExtResource( 20 )
+region = Rect2( 423, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = ExtResource( 20 )
+region = Rect2( 564, 0, 141, 168 )
+
+[sub_resource type="AtlasTexture" id=101]
+atlas = ExtResource( 20 )
+region = Rect2( 705, 0, 141, 168 )
+
+[sub_resource type="SpriteFrames" id=102]
+animations = [ {
+"frames": [ SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ) ],
+"loop": true,
+"name": "join",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ), SubResource( 89 ) ],
+"loop": true,
+"name": "host",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 90 ), SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ) ],
+"loop": true,
+"name": "options",
+"speed": 30.0
+}, {
+"frames": [ SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ) ],
+"loop": true,
+"name": "players",
+"speed": 30.0
+} ]
+
+[sub_resource type="CubeMesh" id=103]
+
+[sub_resource type="SpatialMaterial" id=104]
+albedo_color = Color( 0.0941176, 0.0784314, 0.145098, 1 )
+
+[sub_resource type="PlaneMesh" id=105]
+
+[node name="LobbyWorld" type="Spatial"]
+
+[node name="Lobby" type="Control" parent="."]
+anchor_left = -0.00232005
+anchor_top = 0.00990112
+anchor_right = 0.99768
+anchor_bottom = 1.0099
+margin_top = -0.00100434
+margin_bottom = -0.00100708
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Players" type="Panel" parent="Lobby"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -126.0
+margin_top = -177.5
+margin_right = -126.0
+margin_bottom = -177.5
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeaveButton" type="TextureButton" parent="Lobby/Players" groups=[
+"button",
+]]
+margin_left = 203.0
+margin_top = 132.5
+margin_right = 223.0
+margin_bottom = 148.5
+rect_rotation = -90.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/LeaveButton"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/LeaveButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Players/LeaveButton"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
+
+[node name="ColourSelection" type="Control" parent="Lobby/Players"]
+margin_left = 107.0
+margin_top = 221.5
+margin_right = 147.0
+margin_bottom = 261.5
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectRight" type="TextureButton" parent="Lobby/Players/ColourSelection" groups=[
+"button",
+]]
+margin_left = 29.411
+margin_top = -7.545
+margin_right = 45.4109
+margin_bottom = 8.455
+rect_rotation = 90.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Players/ColourSelection/SelectRight"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectRight"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectRight"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="SelectLeft" type="TextureButton" parent="Lobby/Players/ColourSelection" groups=[
+"button",
+]]
+margin_left = -30.41
+margin_top = 8.37
+margin_right = -10.41
+margin_bottom = 24.37
+rect_rotation = -90.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Players/ColourSelection/SelectLeft"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectLeft"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/ColourSelection/SelectLeft"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="DisplayColour" type="Sprite" parent="Lobby/Players/ColourSelection"]
+position = Vector2( -1.21823, 0.545776 )
+scale = Vector2( 8.206, 1.258 )
+texture = ExtResource( 40 )
+
+[node name="List" type="ItemList" parent="Lobby/Players"]
+margin_left = 74.0
+margin_top = 135.5
+margin_right = 139.0
+margin_bottom = 209.5
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_styles/cursor = SubResource( 5 )
+custom_styles/selected_focus = SubResource( 6 )
+custom_styles/bg_focus = SubResource( 7 )
+custom_styles/cursor_unfocused = SubResource( 8 )
+custom_styles/selected = SubResource( 9 )
+custom_styles/bg = SubResource( 10 )
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapSelector" parent="Lobby/Players" instance=ExtResource( 1 )]
+visible = false
+margin_left = 294.0
+margin_top = 21.5
+margin_right = 334.0
+margin_bottom = 61.5
+
+[node name="MenuOutline" type="Sprite" parent="Lobby/Players"]
+position = Vector2( 129, 196.5 )
+texture = ExtResource( 21 )
+offset = Vector2( -0.478, 0.459 )
+
+[node name="Start" type="TextureButton" parent="Lobby/Players"]
+margin_left = 70.0
+margin_top = 242.5
+margin_right = 154.0
+margin_bottom = 268.5
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Players/Start"]
+frames = SubResource( 19 )
+animation = "unfocused"
+centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Players/Start"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Players/Start"]
+stream = ExtResource( 44 )
+volume_db = -34.677
+pitch_scale = 1.36
+bus = "Sounds"
+
+[node name="BestOf" type="LineEdit" parent="Lobby/Players"]
+margin_left = 138.782
+margin_top = 174.046
+margin_right = 198.782
+margin_bottom = 188.046
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_styles/focus = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = ExtResource( 45 )
+text = "5"
+align = 1
+max_length = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoundNumber" type="LineEdit" parent="Lobby/Players"]
+margin_left = 221.782
+margin_top = 190.046
+margin_right = 269.782
+margin_bottom = 204.046
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_styles/focus = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+align = 1
+max_length = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Connect" type="Panel" parent="Lobby"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -138.0
+margin_top = -83.9995
+margin_right = -138.0
+margin_bottom = -83.9995
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeaveButton2" type="TextureButton" parent="Lobby/Connect" groups=[
+"button",
+]]
+margin_left = 215.0
+margin_top = 39.0
+margin_right = 235.0
+margin_bottom = 55.0
+rect_rotation = -90.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Connect/LeaveButton2"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Connect/LeaveButton2"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Connect/LeaveButton2"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
+
+[node name="TitlePillar" type="Sprite" parent="Lobby/Connect"]
+position = Vector2( 79, 103 )
+texture = ExtResource( 22 )
+
+[node name="IPAddress" type="LineEdit" parent="Lobby/Connect"]
+margin_left = 117.5
+margin_top = 107.5
+margin_right = 199.5
+margin_bottom = 131.5
+custom_styles/read_only = SubResource( 21 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/normal = SubResource( 23 )
+custom_fonts/font = ExtResource( 45 )
+text = "127.0.0.1"
+align = 1
+max_length = 15
+placeholder_text = "Your IPv4"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="LineEdit" parent="Lobby/Connect"]
+margin_left = 117.5
+margin_top = 50.5005
+margin_right = 199.5
+margin_bottom = 74.5005
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_styles/focus = SubResource( 20 )
+custom_styles/normal = SubResource( 24 )
+custom_fonts/font = ExtResource( 45 )
+align = 1
+max_length = 8
+placeholder_text = "Your Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorLabel" type="Label" parent="Lobby/Connect"]
+margin_left = 15.0
+margin_top = 125.0
+margin_right = 257.0
+margin_bottom = 139.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
+align = 1
+
+[node name="join" type="TextureButton" parent="Lobby/Connect" groups=[
+"button",
+]]
+margin_left = 115.496
+margin_top = 141.546
+margin_right = 220.496
+margin_bottom = 177.546
+rect_scale = Vector2( 0.828, 0.844 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Connect/join"]
+frames = SubResource( 33 )
+animation = "unfocused"
+centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Connect/join"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Connect/join"]
+stream = ExtResource( 44 )
+volume_db = -34.677
+pitch_scale = 1.42
+bus = "Sounds"
+
+[node name="BackButton" type="TextureButton" parent="Lobby/Connect" groups=[
+"button",
+]]
+margin_left = 214.5
+margin_top = 38.5005
+margin_right = 234.5
+margin_bottom = 54.5005
+rect_rotation = -90.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Connect/BackButton"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Connect/BackButton"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Connect/BackButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="JoinMenu" type="Sprite" parent="Lobby/Connect"]
+position = Vector2( 158.5, 103 )
+texture = ExtResource( 17 )
+
+[node name="ErrorDialog" type="AcceptDialog" parent="Lobby"]
+margin_right = 55.0
+margin_bottom = 58.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Menu" type="Control" parent="Lobby"]
+margin_left = -128.0
+margin_top = -96.0
+margin_right = -88.0
+margin_bottom = -56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitlePillar" type="Sprite" parent="Lobby/Menu"]
+position = Vector2( 453, 340 )
+texture = ExtResource( 22 )
+
+[node name="Main" type="Panel" parent="Lobby/Menu"]
+margin_left = 472.0
+margin_top = 240.0
+margin_right = 472.0
+margin_bottom = 240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitlePillar" type="Sprite" parent="Lobby/Menu/Main"]
+position = Vector2( -19, 100 )
+texture = ExtResource( 22 )
+
+[node name="JoinButton" type="TextureButton" parent="Lobby/Menu/Main" groups=[
+"button",
+]]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 113.0
+margin_bottom = 52.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/JoinButton"]
+frames = SubResource( 42 )
+animation = "unfocused"
+centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/JoinButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/JoinButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="HostButton" type="TextureButton" parent="Lobby/Menu/Main" groups=[
+"button",
+]]
+margin_left = 8.0
+margin_top = 60.0
+margin_right = 113.0
+margin_bottom = 96.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/HostButton"]
+position = Vector2( -0.218201, -0.454498 )
+frames = SubResource( 51 )
+animation = "unfocused"
+centered = false
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/HostButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/HostButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="OptionsButton" type="TextureButton" parent="Lobby/Menu/Main" groups=[
+"button",
+]]
+margin_left = 8.0
+margin_top = 104.0
+margin_right = 113.0
+margin_bottom = 140.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/OptionsButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/OptionsButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/OptionsButton"]
+frames = SubResource( 60 )
+animation = "unfocused"
+centered = false
+
+[node name="ExitButton" type="TextureButton" parent="Lobby/Menu/Main" groups=[
+"button",
+]]
+margin_left = 8.0
+margin_top = 148.0
+margin_right = 113.0
+margin_bottom = 184.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Main/ExitButton"]
+frames = SubResource( 69 )
+animation = "unfocused"
+centered = false
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Main/ExitButton"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Main/ExitButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="Host" type="Panel" parent="Lobby/Menu"]
+visible = false
+margin_left = 352.0
+margin_top = 152.0
+margin_right = 352.0
+margin_bottom = 152.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostMenu" type="Sprite" parent="Lobby/Menu/Host"]
+position = Vector2( 180.5, 188 )
+texture = ExtResource( 16 )
+
+[node name="Hosting" type="Control" parent="Lobby/Menu/Host"]
+margin_left = 8.0
+margin_top = 232.0
+margin_right = 48.0
+margin_bottom = 272.0
+
+[node name="IPAddress" type="LineEdit" parent="Lobby/Menu/Host/Hosting"]
+margin_left = 131.0
+margin_top = -39.0
+margin_right = 213.0
+margin_bottom = -15.0
+custom_styles/read_only = SubResource( 21 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/normal = SubResource( 23 )
+custom_fonts/font = ExtResource( 45 )
+text = "127.0.0.1"
+align = 1
+max_length = 15
+placeholder_text = "Your IPv4"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="host" type="TextureButton" parent="Lobby/Menu/Host/Hosting" groups=[
+"button",
+]]
+margin_left = 129.0
+margin_top = -5.0
+margin_right = 234.0
+margin_bottom = 31.0
+rect_scale = Vector2( 0.828, 0.86 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Host/Hosting/host"]
+stream = ExtResource( 42 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Host/Hosting/host"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Host/Hosting/host"]
+frames = SubResource( 51 )
+animation = "unfocused"
+centered = false
+
+[node name="Name" type="LineEdit" parent="Lobby/Menu/Host/Hosting"]
+margin_left = 131.0
+margin_top = -96.0
+margin_right = 213.0
+margin_bottom = -72.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+custom_styles/focus = SubResource( 20 )
+custom_styles/normal = SubResource( 24 )
+custom_fonts/font = ExtResource( 45 )
+align = 1
+max_length = 8
+placeholder_text = "Your Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorLabel" type="Label" parent="Lobby/Menu/Host/Hosting"]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 48.0
+margin_bottom = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="Lobby/Menu/Host" groups=[
+"button",
+]]
+margin_left = 237.0
+margin_top = 124.0
+margin_right = 257.0
+margin_bottom = 140.0
+rect_rotation = -90.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Host/BackButton"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Host/BackButton"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Host/BackButton"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="Options" type="Panel" parent="Lobby/Menu"]
+visible = false
+margin_left = 384.0
+margin_top = 192.0
+margin_right = 384.0
+margin_bottom = 192.0
+script = ExtResource( 28 )
+
+[node name="BackButton2" type="TextureButton" parent="Lobby/Menu/Options" groups=[
+"button",
+]]
+margin_left = 204.5
+margin_top = 83.5007
+margin_right = 224.5
+margin_bottom = 99.5007
+rect_rotation = -90.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pressed" type="AudioStreamPlayer" parent="Lobby/Menu/Options/BackButton2"]
+stream = ExtResource( 43 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="focus" type="AudioStreamPlayer" parent="Lobby/Menu/Options/BackButton2"]
+stream = ExtResource( 41 )
+volume_db = -34.677
+bus = "Sounds"
+
+[node name="Anim" type="AnimatedSprite" parent="Lobby/Menu/Options/BackButton2"]
+frames = SubResource( 4 )
+animation = "unfocused"
+centered = false
+
+[node name="MenuOutline" type="Sprite" parent="Lobby/Menu/Options"]
+position = Vector2( 148.485, 147.978 )
+texture = ExtResource( 14 )
+
+[node name="Button1" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 111.782
+margin_top = 91.5455
+margin_right = 125.782
+margin_bottom = 105.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button1"]
+margin_left = 2.0
+margin_top = -1.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 112.782
+margin_top = 109.546
+margin_right = 126.782
+margin_bottom = 123.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button2"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 112.782
+margin_top = 127.546
+margin_right = 126.782
+margin_bottom = 141.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button3"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button4" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 112.782
+margin_top = 145.546
+margin_right = 126.782
+margin_bottom = 159.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button4"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button5" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 91.5455
+margin_right = 159.782
+margin_bottom = 105.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button5"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button6" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 109.546
+margin_right = 159.782
+margin_bottom = 123.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button6"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button7" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 127.546
+margin_right = 159.782
+margin_bottom = 141.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button7"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 14.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button8" type="Button" parent="Lobby/Menu/Options"]
+margin_left = 145.782
+margin_top = 145.546
+margin_right = 159.782
+margin_bottom = 159.546
+custom_styles/hover = SubResource( 70 )
+custom_styles/normal = SubResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Lobby/Menu/Options/Button8"]
+margin_left = 1.0
+margin_top = -1.0
+margin_right = 12.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EffectsSlider" type="HSlider" parent="Lobby/Menu/Options"]
+margin_left = 109.782
+margin_top = 176.546
+margin_right = 186.782
+margin_bottom = 193.546
+rect_scale = Vector2( 1, 1.226 )
+custom_icons/tick = SubResource( 72 )
+custom_icons/grabber_disabled = SubResource( 73 )
+custom_icons/grabber_highlight = SubResource( 74 )
+custom_icons/grabber = SubResource( 75 )
+custom_styles/slider = SubResource( 76 )
+custom_styles/grabber_area_highlight = SubResource( 77 )
+custom_styles/grabber_area = SubResource( 78 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicSlider" type="HSlider" parent="Lobby/Menu/Options"]
+margin_left = 109.782
+margin_top = 206.546
+margin_right = 186.782
+margin_bottom = 223.546
+rect_scale = Vector2( 1, 1.226 )
+custom_icons/tick = SubResource( 72 )
+custom_icons/grabber_disabled = SubResource( 73 )
+custom_icons/grabber_highlight = SubResource( 74 )
+custom_icons/grabber = SubResource( 75 )
+custom_styles/slider = SubResource( 76 )
+custom_styles/grabber_area_highlight = SubResource( 77 )
+custom_styles/grabber_area = SubResource( 78 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Sprite" parent="Lobby"]
+position = Vector2( 379, 104 )
+texture = ExtResource( 4 )
+
+[node name="TransitionAnims" type="AnimatedSprite" parent="Lobby"]
+visible = false
+position = Vector2( 386, 244 )
+frames = SubResource( 102 )
+animation = "options"
+
+[node name="WorldLight" parent="." instance=ExtResource( 24 )]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 7.5, 0, 0, 0, 1095.71, 0, 0, 0, 6.8, 0, 140.603, 0.268716 )
+mesh = SubResource( 103 )
+material/0 = SubResource( 104 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 3, 0, 0, 0, 1095.71, 0, 0, 0, 3, 47.5, 140.603, 65.2687 )
+cast_shadow = 0
+use_in_baked_light = true
+mesh = SubResource( 103 )
+material/0 = SubResource( 104 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 400, 0, 0, 0, 1244.7, 0, 0, 0, 400, 0, 0, 0 )
+mesh = SubResource( 105 )
+material/0 = null
+
+[node name="target_pos" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.499999, 0.866024, 0, -0.866024, 0.499999, 0, 546.966, 16 )
+
+[node name="Clouds" type="Spatial" parent="target_pos"]
+
+[node name="cloud1" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 23.6566, 9.97787, -42.8649 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud2" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, -28.0535, -3.71133, -28.4038 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud3" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, -14.9693, 31.6128, -36.9933 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud4" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, -0.552727, -13.6791, -44.3357 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud5" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, 23.7301, 7.56458, -83.011 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud6" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, -29.1003, -3.21072, -70.2323 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud7" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, -13.7997, 31.3222, -78.3651 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud8" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498965, -1.69926, -14.7088, -85.2808 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud9" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -29.1, -62.5274, -94.2032 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud10" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 23.7752, -46.2041, -97.0698 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud11" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 8.37748, -70.4756, -71.2517 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud12" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -3.61876, -53.4194, -114.591 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud13" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -29.1, -28.5257, -165.379 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud14" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 23.7752, -12.2024, -168.246 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud15" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 8.37748, -36.4738, -142.428 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud16" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, -3.61876, -19.4177, -185.767 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud17" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 87.0067, -92.6326, -128.367 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud18" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 34.7107, -104.876, -114.741 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud19" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 48.9077, -69.9312, -123.111 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud20" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865581, 0.0160456, 0.866027, 0.499743, 62.1759, -115.608, -130.231 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud21" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 67.7155, -9.04347, -104.504 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud22" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 15.4196, -21.287, -90.8779 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud23" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 29.6166, 13.6578, -99.2485 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud24" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, 42.8848, -32.0188, -106.369 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud25" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -65.3827, -53.0578, -79.0927 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud26" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -117.679, -65.3013, -65.4663 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud27" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -103.482, -30.3566, -73.8369 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud28" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -90.2134, -76.0332, -80.957 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud29" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -21.008, -37.3674, -216.998 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud30" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -73.304, -49.611, -203.372 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud31" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -59.107, -14.6661, -211.743 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud32" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865582, 0.0160456, 0.866027, 0.499744, -45.8387, -60.3427, -218.862 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud33" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -21.008, -37.3675, -216.998 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud34" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -73.304, -49.6109, -203.372 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud35" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -59.107, -14.6661, -211.743 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud36" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, -45.8387, -60.3427, -218.862 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud37" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 156.727, 21.056, -42.7032 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud38" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 169.811, 56.3802, -51.2928 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud39" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 1, 0, 0, 0, 0.500001, -0.866026, 0, 0.866027, 0.5, 184.227, 11.0883, -58.6352 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud40" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.997931, 0, -0.0643058, -0.0556907, 0.500001, -0.864234, 0.032153, 0.866027, 0.498966, 155.68, 21.5565, -84.5318 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud41" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.997743, 0, 0.0671618, 0.058164, 0.500001, 0.864071, -0.033581, 0.866027, -0.498872, 155.68, -37.7602, -108.503 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud42" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 119.397, -28.2904, -93.3921 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud43" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 67.1015, -40.5341, -79.7658 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud44" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 81.2985, -5.58928, -88.1364 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud45" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 94.5667, -51.2659, -95.2565 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud46" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 111.476, -24.8437, -217.671 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud47" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.999486, 0, -0.032091, -0.0277917, 0.500001, -0.865583, 0.0160456, 0.866027, 0.499744, 138.941, -35.5753, -233.162 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud48" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.965927, 0, -0.258819, -0.224145, 0.500001, 0.836517, 0.12941, 0.866027, -0.482963, -143.969, 16.4571, -40.048 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud49" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.965927, 0, -0.258819, -0.224145, 0.500001, 0.836517, 0.12941, 0.866027, -0.482963, -147.578, -10.5471, -12.6523 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud50" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.965927, 0, -0.258819, -0.224145, 0.500001, 0.836517, 0.12941, 0.866027, -0.482963, -170.705, 1.45975, -53.0762 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud51" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.980571, 0, -0.196169, -0.169888, 0.500001, 0.8492, 0.0980846, 0.866027, -0.490286, -137.433, -19.1533, -61.0281 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud52" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( 0.981129, 0, 0.193362, 0.167456, 0.500001, -0.849683, -0.096681, 0.866027, 0.490565, -147.626, -11.4165, -123.712 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud53" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -112.413, 5.08643, -112.662 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud54" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -66.4067, 34.2168, -122.923 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud55" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -71.2041, 7.32959, -95.5951 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud56" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -93.3369, 19.9654, -136.382 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud57" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -87.9062, -100.569, -173.952 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="cloud58" type="MeshInstance" parent="target_pos/Clouds"]
+transform = Transform( -0.973735, 0, -0.227689, -0.197184, 0.500001, 0.843282, 0.113844, 0.866027, -0.486869, -114.836, -114.82, -187.41 )
+mesh = ExtResource( 25 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="." groups=[
+"Camera",
+]]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -18.203, 3.511, 0 )
+environment = ExtResource( 18 )
+current = true
+fov = 65.0
+size = 0.1
+near = 0.06
+far = 310.9
+script = ExtResource( 23 )
+
+[node name="Ambiance" parent="." instance=ExtResource( 26 )]
+
+[node name="TowerPiece" parent="." instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13776, 2.38321, 11.2094 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="TowerPiece2" parent="." instance=ExtResource( 29 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.13776, 1.38321, -14.2906 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Environment" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.77459, -0.998, 0 )
+
+[node name="GrassCluster" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 0, 1, 1.5 )
+
+[node name="GrassCluster2" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -0.75, 1, 2.5 )
+
+[node name="GrassCluster3" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 0.25, 1, -2 )
+
+[node name="GrassCluster4" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -1.75, 1, -2.75 )
+
+[node name="GrassCluster5" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -0.75, 1, 5 )
+
+[node name="GrassCluster6" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -2, 1, 4.5 )
+
+[node name="GrassCluster7" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -3.5, 1, -0.75 )
+
+[node name="GrassCluster8" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -4, 1, 0 )
+
+[node name="GrassCluster9" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 0.25, 1, -8.25 )
+
+[node name="GrassCluster10" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -0.5, 1, -7.25 )
+
+[node name="GrassCluster11" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 0.5, 1, -11.75 )
+
+[node name="GrassCluster12" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -1.5, 1, -12.5 )
+
+[node name="GrassCluster13" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -0.5, 1, -4.75 )
+
+[node name="GrassCluster14" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -1.75, 1, -5.25 )
+
+[node name="GrassCluster15" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -3.25, 1, -10.5 )
+
+[node name="GrassCluster16" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -3.75, 1, -9.75 )
+
+[node name="GrassCluster17" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 1.5, 1, 11.75 )
+
+[node name="GrassCluster18" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 0.75, 1, 12.75 )
+
+[node name="GrassCluster19" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 1.75, 1, 8.25 )
+
+[node name="GrassCluster20" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -0.25, 1, 7.5 )
+
+[node name="GrassCluster21" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 0.75, 1, 15.25 )
+
+[node name="GrassCluster22" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -0.5, 1, 14.75 )
+
+[node name="GrassCluster23" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -2, 1, 9.5 )
+
+[node name="GrassCluster24" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, -2.5, 1, 10.25 )
+
+[node name="GrassCluster25" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 8.5, 1, -11.75 )
+
+[node name="GrassCluster26" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 7.75, 1, -10.75 )
+
+[node name="GrassCluster27" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 8.75, 1, -15.25 )
+
+[node name="GrassCluster28" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 6.75, 1, -16 )
+
+[node name="GrassCluster29" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 7.75, 1, -8.25 )
+
+[node name="GrassCluster30" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 6.5, 1, -8.75 )
+
+[node name="GrassCluster31" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 5, 1, -14 )
+
+[node name="GrassCluster32" parent="Environment" instance=ExtResource( 32 )]
+transform = Transform( -1.30337e-07, 0, -0.8, 0, 1, 0, 0.8, 0, -1.30337e-07, 4.5, 1, -13.25 )
+
+[node name="PinkFlower" parent="Environment" instance=ExtResource( 33 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -0.75, 1, 1.5 )
+
+[node name="PinkFlower2" parent="Environment" instance=ExtResource( 33 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -1.25, 1, 2 )
+
+[node name="PinkFlower3" parent="Environment" instance=ExtResource( 33 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0.5, 1, 3.75 )
+
+[node name="PinkFlower4" parent="Environment" instance=ExtResource( 33 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0.5, 1, -3 )
+
+[node name="PinkFlower5" parent="Environment" instance=ExtResource( 33 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -0.5, 1, -2.25 )
+
+[node name="PinkFlower6" parent="Environment" instance=ExtResource( 33 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 1, -1.75 )
+
+[node name="PinkFlower7" parent="Environment" instance=ExtResource( 33 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -2, 1, -3.25 )
+
+[node name="FlatGrass2" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0.0492086, 0.0053159, -2.49661 )
+
+[node name="FlatGrass34" parent="Environment" instance=ExtResource( 34 )]
+transform = Transform( 2.59875e-07, 0, -0.6, 0, 1.2, 0, 0.6, 0, 2.59875e-07, -2.72541, 0.998, -4.75 )
+
+[node name="FlatGrass36" parent="Environment" instance=ExtResource( 35 )]
+transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 0.5, -2.47541, 0.998, -2.5 )
+
+[node name="FlatGrass37" parent="Environment" instance=ExtResource( 35 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 1.2, 0, -0.5, 0, -8.14603e-08, -4.97541, 0.998, 2.5 )
+
+[node name="FlatGrass38" parent="Environment" instance=ExtResource( 35 )]
+transform = Transform( 0.5, 0, 0, 0, 1.2, 0, 0, 0, 0.5, -0.725407, 0.998, -5 )
+
+[node name="FlatGrass35" parent="Environment" instance=ExtResource( 34 )]
+transform = Transform( 0.6, 0, 0, 0, 1.2, 0, 0, 0, 0.6, -5.22541, 0.998, 0.25 )
+
+[node name="BlueFlower" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -0.475407, 0.498, -3.75 )
+
+[node name="BlueFlower2" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, 0.0245934, 0.998, -3.25 )
+
+[node name="BlueFlower3" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -2.22541, 0.748, -5 )
+
+[node name="BlueFlower4" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -2.97541, 0.998, -5.5 )
+
+[node name="BlueFlower9" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -2.22541, 0.998, 7.25 )
+
+[node name="BlueFlower10" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -3.22541, 0.748, 6.75 )
+
+[node name="BlueFlower5" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -2.22541, 0.748, -6 )
+
+[node name="BlueFlower6" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -3.22541, 0.498, -5.75 )
+
+[node name="BlueFlower7" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -2.47541, 0.748, -6.5 )
+
+[node name="BlueFlower8" parent="Environment" instance=ExtResource( 36 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -3.22541, 0.748, -7.5 )
+
+[node name="CherryBlossom" parent="Environment" instance=ExtResource( 31 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, -0.974999, 0.0940208, 4.5 )
+
+[node name="CherryBlossom2" parent="Environment" instance=ExtResource( 31 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, 2.275, 0.0940208, -11.25 )
+
+[node name="CherryBlossom3" parent="Environment" instance=ExtResource( 31 )]
+transform = Transform( 5.19751e-07, 0, -1.2, 0, 1.2, 0, 1.2, 0, 5.19751e-07, 9.525, -0.155979, -15.25 )
+
+[node name="FlatGrass5" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -2.45079, 0.0053159, 2.50339 )
+
+[node name="FlatGrass" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.049209, 0.00531588, -0.00339411 )
+
+[node name="FlatGrass3" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0492086, 0.0053159, 2.49661 )
+
+[node name="FlatGrass4" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -2.50339, 0.0053159, 0.049209 )
+
+[node name="FlatGrass6" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -2.45079, 0.0053159, -7.49661 )
+
+[node name="FlatGrass7" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0492086, 0.0053159, -10.0034 )
+
+[node name="FlatGrass8" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0492086, 0.0053159, -7.50339 )
+
+[node name="FlatGrass9" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -2.50339, 0.0053159, -9.95079 )
+
+[node name="FlatGrass10" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 2.54921, 0.0053159, -12.4966 )
+
+[node name="FlatGrass11" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95079, 0.0053159, -15.0034 )
+
+[node name="FlatGrass12" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95079, 0.0053159, -12.5034 )
+
+[node name="FlatGrass13" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 2.49661, 0.0053159, -14.9508 )
+
+[node name="FlatGrass14" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 2.54921, 0.0053159, -7.49661 )
+
+[node name="FlatGrass15" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95079, 0.0053159, -10.0034 )
+
+[node name="FlatGrass16" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.95079, 0.0053159, -7.50339 )
+
+[node name="FlatGrass17" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 2.49661, 0.0053159, -9.95079 )
+
+[node name="FlatGrass18" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 7.54921, 0.0053159, -7.49661 )
+
+[node name="FlatGrass19" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.95079, 0.0053159, -10.0034 )
+
+[node name="FlatGrass20" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.95079, 0.0053159, -7.50339 )
+
+[node name="FlatGrass21" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 7.49661, 0.0053159, -9.95079 )
+
+[node name="FlatGrass22" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 7.54921, 0.0053159, -12.4966 )
+
+[node name="FlatGrass23" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.95079, 0.0053159, -15.0034 )
+
+[node name="FlatGrass24" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.95079, 0.0053159, -12.5034 )
+
+[node name="FlatGrass25" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, 7.49661, 0.0053159, -14.9508 )
+
+[node name="FlatGrass26" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, 0.0492086, 0.0053159, 10.0034 )
+
+[node name="FlatGrass27" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.45079, 0.0053159, 7.49661 )
+
+[node name="FlatGrass28" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.45079, 0.0053159, 9.9966 )
+
+[node name="FlatGrass29" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -0.00339413, 0.0053159, 7.54921 )
+
+[node name="FlatGrass30" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -0.5, 0, -1.62921e-07, 0, 0.5, 0, 1.62921e-07, 0, -0.5, -7.45079, 0.0053159, 10.0034 )
+
+[node name="FlatGrass31" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.04921, 0.0053159, 7.49661 )
+
+[node name="FlatGrass32" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.04921, 0.0053159, 9.9966 )
+
+[node name="rockDecal" parent="Environment" instance=ExtResource( 37 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.774593, -0.00199986, -5 )
+
+[node name="rockDecal2" parent="Environment" instance=ExtResource( 37 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.774593, -1.002, 0.75 )
+
+[node name="rockDecal4" parent="Environment" instance=ExtResource( 37 )]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.774593, -1.002, 4.25 )
+
+[node name="rockDecal3" parent="Environment" instance=ExtResource( 37 )]
+transform = Transform( 0.5, 0, 0, 0, 2, 0, 0, 0, 0.5, 0.774593, -3.002, 0.25 )
+
+[node name="Petal" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.22541, 0.998, -4 )
+
+[node name="Petal2" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.274593, 0.998, -4.75 )
+
+[node name="Petal3" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -2.97541, 0.998, -6 )
+
+[node name="Petal4" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.97541, 0.998, -6.75 )
+
+[node name="Petal5" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.475407, 0.998, -8.5 )
+
+[node name="Petal6" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 2.02459, 0.998, -7.25 )
+
+[node name="Petal7" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.475407, 0.998, 0.5 )
+
+[node name="Petal8" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -2.72541, 0.998, 0 )
+
+[node name="Petal9" parent="Environment" instance=ExtResource( 38 )]
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -2.22541, 0.998, -2.5 )
+
+[node name="rockDecal5" parent="Environment" instance=ExtResource( 37 )]
+transform = Transform( 0.5, 0, 0, 0, 2, 0, 0, 0, 0.5, 4.02459, -3.002, -9 )
+
+[node name="FlatGrass33" parent="Environment" instance=ExtResource( 30 )]
+transform = Transform( -8.14603e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -8.14603e-08, -7.5034, 0.0053159, 7.54921 )
+
+[node name="MenuTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 46 )
+volume_db = -8.871
+autoplay = true
+bus = "Music"
+
+[node name="Theme" parent="." instance=ExtResource( 47 )]
+volume_db = -8.824
+autoplay = false
+bus = "Music"
+[connection signal="focus_entered" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Players/LeaveButton" to="Lobby/Players/LeaveButton" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Lobby/Players/LeaveButton" to="Lobby" method="_on_LeaveButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Players/LeaveButton/Anim" to="Lobby/Players/LeaveButton" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection/SelectRight" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Players/ColourSelection/SelectRight" to="Lobby/Players/ColourSelection" method="_on_SelectRight_pressed"]
+[connection signal="animation_finished" from="Lobby/Players/ColourSelection/SelectRight/Anim" to="Lobby/Players/ColourSelection/SelectRight" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Players/ColourSelection/SelectLeft" to="Lobby/Players/ColourSelection/SelectLeft" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Players/ColourSelection/SelectLeft" to="Lobby/Players/ColourSelection/SelectLeft" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Players/ColourSelection/SelectLeft" to="Lobby/Players/ColourSelection/SelectLeft" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Players/ColourSelection/SelectLeft" to="Lobby/Players/ColourSelection/SelectLeft" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Players/ColourSelection/SelectLeft" to="Lobby/Players/ColourSelection" method="_on_SelectLeft_pressed"]
+[connection signal="animation_finished" from="Lobby/Players/ColourSelection/SelectLeft/Anim" to="Lobby/Players/ColourSelection/SelectLeft" method="_on_Join_animation_finished"]
+[connection signal="button_down" from="Lobby/Players/Start" to="Lobby/Players/Start" method="_on_JoinButton_button_down"]
+[connection signal="focus_entered" from="Lobby/Players/Start" to="Lobby/Players/Start" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Players/Start" to="Lobby/Players/Start" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Players/Start" to="Lobby/Players/Start" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Players/Start" to="Lobby/Players/Start" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Players/Start" to="Lobby" method="_on_Start_pressed"]
+[connection signal="animation_finished" from="Lobby/Players/Start/Anim" to="Lobby/Players/Start" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Connect/LeaveButton2" to="Lobby/Connect/LeaveButton2" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Lobby/Connect/LeaveButton2" to="Lobby" method="_on_LeaveButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Connect/LeaveButton2/Anim" to="Lobby/Connect/LeaveButton2" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Connect/join" to="Lobby/Connect/join" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Connect/join" to="Lobby" method="_on_join_pressed"]
+[connection signal="animation_finished" from="Lobby/Connect/join/Anim" to="Lobby/Connect/join" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Connect/BackButton" to="Lobby/Connect/BackButton" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Connect/BackButton" to="Lobby/Connect/BackButton" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Connect/BackButton" to="Lobby/Connect/BackButton" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Connect/BackButton" to="Lobby/Connect/BackButton" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Connect/BackButton" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Connect/BackButton/Anim" to="Lobby/Connect/BackButton" method="_on_Join_animation_finished"]
+[connection signal="button_down" from="Lobby/Menu/Main/JoinButton" to="Lobby/Menu/Main/JoinButton" method="_on_JoinButton_button_down"]
+[connection signal="focus_entered" from="Lobby/Menu/Main/JoinButton" to="Lobby/Menu/Main/JoinButton" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Main/JoinButton" to="Lobby/Menu/Main/JoinButton" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Main/JoinButton" to="Lobby/Menu/Main/JoinButton" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Main/JoinButton" to="Lobby/Menu/Main/JoinButton" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Main/JoinButton" to="Lobby" method="_on_JoinButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Main/JoinButton/Anim" to="Lobby/Menu/Main/JoinButton" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Menu/Main/HostButton" to="Lobby/Menu/Main/HostButton" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Main/HostButton" to="Lobby/Menu/Main/HostButton" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Main/HostButton" to="Lobby/Menu/Main/HostButton" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Main/HostButton" to="Lobby/Menu/Main/HostButton" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Main/HostButton" to="Lobby" method="_on_HostButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Main/HostButton/Anim" to="Lobby/Menu/Main/HostButton" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Menu/Main/OptionsButton" to="Lobby/Menu/Main/OptionsButton" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Main/OptionsButton" to="Lobby/Menu/Main/OptionsButton" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Main/OptionsButton" to="Lobby/Menu/Main/OptionsButton" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Main/OptionsButton" to="Lobby/Menu/Main/OptionsButton" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Main/OptionsButton" to="Lobby" method="_on_OptionsButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Main/OptionsButton/Anim" to="Lobby/Menu/Main/OptionsButton" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Menu/Main/ExitButton" to="Lobby/Menu/Main/ExitButton" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Main/ExitButton" to="Lobby/Menu/Main/ExitButton" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Main/ExitButton" to="Lobby/Menu/Main/ExitButton" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Main/ExitButton" to="Lobby/Menu/Main/ExitButton" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Main/ExitButton" to="Lobby" method="_on_ExitButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Main/ExitButton/Anim" to="Lobby/Menu/Main/ExitButton" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Menu/Host/Hosting/host" to="Lobby/Menu/Host/Hosting/host" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Host/Hosting/host" to="Lobby/Menu/Host/Hosting/host" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Host/Hosting/host" to="Lobby/Menu/Host/Hosting/host" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Host/Hosting/host" to="Lobby/Menu/Host/Hosting/host" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Host/Hosting/host" to="Lobby" method="_on_host_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Host/Hosting/host/Anim" to="Lobby/Menu/Host/Hosting/host" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Menu/Host/BackButton" to="Lobby/Menu/Host/BackButton" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Host/BackButton" to="Lobby/Menu/Host/BackButton" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Host/BackButton" to="Lobby/Menu/Host/BackButton" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Host/BackButton" to="Lobby/Menu/Host/BackButton" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Host/BackButton" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Host/BackButton/Anim" to="Lobby/Menu/Host/BackButton" method="_on_Join_animation_finished"]
+[connection signal="focus_entered" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_focus_entered"]
+[connection signal="focus_exited" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_focus_exited"]
+[connection signal="mouse_entered" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options/BackButton2" method="_on_JoinButton_mouse_exited"]
+[connection signal="pressed" from="Lobby/Menu/Options/BackButton2" to="Lobby" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Lobby/Menu/Options/BackButton2" to="Lobby/Menu/Options" method="_on_BackButton_pressed"]
+[connection signal="animation_finished" from="Lobby/Menu/Options/BackButton2/Anim" to="Lobby/Menu/Options/BackButton2" method="_on_Join_animation_finished"]
+[connection signal="pressed" from="Lobby/Menu/Options/Button1" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Button2" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Button3" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Button4" to="Lobby/Menu/Options" method="_on_Button4_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Button5" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 4 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Button6" to="Lobby/Menu/Options" method="_on_Button6_pressed" binds= [ 5 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Button7" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 6 ]]
+[connection signal="pressed" from="Lobby/Menu/Options/Button8" to="Lobby/Menu/Options" method="_on_Button_pressed" binds= [ 7 ]]
+[connection signal="value_changed" from="Lobby/Menu/Options/EffectsSlider" to="Lobby/Menu/Options" method="_on_EffectsSlider_value_changed"]
+[connection signal="value_changed" from="Lobby/Menu/Options/MusicSlider" to="Lobby/Menu/Options" method="_on_MusicSlider_value_changed"]
+[connection signal="animation_finished" from="Lobby/TransitionAnims" to="Lobby" method="_on_TransitionAnims_animation_finished"]
